@@ -19,8 +19,8 @@ relative or absolute path)
 - ’ inhibit all interpretation of a sequence of characters.
 - " inhibit all interpretation of a sequence of characters except for $.
 - Redirections:
-  - < should redirect input.
-  - > should redirect output.
+  - "<" should redirect input.
+  - ">" should redirect output.
   - “<<” read input from the current source until a line containing only the delimiter is seen. it doesn’t need to update history!
   - “>>” should redirect output with append mode.
 - Pipes | The output of each command in the pipeline is connected via a pipe to the
