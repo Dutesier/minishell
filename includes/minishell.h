@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 14:53:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:30:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# include "commands.h"
+# include "executing.h"
+# include "utils.h"
 
 #endif
