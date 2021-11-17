@@ -20,8 +20,19 @@ SRCS 		:=	srcs/main.c \
 				srcs/commands/ft_cd.c \
 				srcs/commands/ft_pwd.c \
 				srcs/executing/find_path.c \
+				srcs/executing/run_command.c \
+				srcs/redirecting/change_in.c \
+				srcs/redirecting/change_out.c \
+				srcs/redirecting/fd_closer.c \
+				srcs/redirecting/get_fd.c \
+				srcs/redirecting/set_in_and_out.c \
+				srcs/redirecting/set_pipes.c \
 				srcs/utils/ft_split.c \
 				srcs/utils/ft_strcmp.c \
+				srcs/utils/print_error.c \
+				srcs/utils/ft_append.c \
+				srcs/utils/ft_putstr_fd.c \
+				srcs/gnl/get_next_line.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 
@@ -31,8 +42,10 @@ SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 # Using wildcards: $(shell find $(HEADERS) -name *.h)
 DEPS	=	includes/commands.h \
 			includes/executing.h \
-			includes/utils.h\
-			includes/minishell.h\
+			includes/redirecting.h \
+			includes/utils.h \
+			includes/get_next_line.h \
+			includes/minishell.h \
 
 CC		=	gcc
 

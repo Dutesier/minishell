@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 16:05:11 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:15:10 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,32 @@
 
 int main(int argc, char *argv[], char **envp)
 {
-	if (argc == 1)
+	if (argc == 2)
 		return (1);
 
 	(void)envp;
-	ft_pwd();
-	ft_cd(argv[1]);
-	ft_pwd();
+	(void)argv;
+	char *line;
+	int i;
+	
+	i = 1;
+	while (i)
+	{
+		ft_putstr_fd("$ ", 1);
+		line = get_next_line(0);
+		// Then a function that uses line
+		if (line != NULL)
+		{
+			if (line[0] == 'c')
+				ft_cd("..");
+			if (line[0] == 'C')
+				ft_cd("minishell");
+			if (line[0] == 'p')
+				ft_pwd();
+			if (line[0] == 'q')
+				i = 0;
+		}
+	}
+
 	return (0);
 }
