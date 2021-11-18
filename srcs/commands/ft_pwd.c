@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 18:35:31 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/15 15:58:05 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/15 16:09:17 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-# include "commands.h"
-# include "executing.h"
-# include "utils.h"
-# include "redirecting.h"
-# include "get_next_line.h"
-
-typedef struct	s_shell
+int ft_pwd(void)
 {
-	char	**envp;
-	char	*line;
+	char *cwd;
 
-	t_comm	**commands;
+	cwd = NULL;
+	cwd = getcwd(cwd, 100);
+	if (!cwd)
+	{
+		perror("Minishell: pwd: ");
+		return (1);
+	}
+	printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}
 
-}			t_shell;
-
-#endif

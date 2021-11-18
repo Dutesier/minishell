@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   redirecting.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 18:35:31 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/15 16:37:01 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/17 17:19:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef REDIRECTING_H
+# define REDIRECTING_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-# include "commands.h"
-# include "executing.h"
-# include "utils.h"
-# include "redirecting.h"
-# include "get_next_line.h"
-
-typedef struct	s_shell
-{
-	char	**envp;
-	char	*line;
-
-	t_comm	**commands;
-
-}			t_shell;
+int	ft_getfd(char *filename, int type);
+int change_in(int old_in_fd, char *new_in);
+int change_out(int old_out_fd, char *new_out);
+int set_in_and_out(t_comm *comm);
+int set_pipes(t_comm *comm);
+int fd_closer(t_comm *comm);
 
 #endif

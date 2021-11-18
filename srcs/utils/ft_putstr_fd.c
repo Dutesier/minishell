@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 18:35:31 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/17 17:31:26 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/17 19:51:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-# include "commands.h"
-# include "executing.h"
-# include "utils.h"
-# include "redirecting.h"
-# include "get_next_line.h"
-
-typedef struct	s_shell
+static int ft_putchar_fd(char c, int fd)
 {
-	char	**envp;
-	char	*line;
+	if (fd < 0)
+		return (0);
+	return (write(fd, &c, 1));
+}
 
-	t_comm	**commands;
+int ft_putstr_fd(char *s, int fd)
+{
+	int i;
 
-}			t_shell;
-
-#endif
+	i = 0;
+	if (!s || fd < 0)
+		return (0);
+	while (s[i] != '\0')
+		ft_putchar_fd(s[i++], fd);
+	return (i);
+}
