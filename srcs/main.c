@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 18:37:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:19:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int main(int argc, char *argv[], char **envp)
 	
 	i = 1;
 	shell.envp = envp;
+	shell.line = NULL;
 	while (i)
 	{
-		ft_putstr_fd("$ ", 1);
-		shell.line = get_next_line(0);
+		//ft_putstr_fd("$ ", 1);
+		shell.line = get_line("$ ", shell.line);
 		// Then a function that uses line
 		if (shell.line != NULL)
 		{
@@ -48,6 +49,8 @@ int main(int argc, char *argv[], char **envp)
 				i = 0;
 		}
 	}
+	clear_history();
+	free(shell.line);
 
 	return (0);
 }
