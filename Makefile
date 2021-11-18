@@ -34,6 +34,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_putstr_fd.c \
 				srcs/gnl/get_next_line.c \
 				srcs/reader/get_line.c \
+				srcs/parser/parser.c \
+				srcs/cleaning/clean_shell.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 
@@ -47,6 +49,9 @@ DEPS	=	includes/commands.h \
 			includes/utils.h \
 			includes/get_next_line.h \
 			includes/reader.h \
+			includes/parser.h \
+			includes/cleaning.h \
+			includes/structures.h \
 			includes/minishell.h \
 
 CC		=	gcc
