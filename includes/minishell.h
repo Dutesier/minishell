@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 14:04:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:15:33 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct	s_shell
 	char	**envp;
 	char	*line;
 
-	t_comm	**commands;
+	t_comm	**commands; // table of all cmommands
 
 }			t_shell;
 
