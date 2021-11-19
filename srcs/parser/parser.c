@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 20:00:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:20:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int parse_line(t_shell *shell)
 		x = i; // Store i
 		while (!is_spec(shell->line[i]))
 			i++;
-		i--;
+		if (i != 0)
+			i--;
 		
 		// Store the str in a t_comm
 		shell->commands[c]->cmd = ft_substr(shell->line, x, i - x);
