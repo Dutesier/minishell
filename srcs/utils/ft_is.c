@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 15:43:36 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/19 17:47:52 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/19 17:54:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+int is_spec(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
+}
 
-# include "structures.h"
-# include "commands.h"
-# include "executing.h"
-# include "utils.h"
-# include "redirecting.h"
-# include "reader.h"
-# include "cleaning.h"
-# include "parser.h"
+int	ft_isalpha(int c)
+{
+	return (((65 <= c) && (90 >= c)) || ((97 <= c) && (122 >= c)));
+}
 
+int	ft_isdigit(int c)
+{
+	return (c >= 48 && c <= 48 + 9);
+}
 
-#endif
+int	ft_isalnum(int c)
+{
+	return (ft_isdigit(c) + ft_isalpha(c));
+}

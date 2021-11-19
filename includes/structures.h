@@ -6,12 +6,39 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 19:58:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:47:29 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct	s_tok
+{
+	char *value;
+	enum
+	{
+		TOK_WORD,
+		TOK_OPERATOR,
+		TOK_DOLLAR,
+		TOK_OPTION,
+		TOK_S_QUOTE,
+		TOK_D_QUOTE,
+		TOK_SEMI,
+		TOK_OPAREN,
+		TOK_CPAREN
+
+	} e_type;
+
+}				t_tok;
+
+typedef struct s_lex
+{
+	int i;
+	char c;
+	char *src;
+	int size;
+}			t_lex;
 
 typedef struct s_comm
 {
