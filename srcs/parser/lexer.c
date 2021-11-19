@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 18:14:01 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:48:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_tok *init_token(char *value, int type)
 	if (!tok)
 		return (NULL);
 	tok->value = value;
-	tok->type = type;
+	tok->e_type = type;
 	return (tok);
 }
 
@@ -31,7 +31,7 @@ t_lex *init_lexer(char *src)
 	if (!lex)
 		return (NULL);
 	lex->i = 0;
-	lex->c = src[i];
+	lex->c = src[lex->i];
 	lex->src = src;
 	lex->size = ft_strlen(src);
 	return (lex);
@@ -39,10 +39,10 @@ t_lex *init_lexer(char *src)
 
 void lex_next(t_lex *lex)
 {
-	if (lex->i < lex->size && lex->src[i] != '\0')
+	if (lex->i < lex->size && lex->c != '\0')
 	{
 		lex->i++;
-		lex->c = lex->src[i];
+		lex->c = lex->src[lex->i];
 	}
 }
 
@@ -62,6 +62,26 @@ t_tok *lex_get_word(t_lex *lex)
 	value = ft_substr(lex->src, x, i);
 	if (!value)
 		return (NULL);
-	return (init_token(value, TOK_WORD);
+	return (init_token(value, TOK_WORD));
+}
+
+t_tok *next_token(t_lex *lex)
+{
+	t_tok *tok;
+
+	while (lex->c != '\0')
+	{
+		if (ft_isalnum(lex->c))
+			return (lex_get_word(lex));
+		if (lex->c == '-')
+			
+		tok = token_switch(lex->c, lex);
+		if (tok)
+		{
+			lex_next(lex);
+			return (tok);
+		};
+	}
+	return (init_token(NULL, TOK_EOL));
 }
 

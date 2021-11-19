@@ -37,6 +37,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \
 				srcs/parser/lexer.c \
+				srcs/parser/lexer_utils.c \
 				srcs/cleaning/clean_shell.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)

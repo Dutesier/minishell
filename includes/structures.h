@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 17:47:29 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:35:06 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@ typedef struct	s_tok
 	enum
 	{
 		TOK_WORD,
-		TOK_OPERATOR,
 		TOK_DOLLAR,
+		TOK_LT,
+		TOK_GT,
+		TOK_ARROW_RIGHT,
+		TOK_ARROW_LEFT,
 		TOK_OPTION,
 		TOK_S_QUOTE,
 		TOK_D_QUOTE,
 		TOK_SEMI,
+		TOK_COLLON,
+		TOK_EQUALS,
+		TOK_BSLASH,
 		TOK_OPAREN,
-		TOK_CPAREN
+		TOK_CPAREN,
+		TOK_EOL
 
 	} e_type;
 
