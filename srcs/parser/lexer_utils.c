@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 19:50:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:41:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,31 @@ t_tok *token_switch_two(char c, t_lex *lex)
 	if (c == '<')
 	{
 		if (lex->src[lex->i + 1] == '<')
-			return (init_token("<", TOK_ARROW_LEFT));
+		{
+			lex_next(lex);
+			return (init_token("<<", TOK_ARROW_LEFT));
+		}
 		return (init_token("<", TOK_LT));
 	}
 	if (c == '>')
 	{
 		if (lex->src[lex->i + 1] == '>')
+		{
+			lex_next(lex);
 			return (init_token(">>", TOK_ARROW_RIGHT));
+		}
 		return (init_token(">", TOK_GT));
 	}
 	return (NULL);
 }
 
-t_tok *lex_get_optn(t_lex *lex)
+/*t_tok *lex_get_space(t_lex *lex)
+{
+	while (ft_isspace(lex->c))
+		lex_next(lex);
+	return (init_token(" ", TOK_SPACE));
+}*/
+/*t_tok *lex_get_optn(t_lex *lex)
 {
 	char	*value;
 	int		i;
@@ -69,4 +81,4 @@ t_tok *lex_get_optn(t_lex *lex)
 	if (!value)
 		return (NULL);
 	return (init_token(value, TOK_OPTION));
-}
+}*/

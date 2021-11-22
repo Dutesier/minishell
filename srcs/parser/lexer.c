@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 19:48:41 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:03:02 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,19 @@ t_tok *next_token(t_lex *lex)
 
 	while (lex->c != '\0')
 	{
+		while (ft_isspace(lex->c))
+			lex_next(lex);
 		if (ft_isalnum(lex->c))
 			return (lex_get_word(lex));
-		if (lex->c == '-')
+		//if (ft_isdigit(lex->c))
+		//	return (lex_get_number(lex));
 			
 		tok = token_switch(lex->c, lex);
 		if (tok)
 		{
 			lex_next(lex);
 			return (tok);
-		};
+		}
 	}
 	return (init_token(NULL, TOK_EOL));
 }

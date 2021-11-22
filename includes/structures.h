@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 19:35:06 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:52:54 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_tok
 		TOK_BSLASH,
 		TOK_OPAREN,
 		TOK_CPAREN,
+		TOK_SPACE,
 		TOK_EOL
 
 	} e_type;
@@ -46,6 +47,30 @@ typedef struct s_lex
 	char *src;
 	int size;
 }			t_lex;
+
+typedef struct s_par
+{
+	t_lex *lex;
+	t_tok *tok;
+}			t_par;
+
+typedef struct s_ast t_ast;
+
+typedef struct s_ast
+{
+	enum
+	{
+		AST_COMPOUND,
+		AST_VARIABLE,
+		AST_COMMAND,
+		AST_WORD,
+		AST_NULL
+	} e_type;
+
+	t_ast **branches;
+	t_tok *my_tok;
+	
+}			t_ast;
 
 typedef struct s_comm
 {
@@ -61,7 +86,6 @@ typedef struct s_comm
 
 	int		fd_p[2]; // Pipe I'm reading from
 	int		fd_n[2]; // Pipe I'm writing to;
-
 }			t_comm;
 
 typedef struct	s_shell

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 19:44:41 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:57:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ t_tok *lex_get_word(t_lex *lex);
 t_tok *next_token(t_lex *lex);
 t_tok *token_switch(char c, t_lex *lex);
 t_tok *token_switch_two(char c, t_lex *lex);
-t_tok *lex_get_optn(t_lex *lex);
+t_tok *lex_get_space(t_lex *lex);
+//t_tok *lex_get_optn(t_lex *lex);
+t_ast *init_ast(int type);
+void ast_add_branch(t_ast *parent, t_ast *child, int i);
+t_par *init_parser(t_lex *lex);
+t_tok *parser_next(t_par *par, unsigned int type);
+t_ast *parse_to_ast(t_par *par);
+t_ast *parse_word(t_par *par);
+t_ast* parse_variable(t_par *par);
 
 #endif

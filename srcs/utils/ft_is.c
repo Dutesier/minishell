@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 17:47:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 17:54:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:57:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ int	ft_isdigit(int c)
 int	ft_isalnum(int c)
 {
 	return (ft_isdigit(c) + ft_isalpha(c));
+}
+
+int	ft_isspace(int c)
+{
+	return (c == 9 || c == 11 || c == ' ' || c == 12 || c == 13 );
 }

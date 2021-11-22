@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 15:24:06 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/22 20:01:50 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[], char **envp)
 			parse_line(&shell);
 			if (shell.line[0] == 'q')
 				i = 0;
-			clean_shell(&shell);
+			//clean_shell(&shell);
 		}
 	}
 	/*int c = 0;
