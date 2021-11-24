@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 17:33:44 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:46:37 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int command_ammount(t_ast *root, int count)
 	while (root && root->branches && root->branches[i] != NULL)
 	{
 		count += command_ammount(root->branches[i], count);
-		if (root->e_type == AST_COMMAND)
+		if (root->branches[i]->e_type == AST_COMMAND)
 			count++;
+		i++;
 	}
+	printf("Command ammount in %s:  %i\n", ast_to_str(root->e_type), count);
 	return (count);
 }
 
@@ -69,6 +71,7 @@ int init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very basic c
 	int x;
 
 	a = args_ammount(ast);
+	command_ammount(ast, 0);
 	x = 0;
 	comm = malloc(sizeof(t_comm));
 	if (!comm)

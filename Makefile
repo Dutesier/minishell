@@ -21,6 +21,9 @@ SRCS 		:=	srcs/main.c \
 				srcs/commands/ft_pwd.c \
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \
+				srcs/executing/init_command.c \
+				srcs/executing/ast_handler.c \
+				srcs/executing/command_table.c \
 				srcs/redirecting/change_in.c \
 				srcs/redirecting/change_out.c \
 				srcs/redirecting/fd_closer.c \

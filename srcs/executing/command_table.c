@@ -6,15 +6,15 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 17:33:41 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:24:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void command_table(t_shell *shell, t_ast *ast)
+/*void command_table(t_shell *shell, t_ast *ast)
 {
 	int count;
 
 	count = commadn
-}
+}*/
