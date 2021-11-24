@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 13:49:39 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:09:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ int parse_line(t_shell *shell)
 	if (!par)
 		return (1);
 	root = parse_to_ast(par);
+	if (root->e_type == AST_COMPOUND && ast_branch_ammount(root) > 1) //FIXME curently just a very small example of how tu use the AST
+	{
+		if (root->branches[1]->e_type == AST_COMMAND)
+		{
+			init_command(shell, root);
+		}
+	}
 	print_ast(root, 0);
 	if (!root)
 		return (1);

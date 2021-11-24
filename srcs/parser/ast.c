@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:29:40 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:22:05 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:10:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ void ast_add_branch(t_ast *parent, t_ast *child, int i)
 		printf("-----Added ->%s<- to the parents %s branches\n", parent->branches[i++]->my_tok->value, ast_to_str(parent->e_type));
 	}*/
 	//printf("->Left: ast_add_branch\n");
+}
+
+int ast_branch_ammount(t_ast *ast)
+{
+	int i;
+
+	i = 0;
+	while (ast && ast->branches && ast->branches[i] != NULL)
+		i++;
+	return (i);
 }
