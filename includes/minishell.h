@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 19:58:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:43:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "executing.h"
 # include "utils.h"
 # include "redirecting.h"
-# include "get_next_line.h"
 # include "reader.h"
 # include "cleaning.h"
 # include "parser.h"

@@ -32,9 +32,14 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/print_error.c \
 				srcs/utils/ft_append.c \
 				srcs/utils/ft_putstr_fd.c \
-				srcs/gnl/get_next_line.c \
+				srcs/utils/ft_strings.c \
+				srcs/utils/ft_is.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \
+				srcs/parser/parser_utils.c \
+				srcs/parser/lexer.c \
+				srcs/parser/lexer_utils.c \
+				srcs/parser/ast.c \
 				srcs/cleaning/clean_shell.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
@@ -47,7 +52,6 @@ DEPS	=	includes/commands.h \
 			includes/executing.h \
 			includes/redirecting.h \
 			includes/utils.h \
-			includes/get_next_line.h \
 			includes/reader.h \
 			includes/parser.h \
 			includes/cleaning.h \
