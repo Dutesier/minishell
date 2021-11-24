@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 20:03:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:26:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_tok *init_token(char *value, int type)
 		return (NULL);
 	tok->value = value;
 	tok->e_type = type;
+	printf("Initialized token [%s] for %s\n", tok_to_str(tok->e_type), value);
 	return (tok);
 }
 
@@ -68,11 +69,12 @@ t_tok *lex_get_word(t_lex *lex)
 t_tok *next_token(t_lex *lex)
 {
 	t_tok *tok;
+	//printf("Entered next_token\n");
 
 	while (lex->c != '\0')
 	{
-		while (ft_isspace(lex->c))
-			lex_next(lex);
+		//while (ft_isspace(lex->c))
+		//	lex_next(lex);
 		if (ft_isalnum(lex->c))
 			return (lex_get_word(lex));
 		//if (ft_isdigit(lex->c))

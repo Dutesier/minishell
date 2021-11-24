@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 20:07:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:33:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int cmd_ammount(char *line)
 	return (i);
 }*/
 
-void print_ast(t_ast *ast);
+void print_ast(t_ast *ast, int l);
 int parse_line(t_shell *shell)
 {
 	t_lex *lex;
@@ -99,24 +99,39 @@ int parse_line(t_shell *shell)
 	if (!par)
 		return (1);
 	root = parse_to_ast(par);
-	print_ast(root);
+	if (root->e_type == AST_COMPOUND && ast_branch_ammount(root) > 1) //FIXME curently just a very small example of how tu use the AST
+	{
+		if (root->branches[1]->e_type == AST_COMMAND)
+		{
+			init_command(shell, root);
+		}
+	}
+	print_ast(root, 0);
 	if (!root)
 		return (1);
 	return (0);
 }
 
-void print_ast(t_ast *ast)
+void print_ast(t_ast *ast, int l)
 {
 	int i;
+	int c;
 
 	i = 0;
+	c = 0;
 	if (ast == NULL)
 		return ;
-	printf("AST %i\n", ast->e_type);
+	l++;
+	while (c < l)
+	{
+		printf("-");
+		c++;
+	}
+	printf("AST %s\n", ast_to_str(ast->e_type));
 	if (ast->my_tok != NULL)
-		printf("AST: Type: %i my_tok->e_type: %i my_tok: %s \n", ast->e_type, ast->my_tok->e_type, ast->my_tok->value);
+		printf("AST: Type: %s my_tok->e_type: %s my_tok: %s \n", ast_to_str(ast->e_type), tok_to_str(ast->my_tok->e_type), ast->my_tok->value);
 	while (ast->branches && ast->branches[i] != NULL)
 	{
-		print_ast(ast->branches[i++]);
+		print_ast(ast->branches[i++], l);
 	}
 }

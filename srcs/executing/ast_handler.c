@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executing.h                                        :+:      :+:    :+:   */
+/*   ast_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:52:22 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/24 15:27:56 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/24 15:40:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTING_H
-# define EXECUTING_H
+#include "minishell.h"
 
-char *ft_newpath(char *cmd, char **envp);
-char *ft_findpath(char **envp);
-int run_command(t_comm *comm);
-int init_command(t_shell *shell, t_ast *ast);
-int args_ammount(t_ast *command);
+int ast_handler(t_shell *shell, t_ast *root)
+{
+	int i;
+	t_ast *b;
 
-#endif
+	i = 0;
+	b = ast->branches[1];
+	if (b->e_type == AST_COMMAND)
+	{
+		// Check for predefined commands
+		if (is_command(root->branches[0]->my_tok->value))
+			// reroute this to commands
+			i = 1;
+		else
+			i = init_command(shell, ast);
+	}
+}

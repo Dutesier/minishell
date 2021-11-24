@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executing.h                                        :+:      :+:    :+:   */
+/*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:52:22 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/24 17:33:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTING_H
-# define EXECUTING_H
+#include "minishell.h"
 
-char *ft_newpath(char *cmd, char **envp);
-char *ft_findpath(char **envp);
-int run_command(t_comm *comm);
-int init_command(t_shell *shell, t_ast *ast);
-int args_ammount(t_ast *command);
+void command_table(t_shell *shell, t_ast *ast)
+{
+	int count;
 
-#endif
+	count = commadn
+}

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 20:03:35 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:25:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_par *init_parser(t_lex *lex)
 t_tok *parser_next(t_par *par, unsigned int type)
 {
 	par->tok = next_token(par->lex);
-	if (par->tok->e_type != type)
+	if (par->tok->e_type != type && type != 42)
 	{
-		printf("[Parser] Wrong node %d, was expecting %d\n", par->tok->e_type, type);
+		printf("[Parser] Wrong node %s, was expecting %s\n", tok_to_str(par->tok->e_type), tok_to_str(type));
 		return (NULL);
 	}
 	return (par->tok);
@@ -41,7 +41,7 @@ t_ast *parse_to_ast(t_par *par)
 {
 	//printf("Entered: parse_to_ast\n");
 	if (par->tok->e_type == TOK_WORD)
-		return (parse_variable(par)); // Here is the main entry point into parssing
+		return (parse_compound(par)); // Here is the main entry point into parsing
 	return (init_ast(AST_NULL));
 }
 
@@ -66,10 +66,9 @@ t_ast *parse_variable(t_par *par)
 	i = 0;
 	ast = init_ast(AST_VARIABLE);
 	ast_add_branch(ast, parse_word(par), i++);
-	parser_next(par, TOK_EQUALS);
-	ast_add_branch(ast, parse_word(par), i++);
 	parser_next(par, TOK_WORD);
 	ast_add_branch(ast, parse_word(par), i++);
+	parser_next(par, TOK_EOL);
 	/*i = 0;
 	while (ast->branches[i] != NULL)
 	{
