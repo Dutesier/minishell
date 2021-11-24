@@ -1,43 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_command.c                                      :+:      :+:    :+:   */
+/*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 15:41:23 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/24 17:33:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int run_command(t_comm *comm)
+void command_table(t_shell *shell, t_ast *ast)
 {
-	pid_t	pid;
-	int		sta;
-	int		error;
-	
+	int count;
 
-	pid = fork();
-	if (pid == -1)
-		return (print_error(FORK_FAIL));
-	if (pid == 0)
-	{
-		if (set_in_and_out(comm))
-			return (1);
-
-		error = execve(comm->cmd, comm->args, NULL);
-		if (error < 0)
-			return (print_error(EXEC_FAIL));
-	}
-	else
-	{
-		waitpid(pid, &sta, 0);
-		sta = WEXITSTATUS(sta);
-		if (sta)
-			return (1);
-		return (0);
-	}
-	return (0);
+	count = commadn
 }

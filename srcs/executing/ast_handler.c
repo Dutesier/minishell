@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_command.c                                      :+:      :+:    :+:   */
+/*   ast_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 15:41:23 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/24 15:27:56 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/24 15:40:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int run_command(t_comm *comm)
+int ast_handler(t_shell *shell, t_ast *root)
 {
-	pid_t	pid;
-	int		sta;
-	int		error;
-	
+	int i;
+	t_ast *b;
 
-	pid = fork();
-	if (pid == -1)
-		return (print_error(FORK_FAIL));
-	if (pid == 0)
+	i = 0;
+	b = ast->branches[1];
+	if (b->e_type == AST_COMMAND)
 	{
-		if (set_in_and_out(comm))
-			return (1);
-
-		error = execve(comm->cmd, comm->args, NULL);
-		if (error < 0)
-			return (print_error(EXEC_FAIL));
+		// Check for predefined commands
+		if (is_command(root->branches[0]->my_tok->value))
+			// reroute this to commands
+			i = 1;
+		else
+			i = init_command(shell, ast);
 	}
-	else
-	{
-		waitpid(pid, &sta, 0);
-		sta = WEXITSTATUS(sta);
-		if (sta)
-			return (1);
-		return (0);
-	}
-	return (0);
 }
