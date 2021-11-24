@@ -34,9 +34,11 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_putstr_fd.c \
 				srcs/utils/ft_strings.c \
 				srcs/utils/ft_is.c \
+				srcs/utils/x_to_str.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \
+				srcs/parser/parser_logic.c \
 				srcs/parser/lexer.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \

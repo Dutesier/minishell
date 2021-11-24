@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 18:52:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 11:36:11 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_tok
 		TOK_OPAREN,
 		TOK_CPAREN,
 		TOK_SPACE,
+		TOK_PIPE,
 		TOK_EOL
 
 	} e_type;

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 12:41:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:14:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_tok *token_switch(char c, t_lex *lex)
 		return (init_token(")", TOK_CPAREN));
 	if (lex->c == '/')
 		return (init_token("/", TOK_BSLASH));
+	if (lex->c == '|')
+		return (init_token("|", TOK_PIPE));
 	if (lex->c == '.')
 		return (init_token(".", TOK_COLLON));
 	if (lex->c == '=')
@@ -32,6 +34,8 @@ t_tok *token_switch(char c, t_lex *lex)
 		return (init_token("\'", TOK_S_QUOTE));
 	if (lex->c == '\"')
 		return (init_token("\"", TOK_D_QUOTE));
+	if (lex->c == '\n')
+		return (init_token("EOL", TOK_EOL));
 	return (token_switch_two(c, lex));
 }
 
@@ -55,15 +59,26 @@ t_tok *token_switch_two(char c, t_lex *lex)
 		}
 		return (init_token(">", TOK_GT));
 	}
-	return (NULL);
+	return (token_switch_three(lex));
 }
 
-/*t_tok *lex_get_space(t_lex *lex)
+t_tok *token_switch_three(t_lex *lex)
 {
+	int i;
+
+	i = 0;
 	while (ft_isspace(lex->c))
+	{
 		lex_next(lex);
+		i++;
+	}
+	if (i == 0)
+		return (NULL);
+	lex->i--;
+	lex->c = lex->src[lex->i];
 	return (init_token(" ", TOK_SPACE));
-}*/
+}
+
 /*t_tok *lex_get_optn(t_lex *lex)
 {
 	char	*value;

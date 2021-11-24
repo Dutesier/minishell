@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/22 11:58:29 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:48:59 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_substr(char *str, int start, int ammount);
 // Error printing
 int		print_error(int error);
 int		ft_putstr_fd(char *s, int fd);
+char *tok_to_str(unsigned int type);
+char *ast_to_str(unsigned int type);
 
 // Pattern matching
 int		is_spec(char c);
