@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:45:25 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 12:15:27 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:45:18 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char *tok_to_str(unsigned int type)
 		return ("TOK_D_QUOTE");
 	if (type == TOK_SEMI)
 		return ("TOK_SEMI");
-	if (type == TOK_COLLON)
-		return ("TOK_COLLON");
+	if (type == TOK_DOT)
+		return ("TOK_DOT");
 	if (type == TOK_EQUALS)
 		return ("TOK_EQUALS");
 	if (type == TOK_BSLASH)

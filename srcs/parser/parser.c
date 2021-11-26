@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:31:32 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:36:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int parse_line(t_shell *shell)
 		return (1);
 	command_ammount(root, 0);
 	print_ast(root, 0);
-	shell->line = par->lex->src; //Because of get quote
+	shell->line = par->lex->src; //Because of get quote we might need to repoint shell.line to the actual line
 	clean_ast(root);
 	clean_parser(par);
 	return (0);
