@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 18:46:37 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:53:06 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ int command_ammount(t_ast *root, int count)
 	i = 0;
 	while (root && root->branches && root->branches[i] != NULL)
 	{
-		count += command_ammount(root->branches[i], count);
+		count = command_ammount(root->branches[i], count);
 		if (root->branches[i]->e_type == AST_COMMAND)
 			count++;
 		i++;
 	}
-	printf("Command ammount in %s:  %i\n", ast_to_str(root->e_type), count);
+	if (root->e_type == AST_ROOT)
+		printf("Command ammount in %s:  %i\n", ast_to_str(root->e_type), count);
 	return (count);
 }
 

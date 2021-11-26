@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:45:25 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 13:48:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:15:27 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char *tok_to_str(unsigned int type)
 
 char *ast_to_str(unsigned int type)
 {
+	if (type == AST_ROOT)
+		return ("AST_ROOT");
 	if (type == AST_COMPOUND)
 		return ("AST_COMPOUND");
 	if (type == AST_VARIABLE)

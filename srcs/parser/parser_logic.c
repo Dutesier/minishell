@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:25:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:17:10 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,23 @@ t_ast *parse_compound(t_par *par)
 	if (next == TOK_EQUALS)
 	{
 		ast_add_branch(ast, parse_variable(par), i++);
-		return (ast);
+		next = par->tok->e_type;
+		if (next == TOK_SPACE)
+		{
+			free(par->tok);
+			parser_next(par, 42);
+			next = par->tok->e_type;
+		}
+		if (next == TOK_SEMI || next == TOK_EOL)
+			return (ast);
 	}
-	if (next == TOK_SPACE)
+	if (next == TOK_SEMI || next == TOK_EOL)
+		return (ast);
+	else
 	{
 		ast_add_branch(ast, parse_command(par), i++);
 		return (ast);
 	}
-	if (next == TOK_SEMI || next == TOK_EOL)
-		return (ast);
 	return (ast); // FIXME Should null terminate? 
 }
 

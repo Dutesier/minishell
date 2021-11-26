@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 18:52:58 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:26:19 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int parse_line(t_shell *shell)
 	if (!par)
 		return (1);
 	root = parse_to_ast(par);
-	command_ammount(root, 0);
-	print_ast(root, 0);
 	if (!root)
 		return (1);
+	command_ammount(root, 0);
+	print_ast(root, 0);
+	clean_ast(root);
+	clean_parser(par);
 	return (0);
 }
 

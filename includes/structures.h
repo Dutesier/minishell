@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 17:33:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:12:26 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ast
 {
 	enum
 	{
+		AST_ROOT,
 		AST_COMPOUND,
 		AST_VARIABLE,
 		AST_COMMAND,
