@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 13:48:59 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:55:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
+char *ft_strcat(char *str, char *append);
 
 // Error printing
 int		print_error(int error);
@@ -43,5 +44,12 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isspace(int c);
+int		ft_isquote(int c);
+
+// Get quote - adapted from gnl
+char *store_buffer(char *holder, char *buff);
+char *store_line(char **line, char *holder, int ret);
+char *get_next_line(int fd, char *s);
+int get_quote(t_lex *lex, char q);
 
 #endif

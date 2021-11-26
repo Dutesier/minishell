@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:26:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:00:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,19 @@ t_tok *lex_get_word(t_lex *lex)
 	char	*value;
 	int		i;
 	int		x;
+	int		q;
 
 	i = 0;
 	x = lex->i;
-	while (ft_isalnum(lex->c))
+	while (ft_isalnum(lex->c) || ft_isquote(lex->c))
 	{
+		q = ft_isquote(lex->c);
+		if (q > 0)
+		{
+			i++;
+			lex_next(lex);
+			i += nextquote(lex, q);
+		}
 		i++;
 		lex_next(lex);
 	}
@@ -69,17 +77,11 @@ t_tok *lex_get_word(t_lex *lex)
 t_tok *next_token(t_lex *lex)
 {
 	t_tok *tok;
-	//printf("Entered next_token\n");
 
 	while (lex->c != '\0')
 	{
-		//while (ft_isspace(lex->c))
-		//	lex_next(lex);
-		if (ft_isalnum(lex->c))
-			return (lex_get_word(lex));
-		//if (ft_isdigit(lex->c))
-		//	return (lex_get_number(lex));
-			
+		if (ft_isalnum(lex->c) || ft_isquote(lex->c))
+			return (lex_get_word(lex)); 
 		tok = token_switch(lex->c, lex);
 		if (tok)
 		{

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 15:10:03 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:52:55 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ t_ast *parse_word(t_par *par);
 t_ast* parse_variable(t_par *par);
 t_ast *parse_compound(t_par *par);
 t_ast *parse_command(t_par *par);
+int is_compound(t_par *par);
+int	nextquote(t_lex *lex, int q);
 
 #endif

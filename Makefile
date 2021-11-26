@@ -36,7 +36,9 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_append.c \
 				srcs/utils/ft_putstr_fd.c \
 				srcs/utils/ft_strings.c \
+				srcs/utils/get_quote.c \
 				srcs/utils/ft_is.c \
+				srcs/utils/ft_is_two.c \
 				srcs/utils/x_to_str.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \

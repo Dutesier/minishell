@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 13:26:19 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:31:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int parse_line(t_shell *shell)
 		return (1);
 	command_ammount(root, 0);
 	print_ast(root, 0);
+	shell->line = par->lex->src; //Because of get quote
 	clean_ast(root);
 	clean_parser(par);
 	return (0);
@@ -60,7 +61,7 @@ void print_ast(t_ast *ast, int l)
 	printf("[%s]", ast_to_str(ast->e_type));
 	if (ast->my_tok != NULL)
 	{
-		printf(": tok->e_type: %s tok->value: %s \n", tok_to_str(ast->my_tok->e_type), ast->my_tok->value);
+		printf(": (%s) :  %s \n", tok_to_str(ast->my_tok->e_type), ast->my_tok->value);
 	}
 	if (!ast->my_tok)
 		printf("\n");

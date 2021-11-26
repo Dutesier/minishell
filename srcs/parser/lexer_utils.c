@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 14:14:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:00:28 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tok *token_switch(char c, t_lex *lex)
 	if (lex->c == '|')
 		return (init_token("|", TOK_PIPE));
 	if (lex->c == '.')
-		return (init_token(".", TOK_COLLON));
+		return (init_token(".", TOK_DOT));
 	if (lex->c == '=')
 		return (init_token("=", TOK_EQUALS));
 	if (lex->c == '\'')
@@ -79,21 +79,27 @@ t_tok *token_switch_three(t_lex *lex)
 	return (init_token(" ", TOK_SPACE));
 }
 
-/*t_tok *lex_get_optn(t_lex *lex)
+int	nextquote(t_lex *lex, int q)
 {
-	char	*value;
-	int		i;
-	int		x;
+	int i;
 
 	i = 0;
-	x = lex->i;
-	while (ft_isalnum(lex->c))
+	lex->c = lex->src[lex->i];
+	if (ft_isquote(lex->c) == q)
+		return (i);
+	while (ft_isquote(lex->c) != q && lex->c != '\0')
 	{
 		i++;
 		lex_next(lex);
 	}
-	value = ft_substr(lex->src, x, i);
-	if (!value)
-		return (NULL);
-	return (init_token(value, TOK_OPTION));
-}*/
+	if (lex->c == '\0')
+	{
+		if (q == 1)
+			get_quote(lex, '\''); //FIXME here we need a program that gets rest of str - probably good instance to use gnl
+		else
+			get_quote(lex, '\"'); //FIXME here we need a program that gets rest of str - probably good instance to use gnl
+		return (i + nextquote(lex, q));
+	}
+	return (i);
+}
+

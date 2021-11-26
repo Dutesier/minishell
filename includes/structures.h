@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 12:12:26 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:03:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_tok
 		TOK_D_QUOTE,
 		TOK_SEMI,
 		TOK_COLLON,
+		TOK_DOT,
 		TOK_EQUALS,
 		TOK_BSLASH,
 		TOK_OPAREN,

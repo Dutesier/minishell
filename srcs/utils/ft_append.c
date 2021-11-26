@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:25:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:26:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:36:37 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@ int ft_strlen(char *str)
 	return (i);
 }
 
+char *ft_strcat(char *str, char *append)
+{
+	int size;
+	int i;
+	char *holder;
+
+	size = ft_strlen(str) + ft_strlen(append);
+	i = 0;
+	holder = (char *)malloc(sizeof(char) * (size + 1));
+	if (!holder)
+		return (0);
+	while (i < size)
+	{
+		while (*str != '\0')
+			holder[i++] = *str++;
+		while (*append != '\0')
+			holder[i++] = *append++;
+	}
+	holder[i] = '\0';
+	return (holder);
+}
 
 char *ft_append(char *str, char *append)
 {
