@@ -42,7 +42,7 @@ For every point, if you have any doubt take bash as a reference.
 ### File Organization
 | Folder      | Description |
 | ----------- | ----------- |
-| Parser     | Contains a parser and a lexer (so far). Its goal is to read the input provided from the user and separate it into actionable commands. Also checks for syntax errors.      |
+| Parser     | Contains a parser and a lexer that build an Abstract Syntax Tree. The goal is to read the input provided from the user and separate it into actionable commands. Also checks for syntax errors.      |
 | Cleaning   | Contains functions to make sure that we go into the next phase (i.e. exiting or new line from user) cleanly. Frees any unnecessary memory. |
 | Commands   | Contains functions to replicate bash commands that need to be hardcoded. "cd" is a good example, since we cannot fork and then call chdir because when we exit the fork we'll be left in the same directory. |
 | Executing   | Executes commands given by the parser via ```execve```. |
