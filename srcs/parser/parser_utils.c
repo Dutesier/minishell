@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 15:37:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:29:51 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ t_ast *parse_to_ast(t_par *par)
 		ast_add_branch(root, parse_compound(par), i++);
 	while (par->tok->e_type != TOK_EOL)
 	{
+		if (par->tok->e_type == TOK_PIPE)
+		{
+			ast_add_branch(root, parse_word(par), i++);
+			parser_next(par, 42);
+		}
 		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
 		{
 			free(par->tok);

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 15:38:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:30:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,7 @@ t_ast *parse_command(t_par *par)
 		next = par->tok->e_type;
 	}
 	// FIXME add redirects
-	if (next == TOK_SEMI || next == TOK_EOL)
+	if (next == TOK_SEMI || next == TOK_EOL || next == TOK_PIPE)
 		return (ast);
-	if (next == TOK_PIPE)
-	{
-		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, TOK_PIPE);
-		ast_add_branch(ast, parse_command(par), i++);
-	}
 	return (ast);
 }
