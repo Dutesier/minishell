@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 18:25:34 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:14:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 char *ft_newpath(char *cmd, char **envp);
 char *ft_findpath(char **envp);
 int run_command(t_comm *comm);
-int init_command(t_shell *shell, t_ast *ast);
+t_comm *init_command(t_shell *shell, t_ast *ast);
 int args_ammount(t_ast *command);
-int command_ammount(t_ast *root, int count);
+int compound_ammount(t_ast *root, int count);
 int store_args(t_comm *comm, t_ast *ast);
 int ast_handler(t_shell *shell, t_ast *root);
+int	command_table(t_shell *shell, t_ast *root);
+int run_comm_table(t_shell *shell);
 
 #endif

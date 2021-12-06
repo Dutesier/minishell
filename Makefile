@@ -40,6 +40,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_is.c \
 				srcs/utils/ft_is_two.c \
 				srcs/utils/x_to_str.c \
+				srcs/utils/comm_printer.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \

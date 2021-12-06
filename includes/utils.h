@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 17:55:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:49:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		print_error(int error);
 int		ft_putstr_fd(char *s, int fd);
 char *tok_to_str(unsigned int type);
 char *ast_to_str(unsigned int type);
+void comm_printer(t_comm *comm);
 
 // Pattern matching
 int		is_spec(char c);
