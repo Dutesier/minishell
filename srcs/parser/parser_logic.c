@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:40:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:38:42 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_ast *parse_compound(t_par *par)
 	next = par->tok->e_type;
 	if (next == TOK_EQUALS)
 	{
+		ast->branches[0]->e_type = AST_VARIABLE;
 		ast_add_branch(ast, parse_variable(par), i++);
 		next = par->tok->e_type;
 		if (next == TOK_SPACE)
@@ -38,9 +39,14 @@ t_ast *parse_compound(t_par *par)
 			return (ast);
 	}
 	if (next == TOK_SEMI || next == TOK_EOL)
+	{
+		if (i == 1)
+			ast->branches[0]->e_type = AST_COMMAND;
 		return (ast);
+	}
 	else
 	{
+		ast->branches[0]->e_type = AST_COMMAND;
 		ast_add_branch(ast, parse_command(par), i++);
 		return (ast);
 	}
@@ -55,7 +61,7 @@ t_ast *parse_command(t_par *par)
 	unsigned int next;
 
 	i = 0;
-	ast = init_ast(AST_COMMAND);
+	ast = init_ast(AST_COMM_ARGS);
 	next = par->tok->e_type;
 	while (next == TOK_WORD || next == TOK_SPACE)
 	{

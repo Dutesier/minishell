@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 16:03:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:03:12 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ typedef struct s_ast
 		AST_ROOT,
 		AST_COMPOUND,
 		AST_VARIABLE,
+		AST_VAR_DEF,
 		AST_COMMAND,
+		AST_COMM_ARGS,
 		AST_WORD,
 		AST_NULL
 	} e_type;
@@ -77,6 +79,12 @@ typedef struct s_ast
 
 typedef struct s_comm
 {
+	enum
+	{
+		VAR_DEF,
+		COMMAND
+	} e_type;
+
 	char	*infile;
 	char	*outfile;
 	int		in;

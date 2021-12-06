@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 13:21:41 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:37:10 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_ast *parse_variable(t_par *par)
 	int i;
 	
 	i = 0;
-	ast = init_ast(AST_VARIABLE);
+	ast = init_ast(AST_VAR_DEF);
 	ast_add_branch(ast, parse_word(par), i++); // The EQUALS
 	parser_next(par, TOK_WORD);
 	ast_add_branch(ast, parse_word(par), i++); // The var value
