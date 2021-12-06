@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/24 15:41:23 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:44:29 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int run_command(t_comm *comm)
 	}
 	else
 	{
+		if (comm->fd_p[0] > -1)
+		{
+			close(comm->fd_p[0]);
+			close(comm->fd_p[1]);
+		}
 		waitpid(pid, &sta, 0);
 		sta = WEXITSTATUS(sta);
 		if (sta)
