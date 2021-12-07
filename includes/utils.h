@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 16:49:00 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:01:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isspace(int c);
 int		ft_isquote(int c);
+int		ft_isword(int c);
 
 // Get quote - adapted from gnl
 char *store_buffer(char *holder, char *buff);

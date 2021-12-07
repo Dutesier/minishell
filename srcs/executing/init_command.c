@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 19:31:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:12:33 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int compound_ammount(t_ast *root, int count)
 			count++;
 		i++;
 	}
-	if (root->e_type == AST_ROOT)
-		printf("Compound ammount in %s:  %i\n", ast_to_str(root->e_type), count);
+	//if (root->e_type == AST_ROOT)
+		//printf("Compound ammount in %s:  %i\n", ast_to_str(root->e_type), count);
 	return (count);
 }
 

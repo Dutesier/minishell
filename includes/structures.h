@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 18:06:38 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:55:29 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_ast
 		AST_VAR_DEF,
 		AST_COMMAND,
 		AST_COMM_ARGS,
+		AST_REDIRECT,
+		AST_DELIMITER,
 		AST_WORD,
 		AST_NULL
 	} e_type;

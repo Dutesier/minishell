@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:16:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 16:22:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:07:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char *ft_newpath(char *cmd, char **envp)
 	char	*full_cmd;
 
 	i = 0;
+	if (access(cmd, F_OK) == 0)
+		return (ft_strdup(cmd));
 	path = ft_split(ft_findpath(envp), ':');
 	while (path[i] != NULL)
 	{

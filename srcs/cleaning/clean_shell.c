@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 16:08:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 10:50:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int clean_shell(t_shell *shell)
 	int i;
 
 	i = 0;
-	while (shell->commands[i] != NULL)
+	while (shell->commands && shell->commands[i] != NULL)
 	{
 		if (shell->commands[i]->cmd)
 			free(shell->commands[i]->cmd);
@@ -31,6 +31,6 @@ int clean_shell(t_shell *shell)
 		i++;
 	}
 	free(shell->commands);
-	free(shell->line);
+	//free(shell->line);
 	return (i);
 }
