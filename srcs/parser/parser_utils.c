@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 17:29:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:13:48 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_tok *parser_next(t_par *par, unsigned int type)
 	par->tok = next_token(par->lex);
 	if (par->tok->e_type != type && type != 42)
 	{
-		printf("[Parser] Wrong node %s, was expecting %s\n", tok_to_str(par->tok->e_type), tok_to_str(type));
+		//printf("[Parser] Wrong node %s, was expecting %s\n", tok_to_str(par->tok->e_type), tok_to_str(type));
 		return (NULL);
 	}
 	return (par->tok);

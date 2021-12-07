@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 16:49:00 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:22:51 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ typedef enum e_exit_code
 	EXEC_FAIL
 }			t_exit_code;
 
+typedef enum e_color
+{
+	WHT,
+	BLK,
+	RED,
+	YEL,
+	BLU,
+	GRN
+}			t_color;
+
 // Strings
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *str1, char *str2, int cmp);
@@ -31,6 +41,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
 char *ft_strcat(char *str, char *append);
+char *ft_color(unsigned int color);
 
 // Error printing
 int		print_error(int error);
@@ -46,6 +57,7 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isspace(int c);
 int		ft_isquote(int c);
+int		ft_isword(int c);
 
 // Get quote - adapted from gnl
 char *store_buffer(char *holder, char *buff);

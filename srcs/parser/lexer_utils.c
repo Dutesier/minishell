@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:00:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:05:16 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_tok *token_switch(char c, t_lex *lex)
 		return (init_token("(", TOK_OPAREN));
 	if (lex->c == ')')
 		return (init_token(")", TOK_CPAREN));
-	if (lex->c == '/')
-		return (init_token("/", TOK_BSLASH));
+	//if (lex->c == '/')
+	//	return (init_token("/", TOK_BSLASH));
 	if (lex->c == '|')
 		return (init_token("|", TOK_PIPE));
-	if (lex->c == '.')
-		return (init_token(".", TOK_DOT));
+	//if (lex->c == '.')
+	//	return (init_token(".", TOK_DOT));
 	if (lex->c == '=')
 		return (init_token("=", TOK_EQUALS));
 	if (lex->c == '\'')

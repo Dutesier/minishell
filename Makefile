@@ -22,6 +22,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \
 				srcs/executing/init_command.c \
+				srcs/executing/init_command_utils.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
 				srcs/redirecting/change_in.c \
@@ -40,6 +41,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_is.c \
 				srcs/utils/ft_is_two.c \
 				srcs/utils/x_to_str.c \
+				srcs/utils/colors.c \
 				srcs/utils/comm_printer.c \
 				srcs/reader/get_line.c \
 				srcs/parser/parser.c \

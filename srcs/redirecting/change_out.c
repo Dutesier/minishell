@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:39:01 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:29:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:53:37 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int change_out(int old_out_fd, char *new_out)
 
 	out = ft_getfd(new_out, 2);
 	if (out == -1)
-		return (print_error(FILE_OPEN_FAIL));
+		return (print_error(FILE_OPEN_FAIL) - 1);
+	//printf("FD %i now points to %s(%i)\n", old_out_fd, new_out, out); 
 	dup2(out, old_out_fd);
+	close(out);
 	return (out);
 }
