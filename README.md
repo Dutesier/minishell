@@ -1,5 +1,5 @@
 # minishell
-## Build a simplified version of a shell
+## Build a simplified version of a shell - (under development :gear:)
 ### Your shell should:
 - [ ] Not interpret unclosed quotes or unspecified special characters like \ or ;.
 - [ ] Not use more than one global variable, think about it and be ready to explain why
