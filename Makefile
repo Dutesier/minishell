@@ -17,20 +17,24 @@ DIR_O	=	obj
 
 # Using wildcards: $(shell find $(DIR_S) -name *.c)
 SRCS 		:=	srcs/main.c \
+	\
 				srcs/commands/ft_cd.c \
 				srcs/commands/ft_pwd.c \
+	\
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \
 				srcs/executing/init_command.c \
 				srcs/executing/init_command_utils.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
+	\
 				srcs/redirecting/change_in.c \
 				srcs/redirecting/change_out.c \
 				srcs/redirecting/fd_closer.c \
 				srcs/redirecting/get_fd.c \
 				srcs/redirecting/set_in_and_out.c \
 				srcs/redirecting/set_pipes.c \
+	\
 				srcs/utils/ft_split.c \
 				srcs/utils/ft_strcmp.c \
 				srcs/utils/print_error.c \
@@ -43,13 +47,17 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/x_to_str.c \
 				srcs/utils/colors.c \
 				srcs/utils/comm_printer.c \
+	\
 				srcs/reader/get_line.c \
+	\
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \
 				srcs/parser/parser_logic.c \
+				srcs/parser/parse_command.c \
 				srcs/parser/lexer.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
+	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \
 

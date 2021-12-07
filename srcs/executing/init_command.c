@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 12:54:59 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:20:17 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,22 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	t_comm *comm;
 	int a;
 	int x;
+	int c;
 
 //	printf("Entered init_command of ast branch %s \n", ast_to_str(ast->e_type));
-	if (ast->branches[1] == NULL)
-		a = 0;
-	else
-		a = args_ammount(ast->branches[1]);
+	int ar = find_args_branch(ast);
+	if (ar >= 0)
+		a = args_ammount(ast->branches[ar]);
 	x = 0;
 	comm = malloc(sizeof(t_comm));
 	if (!comm)
 		return (NULL);
-
-	if (ast->branches[0]->e_type == AST_VARIABLE)
+	c = find_cmd_branch(ast);
+	if (ast->branches[c]->e_type == AST_VARIABLE)
 		comm->e_type = VAR_DEF;
 	else
 		comm->e_type = COMMAND;
-	comm->cmd = ft_newpath(ast->branches[0]->my_tok->value, shell->envp);
+	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, shell->envp);
 
 	comm->piping = 0;
 	comm->fd_n[0] = -1;
@@ -108,11 +108,21 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		comm->args = malloc(sizeof(char *) * 2);
 		if (!comm->args)
 			return (NULL); // NOT A CLEAN EXIT FIXME
-		comm->args[0] = ast->branches[0]->my_tok->value;
+		comm->args[0] = ast->branches[c]->my_tok->value;
 		comm->args[1] = NULL;
 	}
 
-	init_comm_redir(comm, ast);
+	int red;
+
+	red = find_redir_branch(ast);
+	while (red >= 0)
+	{
+		printf("redir %i\n", red);
+		init_comm_redir(comm, ast, red % 10);
+		red = red / 10;
+		if (red == 0)
+			red = -1;
+	}
 	//printf("Left init_command \n");
 	return (comm);
 }
