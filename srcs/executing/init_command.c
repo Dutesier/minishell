@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 11:12:33 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:54:59 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,16 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	else
 		comm->e_type = COMMAND;
 	comm->cmd = ft_newpath(ast->branches[0]->my_tok->value, shell->envp);
+
 	comm->piping = 0;
 	comm->fd_n[0] = -1;
 	comm->fd_n[1] = -1;
 	comm->fd_p[0] = -1;
 	comm->fd_p[1] = -1;
+
+	comm->infile = NULL;
+	comm->outfile = NULL;
+
 	if (a > 1)
 	{
 		x = store_args(comm, ast);
@@ -106,6 +111,8 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		comm->args[0] = ast->branches[0]->my_tok->value;
 		comm->args[1] = NULL;
 	}
+
+	init_comm_redir(comm, ast);
 	//printf("Left init_command \n");
 	return (comm);
 }

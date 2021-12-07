@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:36:50 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:52:38 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int set_in_and_out(t_comm *comm)
 	if (comm->infile != NULL)
 	{
 		comm->in = change_in(STDIN_FILENO, comm->infile);
-		if (comm->in)
+		if (!comm->in)
 			return (1);
 	}
 	if (comm->outfile != NULL)
 	{
 		comm->out = change_out(STDOUT_FILENO, comm->outfile);
-		if (comm->out)
+		if (!comm->out)
 			return (1);
 	}
 	return (0);

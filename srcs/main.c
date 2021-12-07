@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 10:53:37 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:31:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ int main(int argc, char *argv[], char **envp)
 		// Then a function that uses line
 		if (shell.line != NULL)
 		{
-			if (shell.line[0] == 'q')
+			if (shell.line[0] != 'q')
+			{
+				parse_line(&shell);
+				clean_shell(&shell);
+			}
+			else
 				i = 0;
-			parse_line(&shell);
-			clean_shell(&shell);
 		}
 	}
 	/*int c = 0;

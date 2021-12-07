@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:27:56 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/06 16:18:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:22:55 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,15 @@ int ast_handler(t_shell *shell, t_ast *root)
 		else
 			i = init_command(shell, root);
 	}*/
+	return (i);
+}
+
+int branch_ammount(t_ast *ast)
+{
+	int	i;
+
+	i = 0;
+	while (ast->branches && ast->branches[i] != NULL)
+		i++;
 	return (i);
 }
