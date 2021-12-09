@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: candec <candec@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/19 15:43:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:24:33 by candec           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 
 # include "structures.h"
 # include "commands.h"
