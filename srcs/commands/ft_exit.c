@@ -6,7 +6,7 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:25:18 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/09 17:35:23 by Jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:26:53 by Jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void    ft_exit(void)
 {
+    write(1, "exit\n",6);
     exit(EXIT_SUCCESS);
 }
