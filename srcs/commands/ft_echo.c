@@ -6,10 +6,15 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:25:59 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/09 16:26:01 by Jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:04:14 by Jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_echo(char *str)
+int ft_echo(bool n, char *str)
+{
+    write(1, str, ft_strlen(str));
+    if (!n)
+        write(1, "\n", 2);
+}
