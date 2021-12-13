@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 17:31:26 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/09 17:04:29 by Jibanez-         ###   ########.fr       */
+/*   Created: 2021/12/09 17:17:56 by Jibanez-          #+#    #+#             */
+/*   Updated: 2021/12/09 17:24:36 by Jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int ft_putchar_fd(char c, int fd)
+void ft_env(t_shell *shell)
 {
-	if (fd < 0)
-		return (0);
-	return (write(fd, &c, 1));
-}
+    int i;
 
-int ft_putstr_fd(char *s, int fd)
-{
-	int i;
-
-	i = 0;
-	if (!s || fd < 0)
-		return (0);
-	while (s[i] != '\0')
-		ft_putchar_fd(s[i++], fd);
-	return (i);
+    i = 0;
+    while (shell.envp[i])
+    {
+        write(1, &shell.envp[i], ft_strlen(shell.envp[i]));
+        write(1, "\n", 2);
+    }
 }
