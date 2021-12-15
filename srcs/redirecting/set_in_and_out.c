@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 15:52:38 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:15:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int set_in_and_out(t_comm *comm)
 	if (comm->piping)
 		if (set_pipes(comm))
 			return (1);
-	if (comm->infile != NULL)
+	if (comm->redir == 2)
 	{
-		comm->in = change_in(STDIN_FILENO, comm->infile);
+		comm->in = change_in(STDIN_FILENO, comm->infile, comm->redir);
 		if (!comm->in)
 			return (1);
 	}
-	if (comm->outfile != NULL)
+	if (comm->redir == 1 || comm->redir == 3)
 	{
-		comm->out = change_out(STDOUT_FILENO, comm->outfile);
+		comm->out = change_out(STDOUT_FILENO, comm->outfile, comm->redir);
 		if (!comm->out)
 			return (1);
 	}

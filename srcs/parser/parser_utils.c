@@ -6,7 +6,7 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/09 16:30:36 by Jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/13 10:23:15 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_ast *parse_to_ast(t_par *par)
 
 	i = 0;
 	root = init_ast(AST_ROOT);
-	if (par->tok->e_type == TOK_WORD)
+	if (par->tok->e_type == TOK_WORD || command_tok(par->tok->e_type) == 2)
 		ast_add_branch(root, parse_compound(par), i++);
 	while (par->tok->e_type != TOK_EOL)
 	{

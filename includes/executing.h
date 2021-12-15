@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 12:41:26 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:15:16 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ char *ft_newpath(char *cmd, char **envp);
 char *ft_findpath(char **envp);
 int run_command(t_comm *comm);
 t_comm *init_command(t_shell *shell, t_ast *ast);
-int init_comm_redir(t_comm *comm, t_ast *ast);
+int init_comm_redir(t_comm *comm, t_ast *ast, int r);
 int config_redir(t_comm *comm, t_ast *ast, int redir);
+int find_cmd_branch(t_ast *ast);
+int find_redir_branch(t_ast *ast);
+int find_args_branch(t_ast *ast);
 int args_ammount(t_ast *command);
 int compound_ammount(t_ast *root, int count);
 int store_args(t_comm *comm, t_ast *ast);

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:43:30 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 16:44:38 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:10:18 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_getfd(char *filename, int type)
 {
-	if (type == 1)
+	if (type == 2)
 	{
 		if (access(filename, F_OK))
 		{
@@ -25,6 +25,8 @@ int	ft_getfd(char *filename, int type)
 		}
 		return (open(filename, O_RDONLY));
 	}
-	else
+	else if (type == 1)
 		return (open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644));
+	else
+		return (open(filename, O_APPEND | O_CREAT | O_WRONLY,  0644));
 }
