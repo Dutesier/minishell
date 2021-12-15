@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:25:55 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 20:18:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:03:01 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,25 @@
 int init_comm_redir(t_comm *comm, t_ast *ast, int r)
 {
 	int i;
-	int redir;
 	t_ast *b;
 
 	i = 0;
-	redir = 0;
 	b = ast->branches[r];
 	while (b->branches[i] != NULL)
 	{
 		if (b->branches[i]->my_tok->e_type == TOK_SPACE) 
 			i++;
 		if (b->branches[i]->my_tok->e_type == TOK_GT)
-			redir = 1;
+			comm->redir = 1;
 		else if (b->branches[i]->my_tok->e_type == TOK_LT)
-			redir = 2;
+			comm->redir = 2;
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_RIGHT)
-			redir = 3;
+			comm->redir = 3;
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_LEFT)
-			redir = 4;
+			comm->redir = 4;
 		i++;
 	}
-	return (config_redir(comm, b, redir));
+	return (config_redir(comm, b, comm->redir));
 }
 
 int config_redir(t_comm *comm, t_ast *ast, int redir)
@@ -47,7 +45,7 @@ int config_redir(t_comm *comm, t_ast *ast, int redir)
 		i++;
 	if (!ast->branches[i])
 		return (0);
-	if (redir == 1)
+	if (redir == 1 || redir == 3)
 	{
 		comm->outfile = ft_strdup(ast->branches[i]->my_tok->value);
 	}
@@ -55,6 +53,7 @@ int config_redir(t_comm *comm, t_ast *ast, int redir)
 	{
 		comm->infile = ft_strdup(ast->branches[i]->my_tok->value);
 	}
+
 	printf("Redir %i i %i\n", redir, i);
 	return (redir);
 }
@@ -108,9 +107,7 @@ int find_args_branch(t_ast *ast)
 		}
 		i++;
 	}
-	if (noa = -1)
+	if (noa == -1)
 		return (noa);
 	return (i);
 }
-
-
