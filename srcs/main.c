@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 16:31:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:30:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ int main(int argc, char *argv[], char **envp)
 	(void)argv;
 	t_shell shell;
 	int i;
+	char *prompt;
 	
 	i = 1;
 	shell.envp = envp;
 	shell.line = NULL;
+	prompt = "\033[0;34m$\033[0;37m ";
 	while (i)
 	{
 		//ft_putstr_fd("$ ", 1);
-		shell.line = get_line("$ ", shell.line);
+		shell.line = get_line(prompt, shell.line);
 		// Then a function that uses line
 		if (shell.line != NULL)
 		{
