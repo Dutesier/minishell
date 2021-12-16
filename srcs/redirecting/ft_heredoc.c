@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:14:15 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 16:32:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:44:21 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,25 @@ static char *get_until(char *str)
 {
 	char *holder;
 	char *needle;
+	int		i;
 
+	i = 0;
 	holder = get_next_line(STDIN_FILENO, "heredoc> ");
-	needle = ft_strnstr(str, holder);
+	//printf("->str[3] %i<-\n", (int)str[3]);
+	if (ft_isspace(str[ft_strlen(str) - 1]))
+		str[ft_strlen(str) - 1] = '\0';
+	needle = ft_strnstr(holder, str);
 	if (!holder)
 		return (NULL);
 	while (!needle)
 	{
+		i = 1;
 		holder = ft_strcat(holder, get_next_line(STDIN_FILENO, "heredoc> "));
 		if (!holder)
 			return (NULL);
 		needle = ft_strnstr(holder, str);
 	}
-	needle[0] = '\0';
+	if (i)
+		needle[0] = '\0';
 	return (holder);
 }

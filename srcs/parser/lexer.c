@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 11:13:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:51:54 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_tok *lex_get_word(t_lex *lex)
 
 	i = 0;
 	x = lex->i;
-	while (ft_isword(lex->c))
+	while (!ft_isforb(lex->c))//ft_isword(lex->c))
 	{
 		q = ft_isquote(lex->c);
 		if (q > 0)

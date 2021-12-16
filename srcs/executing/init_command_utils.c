@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:25:55 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 15:54:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:18:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,30 @@
 int init_comm_redir(t_comm *comm, t_ast *ast, int r)
 {
 	int i;
+	int stop;
 	t_ast *b;
 
 	i = 0;
 	b = ast->branches[r];
-	while (b->branches[i] != NULL)
+	stop = comm->redir;
+	while (stop == comm->redir && b->branches[i] != NULL)
 	{
 		if (b->branches[i]->my_tok->e_type == TOK_SPACE) 
 			i++;
+
 		if (b->branches[i]->my_tok->e_type == TOK_GT)
-			comm->redir = 1;
+			comm->redir = comm->redir * 10 + 1;
 		else if (b->branches[i]->my_tok->e_type == TOK_LT)
-			comm->redir = 2;
+			comm->redir = comm->redir * 10 + 2;
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_RIGHT)
-			comm->redir = 3;
+			comm->redir = comm->redir * 10 + 3;
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_LEFT)
-			comm->redir = 4;
+			comm->redir = comm->redir * 10 + 4;
+
 		i++;
 	}
+	if (comm->redir % 10 != 0)
+		return (config_redir(comm, b, comm->redir % 10));
 	return (config_redir(comm, b, comm->redir));
 }
 
@@ -58,7 +64,6 @@ int config_redir(t_comm *comm, t_ast *ast, int redir)
 		comm->heredoc = ft_strdup(ast->branches[i]->my_tok->value);
 	}
 
-	printf("Redir %i i %i\n", redir, i);
 	return (redir);
 }
 
@@ -98,20 +103,22 @@ int find_cmd_branch(t_ast *ast)
 int find_args_branch(t_ast *ast)
 {
 	int i;
+	int count;
 	int noa;
 
 	i = 0;
+	count = 0;
 	noa = -1;
 	while (ast->branches[i] != NULL)
 	{
 		if (ast->branches[i]->e_type == AST_COMM_ARGS)
 		{
+			count = i + count * 10;
 			noa = 1;
-			break ;
 		}
 		i++;
 	}
 	if (noa == -1)
 		return (noa);
-	return (i);
+	return (count);
 }

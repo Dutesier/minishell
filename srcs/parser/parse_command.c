@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:30:01 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 19:37:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:20:26 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 {
 	unsigned int	next;
 
-	printf("entered commparser\n");
+	//printf("Entered Command_parser\n");
 	next = par->tok->e_type;
-	printf("entered commparser\n");
 	if (x != 0)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
@@ -31,17 +30,25 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 		ast_add_branch(ast, parse_command(par), i++);
 		next = par->tok->e_type;
 	}
-	if (command_tok(next) == 2)
+	while (next != TOK_EOL && next != TOK_SEMI)
 	{
-		ast_add_branch(ast, parse_redirect(par), i++);
-		next = par->tok->e_type;
+		if (command_tok(next) == 2)
+		{
+			ast_add_branch(ast, parse_redirect(par), i++);
+			next = par->tok->e_type;
+		}
+		else
+		{
+			ast_add_branch(ast, parse_command(par), i++);
+			next = par->tok->e_type;
+		}
 	}
 	return (i);
 }
 
 t_ast *parse_command(t_par *par)
 {
-	printf("Entered: parse_command\n");
+	//printf("Entered: parse_command\n");
 	t_ast *ast;
 	int i;
 	unsigned int next;
