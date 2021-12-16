@@ -34,6 +34,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/redirecting/get_fd.c \
 				srcs/redirecting/set_in_and_out.c \
 				srcs/redirecting/set_pipes.c \
+				srcs/redirecting/ft_heredoc.c \
 	\
 				srcs/utils/ft_split.c \
 				srcs/utils/ft_strcmp.c \
@@ -47,6 +48,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/x_to_str.c \
 				srcs/utils/colors.c \
 				srcs/utils/comm_printer.c \
+				srcs/utils/ft_math.c \
 	\
 				srcs/reader/get_line.c \
 	\

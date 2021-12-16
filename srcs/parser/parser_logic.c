@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 19:27:15 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:20:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_ast *parse_compound(t_par *par)
 {
-	printf("Entered: parse_compound\n");
+	//printf("Entered: parse_compound\n");
 	t_ast *ast;
 	int i;
 	int x;
@@ -60,7 +60,6 @@ t_ast *parse_compound(t_par *par)
 		i += command_parser(ast, par, i, x);
 		return (ast);
 	}
-	printf("left pcomp\n");
 	return (ast); // FIXME Should null terminate? 
 }
 
@@ -71,7 +70,7 @@ t_ast *parse_redirect(t_par *par)
 	int				i;
 	unsigned int	next;
 
-	printf("Entered: parse_redirect\n");
+	//printf("Entered: parse_redirect\n");
 	ast = init_ast(AST_REDIRECT);
 	i = 0;
 	next = par->tok->e_type;

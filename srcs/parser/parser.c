@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 16:27:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:39:58 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ int parse_line(t_shell *shell)
 	if (!root)
 		return (1);
 	//command_ammount(root, 0);
-	printf("%s", ft_color(YEL));
-	print_ast(root, 0);
-	printf("%s\n", ft_color(WHT));
+	if (*shell->debug)
+	{
+		printf("%s", ft_color(YEL));
+		print_ast(root, 0);
+		printf("%s\n", ft_color(WHT));
+	}
+	// printf("Parsing finished\n");
 	ast_handler(shell, root);
 	shell->line = par->lex->src; //Because of get quote we might need to repoint shell.line to the actual line
 	clean_ast(root);

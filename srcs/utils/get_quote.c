@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:50:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 18:58:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:49:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,10 @@ int get_quote(t_lex *lex, char q)
 
 	if (q == '\'')
 		s = "quote> ";
-	else
+	else if (q == '\"')
 		s = "dquote> ";
+	else
+		s = "pipe> ";
 	holder = get_next_line(STDIN_FILENO, s);
 	if (!holder)
 		return (1);

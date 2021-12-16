@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 16:22:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:50:45 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,22 @@ typedef enum e_color
 // Strings
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *str1, char *str2, int cmp);
+char	*ft_strnstr(const char *haystack, const char *needle);
 int		ft_strlen(char *str);
 char	*ft_append(char *str, char *append);
 char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
-char *ft_strcat(char *str, char *append);
-char *ft_color(unsigned int color);
+char	*ft_strcat(char *str, char *append);
+char	*ft_color(unsigned int color);
 
 // Error printing
 int		print_error(int error);
 int		ft_putstr_fd(char *s, int fd);
-char *tok_to_str(unsigned int type);
-char *ast_to_str(unsigned int type);
-void comm_printer(t_comm *comm);
+char	*tok_to_str(unsigned int type);
+char	*ast_to_str(unsigned int type);
+void	comm_printer(t_comm *comm);
 
 // Pattern matching
 int		is_spec(char c);
@@ -58,11 +59,15 @@ int		ft_isalnum(int c);
 int		ft_isspace(int c);
 int		ft_isquote(int c);
 int		ft_isword(int c);
+int		ft_isforb(int c);
 
 // Get quote - adapted from gnl
-char *store_buffer(char *holder, char *buff);
-char *store_line(char **line, char *holder, int ret);
-char *get_next_line(int fd, char *s);
-int get_quote(t_lex *lex, char q);
+char	*store_buffer(char *holder, char *buff);
+char	*store_line(char **line, char *holder, int ret);
+char	*get_next_line(int fd, char *s);
+int		get_quote(t_lex *lex, char q);
+
+// Math
+int		ft_max(int a, int b);
 
 #endif

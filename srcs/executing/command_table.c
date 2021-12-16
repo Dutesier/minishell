@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 11:59:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:43:03 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,14 @@ int run_comm_table(t_shell *shell)
 	int i;
 
 	i = 0;
+	//printf("Trying to run command table\n");
 	while (shell->commands && shell->commands[i] != NULL)
 	{
-		comm_printer(shell->commands[i]);
+		if (*shell->debug)
+		{
+			comm_printer(shell->commands[i]);
+			printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
+		}
 		if (shell->commands[i]->e_type == VAR_DEF)
 		{
 			// FIXME: Need to build a fucntion that sets and stores a variable

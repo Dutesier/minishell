@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 16:24:46 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:43:30 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int run_command(t_comm *comm)
 		return (print_error(FORK_FAIL));
 	if (pid == 0)
 	{
-		printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
 		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
 			return (1);
 

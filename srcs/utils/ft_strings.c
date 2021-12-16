@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:38:47 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:10:52 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:54:55 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int ft_strchr(char c, char *s)
 	while (s && s[i] != '\0')
 	{
 		if (s[i] == c)
-			return (i); //Used to be i
+			return (i);
 		i++;
 	}
 	return (-1);
