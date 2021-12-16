@@ -1,12 +1,12 @@
 # minishell
 ## Build a simplified version of a shell - (under development :gear:)
-### Your shell should:
+### Our shell should:
 - [ ] Not interpret unclosed quotes or unspecified special characters like \ or ;.
 - [ ] Not use more than one global variable, think about it and be ready to explain why
 you do it.
 - [x] Show a prompt when waiting for a new command.
 - [x] Have a working History.
-- [ ] Search and launch the right executable (based on the PATH variable or by using
+- [x] Search and launch the right executable (based on the PATH variable or by using
 relative or absolute path)
 - It must implement the builtins:
  - [ ]   echo with option -n
@@ -16,15 +16,15 @@ relative or absolute path)
  - [ ]   unset with no options
  - [ ]   env with no options or arguments
  - [ ]   exit with no options
- - [ ]   ’ inhibit all interpretation of a sequence of characters.
+ - [x]   ’ inhibit all interpretation of a sequence of characters.
  - [ ]   " inhibit all interpretation of a sequence of characters except for $.
 - Redirections:
- - [ ]   "<" should redirect input.
- - [ ]   ">" should redirect output.
- - [ ]   “<<” read input from the current source until a line containing only the delimiter is seen. it doesn’t need to update history!
- - [ ]   “>>” should redirect output with append mode.
+ - [x]   "<" should redirect input.
+ - [x]   ">" should redirect output.
+ - [x]   “<<” read input from the current source until a line containing only the delimiter is seen. it doesn’t need to update history!
+ - [x]   “>>” should redirect output with append mode.
  - Pipes 
-   - [ ]  "|". The output of each command in the pipeline is connected via a pipe to the
+   - [x]  "|". The output of each command in the pipeline is connected via a pipe to the
 	  input of the next command.
  - [ ]   Environment variables ($ followed by characters) should expand to their values.
  - [ ]   $? should expand to the exit status of the most recently executed foreground
@@ -49,6 +49,9 @@ For every point, if you have any doubt take bash as a reference.
 | Redirecting | Takes care of redirecting STDIN and STDOUT when necessary. A good example is that it creates the pipes needed between two processes when givne the ```pipe``` command. |
 | Reader | Uses the ```readline``` functions to read a line from the user and create a working history. |
 | Utils | Helpful everyday functions. |
+
+### Usage
+This project uses a makefile, so to run the program you can compile with ```make``` and then enter ```./minishell```. Minishell usually runs with no arguments but for debugging you can use the ```-debug``` flag (i.e. ```./minishell -debug```).
 
 ### External functions that are allowed
 - readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history,
