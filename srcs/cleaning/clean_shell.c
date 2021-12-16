@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 12:49:29 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:54:31 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int clean_shell(t_shell *shell)
 			free(shell->commands[i]->infile);
 		if (shell->commands[i]->outfile)
 			free(shell->commands[i]->outfile);
+		if (shell->commands[i]->heredoc)
+			free(shell->commands[i]->heredoc);
 		free(shell->commands[i]);
 		i++;
 	}

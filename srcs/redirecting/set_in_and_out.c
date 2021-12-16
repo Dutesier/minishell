@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/15 12:15:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:26:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int set_in_and_out(t_comm *comm)
 {
+	char *h;
+
 	if (comm->piping)
 		if (set_pipes(comm))
 			return (1);
@@ -27,6 +29,14 @@ int set_in_and_out(t_comm *comm)
 	{
 		comm->out = change_out(STDOUT_FILENO, comm->outfile, comm->redir);
 		if (!comm->out)
+			return (1);
+	}
+	if (comm->redir == 4)
+	{
+		h = ft_heredoc(comm);
+		comm->in = change_in(STDIN_FILENO, h, comm->redir);
+		free(h);
+		if (!comm->in)
 			return (1);
 	}
 	return (0);

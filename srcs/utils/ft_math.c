@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirecting.h                                      :+:      :+:    :+:   */
+/*   ft_math.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 16:37:01 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 15:58:06 by dareias-         ###   ########.fr       */
+/*   Created: 2021/12/16 14:58:47 by dareias-          #+#    #+#             */
+/*   Updated: 2021/12/16 14:59:49 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTING_H
-# define REDIRECTING_H
+#include "minishell.h"
 
-int		ft_getfd(char *filename, int type);
-int		change_in(int old_in_fd, char *new_in, int redir);
-int		change_out(int old_out_fd, char *new_out, int redir);
-int		set_in_and_out(t_comm *comm);
-int		set_pipes(t_comm *comm);
-int		fd_closer(t_comm *comm);
-char	*ft_heredoc(t_comm *comm);
-
-#endif
+int ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}

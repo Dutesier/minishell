@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:43:30 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/15 12:10:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:31:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_getfd(char *filename, int type)
 {
-	if (type == 2)
+	if (type == 2 || type == 4)
 	{
 		if (access(filename, F_OK))
 		{

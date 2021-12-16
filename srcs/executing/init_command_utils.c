@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:25:55 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/15 12:03:01 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:54:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int config_redir(t_comm *comm, t_ast *ast, int redir)
 	if (redir == 2)
 	{
 		comm->infile = ft_strdup(ast->branches[i]->my_tok->value);
+	}
+	if (redir == 4)
+	{
+		comm->heredoc = ft_strdup(ast->branches[i]->my_tok->value);
 	}
 
 	printf("Redir %i i %i\n", redir, i);

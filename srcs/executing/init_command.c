@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 20:20:17 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:52:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 
 	comm->infile = NULL;
 	comm->outfile = NULL;
+	comm->heredoc = NULL;
 
 	if (a > 1)
 	{

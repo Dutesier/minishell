@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/15 12:00:26 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:51:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_comm
 
 	char	*infile;
 	char	*outfile;
+	char	*heredoc;
 	int		in;
 	int		out;
 	int		redir;
