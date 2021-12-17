@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:58:47 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 14:59:49 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:12:10 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,11 @@ int ft_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+int ft_min(int a, int b)
+{
+	if (a >= b)
+		return (b);
+	return (a);
 }

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:39:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:03:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,14 @@ int main(int argc, char *argv[], char **envp)
 	shell.envp = envp;
 	shell.line = NULL;
 	shell.debug = &debug;
+	shell.vars = NULL;
 	if (argc > 1)
 		if (ft_strcmp(argv[1], "-debug", ft_max(ft_strlen(argv[1]), 6)))
 			*shell.debug = 1;
 	prompt = "\033[0;34m$\033[0;37m ";
 	while (i)
 	{
-		//ft_putstr_fd("$ ", 1);
 		shell.line = get_line(prompt, shell.line);
-		// Then a function that uses line
 		if (shell.line != NULL)
 		{
 			if (shell.line[0] != 'q')
@@ -55,13 +54,8 @@ int main(int argc, char *argv[], char **envp)
 				i = 0;
 		}
 	}
-	/*int c = 0;
-	while (shell.commands[c] != NULL)
-	{
-		printf("%s\n", shell.commands[c]->cmd);
-		c++;
-	}*/
 	clear_history();
 	
 	return (0);
 }
+

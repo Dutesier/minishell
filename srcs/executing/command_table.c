@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:43:03 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:55:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	command_table(t_shell *shell, t_ast *root)
 	int count;
 	int i;
 	int x;
-	//printf("Entered command table \n");
+	printf("Entered command table \n");
 
 	count = compound_ammount(root, 0);
+	shell->vars = NULL;
 	i = 0;
 	x = 0;
 	shell->commands = malloc(sizeof(t_comm *) * (count + 1));
@@ -101,7 +102,14 @@ int run_comm_table(t_shell *shell)
 		}
 		if (shell->commands[i]->e_type == VAR_DEF)
 		{
-			// FIXME: Need to build a fucntion that sets and stores a variable
+			if (*shell->debug)
+			{
+				if (shell->commands[i]->redir == 1)
+					printf("%sVariable set%s \n", ft_color(GRN), ft_color(WHT));
+				else
+					printf("%sError: Variable NOT set%s \n", ft_color(RED), ft_color(WHT));
+
+			}
 			i++;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/13 10:23:15 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:28:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ t_ast *parse_word(t_par *par)
 	t_ast *ast;
 	// int i;
 	// i = 0;
+
+	if (par->tok->e_type == TOK_DOLLAR)
+		return (parse_expansion(par));
 
 	ast = init_ast(AST_WORD);
 	ast->branches = NULL;

@@ -27,6 +27,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/init_command_utils.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
+				srcs/executing/set_variables.c \
+				srcs/executing/variable_expansion.c \
 	\
 				srcs/redirecting/change_in.c \
 				srcs/redirecting/change_out.c \
@@ -56,6 +58,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/parser_utils.c \
 				srcs/parser/parser_logic.c \
 				srcs/parser/parse_command.c \
+				srcs/parser/parse_expansion.c \
 				srcs/parser/lexer.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
