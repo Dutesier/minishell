@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 22:20:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:28:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,6 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	replace_variables(shell, ast, NULL);
 	if (*shell->debug)
 	{
-		printf("%s", ft_color(GRN));
-		print_ast(ast, 0);
-		printf("%s\n", ft_color(WHT));
-
 		int v = 0;
 		while (shell->vars && shell->vars[v] != NULL)
 		{
