@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:38:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:05:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_ast
 		AST_COMPOUND,
 		AST_VARIABLE,
 		AST_VAR_DEF,
+		AST_VAR_EXP,
 		AST_COMMAND,
 		AST_COMM_ARGS,
 		AST_REDIRECT,
@@ -108,6 +109,7 @@ typedef struct	s_shell
 	char	**envp;
 	char	*line;
 	int		*debug;
+	char	**vars;
 
 	t_comm	**commands; // table of all commands
 

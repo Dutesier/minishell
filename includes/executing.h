@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 18:33:01 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:34:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,14 @@ int ast_handler(t_shell *shell, t_ast *root);
 int branch_ammount(t_ast *ast);
 int	command_table(t_shell *shell, t_ast *root);
 int run_comm_table(t_shell *shell);
+
+char *var_expand(t_ast *ast);
+char *ft_variable(t_shell *shell, char *str);
+void replace_variables(t_shell *shell, t_ast *ast, t_ast *father);
+void ast_update(t_ast *parent, t_ast *child, int up);
+
+int add_variable(t_shell *shell, char *var, char *expands);
+int	set_variable(t_shell *shell, t_ast *ast);
+int find_var_branch(t_ast *ast);
 
 #endif

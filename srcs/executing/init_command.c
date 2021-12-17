@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:18:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:28:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 		{
 			if (ast->branches[ar % 10]->branches[i]->my_tok->e_type == TOK_SPACE)
 				i++;
+			else if (ast->branches[ar % 10]->branches[i]->e_type == AST_VAR_EXP)
+			{
+				comm->args[x++] = var_expand(ast->branches[ar % 10]->branches[i++]);
+				i++;
+			}
 			else
 				comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
 		}
@@ -91,6 +96,28 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (!comm)
 		return (NULL);
 	init_comm_helper(comm);
+	replace_variables(shell, ast, NULL);
+	if (*shell->debug)
+	{
+		int v = 0;
+		while (shell->vars && shell->vars[v] != NULL)
+		{
+			printf("%sVARS[%i]%s%s\n", ft_color(YEL), v, shell->vars[v], ft_color(WHT));
+			v++;
+		}
+	}
+
+	// Setup Command
+	c = find_cmd_branch(ast);
+	if (find_var_branch(ast) != -1)
+	{
+		comm->e_type = VAR_DEF;
+		comm->redir = set_variable(shell, ast);
+		return (comm);
+	}
+	else
+		comm->e_type = COMMAND;
+	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, shell->envp);
 
 	// Setup arguments
 	int ar = find_args_branch(ast);
@@ -101,15 +128,6 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (ar == 0)
 			ar = -1;
 	}
-
-	// Setup Command
-	c = find_cmd_branch(ast);
-	if (ast->branches[c]->e_type == AST_VARIABLE)
-		comm->e_type = VAR_DEF;
-	else
-		comm->e_type = COMMAND;
-	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, shell->envp);
-
 
 	if (a > 1)
 	{
@@ -141,6 +159,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 void init_comm_helper(t_comm *comm)
 {
 	comm->infile = NULL;
+	comm->cmd = NULL;
 	comm->outfile = NULL;
 	comm->heredoc = NULL;
 	comm->in = -1;

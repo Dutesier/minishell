@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 19:18:33 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:07:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 // parser
 int		parse_line(t_shell *shell);
+void print_ast(t_ast *ast, int l);
 
 // lexer
 t_tok	*init_token(char *value, int type);
@@ -49,5 +50,8 @@ t_ast	*parse_variable(t_par *par);
 int		command_parser(t_ast *ast, t_par *par, unsigned int i, int x);
 t_ast	*parse_command(t_par *par);
 int		command_tok(unsigned int type);
+
+// parse_expansion
+t_ast *parse_expansion(t_par *par);
 
 #endif

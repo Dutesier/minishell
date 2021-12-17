@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:45:25 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 11:55:17 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:23:50 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char *ast_to_str(unsigned int type)
 		return ("AST_WORD");
 	if (type == AST_VAR_DEF)
 		return ("AST_VAR_DEF");
+	if (type == AST_VAR_EXP)
+		return ("AST_VAR_EXP");
 	if (type == AST_COMM_ARGS)
 		return ("AST_COMM_ARGS");
 	if (type == AST_REDIRECT)

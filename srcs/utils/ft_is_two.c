@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:17:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 16:56:17 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:53:51 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int ft_isforb(int c)
 {
 	if (ft_isspace(c))
 		return (1);
-	if (ft_strchr(c, "<>$") > -1)
+	if (ft_strchr(c, "<>$=;") > -1)
 		return (1);
 	if (c == '\0')
 		return (1);
