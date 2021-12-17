@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 18:39:50 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:19:38 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int clean_shell(t_shell *shell)
 	// 1 for shell line
 	
 	int i;
+//	printf("Cleaning Shell \n");
 
 	i = 0;
 	while (shell->commands && shell->commands[i] != NULL)
@@ -39,21 +40,24 @@ int clean_shell(t_shell *shell)
 	if (shell->vars)
 		clean_vars(shell);
 	free(shell->commands);
+//	printf("Cleaned Shell \n");
 	//free(shell->line);
 	return (i);
 }
 
 int clean_vars(t_shell *shell)
 {
-	//printf("cleaning vars\n");
+//	printf("Cleaning vars\n");
 	int i;
 
 	i = 0;
 	while (shell->vars && shell->vars[i] != NULL)
 	{
+	//	printf("VAR[%i] (%p) cleaning: %s\n",i, &shell->vars[i],  shell->vars[i]);
 		free(shell->vars[i]);
 		i++;
 	}
 	free(shell->vars);
+//	printf("Cleaned vars\n");
 	return (i);
 }

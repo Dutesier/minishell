@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 20:51:44 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:20:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	while (ar >= 0)
 	{
 		a += args_ammount(ast->branches[ar % 10]);
-		printf("ar: %i, a: %i\n",ar, a);
 		ar = ar / 10;
 		if (ar == 0)
 			ar = -1;

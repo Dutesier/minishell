@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 18:55:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:18:57 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	command_table(t_shell *shell, t_ast *root)
 	int count;
 	int i;
 	int x;
-	printf("Entered command table \n");
+	//printf("Entered command table \n");
 
 	count = compound_ammount(root, 0);
 	shell->vars = NULL;
