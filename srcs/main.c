@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:44:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:38:28 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
  *
 */
 
+void handle_sigtstp(int sig)
+{
+	if (sig == '\02')
+		printf("\n\033[0;34m$\033[0;37m ");
+	else if (sig == '\03')
+		return ;
+}
+
 int main(int argc, char *argv[], char **envp)
 {
 	t_shell shell;
@@ -36,6 +44,11 @@ int main(int argc, char *argv[], char **envp)
 	shell.line = NULL;
 	shell.debug = &debug;
 	shell.vars = NULL;
+	shell.sa.sa_handler = &handle_sigtstp;
+	shell.sa.sa_flags = SA_RESTART;
+
+	sigaction(SIGINT, &shell.sa, NULL);
+	sigaction(SIGQUIT, &shell.sa, NULL);
 	if (argc > 1)
 		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 			*shell.debug = 1;
@@ -45,13 +58,16 @@ int main(int argc, char *argv[], char **envp)
 		shell.line = get_line(prompt, shell.line);
 		if (shell.line != NULL)
 		{
-			if (shell.line[0] != 'q')
+			if (shell.line[0] == '\04' || shell.line[0] == 'q')
+			{
+				printf("exit\n");
+				i = 0;
+			}
+			else
 			{
 				parse_line(&shell);
 				clean_shell(&shell);
 			}
-			else
-				i = 0;
 		}
 	}
 	clear_history();
