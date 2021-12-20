@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:20:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:23:57 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_ast *parse_compound(t_par *par)
 	if (next == TOK_SEMI || next == TOK_EOL)
 	{
 		if (i == 1)
-			ast->branches[0]->e_type = AST_COMMAND;
+			ast->branches[0]->e_type = AST_COMMAND; //FIXME: What happens when a var expansion happens first??? It is getting set to COMMAND
 		return (ast);
 	}
 	else

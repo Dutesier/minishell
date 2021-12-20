@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:55:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:32:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:19:21 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	clean_ast(t_ast *ast)
 {
-	//printf("Cleaning AST...\n");
+//	printf("Cleaning AST...\n");
 	int i;
 
 	i = 0;
@@ -35,7 +35,7 @@ int	clean_ast(t_ast *ast)
 		clean_tok(ast->my_tok);
 	if (ast)
 		free(ast);
-	//printf("Cleaned AST\n");
+//	printf("Cleaned AST\n");
 	return (i);
 }
 
@@ -47,24 +47,24 @@ int clean_parser(t_par *par)
 	i = 0;
 	i = clean_lexer(par->lex);
 	free(par);
-	//printf("Cleaned parser\n");
+//	printf("Cleaned parser\n");
 	return (i);
 }
 
 int clean_lexer(t_lex *lex)
 {
-	//printf("Cleaning lexer\n");
+//	printf("Cleaning lexer\n");
 	free(lex);
-	//printf("Cleaned lexer\n");
+//	printf("Cleaned lexer\n");
 	return (1);
 }
 
 int clean_tok(t_tok *tok)
 {
-	//printf("Cleaning token %s\n", tok_to_str(tok->e_type));
+//	printf("Cleaning token %s (%p) %s\n", tok_to_str(tok->e_type), &tok->value, tok->value);
 	if (tok->e_type == TOK_WORD)
 		free(tok->value);
 	free(tok);
-	//printf("Cleaned token\n");
+//	printf("Cleaned token\n");
 	return (1);
 }
