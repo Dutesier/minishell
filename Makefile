@@ -20,6 +20,11 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/commands/ft_cd.c \
 				srcs/commands/ft_pwd.c \
+				srcs/commands/ft_echo.c \
+				srcs/commands/ft_env.c \
+				srcs/commands/ft_export.c \
+				srcs/commands/ft_unset.c \
+				srcs/commands/ft_envp.c \
 	\
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \

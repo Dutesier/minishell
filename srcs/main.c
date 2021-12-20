@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 18:03:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:44:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[], char **envp)
 	shell.debug = &debug;
 	shell.vars = NULL;
 	if (argc > 1)
-		if (ft_strcmp(argv[1], "-debug", ft_max(ft_strlen(argv[1]), 6)))
+		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 			*shell.debug = 1;
 	prompt = "\033[0;34m$\033[0;37m ";
 	while (i)

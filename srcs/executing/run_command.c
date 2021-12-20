@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:43:30 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:07:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int run_command(t_comm *comm)
 	int		error;
 	
 
+	if (comm->is_ft)
+		return (run_ft_command(comm));
 	pid = fork();
 	if (pid == -1)
 		return (print_error(FORK_FAIL));
@@ -45,4 +47,47 @@ int run_command(t_comm *comm)
 		return (0);
 	}
 	return (0);
+}
+
+int run_ft_command(t_comm *ft_comm)
+{
+	int sta;
+	int save_in;
+	int save_out;
+
+	sta = 0;
+	save_in = dup(STDIN_FILENO);
+	save_out = dup(STDOUT_FILENO);
+	if (set_in_and_out(ft_comm))
+		return (1);
+	sta = exec_ft_comm(ft_comm); 
+	if (ft_comm->fd_p[0] > -1)
+	{
+		close(ft_comm->fd_p[0]);
+		close(ft_comm->fd_p[1]);
+	}
+	if (ft_comm->infile)
+	{
+		dup2(save_in, STDIN_FILENO);
+		close(ft_comm->in);
+	}
+	if (ft_comm->outfile)
+	{
+		dup2(save_out, STDOUT_FILENO);
+		close(ft_comm->out);
+	}
+	return (sta);
+}
+
+int exec_ft_comm(t_comm *ft_comm)
+{
+	if (ft_comm->is_ft == 1)
+		return (ft_cd(ft_comm));
+	if (ft_comm->is_ft == 2)
+		return (ft_pwd(ft_comm));
+	if (ft_comm->is_ft == 3)
+		return (ft_echo(ft_comm));
+	if (ft_comm->is_ft == 4)
+		return (ft_env(ft_comm, 0));
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 22:28:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:09:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (!comm)
 		return (NULL);
 	init_comm_helper(comm);
+	comm->envp = shell->envp;
+	comm->vars = shell->vars;
 	replace_variables(shell, ast, NULL);
 	if (*shell->debug)
 	{
@@ -117,6 +119,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	}
 	else
 		comm->e_type = COMMAND;
+	comm->is_ft = ft_iscomm(ast->branches[c]->my_tok->value);
 	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, shell->envp);
 
 	// Setup arguments
@@ -143,6 +146,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		comm->args[1] = NULL;
 	}
 
+	// Setup Redirection
 	int red;
 
 	red = find_redir_branch(ast);
@@ -172,5 +176,7 @@ void init_comm_helper(t_comm *comm)
 	comm->fd_n[1] = -1;
 	comm->fd_p[0] = -1;
 	comm->fd_p[1] = -1;
+
+	comm->is_ft = 0;
 }
 
