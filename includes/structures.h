@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 18:05:35 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:04:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef struct	s_tok
+typedef struct s_tok
 {
-	char *value;
+	char	*value;
 	enum
 	{
 		TOK_WORD,
@@ -110,6 +110,7 @@ typedef struct	s_shell
 	char	*line;
 	int		*debug;
 	char	**vars;
+	struct	sigaction sa;
 
 	t_comm	**commands; // table of all commands
 
