@@ -6,20 +6,23 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:17:56 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/09 17:24:36 by Jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:07:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_env(t_shell *shell)
+int ft_env(t_comm *ft_comm, int exp)
 {
     int i;
 
     i = 0;
-    while (shell.envp[i])
+    while (ft_comm->envp[i])
     {
-        write(1, &shell.envp[i], ft_strlen(shell.envp[i]));
-        write(1, "\n", 2);
+		if (exp)
+			printf("declare -x ");
+		printf("%s\n", ft_comm->envp[i]);
+		i++;
     }
+	return (1);
 }

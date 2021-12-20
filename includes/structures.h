@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:04:23 by jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:39:02 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,15 @@ typedef struct s_comm
 
 	char	*cmd;
 	char	**args;
+	char	**envp;
+	char	**vars;
 
 	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
 
 	int		fd_p[2]; // Pipe I'm reading from (previous)
 	int		fd_n[2]; // Pipe I'm writing to (next)
+
+	int		is_ft;
 }			t_comm;
 
 typedef struct	s_shell

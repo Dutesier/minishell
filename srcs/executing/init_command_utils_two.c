@@ -1,23 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   init_command_utils_two.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 15:25:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:35:27 by dareias-         ###   ########.fr       */
+/*   Created: 2021/12/20 12:18:30 by dareias-          #+#    #+#             */
+/*   Updated: 2021/12/20 12:21:34 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_cd(t_comm *ft_comm)
-{
-	int i;
-
-	i = chdir(ft_comm->args[1]);
-	if (i == -1)
-		perror("Minishell: ");
-	return (i);
-}
+// For better organization of init command

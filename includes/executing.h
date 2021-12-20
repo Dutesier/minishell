@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 19:34:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:34:05 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 char *ft_newpath(char *cmd, char **envp);
 char *ft_findpath(char **envp);
-int run_command(t_comm *comm);
 t_comm *init_command(t_shell *shell, t_ast *ast);
 int init_comm_redir(t_comm *comm, t_ast *ast, int r);
 int config_redir(t_comm *comm, t_ast *ast, int redir);
@@ -38,5 +37,9 @@ void ast_update(t_ast *parent, t_ast *child, int up);
 int add_variable(t_shell *shell, char *var, char *expands);
 int	set_variable(t_shell *shell, t_ast *ast);
 int find_var_branch(t_ast *ast);
+
+int run_command(t_comm *comm);
+int run_ft_command(t_comm *ft_comm);
+int exec_ft_comm(t_comm *ft_comm);
 
 #endif
