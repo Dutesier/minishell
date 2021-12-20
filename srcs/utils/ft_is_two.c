@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:17:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 17:40:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:23:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ int ft_iscomm(char *str)
 		return (3);
 	if (ft_strcmp(str, "env", ft_min(ft_strlen(str), 3)))
 		return (4);
+	if (ft_strcmp(str, "export", ft_min(ft_strlen(str), 6)))
+		return (5);
+	if (ft_strcmp(str, "unset", ft_min(ft_strlen(str), 5)))
+		return (6);
 	return (0);
 }

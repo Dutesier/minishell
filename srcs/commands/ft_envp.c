@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:16:14 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:13:18 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:22:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char **rm_envp(char **envp, char *rm)
 		return (NULL); // actually return print error of malloc fail
 	while (envp[i])
 	{
-		if (ft_strcmp(var, envp[i], ft_min(ft_strlen(envp[i]), ft_strlen(rm))))
+		if (ft_strcmp(rm, envp[i], ft_min(ft_strlen(envp[i]), ft_strlen(rm))))
 			free(envp[i++]);
 		new[i] = envp[i]; // Do we want do strdup or are we fine with having just pointers to the OG?
 		i++;
@@ -85,3 +85,4 @@ char *whole_var(t_comm *comm, char *var)
 	free(temp);
 	return (final);
 }
+
