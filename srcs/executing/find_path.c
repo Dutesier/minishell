@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:16:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 11:07:46 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:38:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char *ft_findpath(char **envp)
 	int i;
 
 	i = 0;
+	if (!envp || !envp[i])
+		return (NULL);
 	while (ft_strcmp(envp[i], "PATH", 4) == 0)
 		i++;
 	return (envp[i]);

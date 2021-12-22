@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 22:18:11 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:41:34 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,19 @@ void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 
 char *ft_variable(t_shell *shell, char *str)
 {
-	int i;
+	int		where;
+	float	var_set;
 
-	i = 0;
-	while (shell->vars[i] != NULL)
+	var_set = var_is_set(shell, str);
+	where = (int)var_set;
+	if (var_set == -1)
+		return (NULL);
+	if (var_set - (float)where == 0)
 	{
-		if (ft_strcmp(str, shell->vars[i], ft_min(ft_strlen(str), ft_strlen(shell->vars[i]))))
-			return (ft_strdup(shell->vars[i + 1]));
-		i = i + 2;
+		// Then it is in vars
+		return (ft_strdup(shell->vars[where + 1]));
 	}
-	return (NULL);
+	return (expansion_from_envp(shell, where));
 }
 
 void ast_update(t_ast *parent, t_ast *child, int up)

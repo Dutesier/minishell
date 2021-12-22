@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:38:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:11:05 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int main(int argc, char *argv[], char **envp)
 	shell.line = NULL;
 	shell.debug = &debug;
 	shell.vars = NULL;
+	shell.exports = NULL;
 	shell.sa.sa_handler = &handle_sigtstp;
 	shell.sa.sa_flags = SA_RESTART;
 
@@ -70,6 +71,10 @@ int main(int argc, char *argv[], char **envp)
 			}
 		}
 	}
+	if (shell.vars)
+		clean_vars(&shell);
+	if (shell.exports)
+		clean_exports(&shell);
 	clear_history();
 	
 	return (0);
