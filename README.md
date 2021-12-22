@@ -9,13 +9,13 @@ you do it.
 - [x] Search and launch the right executable (based on the PATH variable or by using
 relative or absolute path)
 - It must implement the builtins:
- - [ ]   echo with option -n
+ - [x]   echo with option -n
  - [ ]   cd with only a relative or absolute path
- - [ ]   pwd with no options
- - [ ]   export with no options
- - [ ]   unset with no options
- - [ ]   env with no options or arguments
- - [ ]   exit with no options
+ - [x]   pwd with no options
+ - [x]   export with no options
+ - [x]   unset with no options
+ - [x]   env with no options or arguments
+ - [x]   exit with no options
  - [x]   ’ inhibit all interpretation of a sequence of characters.
  - [ ]   " inhibit all interpretation of a sequence of characters except for $.
 - Redirections:
