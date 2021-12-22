@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:34:05 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:36:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,18 @@ char *ft_variable(t_shell *shell, char *str);
 void replace_variables(t_shell *shell, t_ast *ast, t_ast *father);
 void ast_update(t_ast *parent, t_ast *child, int up);
 
+// Set_Variables.c
 int add_variable(t_shell *shell, char *var, char *expands);
 int	set_variable(t_shell *shell, t_ast *ast);
 int find_var_branch(t_ast *ast);
+int update_var(t_shell *shell, char *var, char *expands, float var_set);
+void exports_log(t_shell *shell, char *var);
+
+// Variables.c
+float var_is_set(t_shell *shell, char *var);
+int var_in_vars(char **vars, char *var);
+int var_in_envp(char **envp, char *var);
+char *expansion_from_envp(t_shell *shell, int where);
 
 int run_command(t_comm *comm);
 int run_ft_command(t_comm *ft_comm);

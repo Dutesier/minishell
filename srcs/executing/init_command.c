@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:09:00 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:14:59 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (!comm)
 		return (NULL);
 	init_comm_helper(comm);
-	comm->envp = shell->envp;
-	comm->vars = shell->vars;
+	comm->shell = shell;
 	replace_variables(shell, ast, NULL);
 	if (*shell->debug)
 	{

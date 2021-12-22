@@ -6,13 +6,14 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:39:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:13:14 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+typedef struct s_shell t_shell;
 typedef struct s_tok
 {
 	char	*value;
@@ -97,8 +98,11 @@ typedef struct s_comm
 
 	char	*cmd;
 	char	**args;
-	char	**envp;
-	char	**vars;
+
+	t_shell *shell;
+	// Should the two bellow be deleted
+	//char	**envp;
+	//char	**vars;
 
 	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
 
@@ -114,6 +118,7 @@ typedef struct	s_shell
 	char	*line;
 	int		*debug;
 	char	**vars;
+	char	**exports; // The idea is to keep track of what we store in envp to know if it's up to us to free
 	struct	sigaction sa;
 
 	t_comm	**commands; // table of all commands

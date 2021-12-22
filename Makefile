@@ -34,6 +34,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/command_table.c \
 				srcs/executing/set_variables.c \
 				srcs/executing/variable_expansion.c \
+				srcs/executing/variables.c \
 	\
 				srcs/redirecting/change_in.c \
 				srcs/redirecting/change_out.c \

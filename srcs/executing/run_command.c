@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:24:13 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:19:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int run_command(t_comm *comm)
 		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
 			return (1);
 
-		error = execve(comm->cmd, comm->args, NULL);
+		error = execve(comm->cmd, comm->args, comm->shell->envp);
 		if (error < 0)
 			return (print_error(EXEC_FAIL));
 	}

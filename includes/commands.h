@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:31:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:04:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:11:58 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int ft_unset(t_comm *ft_comm);
 
 // Envp
 char **add_envp(char **envp, char *add);
-char **rm_envp(char **envp, char *rm);
-char *whole_var(t_comm *comm, char *var);
+char **rm_envp(char **envp, char *rm, char **exports);
+char *whole_var_from_vars(char **vars, char *var);
+void rm_var_from_vars(t_shell *shell, char *var);
+int did_i_export(char *var, char **exports);
 
 #endif
