@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:11:05 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:52:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int main(int argc, char *argv[], char **envp)
 		clean_exports(&shell);
 	clear_history();
 	
-	return (0);
+	return (EXIT_SUCCESS);
 }
 

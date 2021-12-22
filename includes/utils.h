@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 16:08:26 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:29:27 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int		get_quote(t_lex *lex, char q);
 // Math
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
+int		ft_atoi(const char *str);
 
 #endif

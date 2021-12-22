@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:45:25 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 15:23:50 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:09:42 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ char *tok_to_str(unsigned int type)
 		return ("TOK_PIPE");
 	if (type == TOK_EOL)
 		return ("TOK_EOL");
+	if (type == TOK_TILDE)
+		return ("TOK_TILDE");
+	if (type == TOK_ERROR)
+		return ("TOK_ERROR");
 	return ("TOKEN UNDEFINED");
 }
 

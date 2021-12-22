@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:14:59 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:43:08 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 				i++;
 			}
 			else
+			{
+				//printf("Storing %s", tok_to_str(ast->branches[ar%10]->branches[i]->my_tok->e_type));
 				comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
+			}
 		}
 		ar = ar / 10;
 		if (ar == 0)

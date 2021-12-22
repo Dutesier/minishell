@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 16:51:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:23:21 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ t_tok *lex_get_word(t_lex *lex)
 	}
 	value = ft_substr(lex->src, x, i);
 	if (!value)
-		return (NULL);
+	{	
+		lex_next(lex);
+		return (init_token(NULL, TOK_ERROR));
+	}
 	return (init_token(value, TOK_WORD));
 }
 
 t_tok *next_token(t_lex *lex)
 {
+	//printf("Entered next_token\n");
 	t_tok *tok;
 
 	while (lex->c != '\0')
@@ -88,6 +92,8 @@ t_tok *next_token(t_lex *lex)
 			lex_next(lex);
 			return (tok);
 		}
+		lex_next(lex);
+		return (init_token(NULL, TOK_ERROR));
 	}
 	return (init_token(NULL, TOK_EOL));
 }

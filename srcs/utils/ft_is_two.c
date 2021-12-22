@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:17:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:23:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:33:23 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int ft_isword(int c)
 {
 	if (ft_isquote(c) || ft_isalnum(c))
 		return (1);
-	if (c == '.' || c == '/' || c == '-' || c ==  '_')
+	if (c == '.' || c == '/' || c == '-' || c ==  '_' || c == '~') // This needs to be changed, too messy rn
 		return (1);
 	return (0);
 }
@@ -43,17 +43,19 @@ int ft_isforb(int c)
 
 int ft_iscomm(char *str)
 {
-	if (ft_strcmp(str, "cd", ft_min(ft_strlen(str), 2)))
+	if (ft_strcmp_two(str, "cd"))
 		return (1);
-	if (ft_strcmp(str, "pwd", ft_min(ft_strlen(str), 3)))
+	if (ft_strcmp_two(str, "pwd"))
 		return (2);
-	if (ft_strcmp(str, "echo", ft_min(ft_strlen(str), 4)))
+	if (ft_strcmp_two(str, "echo"))
 		return (3);
-	if (ft_strcmp(str, "env", ft_min(ft_strlen(str), 3)))
+	if (ft_strcmp_two(str, "env"))
 		return (4);
-	if (ft_strcmp(str, "export", ft_min(ft_strlen(str), 6)))
+	if (ft_strcmp_two(str, "export"))
 		return (5);
-	if (ft_strcmp(str, "unset", ft_min(ft_strlen(str), 5)))
+	if (ft_strcmp_two(str, "unset"))
 		return (6);
+	if (ft_strcmp_two(str, "exit"))
+		return (7);
 	return (0);
 }

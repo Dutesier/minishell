@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:31:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:11:58 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:30:12 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int ft_echo(t_comm *ft_comm);
 int ft_env(t_comm *ft_comm, int exp);
 int	ft_export(t_comm *ft_comm);
 int ft_unset(t_comm *ft_comm);
+void	ft_exit(t_comm *ft_comm);
 
 // Envp
 char **add_envp(char **envp, char *add);

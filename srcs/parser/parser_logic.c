@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 22:23:57 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:24:51 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_ast *parse_compound(t_par *par)
 	else
 	{
 		i += command_parser(ast, par, i, x);
+		//printf("Exited parse_compound\n");
 		return (ast);
 	}
 	return (ast); // FIXME Should null terminate? 

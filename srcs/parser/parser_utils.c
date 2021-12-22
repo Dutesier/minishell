@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 15:28:46 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:42:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_ast *parse_to_ast(t_par *par)
 		}
 		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
 		{
+			//printf("------loop\n");
 			free(par->tok);
 			parser_next(par, 42);
 		}

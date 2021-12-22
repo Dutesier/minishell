@@ -25,6 +25,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/commands/ft_export.c \
 				srcs/commands/ft_unset.c \
 				srcs/commands/ft_envp.c \
+				srcs/commands/ft_exit.c \
 	\
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \
@@ -57,6 +58,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/colors.c \
 				srcs/utils/comm_printer.c \
 				srcs/utils/ft_math.c \
+				srcs/utils/ft_atoi.c \
 	\
 				srcs/reader/get_line.c \
 	\

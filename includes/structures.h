@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:13:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:19:54 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_tok
 		TOK_ARROW_RIGHT,
 		TOK_ARROW_LEFT,
 		TOK_OPTION,
+		TOK_TILDE,
 		TOK_S_QUOTE,
 		TOK_D_QUOTE,
 		TOK_SEMI,
@@ -37,6 +38,7 @@ typedef struct s_tok
 		TOK_CPAREN,
 		TOK_SPACE,
 		TOK_PIPE,
+		TOK_ERROR,
 		TOK_EOL
 
 	} e_type;
