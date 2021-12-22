@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 19:38:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 10:06:01 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int main(int argc, char *argv[], char **envp)
 			}
 		}
 	}
+	if (shell.vars)
+		clean_vars(&shell);
 	clear_history();
 	
 	return (0);

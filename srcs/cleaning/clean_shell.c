@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 22:19:38 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/22 10:06:04 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int clean_shell(t_shell *shell)
 		free(shell->commands[i]);
 		i++;
 	}
-	if (shell->vars)
-		clean_vars(shell);
 	free(shell->commands);
 //	printf("Cleaned Shell \n");
 	//free(shell->line);
