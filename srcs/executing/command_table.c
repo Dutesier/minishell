@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:35:33 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:23:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void set_as_piped(t_shell *shell, int i, int fd[])
 	shell->commands[i]->fd_p[1] = fd[1];
 }
 
-static int comm_table_pipes(t_shell *shell, t_ast *root)
+static int comm_table_pipes(t_shell *shell, t_ast *root) // this should be done for every command
 {
 	int i;
 	int x;

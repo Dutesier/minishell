@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:42:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:54:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,20 @@ t_ast *parse_to_ast(t_par *par)
 		ast_add_branch(root, parse_compound(par), i++);
 	while (par->tok->e_type != TOK_EOL)
 	{
+		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
+		{
+			free(par->tok);
+			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
+		}
 		if (par->tok->e_type == TOK_PIPE)
 		{
 			ast_add_branch(root, parse_word(par), i++);
-			parser_next(par, 42);
+			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
 		}
 		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
 		{
-			//printf("------loop\n");
 			free(par->tok);
-			parser_next(par, 42);
+			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
 		}
 		ast_add_branch(root, parse_compound(par), i++);
 	}
@@ -89,9 +93,9 @@ t_ast *parse_variable(t_par *par)
 	i = 0;
 	ast = init_ast(AST_VAR_DEF);
 	ast_add_branch(ast, parse_word(par), i++); // The EQUALS
-	parser_next(par, TOK_WORD);
+	printf("Calling parser_next from parse_variable\n"); parser_next(par, TOK_WORD);
 	ast_add_branch(ast, parse_word(par), i++); // The var value
-	parser_next(par, 42);
+	printf("Calling parser_next from parse_variable\n"); parser_next(par, 42);
 	// Right now,  Variable AST has a word->equals and a word->variable.value
 
 	return (ast);

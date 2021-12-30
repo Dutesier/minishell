@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:23:21 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:45:51 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_tok *init_token(char *value, int type)
 		return (NULL);
 	tok->value = value;
 	tok->e_type = type;
-	//printf("Initialized token [%s] for %s\n", tok_to_str(tok->e_type), value);
+	printf("Initialized token [%s] for %s\n", tok_to_str(tok->e_type), value);
 	return (tok);
 }
 
@@ -79,7 +79,7 @@ t_tok *lex_get_word(t_lex *lex)
 
 t_tok *next_token(t_lex *lex)
 {
-	//printf("Entered next_token\n");
+	printf("Entered next_token at %c\n", lex->c);
 	t_tok *tok;
 
 	while (lex->c != '\0')
@@ -87,12 +87,12 @@ t_tok *next_token(t_lex *lex)
 		if (ft_isword(lex->c))
 			return (lex_get_word(lex)); 
 		tok = token_switch(lex->c, lex);
+		lex_next(lex);
 		if (tok)
 		{
-			lex_next(lex);
+			printf("Returning a token\n");
 			return (tok);
 		}
-		lex_next(lex);
 		return (init_token(NULL, TOK_ERROR));
 	}
 	return (init_token(NULL, TOK_EOL));

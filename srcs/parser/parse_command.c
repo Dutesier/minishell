@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:30:01 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:24:31 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:49:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 	if (x != 0)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
+		printf("Calling parser_next from command parser\n"); parser_next(par, 42);
 	}
 	ast->branches[x]->e_type = AST_COMMAND;
 	next = par->tok->e_type;
@@ -30,14 +30,14 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 		ast_add_branch(ast, parse_command(par), i++);
 		next = par->tok->e_type;
 	}
-	while (next != TOK_EOL && next != TOK_SEMI)
+	while (next != TOK_EOL && next != TOK_SEMI && next != TOK_PIPE)
 	{
 		if (command_tok(next) == 2)
 		{
 			ast_add_branch(ast, parse_redirect(par), i++);
 			next = par->tok->e_type;
 		}
-		else
+		else if (command_tok(next) != 1)
 		{
 			ast_add_branch(ast, parse_command(par), i++);
 			next = par->tok->e_type;
@@ -59,7 +59,7 @@ t_ast *parse_command(t_par *par)
 	while (!command_tok(next))
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
+		printf("Calling parser_next from parse_command\n"); parser_next(par, 42);
 		next = par->tok->e_type;
 	}
 	// FIXME add redirects

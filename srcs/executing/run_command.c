@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:36:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:56:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,30 @@ int run_command(t_comm *comm)
 
 	if (comm->is_ft)
 		return (run_ft_command(comm));
+	if (!comm->cmd)
+	{
+		if (comm->fd_p[0] > -1)
+		{
+			close(comm->fd_p[0]);
+			close(comm->fd_p[1]);
+		}
+		comm->cmd = ft_strcat("minishell: command not found: ", comm->args[0]);
+		ft_putstr_fd(comm->cmd, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+		return (1);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (print_error(FORK_FAIL));
 	if (pid == 0)
 	{
+
 		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
 			return (1);
 
 		error = execve(comm->cmd, comm->args, comm->shell->envp);
 		if (error < 0)
-			return (print_error(EXEC_FAIL));
+			return (print_error(-1));
 	}
 	else
 	{
