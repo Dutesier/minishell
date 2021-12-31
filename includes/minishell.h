@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/29 19:28:45 by jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/31 17:41:16 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <termios.h>
+# include <termcap.h>
+# include <term.h>
 
 # include "structures.h"
 # include "commands.h"

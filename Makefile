@@ -75,6 +75,9 @@ SRCS 		:=	srcs/main.c \
 				srcs/cleaning/clean_ast.c \
 	\
 				srcs/termcaps/canonical_mode.c\
+	\
+				srcs/exiting/handle_error.c\
+	\
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 
@@ -98,7 +101,7 @@ CFLAGS	=	-Wall -Wextra -Werror -pthread
 
 INCLUDES	= -I $(HEADERS)
 
-LIBS	=	-lreadline	
+LIBS	=	-lreadline -lpanel -lncurses
 
 RM		=	rm -f
 
