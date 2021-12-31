@@ -73,6 +73,8 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \
+	\
+				srcs/termcaps/canonical_mode.c\
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 

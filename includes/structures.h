@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:19:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/29 19:38:44 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,33 @@ typedef struct s_comm
 	int		is_ft;
 }			t_comm;
 
+typedef struct s_termcaps
+{
+	struct termios	old_term;
+	struct termios	new_term;
+	char			*buffer;
+	char			*keys_on;
+	char			*keys_off;
+	char			*up_arrow;
+	char			*down_arrow;
+	char			*backspace;
+	char			*del_line;
+	char			*set_cursor_begin;
+}				t_termcaps;
+
 typedef struct	s_shell
 {
-	char	**envp;
-	char	*line;
-	int		*debug;
-	char	**vars;
-	char	**exports; // The idea is to keep track of what we store in envp to know if it's up to us to free
-	struct	sigaction sa;
-
-	t_comm	**commands; // table of all commands
+	char		**envp;
+	char		*line;
+	int			*debug;
+	char		**vars;
+	char		**exports; // The idea is to keep track of what we store in envp to know if it's up to us to free
+	int			exit_status; // Terminal can exit with some status, so if we start a bash in our bash (inception) we can know what was the exit from the second bash
+	struct		sigaction sa;
+	t_termcaps	termcaps;
+	t_comm		**commands; // table of all commands
 
 }			t_shell;
+
 
 #endif

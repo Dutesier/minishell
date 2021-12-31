@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:25:59 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/20 18:56:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/29 19:47:00 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int ft_echo(t_comm *ft_comm)
 	}
 	if (str)
 		printf("%s", str);
-    if (!n)
-        printf("\n");
+	if (n == 0)
+		printf("\n");
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 09:33:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/29 19:28:45 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <termios.h>
 
 # include "structures.h"
 # include "commands.h"
@@ -30,6 +31,6 @@
 # include "reader.h"
 # include "cleaning.h"
 # include "parser.h"
-
+# include "canonical.h"
 
 #endif
