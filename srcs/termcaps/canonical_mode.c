@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/29 19:55:03 by jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/31 09:26:20 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	canonical_on()
 void	canonical_off()
 {
 
+}
+
+int	capabilities()
+{
+	
 }
 
 void	handle_error(t_shell *shell, int exit_code)
