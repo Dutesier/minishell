@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/31 18:49:04 by jibanez-         ###   ########.fr       */
+/*   Updated: 2021/12/31 18:55:30 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_termcaps(t_shell *shell)
 	if (tcgetattr(STDIN_FILENO, &shell->termcaps.old_term) == -1)
 		handle_error(shell, EXIT_FAILURE);
 	term_type = ft_getenv("TERM", shell->envp);
+	printf("%s\n", term_type);
 	if (!term_type)
 		handle_error(shell, EXIT_FAILURE);
 	// if (tgetent(shell->termcaps.buffer, term_type) <= 0)
@@ -43,15 +44,19 @@ void	init_termcaps(t_shell *shell)
 	
 // }
 
-char	*ft_getenv(const char *str, char *envp[])
+char	*ft_getenv(const char *str, char **envp)
 {
 	int i;
+	char *term;
 
 	i = -1;
 	while (envp[++i] != NULL)
 	{
 		if (ft_strnstr(envp[i], str))
+		{
 			printf("%s\n", envp[i]);
+			term = envp[i];
+		}
 	}
-	return (envp[i]);
+	return (term);
 }
