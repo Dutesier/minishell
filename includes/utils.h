@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:29:27 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/01 17:19:40 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
 char	*ft_strcat(char *str, char *append);
 char	*ft_color(unsigned int color);
+int 	ft_putint(int c);
 
 // Error printing
 int		print_error(int error);
