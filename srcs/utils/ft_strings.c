@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strings.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:38:47 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 16:54:55 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/01 17:18:30 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,3 +96,7 @@ int ft_strchr(char c, char *s)
 	return (-1);
 }
 
+int	ft_putint(int c)
+{
+	return (write(1, &c, 1));
+}

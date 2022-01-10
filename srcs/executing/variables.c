@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:11:08 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:47:04 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/29 19:47:26 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 float var_is_set(t_shell *shell, char *var)
 {
-	int i;
+	// int i;
 	int in_envp;
 	int	in_vars;
 
-	i = 0;
+	// i = 0;
 	in_envp = var_in_envp(shell->envp, var);
 	//printf("in_envp %i\n", in_envp);
 	if (in_envp > -1)

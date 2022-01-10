@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:52:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/31 18:27:07 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int main(int argc, char *argv[], char **envp)
 
 	sigaction(SIGINT, &shell.sa, NULL);
 	sigaction(SIGQUIT, &shell.sa, NULL);
+	init_termcaps(&shell);
 	if (argc > 1)
 		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 			*shell.debug = 1;

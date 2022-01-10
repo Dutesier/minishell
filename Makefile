@@ -73,6 +73,11 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \
+	\
+				srcs/termcaps/canonical_mode.c\
+	\
+				srcs/exiting/handle_error.c\
+	\
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 
@@ -92,11 +97,11 @@ DEPS	=	includes/commands.h \
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread
+CFLAGS	=	-Wall -Wextra -Werror -pthread -g
 
 INCLUDES	= -I $(HEADERS)
 
-LIBS	=	-lreadline	
+LIBS	=	-lreadline -lpanel -lncurses
 
 RM		=	rm -f
 
