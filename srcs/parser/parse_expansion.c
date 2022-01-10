@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:13:37 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 18:35:13 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:39:33 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ t_ast *parse_expansion(t_par *par)
 	i = 0;
 	ast = init_ast(AST_VAR_EXP);
 	ast_add_branch(ast, parse_var_exp(par), i++); // The Dollar sign
-	printf("Calling parser_next from parse_expansion\n"); parser_next(par, TOK_WORD);
 	ast_add_branch(ast, parse_var_exp(par), i++); // The word after the sign
-	printf("Calling parser_next from parse_expansion\n"); parser_next(par, 42);
 
 	return (ast);
 }
@@ -32,9 +30,6 @@ t_ast *parse_expansion(t_par *par)
 t_ast *parse_var_exp(t_par *par) // to stop recursiveness
 {
 	t_ast *ast;
-	// int i;
-	// i = 0;
-
 
 	ast = init_ast(AST_WORD);
 	ast->branches = NULL;

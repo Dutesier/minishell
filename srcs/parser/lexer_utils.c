@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 18:44:23 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:39:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_tok *token_switch(char c, t_lex *lex)
 	//	return (init_token("/", TOK_BSLASH));
 	if (lex->c == '|')
 	{
-		printf("Initializing a token for pipe\n");
 		return (init_token("|", TOK_PIPE));
 	}
 	//if (lex->c == '.')

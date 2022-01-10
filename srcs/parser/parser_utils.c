@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 18:54:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:41:12 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_par *init_parser(t_lex *lex)
 {
-	//printf("Entered: init_parser\n");
 	t_par *par;
 
 	par = malloc(sizeof(t_par));
@@ -30,7 +29,6 @@ t_tok *parser_next(t_par *par, unsigned int type)
 	par->tok = next_token(par->lex);
 	if (par->tok->e_type != type && type != 42)
 	{
-		//printf("[Parser] Wrong node %s, was expecting %s\n", tok_to_str(par->tok->e_type), tok_to_str(type));
 		return (NULL);
 	}
 	return (par->tok);
@@ -51,17 +49,17 @@ t_ast *parse_to_ast(t_par *par)
 		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
 		{
 			free(par->tok);
-			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
+			parser_next(par, 42);
 		}
 		if (par->tok->e_type == TOK_PIPE)
 		{
 			ast_add_branch(root, parse_word(par), i++);
-			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
+			parser_next(par, 42);
 		}
 		while (par->tok->e_type == TOK_SEMI || par->tok->e_type == TOK_SPACE)
 		{
 			free(par->tok);
-			printf("Calling parser_next from parse_to_ast\n"); parser_next(par, 42);
+			parser_next(par, 42);
 		}
 		ast_add_branch(root, parse_compound(par), i++);
 	}
@@ -72,8 +70,6 @@ t_ast *parse_to_ast(t_par *par)
 t_ast *parse_word(t_par *par)
 {
 	t_ast *ast;
-	// int i;
-	// i = 0;
 
 	if (par->tok->e_type == TOK_DOLLAR)
 		return (parse_expansion(par));
@@ -86,16 +82,13 @@ t_ast *parse_word(t_par *par)
 
 t_ast *parse_variable(t_par *par)
 {
-	//printf("Entered: parse_variable\n");
 	t_ast *ast;
 	int i;
 	
 	i = 0;
 	ast = init_ast(AST_VAR_DEF);
 	ast_add_branch(ast, parse_word(par), i++); // The EQUALS
-	printf("Calling parser_next from parse_variable\n"); parser_next(par, TOK_WORD);
 	ast_add_branch(ast, parse_word(par), i++); // The var value
-	printf("Calling parser_next from parse_variable\n"); parser_next(par, 42);
 	// Right now,  Variable AST has a word->equals and a word->variable.value
 
 	return (ast);

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:30:01 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 18:49:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:38:13 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 {
 	unsigned int	next;
 
-	//printf("Entered Command_parser\n");
 	next = par->tok->e_type;
 	if (x != 0)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		printf("Calling parser_next from command parser\n"); parser_next(par, 42);
+		parser_next(par, 42);
 	}
 	ast->branches[x]->e_type = AST_COMMAND;
+	parser_next(par, 42);
 	next = par->tok->e_type;
 	if (!command_tok(next)) 
 	{
@@ -48,7 +48,6 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 
 t_ast *parse_command(t_par *par)
 {
-	//printf("Entered: parse_command\n");
 	t_ast *ast;
 	int i;
 	unsigned int next;
@@ -59,7 +58,7 @@ t_ast *parse_command(t_par *par)
 	while (!command_tok(next))
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		printf("Calling parser_next from parse_command\n"); parser_next(par, 42);
+		parser_next(par, 42);
 		next = par->tok->e_type;
 	}
 	// FIXME add redirects
