@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 12:41:34 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:59:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char *var_expand(t_ast *ast)
 
 void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 {
-//	printf("Replacing variables ---- AST: %s\n", ast_to_str(ast->e_type));
 	int i;
 	int c;
 	int x;
@@ -55,10 +54,8 @@ void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 		}
 	}
 	i = 0;
-//	printf("good\n");
 	while (x && ast->branches && ast->branches[i] != NULL)
 		replace_variables(shell, ast->branches[i++], ast);
-//	printf("left rep variables\n");
 }
 
 char *ft_variable(t_shell *shell, char *str)
@@ -118,4 +115,27 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 		printf("-----Added ->%s<- to the parents %s branches\n", parent->branches[i++]->my_tok->value, ast_to_str(parent->e_type));
 	}*/
 	//printf("->Left: ast_update_branch\n");
+}
+
+int variable_as_cmd(t_ast *root)
+{
+	int i;
+	int x;
+
+	i = 0;
+	x = 0;
+	while (root->branches[i] != NULL)
+	{
+		if (root->branches[i]->e_type == AST_WORD)
+		{
+			x = 1;
+			root->branches[i]->e_type = AST_COMMAND;
+			break ;
+		}
+		i++;
+	}
+	if (root->branches[i] && x == 1)
+		if (root->branches[i]->my_tok && root->branches[i]->my_tok->value == NULL)
+			return (1);
+	return (0);
 }
