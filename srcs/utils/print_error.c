@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:12:47 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/17 17:37:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:05:19 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 int	print_error(int error)
 {
-	if (error == 0)
+	if (error == -1)
 		perror("minishell: ");
-	if (error == 1)
+	if (error == MEMORY_FAIL)
 		perror("minishell: Failed to allocate memory: ");
-	if (error == 2)
+	if (error == FILE_OPEN_FAIL)
 		perror("minishell: Couldn't open file: ");
-	if (error == 3)
+	if (error == FORK_FAIL)
 		perror("minishell: Failed to create fork: ");
+	if (error == EXEC_FAIL)
+		perror("minishell: Couldn't execute: ");
+	if (error == COMM_FAIL)
+		perror("minishell: Command not found: ");
+	if (error == IN_N_OUT_FAIL)
+		perror("minishell: Failed setting input and output: ");
 	return (1);
 }

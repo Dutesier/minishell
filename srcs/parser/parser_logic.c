@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:24:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:36:01 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ast *parse_compound(t_par *par)
 	else
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
+		printf("Calling parser_next from parse compound\n"); parser_next(par, 42);
 	}
 	next = par->tok->e_type;
 	if (next == TOK_EQUALS)
@@ -43,7 +43,7 @@ t_ast *parse_compound(t_par *par)
 		if (next == TOK_SPACE)
 		{
 			free(par->tok);
-			parser_next(par, 42);
+			printf("Calling parser_next from parse compound\n"); parser_next(par, 42);
 			next = par->tok->e_type;
 		}
 		if (next == TOK_SEMI || next == TOK_EOL)
@@ -76,21 +76,21 @@ t_ast *parse_redirect(t_par *par)
 	i = 0;
 	next = par->tok->e_type;
 	ast_add_branch(ast, parse_word(par), i++); // The redirect Token
-	parser_next(par, 42);
+	printf("Calling parser_next from parse redirect\n"); parser_next(par, 42);
 	next = par->tok->e_type;
 	if (next == TOK_SPACE)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
+		printf("Calling parser_next from parse redirect\n"); parser_next(par, 42);
 		next = par->tok->e_type;
 	}
 	ast_add_branch(ast, parse_word(par), i++); // The file to redirect to or from
-	parser_next(par, 42);
+	printf("Calling parser_next from parse redirect\n"); parser_next(par, 42);
 	next = par->tok->e_type;
 	if (next == TOK_SPACE)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
+		printf("Calling parser_next from parse redirect\n"); parser_next(par, 42);
 	}
 	return (ast);
 }

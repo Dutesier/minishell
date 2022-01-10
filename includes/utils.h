@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/01 17:19:40 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:10:50 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ typedef enum e_exit_code
 	MEMORY_FAIL,
 	FILE_OPEN_FAIL,
 	FORK_FAIL,
-	EXEC_FAIL
+	EXEC_FAIL,
+	COMM_FAIL,
+	IN_N_OUT_FAIL,
+	PARSE_FAIL
 }			t_exit_code;
 
 typedef enum e_color
