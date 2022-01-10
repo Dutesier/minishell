@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 18:23:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:54:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int run_comm_table(t_shell *shell)
 			}
 			i++;
 		}
+		if (shell->commands[i]->e_type == INVALID)
+			i++;
 		else
 		{
 			run_command(shell->commands[i++]);

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:12:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:02:38 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int clean_shell(t_shell *shell)
 	// 1 for shell line
 	
 	int i;
-//	printf("Cleaning Shell \n");
+	//printf("Cleaning Shell \n");
 
 	i = 0;
 	while (shell->commands && shell->commands[i] != NULL)

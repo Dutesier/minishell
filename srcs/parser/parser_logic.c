@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:42:44 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:14:08 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_ast *parse_compound(t_par *par)
 	else if (next != TOK_EOL && next != TOK_SEMI)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
-		print_ast(ast, 0);
 		parser_next(par, 42);
 	}
 	next = par->tok->e_type;
@@ -60,7 +59,6 @@ t_ast *parse_compound(t_par *par)
 	{
 		if (i == 1 && ast->branches[0]->e_type != AST_VAR_EXP)
 			ast->branches[0]->e_type = AST_COMMAND; //FIXME: What happens when a var expansion happens first??? It is getting set to COMMAND
-		print_ast(ast, 0);
 		return (ast);
 	}
 	else

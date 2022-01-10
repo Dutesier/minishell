@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:46:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:59:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,17 +117,25 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 	//printf("->Left: ast_update_branch\n");
 }
 
-void variable_as_cmd(t_ast *root)
+int variable_as_cmd(t_ast *root)
 {
 	int i;
+	int x;
 
 	i = 0;
+	x = 0;
 	while (root->branches[i] != NULL)
 	{
 		if (root->branches[i]->e_type == AST_WORD)
 		{
+			x = 1;
 			root->branches[i]->e_type = AST_COMMAND;
+			break ;
 		}
 		i++;
 	}
+	if (root->branches[i] && x == 1)
+		if (root->branches[i]->my_tok && root->branches[i]->my_tok->value == NULL)
+			return (1);
+	return (0);
 }
