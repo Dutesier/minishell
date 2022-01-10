@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 14:36:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:35:44 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	set_variable(t_shell *shell, t_ast *ast);
 int find_var_branch(t_ast *ast);
 int update_var(t_shell *shell, char *var, char *expands, float var_set);
 void exports_log(t_shell *shell, char *var);
+void variable_as_cmd(t_ast *root);
 
 // Variables.c
 float var_is_set(t_shell *shell, char *var);

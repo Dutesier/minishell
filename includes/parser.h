@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/17 19:07:23 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:59:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		command_tok(unsigned int type);
 
 // parse_expansion
 t_ast *parse_expansion(t_par *par);
+int parse_exp_status(t_par *par); //Checks if it really is a var expansion or just a dolla sign
 
 #endif

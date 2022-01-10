@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:41:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:42:29 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_ast *parse_word(t_par *par)
 {
 	t_ast *ast;
 
-	if (par->tok->e_type == TOK_DOLLAR)
+	if (par->tok->e_type == TOK_DOLLAR && !parse_exp_status(par))
 		return (parse_expansion(par));
 
 	ast = init_ast(AST_WORD);
@@ -88,7 +88,9 @@ t_ast *parse_variable(t_par *par)
 	i = 0;
 	ast = init_ast(AST_VAR_DEF);
 	ast_add_branch(ast, parse_word(par), i++); // The EQUALS
+	parser_next(par, 42);
 	ast_add_branch(ast, parse_word(par), i++); // The var value
+	parser_next(par, 42);
 	// Right now,  Variable AST has a word->equals and a word->variable.value
 
 	return (ast);
