@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 17:58:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:53:42 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,61 @@ int	nextquote(t_lex *lex, int q)
 		return (i + nextquote(lex, q));
 	}
 	return (i);
+}
+
+char *ft_dupnoq(char *s)
+{
+	int i;
+	int x;
+	int inhib;
+	char *sub;
+	char *temp;
+
+	i = 0;
+	x = 0;
+	temp = s;
+	sub = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!sub)
+		return (NULL);
+	inhib = 0;
+	while (s[x] != '\0')
+	{
+		if (s[x] == '\'')
+			inhib = 1;
+		if (s[x] == '\"')
+			inhib = 2;
+		if (inhib == 1)
+		{
+			if (s[x] == '\'')
+			{
+				inhib = 0;
+				x++;
+			}
+			else
+				sub[i++] = s[x++];	
+		}
+		else if (inhib == 2)
+		{
+			if (s[x] == '\"')
+			{
+				inhib = 0;
+				x++;
+			}
+			else
+				sub[i++] = s[x++];
+		}
+		else
+			sub[i++] = s[x++];
+	}
+	sub[i] = '\0';
+	free(temp);
+	temp = malloc(sizeof(char) * i);
+	while (i >= 0)
+	{
+		temp[i] = sub[i];
+		i--;
+	}
+	free(sub);
+	return (temp);
 }
 

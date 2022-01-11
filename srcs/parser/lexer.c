@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 17:56:06 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:40:55 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ t_tok *lex_get_word(t_lex *lex)
 		{
 			i++;
 			lex_next(lex);
-			i += nextquote(lex, q);
+			i += nextquote(lex, q) - 1;
 		}
 		i++;
 		lex_next(lex);
 	}
-	value = ft_substr(lex->src, x, i);
+	value = ft_dupnoq(ft_substr(lex->src, x, i));
 	if (!value)
 	{	
 		lex_next(lex);

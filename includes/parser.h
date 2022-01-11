@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 16:59:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:40:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_tok	*token_switch(char c, t_lex *lex);
 t_tok	*token_switch_two(char c, t_lex *lex);
 t_tok	*token_switch_three(t_lex *lex);
 int		nextquote(t_lex *lex, int q);
+char *ft_dupnoq(char *s);
 
 // ast
 t_ast	*init_ast(int type);
