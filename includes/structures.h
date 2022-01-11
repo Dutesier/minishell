@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:52:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:05:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_lex
 	char c;
 	char *src;
 	int size;
+	int q;
 }			t_lex;
 
 typedef struct s_par

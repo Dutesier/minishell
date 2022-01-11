@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 18:40:55 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:24:05 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_lex *init_lexer(char *src)
 	lex->c = src[lex->i];
 	lex->src = src;
 	lex->size = ft_strlen(src);
+	lex->q = 0;
 	return (lex);
 }
 
@@ -58,15 +59,23 @@ t_tok *lex_get_word(t_lex *lex)
 	while (!ft_isforb(lex->c))
 	{
 		q = ft_isquote(lex->c);
-		if (q > 0)
+		if (q > 0 || lex->q == 2)
 		{
+			if (lex->q)
+				lex->q = 0;
+
 			i++;
 			lex_next(lex);
-			i += nextquote(lex, q) - 1;
+			q = nextquote(lex, q);
+			if (q > 0)
+				i += q - 1;
+			printf("-->Src: %s\n", lex->src+x+i);
 		}
 		i++;
 		lex_next(lex);
 	}
+	if (lex->q)
+		lex->q = 2;
 	value = ft_dupnoq(ft_substr(lex->src, x, i));
 	if (!value)
 	{	
