@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:38:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:56:06 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,32 @@ t_tok *lex_get_word(t_lex *lex)
 
 t_tok *next_token(t_lex *lex)
 {
-	t_tok *tok;
+	t_tok	*tok;
 
 	while (lex->c != '\0')
 	{
+		tok = token_switch(lex->c, lex);
+		if (tok)
+		{
+			lex_next(lex);
+			return (tok);
+		}
+		else
+		{
+			return (lex_get_word(lex));
+		}
+		/*
 		if (ft_isword(lex->c))
+		{
 			return (lex_get_word(lex)); 
+		}
 		tok = token_switch(lex->c, lex);
 		lex_next(lex);
 		if (tok)
 		{
 			return (tok);
 		}
-		return (init_token(NULL, TOK_ERROR));
+		return (init_token(NULL, TOK_ERROR));*/
 	}
 	return (init_token(NULL, TOK_EOL));
 }
