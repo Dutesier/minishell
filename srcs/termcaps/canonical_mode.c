@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/01/01 17:31:42 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:16:02 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_termcaps(t_shell *shell)
 		handle_error(shell, EXIT_FAILURE);
 	if (tgetent(shell->termcaps.buffer, term_type) <= 0)
 		handle_error(shell, EXIT_FAILURE);
-	else if (!capabilities(&shell->termcaps))
-		handle_error(shell, EXIT_FAILURE);
+	// else if (!capabilities(&shell->termcaps))
+	// 	handle_error(shell, EXIT_FAILURE);
 	free(term_type);
 }
 
@@ -38,6 +38,8 @@ void	init_termcaps(t_shell *shell)
 
 // }
 
+// https://arcticfox1919.gitee.io/linux-manual/man-pages/man5/terminfo.5.html
+
 int	capabilities(t_termcaps *termcaps)
 {
 	int	check;
@@ -46,9 +48,9 @@ int	capabilities(t_termcaps *termcaps)
 	write(1, "HERE\n", 6);
 	if (termcaps->keys_on)
 		tputs(termcaps->keys_on, 1, ft_putint);
-	termcaps->keys_off = tgetstr("ke", &termcaps->buffer);
+	// termcaps->keys_off = tgetstr("ke", &termcaps->buffer);
 	// else (IS_LINUX)
-	// 	termcaps->backspace = tgetstr("kb", &termcaps->buffer);
+		// termcaps->backspace = tgetstr("kb", &termcaps->buffer);
 	termcaps->backspace = ft_strdup("\x7f");
 	termcaps->del_line = tgetstr("dl", &termcaps->buffer);
 	termcaps->set_cursor_begin = tgetstr("cr", &termcaps->buffer);
