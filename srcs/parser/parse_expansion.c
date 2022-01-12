@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:13:37 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:35:31 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:58:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_ast *parse_expansion(t_par *par)
 	}
 	ast_add_branch(ast, parse_var_exp(par), i++); // The word after the sign
 	parser_next(par, 42);
+	next = par->tok->e_type;
 
 	return (ast);
 }

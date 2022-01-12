@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/12 15:32:16 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:39:21 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ t_tok *lex_get_word(t_lex *lex)
 	i = 0;
 	x = lex->i;
 	store = lex->q;
-	printf("-->[LEX_GET_WORD] Current str: %s\n", lex->src+lex->i);
+	printf("\n-->[LEX_GET_WORD] Current str: %s\n", lex->src+lex->i);
 	printf("-->[LEX_GET_WORD] lex->q %i\n", lex->q);
 	while (!ft_isforb(lex->c))
 	{
+		printf("Lex->c %c\n", lex->c);
 		q = ft_isquote(lex->c);
-		if (q > 0 || lex->q == 2)
+		if (q > 0 || lex->q == 2) // If we're on a quote or if we left one open
 		{
 			if (lex->q && q > 1) // Meaning we were hoping for a " to close and we got it
 			{
@@ -74,16 +75,11 @@ t_tok *lex_get_word(t_lex *lex)
 			}
 
 			if (lex->q == 2) // Because we're gonna get the nextquote
-			{
-				printf("Resetting lex->q to 0\n");
 				lex->q = 0;
-			}
-			printf("---->[LEX_GET_WORD] lex->q %i\n", lex->q);
 
 			i++;
 			lex_next(lex);
 			q = nextquote(lex, q);
-			printf("---->[LEX_GET_WORD] lex->q %i\n", lex->q);
 			if (q > 0)
 			{
 				if (lex->q == 1)
@@ -140,6 +136,10 @@ t_tok *next_token(t_lex *lex)
 			return (tok);
 		}
 		return (init_token(NULL, TOK_ERROR));*/
+	}
+	if (lex->q)
+	{
+		return (unclosed_quote(lex));
 	}
 	return (init_token(NULL, TOK_EOL));
 }

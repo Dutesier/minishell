@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 18:40:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:34:38 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ t_tok	*token_switch_two(char c, t_lex *lex);
 t_tok	*token_switch_three(t_lex *lex);
 int		nextquote(t_lex *lex, int q);
 char *ft_dupnoq(char *s);
+
+// lexer_utils_two
+t_tok *unclosed_quote(t_lex *lex);
+
 
 // ast
 t_ast	*init_ast(int type);

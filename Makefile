@@ -69,6 +69,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/parse_command.c \
 				srcs/parser/parse_expansion.c \
 				srcs/parser/lexer.c \
+				srcs/parser/lexer_utils_two.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
 	\
