@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:13:37 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:41:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:35:31 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int parse_exp_status(t_par *par) //Checks if it really is a var expansion or jus
 		return (1);
 	lex_temp->i = par->lex->i;
 	lex_temp->c = par->lex->c;
+	lex_temp->q = par->lex->q;
 	par_temp.lex = lex_temp;
 	parser_next(&par_temp, 42);
 	next = par_temp.tok->e_type;
