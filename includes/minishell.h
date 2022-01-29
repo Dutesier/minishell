@@ -6,12 +6,20 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/31 17:41:16 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:06:17 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# ifdef unix
+#  define IS_LINUX 1
+#  define MAX_PATH 4096
+# else
+#  define IS_LINUX 0
+#  define MAX_PATH 1024
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>

@@ -6,16 +6,36 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/01/12 19:16:02 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/24 12:40:02 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canonical.h"
 
+void	termcaps_to_null(t_termcaps *termcaps)
+{
+	termcaps->buffer = NULL;
+	termcaps->keys_on = NULL;
+	termcaps->keys_off = NULL;
+	termcaps->up_arrow = NULL;
+	termcaps->down_arrow = NULL;
+	termcaps->backspace = NULL;
+	termcaps->del_line = NULL;
+	termcaps->set_cursor_begin = NULL;
+	termcaps->new_term.c_iflag = 0;
+	termcaps->new_term.c_oflag = 0;
+	termcaps->new_term.c_cflag = 0;
+	termcaps->new_term.c_lflag = 0;
+	termcaps->new_term.c_line = '\0';
+	termcaps->new_term.c_ispeed = 0;
+	termcaps->new_term.c_ospeed = 0;
+}
+
 void	init_termcaps(t_shell *shell)
 {
 	char	*term_type;
 
+	termcaps_to_null(&shell->termcaps);
 	if (tcgetattr(STDIN_FILENO, &shell->termcaps.old_term) == -1)
 		handle_error(shell, EXIT_FAILURE);
 	term_type = ft_find_value_from_key("TERM", shell->envp);
@@ -23,8 +43,8 @@ void	init_termcaps(t_shell *shell)
 		handle_error(shell, EXIT_FAILURE);
 	if (tgetent(shell->termcaps.buffer, term_type) <= 0)
 		handle_error(shell, EXIT_FAILURE);
-	// else if (!capabilities(&shell->termcaps))
-	// 	handle_error(shell, EXIT_FAILURE);
+	else if (!capabilities(&shell->termcaps))
+		handle_error(shell, EXIT_FAILURE);
 	free(term_type);
 }
 
@@ -43,18 +63,20 @@ void	init_termcaps(t_shell *shell)
 int	capabilities(t_termcaps *termcaps)
 {
 	int	check;
-
 	termcaps->keys_on = tgetstr("ks", &termcaps->buffer);
-	write(1, "HERE\n", 6);
 	if (termcaps->keys_on)
 		tputs(termcaps->keys_on, 1, ft_putint);
-	// termcaps->keys_off = tgetstr("ke", &termcaps->buffer);
-	// else (IS_LINUX)
-		// termcaps->backspace = tgetstr("kb", &termcaps->buffer);
-	termcaps->backspace = ft_strdup("\x7f");
+	termcaps->keys_off = tgetstr("ke", &termcaps->buffer);
+	termcaps->up_arrow = tgetstr("ku", &termcaps->buffer);
+	termcaps->down_arrow = tgetstr("kd", &termcaps->buffer);
+	if (IS_LINUX)
+		termcaps->backspace = tgetstr("kb", &termcaps->buffer);
+	else
+		termcaps->backspace = ft_strdup("\x7f");
 	termcaps->del_line = tgetstr("dl", &termcaps->buffer);
 	termcaps->set_cursor_begin = tgetstr("cr", &termcaps->buffer);
 	if (!termcaps->keys_on || !termcaps->keys_off
+		|| !termcaps->up_arrow || !termcaps->down_arrow
 		|| !termcaps->backspace || !termcaps->del_line
 		|| !termcaps->set_cursor_begin)
 		check = 0;
