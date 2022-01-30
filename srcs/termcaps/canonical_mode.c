@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/01/24 12:40:02 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/30 00:52:36 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,36 @@ void	init_termcaps(t_shell *shell)
 	free(term_type);
 }
 
-// void	canonical_on()
-// {
+void	canonical_on(t_shell *shell)
+{
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &shell->termcaps.old_term) == -1)
+		handle_error(shell, EXIT_FAILURE);
+}
 
-// }
-
-// void	canonical_off()
-// {
-
-// }
+void	canonical_off(t_shell *shell)
+{
+	shell->termcaps.new_term = shell->termcaps.old_term;
+	shell->termcaps.new_term.c_lflag &= ~ICANON;
+	shell->termcaps.new_term.c_iflag &= ~ECHO;
+	shell->termcaps.new_term.c_lflag &= ~ISIG;
+	shell->termcaps.new_term.c_lflag &= ~IEXTEN;
+	shell->termcaps.new_term.c_iflag &= ~IXON;
+	shell->termcaps.new_term.c_cc[VMIN] = 1;
+	shell->termcaps.new_term.c_cc[VTIME] = 0;
+	// shell->termcaps.new_term.c_cc[VEOF] = 1; // ^D
+	shell->termcaps.new_term.c_cc[VQUIT] = 1; // ^\/
+	// shell->termcaps.new_term.c_cc[VINTR] = 1; // ^C
+	shell->termcaps.new_term.c_cc[VSUSP] = 1; // ^Z
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &shell->termcaps.new_term) == -1)
+		handle_error(shell, EXIT_FAILURE);
+}
 
 // https://arcticfox1919.gitee.io/linux-manual/man-pages/man5/terminfo.5.html
 
 int	capabilities(t_termcaps *termcaps)
 {
 	int	check;
+
 	termcaps->keys_on = tgetstr("ks", &termcaps->buffer);
 	if (termcaps->keys_on)
 		tputs(termcaps->keys_on, 1, ft_putint);
@@ -87,9 +102,9 @@ int	capabilities(t_termcaps *termcaps)
 
 char	*ft_find_value_from_key(const char *str, char **envp)
 {
-	int i;
-	int j;
-	char *ret;
+	int		i;
+	int		j;
+	char	*ret;
 
 	i = -1;
 	while (envp[++i] != NULL)

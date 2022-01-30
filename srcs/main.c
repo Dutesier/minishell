@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/31 18:27:07 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/30 00:57:52 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@
 
 void handle_sigtstp(int sig)
 {
-	if (sig == '\02')
-		printf("\n\033[0;34m$\033[0;37m ");
-	else if (sig == '\03')
-		return ;
+	char *prompt;
+
+	prompt = "\033[0;34m$\033[0;37m ";
+	if (sig == SIGINT) // Signal handle for ^C
+		printf("\n%s", prompt);
+	else if (sig == SIGQUIT)
+	{
+		printf("Exit: \n");
+		kill(0, SIGCHLD);
+	}
 }
 
 int main(int argc, char *argv[], char **envp)
@@ -48,19 +54,20 @@ int main(int argc, char *argv[], char **envp)
 	shell.sa.sa_handler = &handle_sigtstp;
 	shell.sa.sa_flags = SA_RESTART;
 
+	init_termcaps(&shell);
 	sigaction(SIGINT, &shell.sa, NULL);
 	sigaction(SIGQUIT, &shell.sa, NULL);
-	init_termcaps(&shell);
 	if (argc > 1)
 		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 			*shell.debug = 1;
 	prompt = "\033[0;34m$\033[0;37m ";
 	while (i)
 	{
+		canonical_off(&shell);
 		shell.line = get_line(prompt, shell.line);
 		if (shell.line != NULL)
 		{
-			if (shell.line[0] == '\04' || shell.line[0] == 'q')
+			if (shell.line[0] == 'q')
 			{
 				printf("exit\n");
 				i = 0;
@@ -71,6 +78,7 @@ int main(int argc, char *argv[], char **envp)
 				clean_shell(&shell);
 			}
 		}
+		canonical_on(&shell);
 	}
 	if (shell.vars)
 		clean_vars(&shell);

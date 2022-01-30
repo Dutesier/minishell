@@ -31,9 +31,9 @@ relative or absolute path)
 	  pipeline.
  - [ ]   ctrl-C ctrl-D ctrl-\ should work like in bash.
 - When interactive:
-  - [ ]   ctrl-C print a new prompt on a newline.
+  - [x]   ctrl-C print a new prompt on a newline.
   - [ ]   ctrl-D exit the shell.
-  - [ ]   ctrl-\ do nothing.
+  - [x]   ctrl-\ do nothing.
  
 readline function can produce some leaks, no need to fix this.
 
