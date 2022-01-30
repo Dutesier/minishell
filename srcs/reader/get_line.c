@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:05:10 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/30 17:20:32 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:06:49 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char *get_line(const char *prompt, char *line_read)
 		add_history(line_read);
 	else if (line_read == NULL)
 	{
-		printf("quit");
-		kill(1, SIGCHLD);
+		printf("quit\n");
+		line_read = NULL;
 	}
 	return (line_read);
 }
