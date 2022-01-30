@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/01/30 00:52:36 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:03:45 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	canonical_off(t_shell *shell)
 	shell->termcaps.new_term.c_iflag &= ~IXON;
 	shell->termcaps.new_term.c_cc[VMIN] = 1;
 	shell->termcaps.new_term.c_cc[VTIME] = 0;
-	// shell->termcaps.new_term.c_cc[VEOF] = 1; // ^D
 	shell->termcaps.new_term.c_cc[VQUIT] = 1; // ^\/
-	// shell->termcaps.new_term.c_cc[VINTR] = 1; // ^C
 	shell->termcaps.new_term.c_cc[VSUSP] = 1; // ^Z
+	// shell->termcaps.new_term.c_cc[VINTR] = 1; // ^C
+	// shell->termcaps.new_term.c_cc[VEOF] = 1; // ^D
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &shell->termcaps.new_term) == -1)
 		handle_error(shell, EXIT_FAILURE);
 }

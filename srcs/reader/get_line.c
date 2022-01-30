@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:05:10 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 14:11:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:20:32 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,10 @@ char *get_line(const char *prompt, char *line_read)
 	line_read = readline(prompt);
 	if (line_read && *line_read)
 		add_history(line_read);
+	else if (line_read == NULL)
+	{
+		printf("quit");
+		kill(1, SIGCHLD);
+	}
 	return (line_read);
 }

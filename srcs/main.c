@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/30 00:57:52 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:08:03 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void handle_sigtstp(int sig)
 	if (sig == SIGINT) // Signal handle for ^C
 		printf("\n%s", prompt);
 	else if (sig == SIGQUIT)
-	{
-		printf("Exit: \n");
-		kill(0, SIGCHLD);
-	}
+		printf("\n%s", prompt);
 }
 
 int main(int argc, char *argv[], char **envp)
