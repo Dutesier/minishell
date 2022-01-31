@@ -26,7 +26,7 @@ void	termcaps_to_null(t_termcaps *termcaps)
 	termcaps->new_term.c_oflag = 0;
 	termcaps->new_term.c_cflag = 0;
 	termcaps->new_term.c_lflag = 0;
-	termcaps->new_term.c_line = '\0';
+	//termcaps->new_term.c_line = '\0';
 	termcaps->new_term.c_ispeed = 0;
 	termcaps->new_term.c_ospeed = 0;
 }
