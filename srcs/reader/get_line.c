@@ -6,26 +6,24 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:05:10 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/30 21:06:49 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:04:35 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *get_line(const char *prompt, char *line_read)
+void	get_line(t_shell *shell)
 {
-	if (line_read)
+	if (shell->line)
 	{
-		free(line_read);
-		return (NULL);
+		free(shell->line);
 	}
-	line_read = readline(prompt);
-	if (line_read && *line_read)
-		add_history(line_read);
-	else if (line_read == NULL)
+	shell->line = readline(shell->prompt);
+	if (shell->line && *shell->line)
+		add_history(shell->line);
+	else if (shell->line == NULL)
 	{
 		printf("quit\n");
-		line_read = NULL;
+		shell->loop = 0;
 	}
-	return (line_read);
 }

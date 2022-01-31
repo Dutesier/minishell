@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 18:09:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:09:32 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		comm->e_type = INVALID;
 		return (comm);
 	}
-	if (*shell->debug)
+	if (shell->debug)
 	{
 		int v = 0;
 		while (shell->vars && shell->vars[v] != NULL)

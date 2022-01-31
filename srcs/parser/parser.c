@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:20:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:08:13 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int parse_line(t_shell *shell)
 	if (!root)
 		return (1);
 	//command_ammount(root, 0);
-	if (*shell->debug)
+	if (shell->debug)
 	{
 		printf("%s", ft_color(YEL));
 		print_ast(root, 0);

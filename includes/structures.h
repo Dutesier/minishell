@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:52:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 12:58:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ typedef struct	s_shell
 	struct		sigaction sa;
 	t_termcaps	termcaps;
 	t_comm		**commands; // table of all commands
+	int			loop;
+	char		*prompt;
 
 }			t_shell;
 

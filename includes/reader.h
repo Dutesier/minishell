@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   reader.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:04:30 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 14:12:41 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:04:45 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READER_H
 # define READER_H
 
-char *get_line(const char *prompt, char *line_read);
+// char *get_line(const char *prompt, char *line_read);
+void get_line(t_shell *shell);
+
 
 #endif
