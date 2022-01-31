@@ -29,11 +29,11 @@ relative or absolute path)
  - [ ]   Environment variables ($ followed by characters) should expand to their values.
  - [ ]   $? should expand to the exit status of the most recently executed foreground
 	  pipeline.
- - [ ]   ctrl-C ctrl-D ctrl-\ should work like in bash.
+ - [x]   ctrl-C ctrl-D ctrl-\ should work like in bash.
 - When interactive:
-  - [ ]   ctrl-C print a new prompt on a newline.
-  - [ ]   ctrl-D exit the shell.
-  - [ ]   ctrl-\ do nothing.
+  - [x]   ctrl-C print a new prompt on a newline.
+  - [x]   ctrl-D exit the shell.
+  - [x]   ctrl-\ do nothing.
  
 readline function can produce some leaks, no need to fix this.
 

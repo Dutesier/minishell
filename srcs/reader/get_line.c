@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:05:10 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/18 14:11:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:04:35 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *get_line(const char *prompt, char *line_read)
+void	get_line(t_shell *shell)
 {
-	if (line_read)
+	if (shell->line)
 	{
-		free(line_read);
-		return (NULL);
+		free(shell->line);
 	}
-	line_read = readline(prompt);
-	if (line_read && *line_read)
-		add_history(line_read);
-	return (line_read);
+	shell->line = readline(shell->prompt);
+	if (shell->line && *shell->line)
+		add_history(shell->line);
+	else if (shell->line == NULL)
+	{
+		printf("quit\n");
+		shell->loop = 0;
+	}
 }

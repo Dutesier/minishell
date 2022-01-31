@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 18:04:36 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:10:19 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ int run_comm_table(t_shell *shell)
 	//printf("Trying to run command table\n");
 	while (shell->commands && shell->commands[i] != NULL)
 	{
-		if (*shell->debug)
+		if (shell->debug)
 		{
 			comm_printer(shell->commands[i]);
 			printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
 		}
 		if (shell->commands[i]->e_type == VAR_DEF)
 		{
-			if (*shell->debug)
+			if (shell->debug)
 			{
 				if (shell->commands[i]->redir == 1)
 					printf("%sVariable set%s \n", ft_color(BLU), ft_color(WHT));
