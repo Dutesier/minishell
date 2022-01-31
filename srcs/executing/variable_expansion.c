@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:59:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:04:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ char *var_expand(t_ast *ast)
 
 void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 {
+	/*
+	We need father so that we can turn the following structure:
+	-COMMAND
+	--COMM_ARGS <- FATHER
+	---VAR_EXP <- AST
+	----DOLLAR
+	----WORD
+	into:
+	-COMMAND
+	--COMM_ARGS <- FATHER
+	---WORD <- Expanded variable
+	*/
+
+	//print_ast(father, 0);
+	//print_ast(ast, 0);
 	int i;
 	int c;
 	int x;
@@ -64,6 +79,7 @@ char *ft_variable(t_shell *shell, char *str)
 	float	var_set;
 
 	var_set = var_is_set(shell, str);
+	printf("Var set %f\n", var_set);
 	where = (int)var_set;
 	if (var_set == -1)
 		return (NULL);
@@ -77,11 +93,11 @@ char *ft_variable(t_shell *shell, char *str)
 
 void ast_update(t_ast *parent, t_ast *child, int up)
 {
-	/*int b = 0;
-	while (parent->branches && parent->branches[b] != NULL)
-	{
-		printf("-----Parent %s starts with ->%s<- \n", ast_to_str(parent->e_type), parent->branches[b++]->my_tok->value);
-	}*/
+	//printf("AST UPDATE\nup: %i\n", up);
+	//printf("PARENT---------\n");
+	//print_ast(parent, 0);
+	//printf("CHILD---------\n");
+	//print_ast(child, 0);
 
 	int x;
 	int i;
@@ -94,6 +110,7 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 	if (!tree)
 		return ;
 	x = 0;
+	printf("x: %i i: %i\n", x, i);
 	while (x < i)
 	{
 		if (x != up)
@@ -104,16 +121,16 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 	}
 	tree[x] = NULL;
 	if (up != -42)
+	{
+		printf("Calling clean_ast from variable expansion\n");
 		clean_ast(parent->branches[up]);
+	}
 	if (parent->branches)
 		free(parent->branches);
 	parent->branches = tree;
 
-/*	i = 0;
-	while (parent->branches && parent->branches[i] != NULL)
-	{
-		printf("-----Added ->%s<- to the parents %s branches\n", parent->branches[i++]->my_tok->value, ast_to_str(parent->e_type));
-	}*/
+	//print_ast(parent, 0);
+	//print_ast(child, 0);
 	//printf("->Left: ast_update_branch\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:27:56 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/07 12:22:55 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:04:13 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int ast_handler(t_shell *shell, t_ast *root)
 	int i;
 
 	i = 0;
+	//printf("printing from ast_handler\n");
+	//print_ast(root, 0);
 	command_table(shell, root);
 	i = run_comm_table(shell);
 	/*

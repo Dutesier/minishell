@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 18:14:08 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:26:13 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_ast *parse_compound(t_par *par)
 			parser_next(par, 42);
 			next = par->tok->e_type;
 		}
-		if (next == TOK_SEMI || next == TOK_EOL)
+		if (next == TOK_SEMI || next == TOK_EOL) //FIXME:handle for pipe
 			return (ast);
 	}
 	if (next == TOK_SEMI || next == TOK_EOL)

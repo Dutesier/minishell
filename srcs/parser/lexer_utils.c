@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:39:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:44:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_tok *token_switch(char c, t_lex *lex)
 		return (init_token(";", TOK_SEMI));
 	if (lex->c == '$')
 		return (init_token("$", TOK_DOLLAR));
-	if (lex->c == '(')
+	/*if (lex->c == '(')
 		return (init_token("(", TOK_OPAREN));
 	if (lex->c == ')')
-		return (init_token(")", TOK_CPAREN));
+		return (init_token(")", TOK_CPAREN));*/
 	if (lex->c == '~')
 		return (init_token("~", TOK_TILDE));
 	//if (lex->c == '/')
@@ -34,10 +34,10 @@ t_tok *token_switch(char c, t_lex *lex)
 	//	return (init_token(".", TOK_DOT));
 	if (lex->c == '=')
 		return (init_token("=", TOK_EQUALS));
-	if (lex->c == '\'')
+	/*if (lex->c == '\'')
 		return (init_token("\'", TOK_S_QUOTE));
 	if (lex->c == '\"')
-		return (init_token("\"", TOK_D_QUOTE));
+		return (init_token("\"", TOK_D_QUOTE));*/
 	if (lex->c == '\n')
 		return (init_token("EOL", TOK_EOL));
 	return (token_switch_two(c, lex));

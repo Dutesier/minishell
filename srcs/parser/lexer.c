@@ -5,8 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 15:34:57 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:38:51 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:13:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +33,7 @@ t_lex *init_lexer(char *src)
 	lex->c = src[lex->i];
 	lex->src = src;
 	lex->size = ft_strlen(src);
+	lex->q = 0;
 	return (lex);
 }
 
@@ -44,6 +44,8 @@ void lex_next(t_lex *lex)
 		lex->i++;
 		lex->c = lex->src[lex->i];
 	}
+	else
+		printf("*** ERROR: lex->i %i not < then lex->size %i or lex->c %c = NTR\n", lex->i, lex->size, lex->c);
 }
 
 t_tok *lex_get_word(t_lex *lex)
@@ -52,9 +54,11 @@ t_tok *lex_get_word(t_lex *lex)
 	int		i;
 	int		x;
 	int		q;
+	int     store;
 
 	i = 0;
 	x = lex->i;
+	store = 0;
 	while (!ft_isforb(lex->c))
 	{
 		q = ft_isquote(lex->c);
@@ -62,35 +66,41 @@ t_tok *lex_get_word(t_lex *lex)
 		{
 			i++;
 			lex_next(lex);
-			i += nextquote(lex, q);
+			store = q;
+			q = nextquote(lex, q); // REUSING Q for a whole diff thing
+			if (q > 0)
+				i += q - 1;
 		}
 		i++;
 		lex_next(lex);
 	}
-	value = ft_substr(lex->src, x, i);
+	value = ft_dupnoq(ft_substr(lex->src, x, i));
 	if (!value)
 	{	
 		lex_next(lex);
 		return (init_token(NULL, TOK_ERROR));
 	}
+	if (store == 2)
+		return (init_token(value, TOK_DQUOTED));
 	return (init_token(value, TOK_WORD));
 }
 
 t_tok *next_token(t_lex *lex)
 {
-	t_tok *tok;
+	t_tok	*tok;
 
 	while (lex->c != '\0')
 	{
-		if (ft_isword(lex->c))
-			return (lex_get_word(lex)); 
 		tok = token_switch(lex->c, lex);
-		lex_next(lex);
 		if (tok)
 		{
+			lex_next(lex);
 			return (tok);
 		}
-		return (init_token(NULL, TOK_ERROR));
+		else
+		{
+			return (lex_get_word(lex));
+		}
 	}
 	return (init_token(NULL, TOK_EOL));
 }

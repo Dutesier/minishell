@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 14:29:57 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:09:04 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
 char	*ft_strcat(char *str, char *append);
 char	*ft_color(unsigned int color);
-void change_color(unsigned int color);
+void	change_color(unsigned int color);
+//char	*ft_dupnoq(char *s);
 int 	ft_putint(int c);
 
 // Error printing
@@ -68,6 +69,7 @@ int		ft_isquote(int c);
 int		ft_isword(int c);
 int		ft_isforb(int c);
 int		ft_iscomm(char *str);
+int		wordquotetok(unsigned int type);
 
 // Get quote - adapted from gnl
 char	*store_buffer(char *holder, char *buff);
