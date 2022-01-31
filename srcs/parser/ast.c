@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:29:40 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 15:38:31 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:33:16 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,36 @@ void ast_add_branch(t_ast *parent, t_ast *child, int i)
 	if (parent->branches)
 		free(parent->branches);
 	parent->branches = tree;
+}
 
+void ast_add_branch_idx(t_ast *parent, t_ast *child, int i, int idx)
+{
+	int x;
+	int y;
+	t_ast **tree;
+
+	if (idx > i)
+		return ;
+	tree = malloc(sizeof(t_ast *) * (i + 2));
+	if (!tree)
+		return ;
+	x = 0;
+	y = 0;
+	while (x <= i)
+	{
+		if (x == idx)
+			tree[x++] = child;
+		else
+		{
+			tree[x] = parent->branches[y];
+			x++;
+			y++;
+		}
+	}
+	tree[x] = NULL;
+	if (parent->branches)
+		free(parent->branches);
+	parent->branches = tree;
 }
 
 int ast_branch_ammount(t_ast *ast)

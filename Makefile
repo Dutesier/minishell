@@ -72,6 +72,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/lexer_utils_two.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
+				srcs/parser/unpack_quotes.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \

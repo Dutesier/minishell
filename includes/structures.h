@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/12 14:40:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:04:05 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_tok
 		TOK_CPAREN,
 		TOK_SPACE,
 		TOK_PIPE,
+		TOK_SQUOTED,
+		TOK_DQUOTED,
 		TOK_ERROR,
 		TOK_EOL
 

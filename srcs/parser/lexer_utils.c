@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/11 20:07:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:44:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,6 @@ int	nextquote(t_lex *lex, int q)
 		return (i);
 	while (ft_isquote(lex->c) != q && lex->c != '\0')
 	{
-		if (lex->c == '$')
-		{
-			lex->q = 1;
-			return (i); // or i -1??
-		}
 		i++;
 		lex_next(lex);
 	}
