@@ -24,8 +24,10 @@ int args_ammount(t_ast *command)
 	//printf("Entered args_ammount for ast branch %s \n", ast_to_str(command->e_type));
 	while (command && command->branches && command->branches[i] != NULL)
 	{
-		if (command->branches[i++]->my_tok->e_type == TOK_WORD)
-			count++;
+		if (command->branches[i]->my_tok->e_type == TOK_WORD)
+			if (command->branches[i]->my_tok->value != NULL)	
+				count++;
+		i++;
 	}
 	//printf("left args_ammount with %i\n", count + 1);
 	return (count + 1);
@@ -69,18 +71,24 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 			else if (ast->branches[ar % 10]->branches[i]->e_type == AST_VAR_EXP)
 			{
 				comm->args[x++] = var_expand(ast->branches[ar % 10]->branches[i++]);
-				i++;
+				//i++;
 			}
 			else
 			{
-				//printf("Storing %s", tok_to_str(ast->branches[ar%10]->branches[i]->my_tok->e_type));
-				comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
+				printf("Storing %s\n", tok_to_str(ast->branches[ar%10]->branches[i]->my_tok->e_type));
+				if (ast->branches[ar%10]->branches[i]->my_tok->value != NULL)
+					comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
+				else
+					i++;
 			}
 		}
 		ar = ar / 10;
 		if (ar == 0)
 			ar = -1;
 	}
+	int count = 0;
+	while (count < x)
+		printf("%s\n", comm->args[count++]);
 	return (x);
 }
 
@@ -111,7 +119,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		int v = 0;
 		while (shell->vars && shell->vars[v] != NULL)
 		{
-			printf("%sVARS[%i]%s%s\n", ft_color(YEL), v, shell->vars[v], ft_color(WHT));
+			printf("%sVARS[%i]%s%s\n", ft_color(CYA), v, shell->vars[v], ft_color(WHT));
 			v++;
 		}
 	}
@@ -138,6 +146,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (ar == 0)
 			ar = -1;
 	}
+	printf("Args ammount: %i\n", a);
 
 	if (a > 1)
 	{
@@ -164,6 +173,9 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (red == 0)
 			red = -1;
 	}
+	change_color(RED);
+	print_ast(ast, 0);
+	change_color(WHT);
 	return (comm);
 }
 

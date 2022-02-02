@@ -64,6 +64,8 @@ void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 		{
 			while (father->branches[i]->e_type != AST_VAR_EXP)
 				i++;
+			printf("Calling ast update\n");
+			print_ast(father, 0);
 			ast_update(father, temp, i); 
 			x = 0;
 		}
@@ -110,7 +112,7 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 	if (!tree)
 		return ;
 	x = 0;
-	printf("x: %i i: %i\n", x, i);
+	printf("x: %i i: %i up: %i\n", x, i, up);
 	while (x < i)
 	{
 		if (x != up)
@@ -120,14 +122,19 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 		x++;
 	}
 	tree[x] = NULL;
+	printf("Tree made in ast_update\n");
+	print_ast(*tree, 0);
 	if (up != -42)
 	{
-		printf("Calling clean_ast from variable expansion\n");
+		printf("Calling clean_ast from variable expansion: printing ast BEFORE cleaning\n");
+		print_ast(parent, 0);
 		clean_ast(parent->branches[up]);
 	}
 	if (parent->branches)
 		free(parent->branches);
 	parent->branches = tree;
+	printf("Printing AST at the end of AST update\n");
+	print_ast(parent, 0);
 
 	//print_ast(parent, 0);
 	//print_ast(child, 0);

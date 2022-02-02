@@ -57,7 +57,7 @@ int main(int argc, char *argv[], char **envp)
 	init_shell(&shell, envp);
 	if (argc > 1)
 		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
-			*shell.debug = 1;
+			shell.debug = 1;
 	while (shell.loop)
 	{
 		canonical_off(&shell);

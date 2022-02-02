@@ -26,6 +26,10 @@ char *ft_color(unsigned int color)
 		return ("\033[0;34m");
 	if (color == GRN)
 		return ("\033[0;32m");
+	if (color == CYA)
+		return ("\033[0;36m");
+	if (color == PUR)
+		return ("\033[0;35m");
 	return ("");
 }
 

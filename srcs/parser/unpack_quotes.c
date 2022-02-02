@@ -31,7 +31,6 @@ int unpack_quotes(t_ast *ast)
 
 int expand_quote(t_ast *father, int i)
 {
-	printf("Expanding quote\n");
 	int j;
 	int found_dollar;
 	t_ast *son;
@@ -54,6 +53,8 @@ int expand_quote(t_ast *father, int i)
 		return (exp_needed(father, i, value, j));
 	return (no_exp_needed(son, value));
 }
+
+// exp stands for expansion
 
 int no_exp_needed(t_ast *son, char *value)
 {
@@ -95,7 +96,6 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 		ast_add_branch_idx(father, temp_a, ast_branch_ammount(father), son_i + a); 
 	else
 	{
-		printf("Calling clean ast from exp needed\n");
 		clean_ast(father->branches[son_i]);
 		father->branches[son_i] = temp_a;
 		a++;
@@ -118,6 +118,7 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 		i++;
 	temp_a = init_ast(AST_WORD);
 	temp_t = init_token(ft_substr(holder, j, i), TOK_WORD);
+	temp_a->my_tok = temp_t;
 	ast_add_branch_idx(father, temp_a, ast_branch_ammount(father), son_i + a); 
 	free(holder);
 	free(value);
@@ -140,8 +141,12 @@ t_ast *add_var_exp(t_ast *ast, char *value, int j)
 	ast_add_branch(ast, temp_a, 0);
 	while (value[j + i] != '\0')
 		if (value[j + (i++)] == ' ') // Some other chars too probably
+		{
+			i--;
 			break ;
+		}
 	temp_s = ft_substr(value, j, i); 
+	printf("STRLEN: %i\n", ft_strlen(temp_s));
 	temp_t = init_token(temp_s, TOK_WORD);
 	temp_a = init_ast(AST_WORD);
 	temp_a->my_tok = temp_t;

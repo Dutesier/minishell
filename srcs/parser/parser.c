@@ -38,7 +38,8 @@ int parse_line(t_shell *shell)
 	//command_ammount(root, 0);
 	if (shell->debug)
 	{
-		printf("%s", ft_color(YEL));
+		printf("************* DEBUGGING *************\n");
+		printf("\n%s", ft_color(PUR));
 		print_ast(root, 0);
 		printf("%s\n", ft_color(WHT));
 	}

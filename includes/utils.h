@@ -31,7 +31,9 @@ typedef enum e_color
 	RED,
 	YEL,
 	BLU,
-	GRN
+	GRN,
+	CYA,
+	PUR
 }			t_color;
 
 // Strings

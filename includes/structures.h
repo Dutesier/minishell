@@ -136,7 +136,7 @@ typedef struct	s_shell
 {
 	char		**envp;
 	char		*line;
-	int			*debug;
+	int			debug;
 	char		**vars;
 	char		**exports; // The idea is to keep track of what we store in envp to know if it's up to us to free
 	int			exit_status; // Terminal can exit with some status, so if we start a bash in our bash (inception) we can know what was the exit from the second bash
