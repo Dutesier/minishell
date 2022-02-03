@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:17:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 15:41:19 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:18:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,12 @@ int ft_iscomm(char *str)
 		return (6);
 	if (ft_strcmp_two(str, "exit"))
 		return (7);
+	return (0);
+}
+
+int wordquotetok(unsigned int type)
+{
+	if (type == TOK_WORD || type == TOK_DQUOTED)
+		return (1);
 	return (0);
 }

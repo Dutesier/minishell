@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:45:25 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:09:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:03:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ char *tok_to_str(unsigned int type)
 		return ("TOK_ARROW_LEFT");
 	if (type == TOK_OPTION)
 		return ("TOK_OPTION");
+	if (type == TOK_SQUOTED)
+		return ("TOK_SQUOTED");
+	if (type == TOK_DQUOTED)
+		return ("TOK_DQUOTED");
 	if (type == TOK_S_QUOTE)
 		return ("TOK_S_QUOTE");
 	if (type == TOK_D_QUOTE)

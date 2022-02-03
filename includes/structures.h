@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 14:44:08 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:28:38 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_tok
 		TOK_CPAREN,
 		TOK_SPACE,
 		TOK_PIPE,
+		TOK_SQUOTED,
+		TOK_DQUOTED,
 		TOK_ERROR,
 		TOK_EOL
 
@@ -51,6 +53,7 @@ typedef struct s_lex
 	char c;
 	char *src;
 	int size;
+	int q;
 }			t_lex;
 
 typedef struct s_par

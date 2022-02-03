@@ -59,6 +59,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/comm_printer.c \
 				srcs/utils/ft_math.c \
 				srcs/utils/ft_atoi.c \
+				srcs/utils/ft_dupnoq.c \
 	\
 				srcs/reader/get_line.c \
 	\
@@ -68,8 +69,10 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/parse_command.c \
 				srcs/parser/parse_expansion.c \
 				srcs/parser/lexer.c \
+				srcs/parser/lexer_utils_two.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
+				srcs/parser/unpack_quotes.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \
