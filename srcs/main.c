@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 13:05:48 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:58:54 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
  *
 */
 
-void handle_sigtstp(int sig)
+void	handle_sigtstp(int sig)
 {
-	char *prompt;
+	char	*prompt;
 
 	prompt = "\033[0;34m$\033[0;37m ";
 	if (sig == SIGINT) // Signal handle for ^C
@@ -34,7 +34,7 @@ void handle_sigtstp(int sig)
 		printf("\n%s", prompt);
 }
 
-void init_shell(t_shell *shell, char **envp)
+void	init_shell(t_shell *shell, char **envp)
 {
 	shell->loop = 1;
 	shell->envp = envp;
@@ -50,14 +50,13 @@ void init_shell(t_shell *shell, char **envp)
 	sigaction(SIGQUIT, &shell->sa, NULL);
 }
 
-int main(int argc, char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
-	t_shell shell;
-	
+	t_shell	shell;
+
 	init_shell(&shell, envp);
-	if (argc > 1)
-		if (ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
-			*shell.debug = 1;
+	if (argc > 1 && ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
+		shell.debug = 1;
 	while (shell.loop)
 	{
 		canonical_off(&shell);
@@ -74,7 +73,5 @@ int main(int argc, char *argv[], char **envp)
 	if (shell.exports)
 		clean_exports(&shell);
 	clear_history();
-	
 	return (EXIT_SUCCESS);
 }
-
