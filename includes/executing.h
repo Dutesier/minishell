@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/10 17:50:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:27:55 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,13 @@ char *expansion_from_envp(t_shell *shell, int where);
 int run_command(t_comm *comm);
 int run_ft_command(t_comm *ft_comm);
 int exec_ft_comm(t_comm *ft_comm);
+
+// unpack_quotes (&& utils)
+int exp_needed(t_shell *shell, t_ast *father, char *og_str, int i);
+int no_exp_needed(t_ast *son, char *value);
+int expand_quote(t_shell *shell, t_ast *father, int i);
+int unpack_quotes(t_shell *shell, t_ast *ast);
+char *getvar_from_dq(t_shell *shell, char *str);
+int dq_expanded_len(char *str);
 
 #endif

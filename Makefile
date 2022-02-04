@@ -36,6 +36,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/set_variables.c \
 				srcs/executing/variable_expansion.c \
 				srcs/executing/variables.c \
+				srcs/executing/unpack_quotes.c \
+				srcs/executing/unpack_quotes_utils.c \
 	\
 				srcs/redirecting/change_in.c \
 				srcs/redirecting/change_out.c \
@@ -72,7 +74,6 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/lexer_utils_two.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
-				srcs/parser/unpack_quotes.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \

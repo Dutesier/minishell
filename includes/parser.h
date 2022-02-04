@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 14:12:19 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:27:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,5 @@ int		command_tok(unsigned int type);
 t_ast *parse_expansion(t_par *par);
 int parse_exp_status(t_par *par); //Checks if it really is a var expansion or just a dolla sign
 
-// unpack_quotes
-t_ast *add_var_exp(t_ast *ast, char *value, int j);
-int exp_needed(t_ast *father, int son_i, char *value, int j);
-int no_exp_needed(t_ast *son, char *value);
-int expand_quote(t_ast *father, int i);
-int unpack_quotes(t_ast *ast);
 
 #endif

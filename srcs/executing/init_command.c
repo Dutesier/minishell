@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 18:09:45 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:14:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 			}
 			else
 			{
-				printf("Storing %s\n", tok_to_str(ast->branches[ar%10]->branches[i]->my_tok->e_type));
 				if (ast->branches[ar%10]->branches[i]->my_tok->value != NULL)
 					comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
 				else
@@ -86,9 +85,6 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 		if (ar == 0)
 			ar = -1;
 	}
-	int count = 0;
-	while (count < x)
-		printf("%s\n", comm->args[count++]);
 	return (x);
 }
 
@@ -109,6 +105,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	init_comm_helper(comm);
 	comm->shell = shell;
 	replace_variables(shell, ast, NULL);
+	unpack_quotes(shell, ast);
 	if (variable_as_cmd(ast))
 	{
 		comm->e_type = INVALID;
@@ -146,8 +143,6 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (ar == 0)
 			ar = -1;
 	}
-	printf("Args ammount: %i\n", a);
-
 	if (a > 1)
 	{
 		x = store_args(comm, ast, a);
@@ -173,9 +168,6 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (red == 0)
 			red = -1;
 	}
-	change_color(RED);
-	print_ast(ast, 0);
-	change_color(WHT);
 	return (comm);
 }
 
