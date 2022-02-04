@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:03:09 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 19:22:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:30:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,23 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 
 	i = 0;
 	a = 0;
+	printf("Starting expansion inside double quotes\nSTR: %s<-\n", value);
 	holder = ft_dupnoq(value);
+	printf("STR without quotes: %s\n", holder);
+	printf("OUR AST RIGHT NOW:\n");
+	print_ast(father, 0);
 
 	// Store up to the variable
 	if (holder[0] != '$')
 	{
-		temp_t = init_token(ft_substr(holder, 0, j), TOK_WORD);
+		char *store = ft_substr(holder, 0, j);
+		printf("Storing up to the variable - Storing: %s<-\n", store); 
+		temp_t = init_token(store, TOK_WORD);
 		clean_tok(father->branches[son_i]->my_tok);
 		father->branches[son_i]->my_tok = temp_t;
 		a++;
+		printf("OUR AST RIGHT NOW:\n");
+		print_ast(father, 0);
 	}
 	else
 		j++;
@@ -100,6 +108,8 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 		father->branches[son_i] = temp_a;
 		a++;
 	}
+		printf("STORED VAR EXP\nOUR AST RIGHT NOW:\n");
+		print_ast(father, 0);
 
 
 	// Checking if there is more to store 
@@ -110,6 +120,9 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 	{
 		free(holder);
 		free(value);
+		printf("OUR AST RIGHT NOW:\n");
+		print_ast(father, 0);
+		printf("Returning: Added two branches\n");
 		return (2); // for two branches added
 	}
 	j = j + i;
@@ -122,6 +135,9 @@ int exp_needed(t_ast *father, int son_i, char *value, int j)
 	ast_add_branch_idx(father, temp_a, ast_branch_ammount(father), son_i + a); 
 	free(holder);
 	free(value);
+	printf("OUR AST RIGHT NOW:\n");
+	print_ast(father, 0);
+	printf("Returning: Added three branches\n");
 	return (3);
 }
 
