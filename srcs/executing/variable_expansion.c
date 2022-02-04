@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 18:04:09 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:12:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void replace_variables(t_shell *shell, t_ast *ast, t_ast *father)
 		{
 			while (father->branches[i]->e_type != AST_VAR_EXP)
 				i++;
-			printf("Calling ast update\n");
-			print_ast(father, 0);
 			ast_update(father, temp, i); 
 			x = 0;
 		}
@@ -81,7 +79,6 @@ char *ft_variable(t_shell *shell, char *str)
 	float	var_set;
 
 	var_set = var_is_set(shell, str);
-	printf("Var set %f\n", var_set);
 	where = (int)var_set;
 	if (var_set == -1)
 		return (NULL);
@@ -112,7 +109,6 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 	if (!tree)
 		return ;
 	x = 0;
-	printf("x: %i i: %i up: %i\n", x, i, up);
 	while (x < i)
 	{
 		if (x != up)
@@ -122,19 +118,13 @@ void ast_update(t_ast *parent, t_ast *child, int up)
 		x++;
 	}
 	tree[x] = NULL;
-	printf("Tree made in ast_update\n");
-	print_ast(*tree, 0);
 	if (up != -42)
 	{
-		printf("Calling clean_ast from variable expansion: printing ast BEFORE cleaning\n");
-		print_ast(parent, 0);
 		clean_ast(parent->branches[up]);
 	}
 	if (parent->branches)
 		free(parent->branches);
 	parent->branches = tree;
-	printf("Printing AST at the end of AST update\n");
-	print_ast(parent, 0);
 
 	//print_ast(parent, 0);
 	//print_ast(child, 0);

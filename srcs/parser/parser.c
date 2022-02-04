@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 18:10:00 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:30:48 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int parse_line(t_shell *shell)
 	if (!par)
 		return (1);
 	root = parse_to_ast(par);
-	unpack_quotes(root);
 	if (!root)
 		return (1);
 	//command_ammount(root, 0);
