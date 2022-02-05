@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:26:58 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/31 18:48:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/05 11:39:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,22 @@ int ft_strcmp_two(char *str1, char *str2)
 		i++;
 	}
 	return (1);
+}
+
+int my_strcmp(char *str1, char *str2)
+{
+	int i;
+
+	i = 0;
+	if (!str1 || !str2)
+		return (0);
+	while (str1[i] != '\0')
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (str1[i] - str2[i]);
 }
 
 int ft_strcmp_envp(char *whole_var, char *var)
