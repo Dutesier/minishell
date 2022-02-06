@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 16:58:54 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:25:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	main(int argc, char *argv[], char **envp)
 	t_shell	shell;
 
 	init_shell(&shell, envp);
+	if (argc > 1)
+		return (interactive_mode(&shell, argv, argc));
 	if (argc > 1 && ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 		shell.debug = 1;
 	while (shell.loop)

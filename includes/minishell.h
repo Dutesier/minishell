@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/24 11:06:17 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:26:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@
 # include "cleaning.h"
 # include "parser.h"
 # include "canonical.h"
+# include "interactive.h"
 
 #endif

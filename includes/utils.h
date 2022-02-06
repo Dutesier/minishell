@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/05 11:41:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:20:17 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_color(unsigned int color);
 void	change_color(unsigned int color);
 //char	*ft_dupnoq(char *s);
 int 	ft_putint(int c);
+char	*ft_strjoin(char *s1, char *s2);
 
 // Error printing
 int		print_error(int error);

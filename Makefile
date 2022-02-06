@@ -65,6 +65,9 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/reader/get_line.c \
 	\
+				srcs/interactive/interactive.c \
+				srcs/interactive/join_args.c \
+	\
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \
 				srcs/parser/parser_logic.c \
@@ -92,6 +95,7 @@ SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 DEPS	=	includes/commands.h \
 			includes/executing.h \
 			includes/redirecting.h \
+			includes/interactive.h \
 			includes/utils.h \
 			includes/reader.h \
 			includes/parser.h \
