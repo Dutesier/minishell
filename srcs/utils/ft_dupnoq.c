@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:32:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 14:43:35 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:29:13 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,31 @@ char *ft_dupnoq(char *s)
 	{
 		if (s[x] == '\'')
 		{
-			if (inhib == 1)
-				inhib = 0;
-			else if (inhib == 0)
+			if (!inhib)
+			{
 				inhib = 1;
-		}
-		if (s[x] == '\"')
-		{
-			if (inhib == 2)
+				x++;
+			}
+			else if (inhib == 1)
+			{
 				inhib = 0;
-			else if (inhib == 0)
-				inhib = 2;
-		}
-		if (inhib == 1)
-		{
-			if (s[x] == '\'')
 				x++;
+			}
 			else
-				sub[i++] = s[x++];	
+				sub[i++] = s[x++];
 		}
-		else if (inhib == 2)
+		else if (s[x] == '\"')
 		{
-			if (s[x] == '\"')
+			if (!inhib)
+			{
+				inhib = 2;
 				x++;
+			}
+			else if (inhib == 2)
+			{
+				inhib = 0;
+				x++;
+			}
 			else
 				sub[i++] = s[x++];
 		}
