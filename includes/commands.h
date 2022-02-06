@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:31:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/05 11:45:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/06 01:01:26 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int did_i_export(char *var, char **exports);
 int ft_print_export(t_comm *ft_comm, int i);
 int env_in_sorted(char **sorted_env, char *env);
 void print_sorted_env(char **sorted_env);
+int get_next_lowest_env(char **sorted_env, t_comm *ft_comm);
 
 
 #endif
