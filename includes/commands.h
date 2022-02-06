@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:31:38 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 18:30:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/06 01:01:26 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,12 @@ char **rm_envp(char **envp, char *rm, char **exports);
 char *whole_var_from_vars(char **vars, char *var);
 void rm_var_from_vars(t_shell *shell, char *var);
 int did_i_export(char *var, char **exports);
+
+// EXPORT
+int ft_print_export(t_comm *ft_comm, int i);
+int env_in_sorted(char **sorted_env, char *env);
+void print_sorted_env(char **sorted_env);
+int get_next_lowest_env(char **sorted_env, t_comm *ft_comm);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 15:09:04 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/05 11:41:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_color
 
 // Strings
 char	**ft_split(char const *s, char c);
+int		my_strcmp(char *str1, char *str2);
 int		ft_strcmp(char *str1, char *str2, int cmp);
 int		ft_strcmp_two(char *str1, char *str2);
 int		ft_strcmp_envp(char *whole_var, char *var);
