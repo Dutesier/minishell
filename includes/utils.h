@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/06 20:20:17 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:20:46 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		my_strcmp(char *str1, char *str2);
 int		ft_strcmp(char *str1, char *str2, int cmp);
 int		ft_strcmp_two(char *str1, char *str2);
 int		ft_strcmp_envp(char *whole_var, char *var);
-char	*ft_strnstr(const char *haystack, const char *needle);
+char	*ft_strnstr(char *haystack, char *needle);
 int		ft_strlen(char *str);
 char	*ft_append(char *str, char *append);
 char	*ft_strdup(char *s);

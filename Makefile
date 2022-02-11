@@ -106,6 +106,11 @@ DEPS	=	includes/commands.h \
 CC		=	gcc
 
 CFLAGS	=	-Wall -Wextra -Werror -pthread -g
+CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
+CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
+CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
+CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
+#CFLAGS += -fstack-protector-all -fstack-clash-protection
 
 INCLUDES	= -I $(HEADERS)
 
@@ -120,6 +125,10 @@ $(DIR_O)/%.o: %.c
 
 $(NAME):	$(DEPS) $(OBJS)
 			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
+			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
+
+debug:	$(DEPS) $(OBJS)
+			$(CC) $(CFLAGS) -fsanitize=address $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
 			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
 
 all:		$(NAME)

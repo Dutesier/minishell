@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 19:32:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/06 19:29:13 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:39:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char *ft_dupnoq(char *s)
 
 	i = 0;
 	x = 0;
+	if (!s)
+		return (NULL);
 	sub = malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!sub)
 		return (NULL);
@@ -63,7 +65,12 @@ char *ft_dupnoq(char *s)
 			sub[i++] = s[x++];
 	}
 	sub[i] = '\0';
-	temp = malloc(sizeof(char) * i);
+	temp = malloc(sizeof(char) * (i + 1));
+	if (!temp)
+	{
+		free(sub);
+		return (NULL);
+	}
 	while (i >= 0)
 	{
 		temp[i] = sub[i];

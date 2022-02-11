@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/04 19:30:48 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/08 20:09:36 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void print_ast(t_ast *ast, int l)
 	printf("[%s]", ast_to_str(ast->e_type));
 	if (ast->my_tok != NULL)
 	{
-		printf(": (%s) :  %s \n", tok_to_str(ast->my_tok->e_type), ast->my_tok->value);
+		printf(": (%s) :  ->%s<- \n", tok_to_str(ast->my_tok->e_type), ast->my_tok->value);
 	}
 	if (!ast->my_tok)
 		printf("\n");

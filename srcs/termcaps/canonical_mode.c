@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/01/30 01:03:45 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:47:00 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,27 @@ void	init_termcaps(t_shell *shell)
 {
 	char	*term_type;
 
+	//printf("Entered init_termcaps\n");
+	term_type = NULL;
 	termcaps_to_null(&shell->termcaps);
 	if (tcgetattr(STDIN_FILENO, &shell->termcaps.old_term) == -1)
 		handle_error(shell, EXIT_FAILURE);
+	//printf("termcaps 1\n");
 	term_type = ft_find_value_from_key("TERM", shell->envp);
+	//printf("termcaps 2\n");
 	if (!term_type)
-		handle_error(shell, EXIT_FAILURE);
+		handle_error(shell, 11);//EXIT_FAILURE);
+	//printf("termcaps 3\n");
 	if (tgetent(shell->termcaps.buffer, term_type) <= 0)
-		handle_error(shell, EXIT_FAILURE);
+	{
+		handle_error(shell,12);// EXIT_FAILURE);
+		//printf("termcaps 4\n");
+	}
 	else if (!capabilities(&shell->termcaps))
-		handle_error(shell, EXIT_FAILURE);
+		handle_error(shell, 13);//EXIT_FAILURE);
+	//printf("termcaps 5\n");
 	free(term_type);
+	//printf("Ended init_termcaps\n");
 }
 
 void	canonical_on(t_shell *shell)
@@ -100,17 +110,18 @@ int	capabilities(t_termcaps *termcaps)
 	return (check);
 }
 
-char	*ft_find_value_from_key(const char *str, char **envp)
+char	*ft_find_value_from_key(char *str, char **envp)
 {
 	int		i;
 	int		j;
 	char	*ret;
 
 	i = -1;
+	ret = NULL;
 	while (envp[++i] != NULL)
 	{
 		j = 0;
-		if (ret && ft_strnstr(envp[i], str))
+		if (ft_strnstr(envp[i], str))
 		{
 			while (str[j] && envp[i][j] && (str[j] == envp[i][j]))
 				j++;

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:26:58 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/05 11:39:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/11 09:23:28 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,16 @@ int ft_strcmp_envp(char *whole_var, char *var)
 	return (0);
 }
 
-char	*ft_strnstr(const char *haystack, const char *needle)
+char	*ft_strnstr(char *haystack, char *needle)
 {
 	size_t		i;
 	size_t		j;
 
 	i = 0;
+	if (!haystack)
+		return (NULL);
 	if (*needle == '\0' || needle == NULL)
-		return ((char*)haystack);
+		return (haystack);
 	while (haystack[i] != '\0')
 	{
 		j = 0;
