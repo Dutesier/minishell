@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 18:10:19 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:53:28 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int run_comm_table(t_shell *shell)
 			i++;
 		else
 		{
-			run_command(shell->commands[i++]);
+			shell->last_exit = run_command(shell->commands[i++]);
 		}
 	}
 	return (i);

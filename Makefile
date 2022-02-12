@@ -61,6 +61,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/comm_printer.c \
 				srcs/utils/ft_math.c \
 				srcs/utils/ft_atoi.c \
+				srcs/utils/ft_itoa.c \
 				srcs/utils/ft_dupnoq.c \
 	\
 				srcs/reader/get_line.c \

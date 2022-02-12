@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:36:06 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/04 20:12:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:58:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char *ft_variable(t_shell *shell, char *str)
 	int		where;
 	float	var_set;
 
+	if (str && my_strcmp(str, "?") == 0)
+		return (ft_strdup(ft_itoa(shell->last_exit)));
 	var_set = var_is_set(shell, str);
 	where = (int)var_set;
 	if (var_set == -1)

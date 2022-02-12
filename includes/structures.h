@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/03 09:28:38 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:01:15 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct	s_shell
 	t_comm		**commands; // table of all commands
 	int			loop;
 	char		*prompt;
+	int			last_exit;
 
 }			t_shell;
 

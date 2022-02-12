@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/11 19:47:13 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:10:08 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	handle_sigtstp(int sig)
 
 void	init_shell(t_shell *shell, char **envp)
 {
-	shell->loop = 1;
+	shell->loop = 0;
+	shell->last_exit = 0;
 	shell->envp = envp;
 	shell->line = NULL;
 	shell->debug = 0;
@@ -59,6 +60,7 @@ int	main(int argc, char *argv[], char **envp)
 		shell.debug = 1;
 	else if (argc > 1)
 		return (interactive_mode(&shell, argv));
+	shell.loop = 1;
 	while (shell.loop)
 	{
 		canonical_off(&shell);

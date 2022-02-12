@@ -6,7 +6,7 @@
 /*   By: Jibanez- < jibanez-@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:25:18 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/30 14:59:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:11:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	ft_exit(t_comm *ft_comm)
 	if (ft_comm->shell->exports)
 		clean_exports(ft_comm->shell);
 	clean_shell(ft_comm->shell);
-	clear_history();	
+	if (ft_comm->shell->loop)
+		clear_history();	
 	unlink(".mini.thd");
-    write(1, "exit\n", 6);
+	if (ft_comm->shell->loop)
+		write(1, "exit\n", 6);
     exit(ex);
 }

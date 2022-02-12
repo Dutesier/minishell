@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:52:43 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/11 19:46:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:11:44 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int interactive_mode(t_shell *shell, char *argv[])
 		if (shell->line != NULL)
 			free(shell->line);
 		shell->line = format_interactive_line(debugging);
-		//printf("FORMAT LINE: ->%s<-\n", shell->line);
 		if (shell->line != NULL)
 		{
 			parse_line(shell);
