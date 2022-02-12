@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 15:11:16 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:36:57 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_ast *parse_to_ast(t_par *par)
 			free(par->tok);
 			parser_next(par, 42);
 		}
-		ast_add_branch(root, parse_compound(par), i++);
+		if (par->tok->e_type != TOK_EOL  &&  par->tok->e_type != TOK_SEMI)
+			ast_add_branch(root, parse_compound(par), i++);
 	}
 	free(par->tok); //Freeing the TOK_EOL
 	return (root);
