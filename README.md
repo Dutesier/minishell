@@ -73,14 +73,14 @@ This project uses a makefile, so to run the program you can compile with ```make
 
 ### Know bugs
 -- Tested onLinux --
-- [ ] Shell hagsout when echo is written without quotes
-- [ ] echo -n enters in a loop and would not exit
-- [ ] exit -v enters in a loop and would not exit
-- [ ] Typing 'echo "ls"' would produce the followint output Expanding quote\n --> ls command
+- [x] Shell hagsout when echo is written without quotes
+- [x] echo -n enters in a loop and would not exit
+- [x] exit -v enters in a loop and would not exit
+- [x] Typing 'echo "ls"' would produce the followint output Expanding quote\n --> ls command
 - [ ] Pressing tab without input written would try to autocomplete with the files in the directory
-- [ ] ls works, ls -l doesn't. Shell enters in a loop and would not exit
-- [ ] $? works, but it also prints "minishell: command not found:"
-- [ ] $? + $? enters in a loop and would not exit
+- [x] ls works, ls -l doesn't. Shell enters in a loop and would not exit
+- [x] $? works, but it also prints "minishell: command not found:"
+- [ ] $? + $? prints minishell: command not found: X
 - [ ] After typing something and pressing CTRL + C a couple of times, it keeps saving the typed text in the buffer with the message "minishell: command not found:"
 - [ ] After typing the commnad "cat" without arguments the Shell enters in a loop and would not exit
-- [ ] export var=x enters in a loop and would not exit
+- [ ] export var=x do not export the var
