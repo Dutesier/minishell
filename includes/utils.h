@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:24:46 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 17:00:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:04:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*ft_strnstr(char *haystack, char *needle);
 int		ft_strlen(char *str);
 char	*ft_append(char *str, char *append);
 char	*ft_strdup(char *s);
-char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char c, char *s);
 char	*ft_substr(char *str, int start, int ammount);
 char	*ft_strcat(char *str, char *append);
