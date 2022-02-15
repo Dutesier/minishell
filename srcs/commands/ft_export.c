@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:38:27 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/06 01:06:25 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:30:27 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int	ft_export(t_comm *ft_comm)
 		}
 		i++;
 	}
-//	return (ft_env(ft_comm, 1));
 	return (0);
 }
+/*	return (ft_env(ft_comm, 1)); */
 
-int ft_print_export(t_comm *ft_comm, int i)
+int	ft_print_export(t_comm *ft_comm, int i)
 {
-	int sorted;
-	int next;
-	char **sorted_env;
-	int env_ammount;
+	int		sorted;
+	int		next;
+	char	**sorted_env;
+	int		env_ammount;
 
 	while (ft_comm->shell->envp[i])
 		i++;
@@ -54,7 +54,6 @@ int ft_print_export(t_comm *ft_comm, int i)
 	if (!sorted_env)
 		return (0);
 	sorted_env[0] = NULL;
-
 	sorted = 0;
 	env_ammount = i;
 	while (sorted < env_ammount)
@@ -68,9 +67,9 @@ int ft_print_export(t_comm *ft_comm, int i)
 	return (sorted);
 }
 
-int env_in_sorted(char **sorted_env, char *env)
+int	env_in_sorted(char **sorted_env, char *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (sorted_env[i])
@@ -82,10 +81,10 @@ int env_in_sorted(char **sorted_env, char *env)
 	return (0);
 }
 
-void print_sorted_env(char **sorted_env)
+void	print_sorted_env(char **sorted_env)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (sorted_env[i])
@@ -103,22 +102,19 @@ void print_sorted_env(char **sorted_env)
 	}
 }
 
-int get_next_lowest_env(char **sorted_env, t_comm *ft_comm)
+int	get_next_lowest_env(char **sorted_env, t_comm *ft_comm)
 {
-	int i;
-	int ret;
-	int cmp;
-	int lowest;
+	int	i;
+	int	ret;
+	int	cmp;
+	int	lowest;
 
 	i = 0;
 	lowest = 420;
 	while (ft_comm->shell->envp[i])
 	{	
 		if (env_in_sorted(sorted_env, ft_comm->shell->envp[i]))
-		{
 			i++;
-			continue ;
-		}
 		if (ft_comm->shell->envp[i][0] < lowest)
 		{
 			lowest = ft_comm->shell->envp[i][0];

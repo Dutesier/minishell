@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:25:59 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/29 19:47:00 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:49:24 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //static int ft_loop_echo(t_comm *ft_comm, int n);
 
-int ft_echo(t_comm *ft_comm)
+int	ft_echo(t_comm *ft_comm)
 {
 	char	*str;
 	int		n;
@@ -25,7 +25,8 @@ int ft_echo(t_comm *ft_comm)
 		ft_comm->out = STDOUT_FILENO;
 	if (ft_comm->args[1])
 	{
-		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2)))
+		if (ft_strcmp(ft_comm->args[1], "-n",
+				ft_min(ft_strlen(ft_comm->args[1]), 2)))
 		{
 			n = 1;
 			str = ft_comm->args[2];
@@ -59,4 +60,3 @@ int ft_echo(t_comm *ft_comm)
 		free(str);
 	}
 }*/
-

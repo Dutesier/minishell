@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:16:21 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 15:38:00 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:00:29 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 #include "minishell.h"
 
-char *ft_findpath(char **envp)
+char	*ft_findpath(char **envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!envp || !envp[i])
@@ -30,7 +30,7 @@ char *ft_findpath(char **envp)
 	return (envp[i]);
 }
 
-char *ft_newpath(char *cmd, char **envp)
+char	*ft_newpath(char *cmd, char **envp)
 {
 	int		i;
 	char	**path;

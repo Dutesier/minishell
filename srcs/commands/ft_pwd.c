@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:58:05 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:37:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:24:42 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(t_comm *ft_comm)
+int	ft_pwd(t_comm *ft_comm)
 {
-	char *cwd;
+	char	*cwd;
 
 	cwd = NULL;
 	(void)ft_comm;
@@ -28,4 +28,3 @@ int ft_pwd(t_comm *ft_comm)
 	free(cwd);
 	return (0);
 }
-
