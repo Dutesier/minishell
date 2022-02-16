@@ -14,13 +14,12 @@
 
 int set_in_and_out(t_comm *comm)
 {
-	printf("Entered in n out\n");
 	char *h;
 
 	if (comm->piping)
 		if (set_pipes(comm))
 			return (1);
-	printf("Entered in n out\n");
+	fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir);
 	while (comm->redir > 0)
 	{
 		if (comm->redir % 10 == 2)

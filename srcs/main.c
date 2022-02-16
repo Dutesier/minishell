@@ -51,11 +51,19 @@ void	init_shell(t_shell *shell, char **envp)
 	sigaction(SIGQUIT, &shell->sa, NULL);
 }
 
+void signal_callback_handler(int signum)
+{
+    fprintf(stderr, "Caught signal SIGPIPE %d\n",signum);
+	exit(42);
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
 
 	init_shell(&shell, envp);
+	signal(SIGPIPE, signal_callback_handler);
+	
 	// FOR TESTING ONLY
 	// argv[2] will contains the content of the line for example "echo something ; ls -la"
 	if (argc >= 3 && !ft_strcmp(argv[1], "-c", 3))

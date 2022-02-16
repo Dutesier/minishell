@@ -84,7 +84,7 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/termcaps/canonical_mode.c\
 	\
-				srcs/exiting/handle_error.c\
+				srcs/handle_error/handle_error.c\
 	\
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
@@ -107,10 +107,10 @@ DEPS	=	includes/commands.h \
 CC		=	gcc
 
 CFLAGS	=	-Wall -Wextra -Werror -pthread -g
-CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
-CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
-CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
-CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
+#CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
+#CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
+#CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
+#CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
 #CFLAGS += -fstack-protector-all -fstack-clash-protection
 
 INCLUDES	= -I $(HEADERS)

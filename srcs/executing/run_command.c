@@ -19,13 +19,16 @@ int run_command(t_comm *comm)
 	int		error;
 	
 
+	error = 0;
 	if (comm->is_ft)
 		return (run_ft_command(comm));
 	if (!comm->cmd)
 	{
 		if (comm->fd_p[0] > -1)
 		{
+			fprintf(stderr, "Closing comm->fd_p[0]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[0]);
+			fprintf(stderr, "Closing comm->fd_p[1]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[1]);
 		}
 		comm->cmd = ft_strcat("minishell: command not found: ", comm->args[0]);
@@ -42,15 +45,22 @@ int run_command(t_comm *comm)
 		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
 			return (1);
 
-		error = execve(comm->cmd, comm->args, comm->shell->envp);
-		if (error < 0)
-			return (print_error(-1));
+		if (!comm->is_ft)
+		{
+			fprintf(stderr, "Calling execve\n");
+			error = execve(comm->cmd, comm->args, comm->shell->envp);
+			if (error < 0)
+				return (print_error(-1));
+		}
+		return (error);
 	}
 	else
 	{
 		if (comm->fd_p[0] > -1)
 		{
+			fprintf(stderr, "Closing comm->fd_p[0]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[0]);
+			fprintf(stderr, "Closing comm->fd_p[1]: (%i)\n",comm->fd_p[1]);
 			close(comm->fd_p[1]);
 		}
 		waitpid(pid, &sta, 0);
@@ -70,27 +80,37 @@ int run_ft_command(t_comm *ft_comm)
 	int save_out;
 
 	sta = 0;
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	save_in = STDIN_FILENO;
+	save_out = STDOUT_FILENO;
 	if (set_in_and_out(ft_comm))
 		return (1);
-	printf("Entered run ft\n");
+	fprintf(stderr, "Entered run ft\n");
+	comm_printer(ft_comm);
 	sta = exec_ft_comm(ft_comm); 
+	fprintf(stderr, "Ran ft_command\nClosing Pipes\n");
 	if (ft_comm->fd_p[0] > -1)
 	{
+		fprintf(stderr, "Closing previous pipe\n");
+		fprintf(stderr, "Closing ft_comm->fd_p[0]: (%i)\n", ft_comm->fd_p[0]);
 		close(ft_comm->fd_p[0]);
+		fprintf(stderr, "Closing ft_comm->fd_p[1]: (%i)\n", ft_comm->fd_p[1]);
 		close(ft_comm->fd_p[1]);
 	}
 	if (ft_comm->infile)
 	{
+		fprintf(stderr, "Resseting STDIN\n");
 		dup2(save_in, STDIN_FILENO);
+		fprintf(stderr, "Closing ft_comm->in: (%i)\n", ft_comm->in);
 		close(ft_comm->in);
 	}
 	if (ft_comm->outfile)
 	{
+		fprintf(stderr, "Resseting STDOUT\n");
 		dup2(save_out, STDOUT_FILENO);
+		fprintf(stderr, "Closing ft_comm->out: (%i)\n", ft_comm->out);
 		close(ft_comm->out);
 	}
+	fprintf(stderr, "Returning from run_ft_command\n");
 	return (sta);
 }
 

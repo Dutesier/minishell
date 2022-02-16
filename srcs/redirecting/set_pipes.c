@@ -22,31 +22,27 @@ int set_pipes(t_comm *comm)
 {
 
 	printf("FDs: fd_p[0]: %i, fd_p[1]: %i, fd_n[0]: %i, fd_n[1]: %i\n", comm->fd_p[0],comm->fd_p[1],comm->fd_n[0],comm->fd_n[1]);
-	perror("perror->");
-	if (comm->fd_p[1] > -1) // If the previous comm was writing to us
-		close(comm->fd_p[1]);
-	if (comm->fd_n[0] > -1) // We wont read from the NEXT comm 
-		close(comm->fd_n[0]);
-	perror("perror->");
+	if (comm->fd_p[1] > -1) // If the previous command was writing to us
+		{fprintf(stderr, "Closing comm->fd_p[1]: (%i)\n",comm->fd_p[1]);close(comm->fd_p[1]);}
+	if (comm->fd_n[0] > -1 && !comm->is_ft) // We wont read from the NEXT command
+		{fprintf(stderr, "Closing comm->fd_n[0]: (%i)\n",comm->fd_n[0]);close(comm->fd_n[0]);} 
 	if (comm->piping == 1)
 	{
-		dup2(comm->fd_p[0], STDIN_FILENO); // Means we're reading from the previous comm
+		dup2(comm->fd_p[0], STDIN_FILENO); // Means we're reading from the previous command
 	}
-	if (comm->piping == 2) // Means we're sending our output into the next comm input
+	else if (comm->piping == 2) 
 	{
-		printf("In piping 2: comm->fd_n[1] = (%i) STDOUT_FILENO = (%i) \n", comm->fd_n[1], STDOUT_FILENO);
-		printf("%i\n",dup2(comm->fd_n[1], STDOUT_FILENO));
+		if (dup2(comm->fd_n[1], STDOUT_FILENO) == -1) // Means we're sending our output into the next commamnds input
 			perror("piping 2 error");
 	}
-	if (comm->piping == 3)
+	else if (comm->piping == 3)
 	{
-		dup2(comm->fd_p[0], STDIN_FILENO);
-		dup2(comm->fd_n[1], STDOUT_FILENO);
+		dup2(comm->fd_p[0], STDIN_FILENO); // Reading our INPUT from the PREVIOUS command
+		dup2(comm->fd_n[1], STDOUT_FILENO); // Writing our OUTPUT to the NEXT command
 	}
-	if (comm->fd_p[0] > -1)
-		close(comm->fd_p[0]);
-	if (comm->fd_n[1] > -1)
-		close(comm->fd_n[1]);
-	printf("Returning\n");
+	if (comm->fd_p[0] > -1) // If the previous command was piping to us (we close it cause we already dupped it?)
+		{fprintf(stderr, "Closing comm->fd_p[0]: (%i)\n",comm->fd_p[0]);close(comm->fd_p[0]);}
+	if (comm->fd_n[1] > -1 && !comm->is_ft) // If we're piping to the next command (we close it cause we already dupped it?)
+		{fprintf(stderr, "Closing comm->fd_n[1]: (%i)\n",comm->fd_n[1]);close(comm->fd_n[1]);}
 	return (0);
 }
