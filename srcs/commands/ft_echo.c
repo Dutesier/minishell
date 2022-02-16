@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:25:59 by Jibanez-          #+#    #+#             */
-/*   Updated: 2022/02/14 16:16:58 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/16 12:43:06 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //static int ft_loop_echo(t_comm *ft_comm, int n);
 
-int ft_echo(t_comm *ft_comm)
+int	ft_echo(t_comm *ft_comm)
 {
 	printf("Entered ft_echo\n");
 	char	*str;
@@ -65,4 +65,3 @@ int ft_echo(t_comm *ft_comm)
 		free(str);
 	}
 }*/
-

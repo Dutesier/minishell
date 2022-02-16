@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 16:53:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:54:46 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int comm_table_pipes(t_shell *shell, t_ast *root);
+static int	comm_table_pipes(t_shell *shell, t_ast *root);
 
 int	command_table(t_shell *shell, t_ast *root)
 {
-	int count;
-	int i;
-	int x;
-	//printf("Entered command table \n");
+	int	count;
+	int	i;
+	int	x;
 
 	count = compound_ammount(root, 0);
 	i = 0;
@@ -36,11 +35,10 @@ int	command_table(t_shell *shell, t_ast *root)
 	}
 	shell->commands[i] = NULL;
 	comm_table_pipes(shell, root);
-	//printf("Built %i commands in command table \n", i);
 	return (i);
 }
 
-static void set_as_piper(t_shell *shell, int i, int fd[])
+static void	set_as_piper(t_shell *shell, int i, int fd[])
 {
 	if (shell->commands[i]->piping == 0)
 		shell->commands[i]->piping = 2;
@@ -50,7 +48,7 @@ static void set_as_piper(t_shell *shell, int i, int fd[])
 	shell->commands[i]->fd_n[1] = fd[1];
 }
 
-static void set_as_piped(t_shell *shell, int i, int fd[])
+static void	set_as_piped(t_shell *shell, int i, int fd[])
 {
 	if (shell->commands[i]->piping == 0)
 		shell->commands[i]->piping = 1;
@@ -60,11 +58,12 @@ static void set_as_piped(t_shell *shell, int i, int fd[])
 	shell->commands[i]->fd_p[1] = fd[1];
 }
 
-static int comm_table_pipes(t_shell *shell, t_ast *root) // this should be done for every command
+/* this should be done for every command */
+static int	comm_table_pipes(t_shell *shell, t_ast *root)
 {
-	int i;
-	int x;
-	int fd[2];
+	int	i;
+	int	x;
+	int	fd[2];
 
 	i = 0;
 	x = 0;
@@ -86,12 +85,11 @@ static int comm_table_pipes(t_shell *shell, t_ast *root) // this should be done 
 	return (i);
 }
 
-int run_comm_table(t_shell *shell)
+int	run_comm_table(t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	//printf("Trying to run command table\n");
 	while (shell->commands && shell->commands[i] != NULL)
 	{
 		if (shell->debug)
@@ -108,16 +106,13 @@ int run_comm_table(t_shell *shell)
 					printf("%sVariable set%s \n", ft_color(BLU), ft_color(WHT));
 				else
 					printf("%sWarning: Either rewrote variable or variable couldn't be set%s \n", ft_color(RED), ft_color(WHT));
-
 			}
 			i++;
 		}
 		else if (shell->commands[i]->e_type == INVALID)
 			i++;
 		else
-		{
 			shell->last_exit = run_command(shell->commands[i++]);
-		}
 	}
 	return (i);
 }

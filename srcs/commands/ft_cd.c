@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:25:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/20 12:35:27 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:24:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_cd(t_comm *ft_comm)
+int	ft_cd(t_comm *ft_comm)
 {
-	int i;
+	int	i;
 
 	i = chdir(ft_comm->args[1]);
 	if (i == -1)

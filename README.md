@@ -2,7 +2,7 @@
 ## Build a simplified version of a shell - (under development :gear:)
 ### Our shell should:
 - [ ] Not interpret unclosed quotes or unspecified special characters like \ or ;.
-- [x] Not use more than one global variable, think about it and be ready to explain why
+- [ ] Not use more than one global variable, think about it and be ready to explain why
 you do it.
 - [x] Show a prompt when waiting for a new command.
 - [x] Have a working History.
@@ -10,7 +10,7 @@ you do it.
 relative or absolute path)
 - It must implement the builtins:
  - [x]   echo with option -n
- - [x]   cd with only a relative or absolute path
+ - [ ]   cd with only a relative or absolute path
  - [x]   pwd with no options
  - [x]   export with no options
  - [x]   unset with no options
@@ -26,8 +26,8 @@ relative or absolute path)
  - Pipes 
    - [x]  "|". The output of each command in the pipeline is connected via a pipe to the
 	  input of the next command.
- - [x]   Environment variables ($ followed by characters) should expand to their values.
- - [x]   $? should expand to the exit status of the most recently executed foreground
+ - [ ]   Environment variables ($ followed by characters) should expand to their values.
+ - [ ]   $? should expand to the exit status of the most recently executed foreground
 	  pipeline.
  - [x]   ctrl-C ctrl-D ctrl-\ should work like in bash.
 - When interactive:
@@ -46,10 +46,8 @@ For every point, if you have any doubt take bash as a reference.
 | Cleaning   | Contains functions to make sure that we go into the next phase (i.e. exiting or new line from user) cleanly. Frees any unnecessary memory. |
 | Commands   | Contains functions to replicate bash commands that need to be hardcoded. "cd" is a good example, since we cannot fork and then call chdir because when we exit the fork we'll be left in the same directory. |
 | Executing   | Executes commands given by the parser via ```execve```. |
-| Interactive   | Implements a non-interactive mode for the shell when ran with parameters. I.e. ```./minishell script.sh```.  |
-| Redirecting | Takes care of redirecting STDIN and STDOUT when necessary. A good example is that it creates the pipes needed between two processes when given the ```pipe``` command. |
+| Redirecting | Takes care of redirecting STDIN and STDOUT when necessary. A good example is that it creates the pipes needed between two processes when givne the ```pipe``` command. |
 | Reader | Uses the ```readline``` functions to read a line from the user and create a working history. |
-| Termcaps | Handles signals (i.e CTRL + D). |
 | Utils | Helpful everyday functions. |
 
 ### Usage
@@ -71,3 +69,18 @@ This project uses a makefile, so to run the program you can compile with ```make
 - strerror, perror,
 - isatty, ttyname, ttyslot,
 - ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs.
+
+
+### Know bugs
+-- Tested onLinux --
+- [x] Shell hagsout when echo is written without quotes
+- [x] echo -n enters in a loop and would not exit
+- [x] exit -v enters in a loop and would not exit
+- [x] Typing 'echo "ls"' would produce the followint output Expanding quote\n --> ls command
+- [ ] Pressing tab without input written would try to autocomplete with the files in the directory
+- [x] ls works, ls -l doesn't. Shell enters in a loop and would not exit
+- [x] $? works, but it also prints "minishell: command not found:"
+- [ ] $? + $? prints minishell: command not found: X
+- [ ] After typing something and pressing CTRL + C a couple of times, it keeps saving the typed text in the buffer with the message "minishell: command not found:"
+- [ ] After typing the commnad "cat" without arguments the Shell enters in a loop and would not exit
+- [ ] export var=x do not export the var
