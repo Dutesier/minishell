@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 16:50:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:19:27 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int run_command(t_comm *comm)
 
 int run_ft_command(t_comm *ft_comm)
 {
+	printf("Entered run ft\n");
 	int sta;
 	int save_in;
 	int save_out;
@@ -73,6 +74,7 @@ int run_ft_command(t_comm *ft_comm)
 	save_out = dup(STDOUT_FILENO);
 	if (set_in_and_out(ft_comm))
 		return (1);
+	printf("Entered run ft\n");
 	sta = exec_ft_comm(ft_comm); 
 	if (ft_comm->fd_p[0] > -1)
 	{

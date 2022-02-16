@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:52:43 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 17:11:44 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:50:41 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int interactive_mode(t_shell *shell, char *argv[])
 {
 	int ret;
-	int fd;
-	char *debugging;
+	//int fd;
+	//char *debugging;
 
 	ret = 1;
+	// Normally
+	/*
 	fd = ft_getfd(argv[1], 2);
 	if (fd == -1)
 		return (EXIT_FAILURE);
@@ -42,7 +44,15 @@ int interactive_mode(t_shell *shell, char *argv[])
 		else
 			ret = 0;
 	}
-	//printf("Closed fd %i with status %i\n", fd, close(fd));
+	close(fd);
+	*/
+
+	// For testing
+	shell->line = argv[2];
+	// End of test
+
+	ret = parse_line(shell);
+	clean_shell(shell);
 	if (shell->vars)
 	{
 		clean_vars(shell);
@@ -51,7 +61,7 @@ int interactive_mode(t_shell *shell, char *argv[])
 	{
 		clean_exports(shell);
 	}
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 char *format_interactive_line(char *line)

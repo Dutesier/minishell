@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:15:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:33:22 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int set_in_and_out(t_comm *comm)
 {
+	printf("Entered in n out\n");
 	char *h;
 
 	if (comm->piping)
 		if (set_pipes(comm))
 			return (1);
+	printf("Entered in n out\n");
 	while (comm->redir > 0)
 	{
 		if (comm->redir % 10 == 2)

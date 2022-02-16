@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:25:59 by Jibanez-          #+#    #+#             */
-/*   Updated: 2021/12/29 19:47:00 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:16:58 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,34 @@
 
 int ft_echo(t_comm *ft_comm)
 {
+	printf("Entered ft_echo\n");
 	char	*str;
 	int		n;
+	int		i;
 
 	n = 0;
+	i = 1;
 	str = NULL;
 	if (ft_comm->out == -1)
 		ft_comm->out = STDOUT_FILENO;
 	if (ft_comm->args[1])
 	{
-		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2)))
+		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2))) // This needs to be changed
 		{
 			n = 1;
-			str = ft_comm->args[2];
+			i = 2;
 		}
-		else
-			str = ft_comm->args[1];
+		str = ft_comm->args[i];
 	}
-	if (str)
-		printf("%s", str);
+	while (ft_comm->args[i])
+	{
+		printf("%s", ft_comm->args[i++]);
+		if (ft_comm->args[i])
+			printf(" ");
+	}
 	if (n == 0)
 		printf("\n");
-	return (1);
+	return (0);
 }
 
 /*static int ft_loop_echo(t_comm *ft_comm, int n)
