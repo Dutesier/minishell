@@ -20,21 +20,23 @@ int run_command(t_comm *comm)
 	
 
 	error = 0;
+	if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
+		return (1);
 	if (comm->is_ft)
 		return (run_ft_command(comm));
 	if (!comm->cmd)
 	{
-		if (comm->fd_p[0] > -1)
+		/*if (comm->fd_p[0] > -1)
 		{
 			fprintf(stderr, "Closing comm->fd_p[0]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[0]);
 			fprintf(stderr, "Closing comm->fd_p[1]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[1]);
-		}
+		}*/
 		comm->cmd = ft_strcat("minishell: command not found: ", comm->args[0]);
 		ft_putstr_fd(comm->cmd, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
-		return (1);
+		return (127);
 	}
 	pid = fork();
 	if (pid == -1)
@@ -42,9 +44,10 @@ int run_command(t_comm *comm)
 	if (pid == 0)
 	{
 
-		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
-			return (1);
+		fprintf(stderr, "Inside forked process\n");
 
+
+		comm_printer(comm);
 		if (!comm->is_ft)
 		{
 			fprintf(stderr, "Calling execve\n");
@@ -56,14 +59,15 @@ int run_command(t_comm *comm)
 	}
 	else
 	{
-		if (comm->fd_p[0] > -1)
+		/*if (comm->fd_p[0] > -1)
 		{
 			fprintf(stderr, "Closing comm->fd_p[0]: (%i)\n",comm->fd_p[0]);
 			close(comm->fd_p[0]);
 			fprintf(stderr, "Closing comm->fd_p[1]: (%i)\n",comm->fd_p[1]);
 			close(comm->fd_p[1]);
-		}
+		}*/
 		waitpid(pid, &sta, 0);
+		fprintf(stderr, "Execve finished\n");
 		sta = WEXITSTATUS(sta);
 		if (sta)
 			return (sta);
@@ -82,13 +86,13 @@ int run_ft_command(t_comm *ft_comm)
 	sta = 0;
 	save_in = STDIN_FILENO;
 	save_out = STDOUT_FILENO;
-	if (set_in_and_out(ft_comm))
-		return (1);
+	//if (set_in_and_out(ft_comm))
+	//	return (1);
 	fprintf(stderr, "Entered run ft\n");
 	comm_printer(ft_comm);
 	sta = exec_ft_comm(ft_comm); 
 	fprintf(stderr, "Ran ft_command\nClosing Pipes\n");
-	if (ft_comm->fd_p[0] > -1)
+	/*if (ft_comm->fd_p[0] > -1)
 	{
 		fprintf(stderr, "Closing previous pipe\n");
 		fprintf(stderr, "Closing ft_comm->fd_p[0]: (%i)\n", ft_comm->fd_p[0]);
@@ -109,7 +113,7 @@ int run_ft_command(t_comm *ft_comm)
 		dup2(save_out, STDOUT_FILENO);
 		fprintf(stderr, "Closing ft_comm->out: (%i)\n", ft_comm->out);
 		close(ft_comm->out);
-	}
+	}*/
 	fprintf(stderr, "Returning from run_ft_command\n");
 	return (sta);
 }

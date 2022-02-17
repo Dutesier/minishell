@@ -46,6 +46,8 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->prompt = "\033[0;34m$\033[0;37m ";
 	shell->sa.sa_handler = &handle_sigtstp;
 	shell->sa.sa_flags = SA_RESTART;
+	shell->save_in = dup(STDIN_FILENO);
+	shell->save_out = dup(STDOUT_FILENO);
 	init_termcaps(shell);
 	sigaction(SIGINT, &shell->sa, NULL);
 	sigaction(SIGQUIT, &shell->sa, NULL);

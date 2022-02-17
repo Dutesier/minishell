@@ -44,8 +44,10 @@ static void	set_as_piper(t_shell *shell, int i, int fd[])
 		shell->commands[i]->piping = 2;
 	else
 		shell->commands[i]->piping = 3;
-	shell->commands[i]->fd_n[0] = fd[0];
-	shell->commands[i]->fd_n[1] = fd[1];
+	/*shell->commands[i]->fd_n[0] = fd[0];
+	shell->commands[i]->fd_n[1] = fd[1];*/
+	shell->commands[i]->my_pipe[0] = fd[0];
+	shell->commands[i]->my_pipe[1] = fd[1];
 }
 
 static void	set_as_piped(t_shell *shell, int i, int fd[])
@@ -54,8 +56,10 @@ static void	set_as_piped(t_shell *shell, int i, int fd[])
 		shell->commands[i]->piping = 1;
 	else
 		shell->commands[i]->piping = 3;
-	shell->commands[i]->fd_p[0] = fd[0];
-	shell->commands[i]->fd_p[1] = fd[1];
+	/*shell->commands[i]->fd_p[0] = fd[0];
+	shell->commands[i]->fd_p[1] = fd[1];*/
+	shell->commands[i]->my_pipe[0] = fd[0];
+	shell->commands[i]->my_pipe[1] = fd[1];
 }
 
 /* this should be done for every command */
@@ -112,7 +116,10 @@ int	run_comm_table(t_shell *shell)
 		else if (shell->commands[i]->e_type == INVALID)
 			i++;
 		else
-			shell->last_exit = run_command(shell->commands[i++]);
+		{
+			shell->last_exit = run_command(shell->commands[i]);
+			reset_std_io(shell->commands[i++], 1, 1);
+		}
 	}
 	return (i);
 }

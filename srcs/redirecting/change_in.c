@@ -18,8 +18,8 @@ int change_in(int old_in_fd, char *new_in, int redir)
 
 	in = ft_getfd(new_in, redir);
 	if (in == -1)
-		return (print_error(FILE_OPEN_FAIL) - 1);
+		return (print_error(FILE_OPEN_FAIL) - 2);
 	dup2(in, old_in_fd);
-	close(in);
+	close(in); // Old IN fd now points to IN so no need to have IN open as well;
 	return (in);
 }
