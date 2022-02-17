@@ -14,7 +14,7 @@
 
 static int close_pipes(t_comm *comm)
 {
-	if (comm->piping == 1)
+/*	if (comm->piping == 1)
 		close(comm->fd_p[0]);
 	if (comm->piping == 2)
 		close(comm->fd_n[1]);
@@ -22,8 +22,10 @@ static int close_pipes(t_comm *comm)
 	{
 		close(comm->fd_p[0]);
 		close(comm->fd_n[1]);
-	}
-	return (0);
+	}*/
+	if (comm)
+		return (0);
+	return (1);
 }
 
 static int close_fds(t_comm *comm)

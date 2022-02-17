@@ -112,8 +112,7 @@ typedef struct s_comm
 
 	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
 
-	int		fd_p[2]; // Pipe I'm reading from (previous)
-	int		fd_n[2]; // Pipe I'm writing to (next)
+	int		my_pipe[2];
 
 	int		is_ft;
 }			t_comm;
@@ -146,6 +145,9 @@ typedef struct	s_shell
 	int			loop;
 	char		*prompt;
 	int			last_exit;
+	int		save_in;
+	int		save_out;
+	int		saved;
 
 }			t_shell;
 

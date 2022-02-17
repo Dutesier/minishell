@@ -46,6 +46,9 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->prompt = "\033[0;34m$\033[0;37m ";
 	shell->sa.sa_handler = &handle_sigtstp;
 	shell->sa.sa_flags = SA_RESTART;
+	shell->save_in = -1;
+	shell->save_out = -1;
+	shell->saved = 0;
 	init_termcaps(shell);
 	sigaction(SIGINT, &shell->sa, NULL);
 	sigaction(SIGQUIT, &shell->sa, NULL);
@@ -56,6 +59,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_shell	shell;
 
 	init_shell(&shell, envp);
+	
 	// FOR TESTING ONLY
 	// argv[2] will contains the content of the line for example "echo something ; ls -la"
 	if (argc >= 3 && !ft_strcmp(argv[1], "-c", 3))

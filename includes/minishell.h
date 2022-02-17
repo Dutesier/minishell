@@ -21,6 +21,12 @@
 #  define MAX_PATH 1024
 # endif
 
+# ifdef DEBUG_MODE
+#  define DEBUG(x) x
+# else
+#  define DEBUG(x)
+# endif
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

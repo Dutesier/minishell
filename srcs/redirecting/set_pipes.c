@@ -14,39 +14,31 @@
 
 /*
  *
- * We read from pipe[0] and write to pipe[1]
+ * We read from my_pipe[0] and write to my_pipe[1]
+ * if comm->is_ft then the fds we have are not duplicated
  * 
 */
 
-int set_pipes(t_comm *comm)
+int set_pipes(t_comm *comm, int my_pipe[])
 {
-
-	printf("FDs: fd_p[0]: %i, fd_p[1]: %i, fd_n[0]: %i, fd_n[1]: %i\n", comm->fd_p[0],comm->fd_p[1],comm->fd_n[0],comm->fd_n[1]);
-	perror("perror->");
-	if (comm->fd_p[1] > -1) // If the previous comm was writing to us
-		close(comm->fd_p[1]);
-	if (comm->fd_n[0] > -1) // We wont read from the NEXT comm 
-		close(comm->fd_n[0]);
-	perror("perror->");
-	if (comm->piping == 1)
+	if (comm->piping == 1) // our stdin should be the read end of the pipe
 	{
-		dup2(comm->fd_p[0], STDIN_FILENO); // Means we're reading from the previous comm
+		dup2(my_pipe[0], STDIN_FILENO);
+		comm->in = my_pipe[0];
 	}
-	if (comm->piping == 2) // Means we're sending our output into the next comm input
+	else if (comm->piping == 2)
 	{
-		printf("In piping 2: comm->fd_n[1] = (%i) STDOUT_FILENO = (%i) \n", comm->fd_n[1], STDOUT_FILENO);
-		printf("%i\n",dup2(comm->fd_n[1], STDOUT_FILENO));
-			perror("piping 2 error");
+		DEBUG(fprintf(stderr, "My_pipe[1] before dup2 -> %i\n", my_pipe[1]));
+		dup2(my_pipe[1], STDOUT_FILENO);
+		DEBUG(fprintf(stderr, "My_pipe[1] after dup2 -> %i\n", my_pipe[1]));
+		comm->out = my_pipe[1];
 	}
-	if (comm->piping == 3)
+	else if (comm->piping == 3)
 	{
-		dup2(comm->fd_p[0], STDIN_FILENO);
-		dup2(comm->fd_n[1], STDOUT_FILENO);
+		dup2(my_pipe[0], STDIN_FILENO);
+		dup2(my_pipe[1], STDOUT_FILENO);
+		comm->in = my_pipe[0];
+		comm->out = my_pipe[1];
 	}
-	if (comm->fd_p[0] > -1)
-		close(comm->fd_p[0]);
-	if (comm->fd_n[1] > -1)
-		close(comm->fd_n[1]);
-	printf("Returning\n");
 	return (0);
 }

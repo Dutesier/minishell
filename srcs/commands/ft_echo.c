@@ -16,7 +16,6 @@
 
 int	ft_echo(t_comm *ft_comm)
 {
-	printf("Entered ft_echo\n");
 	char	*str;
 	int		n;
 	int		i;
@@ -24,11 +23,9 @@ int	ft_echo(t_comm *ft_comm)
 	n = 0;
 	i = 1;
 	str = NULL;
-	if (ft_comm->out == -1)
-		ft_comm->out = STDOUT_FILENO;
 	if (ft_comm->args[1])
 	{
-		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2))) // This needs to be changed
+		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2))) // This needs to be changed to include "-nnnnnn"
 		{
 			n = 1;
 			i = 2;
@@ -41,27 +38,14 @@ int	ft_echo(t_comm *ft_comm)
 		if (ft_comm->args[i])
 			printf(" ");
 	}
+	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	if (n == 0)
-		printf("\n");
+	{
+		DEBUG(fprintf(stderr, "Printing a nl\n"));	
+		printf("%c", '\n');
+		DEBUG(fprintf(stderr,"Printed a nl\n"));	
+	}
+	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	return (0);
 }
 
-/*static int ft_loop_echo(t_comm *ft_comm, int n)
-{
-	char *str;
-
-	if (ft_comm->in == -1)
-		ft_comm->in = STDIN_FILENO;
-	while (1)
-	{
-		str = get_next_line(ft_comm->in, "> ");
-		if (!str)
-			return (1);
-		if (str[0] == '\0')
-			return (0);
-		prinft("%s", str);
-		if (!n)
-			printf("\n");
-		free(str);
-	}
-}*/

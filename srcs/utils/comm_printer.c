@@ -17,14 +17,16 @@ void comm_printer(t_comm *comm)
 	int i;
 
 	i = 0;
-	printf("%s", ft_color(YEL));
-	printf("\nCOMMAND: %s\n", comm->cmd);
+	fprintf(stderr,"%s", ft_color(YEL));
+	fprintf(stderr,"\nCOMMAND: %s\n", comm->cmd);
 	while (comm->args && comm->args[i] != NULL)
 	{
-		printf("ARG[%i]: %s\n", i, comm->args[i]);
+		fprintf(stderr,"ARG[%i]: %s\n", i, comm->args[i]);
 		i++;
 	}
-	printf("PIPING: %i\n", comm->piping);
-	printf("IN: %s(%i)\nOUT: %s(%i)\n", comm->infile, comm->in, comm->outfile, comm->out);
-	printf("%s\n", ft_color(WHT));
+	fprintf(stderr,"PIPING: %i\n", comm->piping);
+	fprintf(stderr,"IN: %s(%i)\nOUT: %s(%i)\n", comm->infile, comm->in, comm->outfile, comm->out);
+	fprintf(stderr,"PIPE[0]: (%i)\nPIPE[1]: (%i)\n", comm->my_pipe[0], comm->my_pipe[1]);
+	fprintf(stderr,"IS_FT: (%i)\n", comm->is_ft);
+	fprintf(stderr,"%s\n", ft_color(WHT));
 }

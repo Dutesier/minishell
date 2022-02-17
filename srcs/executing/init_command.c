@@ -178,16 +178,14 @@ void init_comm_helper(t_comm *comm)
 	comm->cmd = NULL;
 	comm->outfile = NULL;
 	comm->heredoc = NULL;
-	comm->in = -1;
-	comm->out = -1;
+	comm->in = STDIN_FILENO;
+	comm->out = STDOUT_FILENO;
 	comm->redir = 0;
 
 	comm->piping = 0;
 
-	comm->fd_n[0] = -1;
-	comm->fd_n[1] = -1;
-	comm->fd_p[0] = -1;
-	comm->fd_p[1] = -1;
+	comm->my_pipe[0] = -1;
+	comm->my_pipe[1] = -1;
 
 	comm->is_ft = 0;
 }

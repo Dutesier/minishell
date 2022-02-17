@@ -19,19 +19,23 @@ int run_command(t_comm *comm)
 	int		error;
 	
 
+	error = 0;
+	if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
+		return (1);
+	if (comm->shell->debug)
+	{
+		comm_printer(comm);
+		printf("********* FINISHED DEBUGGING *********\n");
+		printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
+	}
 	if (comm->is_ft)
 		return (run_ft_command(comm));
 	if (!comm->cmd)
 	{
-		if (comm->fd_p[0] > -1)
-		{
-			close(comm->fd_p[0]);
-			close(comm->fd_p[1]);
-		}
 		comm->cmd = ft_strcat("minishell: command not found: ", comm->args[0]);
 		ft_putstr_fd(comm->cmd, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
-		return (1);
+		return (127);
 	}
 	pid = fork();
 	if (pid == -1)
@@ -39,21 +43,23 @@ int run_command(t_comm *comm)
 	if (pid == 0)
 	{
 
-		if (set_in_and_out(comm)) // FIXME handle multiple redirs (i.e. ls > test > test1)
-			return (1);
+		DEBUG(fprintf(stderr, "Inside forked process\n"));
 
-		error = execve(comm->cmd, comm->args, comm->shell->envp);
-		if (error < 0)
-			return (print_error(-1));
+
+		if (!comm->is_ft)
+		{
+			DEBUG(fprintf(stderr, "Calling execve\n"));
+			error = execve(comm->cmd, comm->args, comm->shell->envp);
+			if (error < 0)
+				return (print_error(-1));
+		}
+		return (error);
 	}
 	else
 	{
-		if (comm->fd_p[0] > -1)
-		{
-			close(comm->fd_p[0]);
-			close(comm->fd_p[1]);
-		}
+		
 		waitpid(pid, &sta, 0);
+		DEBUG(fprintf(stderr, "Execve finished\n"));
 		sta = WEXITSTATUS(sta);
 		if (sta)
 			return (sta);
@@ -70,27 +76,13 @@ int run_ft_command(t_comm *ft_comm)
 	int save_out;
 
 	sta = 0;
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
-	if (set_in_and_out(ft_comm))
-		return (1);
-	printf("Entered run ft\n");
+	save_in = STDIN_FILENO;
+	save_out = STDOUT_FILENO;
+	
+	DEBUG(fprintf(stderr, "Entered run ft\n"));
+	comm_printer(ft_comm);
 	sta = exec_ft_comm(ft_comm); 
-	if (ft_comm->fd_p[0] > -1)
-	{
-		close(ft_comm->fd_p[0]);
-		close(ft_comm->fd_p[1]);
-	}
-	if (ft_comm->infile)
-	{
-		dup2(save_in, STDIN_FILENO);
-		close(ft_comm->in);
-	}
-	if (ft_comm->outfile)
-	{
-		dup2(save_out, STDOUT_FILENO);
-		close(ft_comm->out);
-	}
+	DEBUG(fprintf(stderr, "Ran ft_command\n"));
 	return (sta);
 }
 

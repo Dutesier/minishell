@@ -18,7 +18,7 @@ int change_out(int old_out_fd, char *new_out, int redir)
 
 	out = ft_getfd(new_out, redir);
 	if (out == -1)
-		return (print_error(FILE_OPEN_FAIL) - 1);
+		return (print_error(FILE_OPEN_FAIL) - 2);
 //	printf("FD %i now points to %s(%i)\n", old_out_fd, new_out, out); 
 	dup2(out, old_out_fd);
 	close(out);
