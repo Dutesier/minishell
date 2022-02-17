@@ -147,6 +147,7 @@ typedef struct	s_shell
 	int			last_exit;
 	int		save_in;
 	int		save_out;
+	int		saved;
 
 }			t_shell;
 

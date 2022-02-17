@@ -23,7 +23,6 @@ int	command_parser(t_ast *ast, t_par *par, unsigned int i, int x)
 		parser_next(par, 42);
 	}
 	ast->branches[x]->e_type = AST_COMMAND;
-	parser_next(par, 42);
 	next = par->tok->e_type;
 	if (!command_tok(next)) 
 	{

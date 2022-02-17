@@ -12,15 +12,18 @@
 
 #include "minishell.h"
 
+static void save_std_io(t_comm *comm);
+
 int set_in_and_out(t_comm *comm)
 {
 	char *h;
 
+	save_std_io(comm);
 	reset_std_io(comm, 1, 1);
 	if (comm->piping)
 		if (set_pipes(comm, comm->my_pipe))
 			return (1);
-	fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir);
+	DEBUG(fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir));
 	while (comm->redir > 0)
 	{
 		if (comm->redir % 10 == 2)
@@ -45,20 +48,20 @@ int set_in_and_out(t_comm *comm)
 		}
 		comm->redir = comm->redir / 10;
 	}
-	fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->in, comm->out);
+	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->in, comm->out));
 	return (0);
 }
 
 int reset_std_io(t_comm *comm, int reset_in, int reset_out)
 {
-	fprintf(stderr, "Resetting std io\n");
+	DEBUG(fprintf(stderr, "Resetting std io\n"));
 	if (reset_in)
 	{
 		if (comm->in != STDIN_FILENO)
 		{
-			fprintf(stderr, "Dupping COMM->IN(%i) to STDIN_FILENO(%i)\n", comm->in, STDIN_FILENO);
+			DEBUG(fprintf(stderr, "Resetting via dup2 STDIN_FILENO(%i)\n", STDIN_FILENO));
 			dup2(comm->shell->save_in, STDIN_FILENO);
-			fprintf(stderr, "Closing current in: FD(%i)\n", comm->in);
+			DEBUG(fprintf(stderr, "Closing Comm->in: FD(%i)\n", comm->in));
 			close(comm->in);
 		}
 		comm->in = STDIN_FILENO;
@@ -67,12 +70,35 @@ int reset_std_io(t_comm *comm, int reset_in, int reset_out)
 	{
 		if (comm->out != STDOUT_FILENO)
 		{
-			fprintf(stderr, "Dupping COMM->OUT(%i) to STDOUT_FILENO(%i)\n", comm->out, STDOUT_FILENO);
-			dup2(comm->shell->save_out, STDOUT_FILENO);
-			fprintf(stderr, "Closing current out: FD(%i)\n", comm->out);
+			DEBUG(fprintf(stderr, "Closing comm->out: FD(%i)\n", comm->out));
 			close(comm->out);
+			DEBUG(fprintf(stderr, "Resetting via dup2 STDOUT_FILENO(%i)\n", STDOUT_FILENO));
+			dup2(comm->shell->save_out, STDOUT_FILENO);
 		}
 		comm->out = STDOUT_FILENO;
 	}
 	return (0);
+}
+
+static void save_std_io(t_comm *comm)
+{
+	if (!comm->shell->saved)
+	{
+		comm->shell->save_in = dup(STDIN_FILENO);
+		comm->shell->save_out = dup(STDOUT_FILENO);
+		DEBUG(fprintf(stderr, "Saving (via dup) STDIN(%i) and STDOUT(%i)\n", comm->shell->save_in, comm->shell->save_out));
+		comm->shell->saved = 1;
+	}
+}
+
+void close_std_io_dups(t_shell *shell)
+{
+	if (shell->saved)
+	{
+		close(shell->save_out);
+		DEBUG(fprintf(stderr, "Closing SavedOut: FD(%i)\n", shell->save_out));
+		close(shell->save_in);
+		DEBUG(fprintf(stderr, "Closing SavedIn: FD(%i)\n", shell->save_in));
+		shell->saved = 0;
+	}
 }
