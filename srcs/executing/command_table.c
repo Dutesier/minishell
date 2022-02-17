@@ -109,12 +109,6 @@ int	run_comm_table(t_shell *shell)
 	i = 0;
 	while (shell->commands && shell->commands[i] != NULL)
 	{
-		if (shell->debug)
-		{
-			comm_printer(shell->commands[i]);
-			printf("********* FINISHED DEBUGGING *********\n");
-			printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
-		}
 		if (shell->commands[i]->e_type == VAR_DEF)
 		{
 			if (shell->debug)

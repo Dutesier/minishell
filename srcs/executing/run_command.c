@@ -25,8 +25,8 @@ int run_command(t_comm *comm)
 	if (comm->shell->debug)
 	{
 		comm_printer(comm);
-		printf("********* FINISHED DEBUGGING *********\n");
-		printf("%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
+		fprintf(stderr,"********* FINISHED DEBUGGING *********\n");
+		fprintf(stderr,"%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
 	}
 	if (comm->is_ft)
 		return (run_ft_command(comm));
@@ -80,7 +80,6 @@ int run_ft_command(t_comm *ft_comm)
 	save_out = STDOUT_FILENO;
 	
 	DEBUG(fprintf(stderr, "Entered run ft\n"));
-	comm_printer(ft_comm);
 	sta = exec_ft_comm(ft_comm); 
 	DEBUG(fprintf(stderr, "Ran ft_command\n"));
 	return (sta);
