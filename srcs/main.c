@@ -38,7 +38,7 @@ void	init_shell(t_shell *shell, char **envp)
 {
 	shell->loop = 0;
 	shell->last_exit = 0;
-	shell->envp = envp;
+	shell->envp = dup_envp(envp);
 	shell->line = NULL;
 	shell->debug = 0;
 	shell->vars = NULL;
@@ -90,8 +90,10 @@ int	main(int argc, char *argv[], char **envp)
 	}
 	if (shell.vars)
 		clean_vars(&shell);
-	if (shell.exports)
-		clean_exports(&shell);
+	/*if (shell.exports)
+		clean_exports(&shell);*/
+	if (shell.envp)
+		clean_envp(&shell);
 	clear_history();
 	return (EXIT_SUCCESS);
 }

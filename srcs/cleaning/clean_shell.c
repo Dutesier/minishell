@@ -55,7 +55,8 @@ int	clean_vars(t_shell *shell)
 		free(shell->vars[i]);
 		i++;
 	}
-	free(shell->vars);
+	if (shell->vars)
+		free(shell->vars);
 	return (i);
 }
 
@@ -69,5 +70,17 @@ int	clean_exports(t_shell *shell)
 		free(shell->exports[i++]);
 	}
 	free(shell->exports);
+	return (i);
+}
+
+int clean_envp(t_shell *shell)
+{
+	int i;
+
+	i = 0;
+	while (shell->envp && shell->envp[i])
+		free(shell->envp[i++]);
+	if (shell->envp)
+		free(shell->envp);
 	return (i);
 }

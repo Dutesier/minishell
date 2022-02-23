@@ -34,8 +34,8 @@ int	ft_unset(t_comm *ft_comm)
 		}
 		else if (var_set > -1)
 		{
-			ft_comm->shell->envp = rm_envp(ft_comm->shell->envp, ft_comm->shell->envp[where], ft_comm->shell->exports);
-			rm_var_from_vars(ft_comm->shell, ft_comm->args[i]);
+			ft_comm->shell->envp = rm_envp(ft_comm->shell->envp, ft_comm->shell->envp[where]);
+			rm_var_from_vars(ft_comm->shell, ft_comm->args[i]); // Will this not bug?
 		}
 	}
 	return (i);

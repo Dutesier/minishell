@@ -63,6 +63,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_atoi.c \
 				srcs/utils/ft_itoa.c \
 				srcs/utils/ft_dupnoq.c \
+				srcs/utils/dup_envp.c \
 	\
 				srcs/reader/get_line.c \
 	\

@@ -26,16 +26,47 @@ int	ft_export(t_comm *ft_comm)
 	{
 		var_set = var_is_set(ft_comm->shell, ft_comm->args[i]);
 		where = (int)var_set;
-		if (var_set - (float)where != 0.1)
+		if (var_set == -1.0) // var isnt set in envp or our vars
 		{
-			var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
+			if (!ft_comm->args[i + 1])
+				add_variable(ft_comm->shell,ft_comm->args[i], "");
+			else if (ft_comm->args[i+1][0] == '=' && ft_comm->args[i+1][1] == '\0')
+			{
+				add_variable(ft_comm->shell,ft_comm->args[i],ft_comm->args[i + 2]);
+				i +=3;
+			}
+			else
+			{
+				add_variable(ft_comm->shell,ft_comm->args[i], "");
+				i++;
+			}
+		}
+		else if (var_set - (float)where != 0.1) // Var is set in our vars
+		{
+			if (ft_comm->args[i+1] && ft_comm->args[i+1][0] == '=' && ft_comm->args[i+1][1] == '\0')
+			{
+				update_var(ft_comm->shell, ft_comm->args[i], ft_comm->args[i+2], var_set);
+				var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
+				i += 3;
+			}
+			else
+				var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i++]);
 			if (var)
 			{
 				ft_comm->shell->envp = add_envp(ft_comm->shell->envp, var);
-				exports_log(ft_comm->shell, var);
+	
 			}
 		}
-		i++;
+		else // we need to update the var in shell envp
+		{
+			if (ft_comm->args[i+1] && ft_comm->args[i+1][0] == '=' && ft_comm->args[i+1][1] == '\0')
+			{
+				change_envp(ft_comm->shell->envp, where,ft_comm->args[i + 2]);
+				i += 3;
+			}
+			else
+				i++;
+		}
 	}
 	return (0);
 }
@@ -105,28 +136,39 @@ void	print_sorted_env(char **sorted_env)
 int	get_next_lowest_env(char **sorted_env, t_comm *ft_comm)
 {
 	int	i;
-	int	ret;
-	int	cmp;
+	int j;
 	int	lowest;
 
 	i = 0;
-	lowest = 420;
 	while (ft_comm->shell->envp[i])
-	{	
+	{
 		if (env_in_sorted(sorted_env, ft_comm->shell->envp[i]))
+		{
 			i++;
-		if (ft_comm->shell->envp[i][0] < lowest)
-		{
-			lowest = ft_comm->shell->envp[i][0];
-			ret = i;
+			continue ;
 		}
-		if (ft_comm->shell->envp[i][0] == lowest)
+		j = 0;
+		lowest = 1;
+		while (ft_comm->shell->envp[j])
 		{
-			cmp = my_strcmp(ft_comm->shell->envp[i], ft_comm->shell->envp[ret]);
-			if (cmp < 0)
-				ret = i;
+			if (i == j || env_in_sorted(sorted_env, ft_comm->shell->envp[j]))
+			{
+				j++;
+				continue ;
+			}
+			if (my_strcmp(ft_comm->shell->envp[i], ft_comm->shell->envp[j]) > 0)
+			{
+				lowest = 0;
+				break ;
+			}
+			j++;
 		}
-		i++;
+		if (lowest)
+		{
+			return (i);
+		}
+		else
+			i++;
 	}
-	return (ret);
+	return (-1);
 }
