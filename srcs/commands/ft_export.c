@@ -18,6 +18,7 @@ int	ft_export(t_comm *ft_comm)
 	float	var_set;
 	int		where;
 	int		i;
+	int		save;
 
 	i = 1;
 	if (!ft_comm->args[1])
@@ -26,19 +27,35 @@ int	ft_export(t_comm *ft_comm)
 	{
 		var_set = var_is_set(ft_comm->shell, ft_comm->args[i]);
 		where = (int)var_set;
+		save = i;
 		if (var_set == -1.0) // var isnt set in envp or our vars
 		{
 			if (!ft_comm->args[i + 1])
+			{
 				add_variable(ft_comm->shell,ft_comm->args[i], "");
+				i++;
+				//fprintf(stderr, "Export: 1\n");
+			}
 			else if (ft_comm->args[i+1][0] == '=' && ft_comm->args[i+1][1] == '\0')
 			{
 				add_variable(ft_comm->shell,ft_comm->args[i],ft_comm->args[i + 2]);
 				i +=3;
+				//fprintf(stderr, "Export: 2\n");
 			}
 			else
 			{
 				add_variable(ft_comm->shell,ft_comm->args[i], "");
 				i++;
+				//fprintf(stderr, "Export: 3\n");
+			}
+			var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[save]);
+			if (var)
+			{
+				//fprintf(stderr, "Export: Adding to envp\n");
+				ft_comm->shell->envp = add_envp(ft_comm->shell->envp, var);
+
+				if (!ft_comm->shell->envp)
+					fprintf(stderr, "Envp = null\n");
 			}
 		}
 		else if (var_set - (float)where != 0.1) // Var is set in our vars
@@ -48,13 +65,16 @@ int	ft_export(t_comm *ft_comm)
 				update_var(ft_comm->shell, ft_comm->args[i], ft_comm->args[i+2], var_set);
 				var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
 				i += 3;
+				//fprintf(stderr, "Export: 4\n");
 			}
 			else
 				var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i++]);
 			if (var)
 			{
 				ft_comm->shell->envp = add_envp(ft_comm->shell->envp, var);
-	
+				//fprintf(stderr, "Export: 5\n");
+				if (!ft_comm->shell->envp)
+					fprintf(stderr, "Envp = null\n");
 			}
 		}
 		else // we need to update the var in shell envp
@@ -63,6 +83,7 @@ int	ft_export(t_comm *ft_comm)
 			{
 				change_envp(ft_comm->shell->envp, where,ft_comm->args[i + 2]);
 				i += 3;
+				//fprintf(stderr, "Export: 6\n");
 			}
 			else
 				i++;

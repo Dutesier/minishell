@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+static void update_pwd(t_shell *shell);
+
 int	ft_cd(t_comm *ft_comm)
 {
 	int	i;
@@ -19,5 +21,28 @@ int	ft_cd(t_comm *ft_comm)
 	i = chdir(ft_comm->args[1]);
 	if (i == -1)
 		perror("Minishell: ");
+	update_pwd(ft_comm->shell);
 	return (i);
+}
+
+static void update_pwd(t_shell *shell)
+{
+	char	*pwd;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	if (!shell->envp || !shell->envp[i])
+		return ;
+	while (shell->envp[i] && ft_strcmp(shell->envp[i], "PWD", 3) == 0)
+		i++;
+    if (!shell->envp[i])
+        return ;
+	temp = getcwd(NULL, 0);
+	if (!temp)
+		return ;
+	pwd = ft_strjoin("PWD=", temp);
+	free(temp);
+	free(shell->envp[i]);
+	shell->envp[i] = pwd;
 }

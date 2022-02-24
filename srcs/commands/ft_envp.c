@@ -24,8 +24,11 @@ char	**add_envp(char **envp, char *add)
 	if (!new)
 		return (NULL);
 	i = 0;
-	while (envp[i++])
+	while (envp[i])
+	{
 		new[i] = envp[i];
+		i++;
+	}
 	new[i++] = add;
 	return (new);
 }
