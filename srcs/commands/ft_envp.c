@@ -24,13 +24,16 @@ char	**add_envp(char **envp, char *add)
 	if (!new)
 		return (NULL);
 	i = 0;
-	while (envp[i++])
+	while (envp[i])
+	{
 		new[i] = envp[i];
+		i++;
+	}
 	new[i++] = add;
 	return (new);
 }
 
-char	**rm_envp(char **envp, char *rm, char **exports)
+char	**rm_envp(char **envp, char *rm)
 {
 	int		i;
 	int		j;
@@ -51,9 +54,7 @@ char	**rm_envp(char **envp, char *rm, char **exports)
 	{
 		if (ft_strcmp_two(rm, envp[i]))
 		{
-			if (did_i_export(rm, exports))
-				free(envp[i]);
-			i++;
+			free(envp[i++]);
 		}
 		if (envp[i] == NULL)
 			break ;
@@ -141,7 +142,7 @@ void	rm_var_from_vars(t_shell *shell, char *var)
 	return ;
 }
 
-int	did_i_export(char *var, char **exports)
+/*int	did_i_export(char *var, char **exports)
 {
 	int	i;
 
@@ -152,5 +153,38 @@ int	did_i_export(char *var, char **exports)
 			return (1);
 		i++;
 	}
+	return (0);
+}*/
+
+int		change_envp(char **envp, int where, char *new_val)
+{
+	int i;
+	int j;
+	char *new_env;
+
+
+	i = 0;
+	j = 0;
+	if (!envp[where])
+		return (1);
+	while (envp[where][i] != '\0')
+	{
+		if (envp[where][i++] == '=')
+			break ;
+	}
+	new_env = malloc(sizeof(char) * (i + ft_strlen(new_val) + 1));
+	if (!new_env)
+		return (1);
+	while (j < i)
+	{
+		new_env[j] = envp[where][j];
+		j++;
+	}
+	j = 0;
+	while (new_val[j] != '\0')
+	{
+		new_env[i++] = new_val[j++];
+	}
+	new_env[i] = '\0';
 	return (0);
 }

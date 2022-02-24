@@ -86,4 +86,8 @@ int		ft_min(int a, int b);
 int		ft_atoi(const char *str);
 char		*ft_itoa(int n);
 
+char **dup_envp(char **envp);
+
+char *get_cwd(t_shell *shell);
+
 #endif

@@ -20,5 +20,6 @@ int	clean_ast(t_ast *ast);
 int clean_parser(t_par *par);
 int clean_lexer(t_lex *lex);
 int clean_tok(t_tok *tok);
+int clean_envp(t_shell *shell);
 
 #endif

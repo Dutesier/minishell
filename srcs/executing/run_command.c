@@ -70,7 +70,6 @@ int run_command(t_comm *comm)
 
 int run_ft_command(t_comm *ft_comm)
 {
-	printf("Entered run ft\n");
 	int sta;
 	int save_in;
 	int save_out;

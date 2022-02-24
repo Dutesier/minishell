@@ -57,10 +57,12 @@ int interactive_mode(t_shell *shell, char *argv[])
 	{
 		clean_vars(shell);
 	}
-	if (shell->exports)
+	if (shell->envp)
+		clean_envp(shell);
+	/*if (shell->exports)
 	{
 		clean_exports(shell);
-	}
+	}*/
 	return (ret);
 }
 
