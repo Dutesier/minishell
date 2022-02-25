@@ -36,13 +36,16 @@ static void update_pwd(t_shell *shell)
 		return ;
 	while (shell->envp[i] && ft_strcmp(shell->envp[i], "PWD", 3) == 0)
 		i++;
-    if (!shell->envp[i])
-        return ;
 	temp = getcwd(NULL, 0);
 	if (!temp)
 		return ;
 	pwd = ft_strjoin("PWD=", temp);
 	free(temp);
-	free(shell->envp[i]);
-	shell->envp[i] = pwd;
+	if (!shell->envp[i])
+		shell->envp = add_envp(shell->envp, pwd);
+	else
+	{
+		free(shell->envp[i]);
+		shell->envp[i] = pwd;
+	}
 }
