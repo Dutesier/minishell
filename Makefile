@@ -117,14 +117,16 @@ CFLAGS	=	-Wall -Wextra -Werror -pthread -g
 
 INCLUDES	= -I $(HEADERS)
 
-LIBS	=	-lreadline -lpanel -lncurses
+LIBS	=	-lreadline -lpanel -lncurses -L ~/.brew/opt/readline/lib
+
+INCLUDE_RL = -I ~/.brew/opt/readline/include 
 
 RM		=	rm -f
 
 $(DIR_O)/%.o: %.c
 			@mkdir -p $(DIR_O)
 			@mkdir -p $(SUB_DIR_O)
-			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+			$(CC) $(CFLAGS) $(INCLUDES) $(INCLUDE_RL) -o $@ -c $<
 
 $(NAME):	$(DEPS) $(OBJS)
 			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)

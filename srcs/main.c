@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/16 12:43:50 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:29:33 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,27 @@
  *
 */
 
-void	handle_sigtstp(int sig)
+void	handle_sig(int sig)
 {
 	char	*prompt;
 
 	prompt = "\033[0;34m$\033[0;37m ";
-	if (sig == SIGINT) // Signal handle for ^C
-		printf("\n%s", prompt);
-	else if (sig == SIGQUIT)
-		printf("\n%s", prompt);
+	
+	if (sig == SIGINT)
+	{
+	    printf("\n"); // Move to a new line
+    	rl_on_new_line(); // Regenerate the prompt on a newline
+    	rl_replace_line("", 0); // Clear the previous text
+    	rl_redisplay();
+	}
+	else if (sig == SIGKILL)
+	{
+		ft_putstr_fd("ctrl + D\n", 1);
+		ft_putstr_fd("\rQuit\n", 1);
+
+	}
+	// write(1, "Went through here\n", 19);
+	// printf("%d %s", sig, prompt);
 }
 
 void	init_shell(t_shell *shell, char **envp)
@@ -39,19 +51,17 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->loop = 0;
 	shell->last_exit = 0;
 	shell->envp = dup_envp(envp);
-	shell->line = NULL;
+	shell->line = 0;
 	shell->debug = 0;
 	shell->vars = NULL;
 	shell->exports = NULL;
 	shell->prompt = NULL;
-	shell->sa.sa_handler = &handle_sigtstp;
+	shell->sa.sa_handler = &handle_sig;
 	shell->sa.sa_flags = SA_RESTART;
 	shell->save_in = -1;
 	shell->save_out = -1;
 	shell->saved = 0;
 	init_termcaps(shell);
-	sigaction(SIGINT, &shell->sa, NULL);
-	sigaction(SIGQUIT, &shell->sa, NULL);
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -80,6 +90,8 @@ int	main(int argc, char *argv[], char **envp)
 	while (shell.loop)
 	{
 		canonical_off(&shell);
+		signal(SIGINT, handle_sig);
+		signal(SIGQUIT, SIG_IGN);
 		get_line(&shell);
 		if (shell.line != NULL)
 		{

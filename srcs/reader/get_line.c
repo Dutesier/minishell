@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:05:10 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/31 13:04:35 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:35:11 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	get_line(t_shell *shell)
 		free(shell->line);
 	}
 	add_exit_val_prompt(shell);
-	get_cwd(shell);
+	// get_cwd(shell);
 	shell->line = readline(shell->prompt);
 	if (shell->line && *shell->line)
 		add_history(shell->line);
 	else if (shell->line == NULL)
 	{
-		printf("quit\n");
+		printf("Quit\n\r");
 		shell->loop = 0;
 	}
 }

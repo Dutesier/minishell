@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:01:00 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/02/15 19:08:06 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:07:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	canonical_off(t_shell *shell)
 	shell->termcaps.new_term.c_iflag &= ~ECHO;
 	shell->termcaps.new_term.c_lflag &= ~ISIG;
 	shell->termcaps.new_term.c_lflag &= ~IEXTEN;
-	shell->termcaps.new_term.c_iflag &= ~IXON;
+	shell->termcaps.new_term.c_lflag &= ~IXON;
 	shell->termcaps.new_term.c_cc[VMIN] = 1;
 	shell->termcaps.new_term.c_cc[VTIME] = 0;
 	shell->termcaps.new_term.c_cc[VQUIT] = 1;
