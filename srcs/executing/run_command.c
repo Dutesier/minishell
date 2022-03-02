@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+static void	comm_sig(int sig)
+{
+	if (sig == SIGINT)
+	{
+	 	printf("\n");
+	}
+}
+
 int run_command(t_comm *comm)
 {
 	pid_t	pid;
@@ -28,6 +36,7 @@ int run_command(t_comm *comm)
 		fprintf(stderr,"********* FINISHED DEBUGGING *********\n");
 		fprintf(stderr,"%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
 	}
+	signal(SIGINT, comm_sig);
 	if (comm->is_ft)
 		return (run_ft_command(comm));
 	if (!comm->cmd)
