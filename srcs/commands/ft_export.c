@@ -38,8 +38,16 @@ int	ft_export(t_comm *ft_comm)
 			}
 			else if (ft_comm->args[i+1][0] == '=' && ft_comm->args[i+1][1] == '\0')
 			{
-				add_variable(ft_comm->shell,ft_comm->args[i],ft_comm->args[i + 2]);
-				i +=3;
+				if (!ft_comm->args[i + 2])
+				{
+					add_variable(ft_comm->shell,ft_comm->args[i], "");
+					i +=2;
+				}
+				else
+				{	
+					add_variable(ft_comm->shell,ft_comm->args[i],ft_comm->args[i + 2]);
+					i +=3;
+				}
 				//fprintf(stderr, "Export: 2\n");
 			}
 			else
