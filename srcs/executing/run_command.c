@@ -68,7 +68,7 @@ int run_command(t_comm *comm)
 	{
 		
 		waitpid(pid, &sta, 0);
-		DEBUG(fprintf(stderr, "Execve finished\n"));
+		DEBUG(fprintf(stderr, "**************Execve finished**************\n"));
 		sta = WEXITSTATUS(sta);
 		if (sta)
 			return (sta);

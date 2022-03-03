@@ -71,6 +71,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/interactive/interactive.c \
 				srcs/interactive/join_args.c \
 	\
+				srcs/initialization/init_shell.c \
+	\
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \
 				srcs/parser/parser_logic.c \
@@ -99,6 +101,7 @@ DEPS	=	includes/commands.h \
 			includes/executing.h \
 			includes/redirecting.h \
 			includes/interactive.h \
+			includes/initialization.h \
 			includes/utils.h \
 			includes/reader.h \
 			includes/parser.h \
@@ -132,9 +135,11 @@ $(NAME):	$(DEPS) $(OBJS)
 			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
 			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
 
-debug:	$(DEPS) $(OBJS)
-			$(CC) $(CFLAGS) -fsanitize=address $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
-			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
+
+debug:		INCLUDES += -DDEBUG_MODE
+debug:		CFLAGS = -Wall -Wextra -g -fsanitize=address
+debug:		fclean
+debug:		all
 
 all:		$(NAME)
 
@@ -149,4 +154,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re			
+.PHONY:		all clean fclean re

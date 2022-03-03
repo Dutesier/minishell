@@ -178,8 +178,6 @@ void init_comm_helper(t_comm *comm)
 	comm->cmd = NULL;
 	comm->outfile = NULL;
 	comm->heredoc = NULL;
-	comm->in = STDIN_FILENO;
-	comm->out = STDOUT_FILENO;
 	comm->redir = 0;
 
 	comm->piping = 0;

@@ -98,8 +98,6 @@ typedef struct s_comm
 	char	*infile;
 	char	*outfile;
 	char	*heredoc;
-	int		in;
-	int		out;
 	int		redir;
 
 	char	*cmd;
@@ -131,6 +129,18 @@ typedef struct s_termcaps
 	char			*set_cursor_begin;
 }				t_termcaps;
 
+typedef	struct s_io
+{
+	int		save_in;
+	int		save_out;
+	int		saved_in;
+	int		saved_out;
+	
+
+	int		current_in;
+	int		current_out;
+}				t_io;
+
 typedef struct	s_shell
 {
 	char		**envp;
@@ -145,9 +155,8 @@ typedef struct	s_shell
 	int			loop;
 	char		*prompt;
 	int			last_exit;
-	int		save_in;
-	int		save_out;
-	int		saved;
+
+	t_io		io;	
 
 }			t_shell;
 

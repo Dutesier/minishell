@@ -30,10 +30,10 @@ static int close_pipes(t_comm *comm)
 
 static int close_fds(t_comm *comm)
 {
-	if (comm->in)
-		close(comm->in);
-	if (comm->out)
-		close(comm->out);
+	if (comm->shell->io.current_in != STDIN_FILENO)
+		close(comm->shell->io.current_in);
+	if (comm->shell->io.current_out != STDOUT_FILENO)
+		close(comm->shell->io.current_out);
 	return (0);
 }
 

@@ -12,93 +12,131 @@
 
 #include "minishell.h"
 
-static void save_std_io(t_comm *comm);
-
 int set_in_and_out(t_comm *comm)
 {
-	char *h;
+	char	*h;
+	int		reset_in;
+	int		reset_out;
 
-	save_std_io(comm);
-	reset_std_io(comm, 1, 1);
+	DEBUG(fprintf(stderr, "Setting pipes: Piping (%i)\n", comm->piping));
+	//save_std_io(comm->shell);
+	//reset_std_io(comm->shell, 1, 1);
+	reset_in = 1;
+	reset_out = 1;
+	if (comm->piping == 1 || comm->piping == 3)
+	{
+		save_std_io(comm->shell, 1, 0);
+		reset_in = 0;
+	}
+	if (comm->piping == 2 || comm->piping == 3)
+	{
+		save_std_io(comm->shell, 0, 1);
+		reset_out = 0;
+	}
 	if (comm->piping)
 		if (set_pipes(comm, comm->my_pipe))
 			return (1);
+	
 	DEBUG(fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir));
 	while (comm->redir > 0)
 	{
 		if (comm->redir % 10 == 2)
 		{
-			comm->in = change_in(comm->in, comm->infile, comm->redir % 10);
-			if (comm->in < 0)
-				return (1);
+			save_std_io(comm->shell, 1, 0);
+			comm->shell->io.current_in = change_in(comm->shell->io.current_in, comm->infile, comm->redir % 10);
+			reset_in = 0;
+			if (comm->shell->io.current_in < 0)
+				return (2);
 		}
 		else if (comm->redir % 10 == 1 || comm->redir % 10 == 3)
 		{
-			comm->out = change_out(comm->out, comm->outfile, comm->redir % 10);
-			if (comm->out < 0)
-				return (1);
+			save_std_io(comm->shell, 0, 1);
+			comm->shell->io.current_out = change_out(comm->shell->io.current_out, comm->outfile, comm->redir % 10);
+			reset_out = 0;
+			if (comm->shell->io.current_out < 0)
+				return (3);
 		}
 		else if (comm->redir % 10 == 4)
 		{
+			save_std_io(comm->shell, 1, 0);
 			h = ft_heredoc(comm);
-			comm->in = change_in(comm->in, h, comm->redir % 10);
+			comm->shell->io.current_in = change_in(comm->shell->io.current_in, h, comm->redir % 10);
 			free(h);
-			if (comm->in < 0)
-				return (1);
+			reset_in = 0;
+			if (comm->shell->io.current_in < 0)
+				return (4);
 		}
 		comm->redir = comm->redir / 10;
 	}
-	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->in, comm->out));
+	reset_std_io(comm->shell, reset_in, reset_out);
+	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->shell->io.current_in, comm->shell->io.current_out));
 	return (0);
 }
 
-int reset_std_io(t_comm *comm, int reset_in, int reset_out)
+int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 {
 	DEBUG(fprintf(stderr, "Resetting std io\n"));
 	if (reset_in)
 	{
-		if (comm->in != STDIN_FILENO)
+		if (shell->io.saved_in)
 		{
 			DEBUG(fprintf(stderr, "Resetting via dup2 STDIN_FILENO(%i)\n", STDIN_FILENO));
-			dup2(comm->shell->save_in, STDIN_FILENO);
-			DEBUG(fprintf(stderr, "Closing Comm->in: FD(%i)\n", comm->in));
-			close(comm->in);
+			dup2(shell->io.save_in, STDIN_FILENO);
+			if (shell->io.current_in != STDIN_FILENO)
+			{
+				DEBUG(fprintf(stderr, "Closing shell->io.current_in: FD(%i)\n", shell->io.current_in));
+				close(shell->io.current_in);
+			}
+			shell->io.saved_in = 1;
 		}
-		comm->in = STDIN_FILENO;
+		shell->io.current_in = STDIN_FILENO;
 	}
 	if (reset_out)
 	{
-		if (comm->out != STDOUT_FILENO)
+		if (shell->io.saved_out)
 		{
-			DEBUG(fprintf(stderr, "Closing comm->out: FD(%i)\n", comm->out));
-			close(comm->out);
 			DEBUG(fprintf(stderr, "Resetting via dup2 STDOUT_FILENO(%i)\n", STDOUT_FILENO));
-			dup2(comm->shell->save_out, STDOUT_FILENO);
+			dup2(shell->io.save_out, STDOUT_FILENO);
+			if (shell->io.current_out != STDOUT_FILENO)
+			{
+				DEBUG(fprintf(stderr, "Closing shell->io.current_out: FD(%i)\n", shell->io.current_out));
+				close(shell->io.current_out);
+			}
+			shell->io.saved_out = 0;
 		}
-		comm->out = STDOUT_FILENO;
+		shell->io.current_out = STDOUT_FILENO;
 	}
 	return (0);
 }
 
-static void save_std_io(t_comm *comm)
+void save_std_io(t_shell *shell, int in, int out)
 {
-	if (!comm->shell->saved)
+	if (!shell->io.saved_in && in)
 	{
-		comm->shell->save_in = dup(STDIN_FILENO);
-		comm->shell->save_out = dup(STDOUT_FILENO);
-		DEBUG(fprintf(stderr, "Saving (via dup) STDIN(%i) and STDOUT(%i)\n", comm->shell->save_in, comm->shell->save_out));
-		comm->shell->saved = 1;
+		shell->io.save_in = dup(STDIN_FILENO);
+		DEBUG(fprintf(stderr, "Saving (via dup) STDIN(%i)\n", shell->io.save_in));
+		shell->io.saved_in = 1;
+	}
+	if (!shell->io.saved_out && out)
+	{
+		shell->io.save_out = dup(STDOUT_FILENO);
+		DEBUG(fprintf(stderr, "Saving (via dup) STDOUT(%i)\n", shell->io.save_out));
+		shell->io.saved_out = 1;
 	}
 }
 
 void close_std_io_dups(t_shell *shell)
 {
-	if (shell->saved)
+	if (shell->io.saved_in)
 	{
-		close(shell->save_out);
-		DEBUG(fprintf(stderr, "Closing SavedOut: FD(%i)\n", shell->save_out));
-		close(shell->save_in);
-		DEBUG(fprintf(stderr, "Closing SavedIn: FD(%i)\n", shell->save_in));
-		shell->saved = 0;
+		close(shell->io.save_in);
+		DEBUG(fprintf(stderr, "Closing SavedIn: FD(%i)\n", shell->io.save_in));
+		shell->io.saved_in = 0;
+	}
+	if (shell->io.saved_out)
+	{
+		close(shell->io.save_out);
+		DEBUG(fprintf(stderr, "Closing SavedOut: FD(%i)\n", shell->io.save_out));
+		shell->io.saved_out = 0;
 	}
 }
