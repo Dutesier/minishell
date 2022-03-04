@@ -43,7 +43,9 @@ int set_in_and_out(t_comm *comm)
 		if (comm->redir % 10 == 2)
 		{
 			save_std_io(comm->shell, 1, 0);
-			comm->shell->io.current_in = change_in(comm->shell->io.current_in, comm->infile, comm->redir % 10);
+			if (comm->shell->io.current_in != STDIN_FILENO)
+				close(comm->shell->io.current_in);
+			comm->shell->io.current_in = change_in(STDIN_FILENO, comm->infile, comm->redir % 10);
 			reset_in = 0;
 			if (comm->shell->io.current_in < 0)
 				return (2);
@@ -51,7 +53,9 @@ int set_in_and_out(t_comm *comm)
 		else if (comm->redir % 10 == 1 || comm->redir % 10 == 3)
 		{
 			save_std_io(comm->shell, 0, 1);
-			comm->shell->io.current_out = change_out(comm->shell->io.current_out, comm->outfile, comm->redir % 10);
+			if (comm->shell->io.current_out != STDOUT_FILENO)
+				close(comm->shell->io.current_out);
+			comm->shell->io.current_out = change_out(STDOUT_FILENO, comm->outfile, comm->redir % 10);
 			reset_out = 0;
 			if (comm->shell->io.current_out < 0)
 				return (3);
@@ -59,12 +63,19 @@ int set_in_and_out(t_comm *comm)
 		else if (comm->redir % 10 == 4)
 		{
 			save_std_io(comm->shell, 1, 0);
+			reset_std_io(comm->shell, reset_in, reset_out);
 			h = ft_heredoc(comm);
-			comm->shell->io.current_in = change_in(comm->shell->io.current_in, h, comm->redir % 10);
+			if (comm->shell->io.current_in != STDIN_FILENO)
+				close(comm->shell->io.current_in);
+			comm->shell->io.current_in = change_in(STDIN_FILENO, h, comm->redir % 10);
 			free(h);
 			reset_in = 0;
 			if (comm->shell->io.current_in < 0)
+			{
+				DEBUG(fprintf(stderr, "Error with heredoc\n"));
 				return (4);
+			}
+			DEBUG(fprintf(stderr, "Done with heredoc\n"));
 		}
 		comm->redir = comm->redir / 10;
 	}

@@ -31,7 +31,8 @@ char *ft_heredoc(t_comm *comm)
 		return (0);
 	write(temp, str, ft_strlen(str) * sizeof(char));
 	free(str);
-	close(temp);
+	if (close(temp) < 0)
+		DEBUG(fprintf(stderr, "Could not close HEREDOC (%i)\n", temp));
 	return (t);
 }
 

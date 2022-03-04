@@ -109,6 +109,7 @@ int	run_comm_table(t_shell *shell)
 		}
 	}
 	reset_std_io(shell, 1, 1);
+	unlink(".mini.thd");
 	// close_std_io_dups(shell);
 	return (i);
 }
