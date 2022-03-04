@@ -20,7 +20,7 @@ int		set_in_and_out(t_comm *comm);
 int		reset_std_io(t_shell *shell, int reset_in, int reset_out);
 void    save_std_io(t_shell *shell, int in, int out);
 void	close_std_io_dups(t_shell *shell);
-int		set_pipes(t_comm *comm, int my_pipe[]);
+int		set_pipes(t_comm *comm);
 int		fd_closer(t_comm *comm);
 char	*ft_heredoc(t_comm *comm);
 

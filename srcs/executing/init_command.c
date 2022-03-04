@@ -182,9 +182,6 @@ void init_comm_helper(t_comm *comm)
 
 	comm->piping = 0;
 
-	comm->my_pipe[0] = -1;
-	comm->my_pipe[1] = -1;
-
 	comm->is_ft = 0;
 }
 

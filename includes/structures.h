@@ -110,7 +110,6 @@ typedef struct s_comm
 
 	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
 
-	int		my_pipe[2];
 
 	int		is_ft;
 }			t_comm;
@@ -135,6 +134,7 @@ typedef	struct s_io
 	int		save_out;
 	int		saved_in;
 	int		saved_out;
+	int		my_pipe[2];
 	
 
 	int		current_in;

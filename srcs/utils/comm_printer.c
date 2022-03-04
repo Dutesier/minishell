@@ -26,7 +26,7 @@ void comm_printer(t_comm *comm)
 	}
 	fprintf(stderr,"PIPING: %i\n", comm->piping);
 	fprintf(stderr,"IN: %s(%i)\nOUT: %s(%i)\n", comm->infile, comm->shell->io.current_in, comm->outfile, comm->shell->io.current_out);
-	fprintf(stderr,"PIPE[0]: (%i)\nPIPE[1]: (%i)\n", comm->my_pipe[0], comm->my_pipe[1]);
+	fprintf(stderr,"PIPE[0]: (%i)\nPIPE[1]: (%i)\n", comm->shell->io.my_pipe[0], comm->shell->io.my_pipe[1]);
 	fprintf(stderr,"IS_FT: (%i)\n", comm->is_ft);
 	fprintf(stderr,"%s\n", ft_color(WHT));
 }

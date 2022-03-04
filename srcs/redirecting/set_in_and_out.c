@@ -34,7 +34,7 @@ int set_in_and_out(t_comm *comm)
 		reset_out = 0;
 	}
 	if (comm->piping)
-		if (set_pipes(comm, comm->my_pipe))
+		if (set_pipes(comm))
 			return (1);
 	
 	DEBUG(fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir));
@@ -80,31 +80,31 @@ int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 	{
 		if (shell->io.saved_in)
 		{
-			DEBUG(fprintf(stderr, "Resetting via dup2 STDIN_FILENO(%i)\n", STDIN_FILENO));
+			DEBUG(fprintf(stderr, " - Resetting via dup2 STDIN_FILENO(%i)\n", STDIN_FILENO));
 			dup2(shell->io.save_in, STDIN_FILENO);
 			if (shell->io.current_in != STDIN_FILENO)
 			{
-				DEBUG(fprintf(stderr, "Closing shell->io.current_in: FD(%i)\n", shell->io.current_in));
+				DEBUG(fprintf(stderr, " -- Closing shell->io.current_in: FD(%i)\n", shell->io.current_in));
 				close(shell->io.current_in);
 			}
-			shell->io.saved_in = 1;
+			shell->io.saved_in = 0;
 		}
-		shell->io.current_in = STDIN_FILENO;
+		shell->io.current_in = shell->io.save_in;
 	}
 	if (reset_out)
 	{
 		if (shell->io.saved_out)
 		{
-			DEBUG(fprintf(stderr, "Resetting via dup2 STDOUT_FILENO(%i)\n", STDOUT_FILENO));
+			DEBUG(fprintf(stderr, " - Resetting via dup2 STDOUT_FILENO(%i)\n", STDOUT_FILENO));
 			dup2(shell->io.save_out, STDOUT_FILENO);
 			if (shell->io.current_out != STDOUT_FILENO)
 			{
-				DEBUG(fprintf(stderr, "Closing shell->io.current_out: FD(%i)\n", shell->io.current_out));
+				DEBUG(fprintf(stderr, " -- Closing shell->io.current_out: FD(%i)\n", shell->io.current_out));
 				close(shell->io.current_out);
 			}
 			shell->io.saved_out = 0;
 		}
-		shell->io.current_out = STDOUT_FILENO;
+		shell->io.current_out = shell->io.save_out;
 	}
 	return (0);
 }
