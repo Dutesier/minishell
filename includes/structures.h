@@ -86,6 +86,16 @@ typedef struct s_ast
 	
 }			t_ast;
 
+typedef	struct s_redir
+{
+	int	reads;
+	int	writes;
+	int	appends;
+	int	heredoc;
+
+	int ammount;
+}				t_redir;
+
 typedef struct s_comm
 {
 	enum
@@ -97,8 +107,9 @@ typedef struct s_comm
 
 	char	*infile;
 	char	*outfile;
-	char	*heredoc;
-	int		redir;
+	char	*heredoc_filename;
+	char	*heredoc_word;
+	t_redir	redir;
 
 	char	*cmd;
 	char	**args;

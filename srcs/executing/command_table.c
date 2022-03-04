@@ -94,7 +94,7 @@ int	run_comm_table(t_shell *shell)
 		{
 			if (shell->debug)
 			{
-				if (shell->commands[i]->redir == 1)
+				if (shell->commands[i]->redir.reads)
 					printf("%sVariable set%s \n", ft_color(BLU), ft_color(WHT));
 				else
 					printf("%sWarning: Either rewrote variable or variable couldn't be set%s \n", ft_color(RED), ft_color(WHT));
@@ -111,5 +111,6 @@ int	run_comm_table(t_shell *shell)
 	reset_std_io(shell, 1, 1);
 	unlink(".mini.thd");
 	// close_std_io_dups(shell);
+	DEBUG(fprintf(stderr, "Finished running command table\n"));
 	return (i);
 }

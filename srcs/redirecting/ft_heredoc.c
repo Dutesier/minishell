@@ -26,7 +26,7 @@ char *ft_heredoc(t_comm *comm)
 	temp = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (temp < 0)
 		return (0);
-	str = get_until(comm->heredoc);
+	str = get_until(comm->heredoc_word);
 	if (!str)
 		return (0);
 	write(temp, str, ft_strlen(str) * sizeof(char));
