@@ -68,6 +68,7 @@ int set_in_and_out(t_comm *comm)
 		}
 		comm->redir = comm->redir / 10;
 	}
+	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->shell->io.current_in, comm->shell->io.current_out));
 	reset_std_io(comm->shell, reset_in, reset_out);
 	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->shell->io.current_in, comm->shell->io.current_out));
 	return (0);
@@ -75,7 +76,7 @@ int set_in_and_out(t_comm *comm)
 
 int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 {
-	DEBUG(fprintf(stderr, "Resetting std io\n"));
+	DEBUG(fprintf(stderr, "Resetting STD-IO: IN %s OUT %s\n", reset_in ? "true":"false", reset_out ? "true" : "false"));
 	if (reset_in)
 	{
 		if (shell->io.saved_in)
@@ -87,9 +88,9 @@ int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 				DEBUG(fprintf(stderr, " -- Closing shell->io.current_in: FD(%i)\n", shell->io.current_in));
 				close(shell->io.current_in);
 			}
+			shell->io.current_in = shell->io.save_in;
 			shell->io.saved_in = 0;
 		}
-		shell->io.current_in = shell->io.save_in;
 	}
 	if (reset_out)
 	{
@@ -102,9 +103,9 @@ int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 				DEBUG(fprintf(stderr, " -- Closing shell->io.current_out: FD(%i)\n", shell->io.current_out));
 				close(shell->io.current_out);
 			}
+			shell->io.current_out = shell->io.save_out;
 			shell->io.saved_out = 0;
 		}
-		shell->io.current_out = shell->io.save_out;
 	}
 	return (0);
 }

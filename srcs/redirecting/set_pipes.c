@@ -28,7 +28,7 @@ int set_pipes(t_comm *comm)
 			close(comm->shell->io.current_in);
 			DEBUG(fprintf(stderr, "Closed (%i)\n", comm->shell->io.current_in));
 		}
-		if (dup2(comm->shell->io.my_pipe[0], STDIN_FILENO) , 0)
+		if (dup2(comm->shell->io.my_pipe[0], STDIN_FILENO) < 0)
 			return (print_error(IN_N_OUT_FAIL));
 		comm->shell->io.current_in = comm->shell->io.my_pipe[0];
 	}
@@ -57,13 +57,13 @@ int set_pipes(t_comm *comm)
 			close(comm->shell->io.current_out);
 			DEBUG(fprintf(stderr, "Closed (%i)\n", comm->shell->io.current_out));
 		}
-		if (pipe(comm->shell->io.my_pipe) < 0)
-			return (print_error(IN_N_OUT_FAIL));
 		if (dup2(comm->shell->io.my_pipe[0], STDIN_FILENO) < 0)
 			return (print_error(IN_N_OUT_FAIL) + fprintf(stderr, "comm->shell->io.my_pipe[0] = (%i)\n", comm->shell->io.my_pipe[0]));
+		comm->shell->io.current_in = comm->shell->io.my_pipe[0];
+		if (pipe(comm->shell->io.my_pipe) < 0)
+			return (print_error(IN_N_OUT_FAIL));
 		if (dup2(comm->shell->io.my_pipe[1], STDOUT_FILENO) < 0)
 			return (print_error(IN_N_OUT_FAIL) + fprintf(stderr, "comm->shell->io.my_pipe[1] = (%i)\n", comm->shell->io.my_pipe[1]));
-		comm->shell->io.current_in = comm->shell->io.my_pipe[0];
 		comm->shell->io.current_out = comm->shell->io.my_pipe[1];
 	}
 	return (0);
