@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:14:15 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/30 15:00:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:30:37 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char *ft_heredoc(t_comm *comm)
 	t = ft_strdup(".mini.thd");
 	if (!t)
 		return (0);
-	temp = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	temp = open(t, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (temp < 0)
 		return (0);
 	str = get_until(comm->heredoc_word);

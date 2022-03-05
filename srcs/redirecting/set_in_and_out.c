@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/14 19:33:22 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:42:45 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int set_in_and_out(t_comm *comm)
 	int		reset_in;
 	int		reset_out;
 
+	DEBUG(fprintf(stderr, "Entered set_in_and_out:\n"));
+	DEBUG(fprintf(stderr, "SaveIn (%s): %s%i%s\n", comm->shell->io.saved_in?"true":"false", ft_color(YEL), comm->shell->io.save_in, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "SaveOut (%s): %s%i%s\n", comm->shell->io.saved_out?"true":"false", ft_color(YEL), comm->shell->io.save_out, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Current In: %s%i%s\n", ft_color(YEL), comm->shell->io.current_in, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Current Out: %s%i%s\n", ft_color(YEL), comm->shell->io.current_out, ft_color(WHT)));
 	DEBUG(fprintf(stderr, "Setting pipes: Piping (%i)\n", comm->piping));
 	//save_std_io(comm->shell);
 	//reset_std_io(comm->shell, 1, 1);
@@ -37,6 +42,10 @@ int set_in_and_out(t_comm *comm)
 			return (1);
 	
 	DEBUG(fprintf(stderr,"Set pipes\nHandling redirections (%i)\n", comm->redir.ammount));
+	DEBUG(fprintf(stderr, "Writes: %s%i%s\n", ft_color(YEL), comm->redir.writes, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Reads: %s%i%s\n", ft_color(YEL), comm->redir.reads, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Appends: %s%i%s\n", ft_color(YEL), comm->redir.appends, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Heredoc: %s%i%s\n", ft_color(YEL), comm->redir.heredoc, ft_color(WHT)));
 	while (comm->redir.ammount > 0)
 	{
 		if (comm->redir.reads) // < 
@@ -77,7 +86,7 @@ int set_in_and_out(t_comm *comm)
 			save_std_io(comm->shell, 1, 0);
 			if (comm->shell->io.current_in != STDIN_FILENO)
 				close(comm->shell->io.current_in);
-			comm->shell->io.current_in = change_in(STDIN_FILENO, comm->heredoc_filename, comm->redir.reads);
+			comm->shell->io.current_in = change_in(STDIN_FILENO, comm->heredoc_filename, comm->redir.heredoc);
 			reset_in = 0;
 			if (comm->shell->io.current_in < 0)
 				return (4);
@@ -88,6 +97,11 @@ int set_in_and_out(t_comm *comm)
 	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->shell->io.current_in, comm->shell->io.current_out));
 	reset_std_io(comm->shell, reset_in, reset_out);
 	DEBUG(fprintf(stderr, "Reading from (%i) and writing to (%i)\n", comm->shell->io.current_in, comm->shell->io.current_out));
+	DEBUG(fprintf(stderr, "SaveIn (%s): %s%i%s\n", comm->shell->io.saved_in?"true":"false", ft_color(YEL), comm->shell->io.save_in, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "SaveOut (%s): %s%i%s\n", comm->shell->io.saved_out?"true":"false", ft_color(YEL), comm->shell->io.save_out, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Current In: %s%i%s\n", ft_color(YEL), comm->shell->io.current_in, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Current Out: %s%i%s\n", ft_color(YEL), comm->shell->io.current_out, ft_color(WHT)));
+
 	return (0);
 }
 
