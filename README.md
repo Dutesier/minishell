@@ -26,8 +26,8 @@ relative or absolute path)
  - Pipes 
    - [x]  "|". The output of each command in the pipeline is connected via a pipe to the
 	  input of the next command.
- - [ ]   Environment variables ($ followed by characters) should expand to their values.
- - [ ]   $? should expand to the exit status of the most recently executed foreground
+ - [x]   Environment variables ($ followed by characters) should expand to their values.
+ - [x]   $? should expand to the exit status of the most recently executed foreground
 	  pipeline.
  - [x]   ctrl-C ctrl-D ctrl-\ should work like in bash.
 - When interactive:
@@ -72,15 +72,15 @@ This project uses a makefile, so to run the program you can compile with ```make
 
 
 ### Know bugs
--- Tested onLinux --
-- [x] Shell hagsout when echo is written without quotes
-- [x] echo -n enters in a loop and would not exit
-- [x] exit -v enters in a loop and would not exit
-- [x] Typing 'echo "ls"' would produce the followint output Expanding quote\n --> ls command
+-- Tested on Linux & OSx --
+- [x] ~~Shell hangs when echo is written without quotes~~
+- [x] ~~echo -n enters in a loop and would not exit~~
+- [x] ~~exit -v enters in a loop and would not exit~~
+- [x] ~~Typing 'echo "ls"' would produce the following output Expanding quote\n --> ls command~~
 - [ ] Pressing tab without input written would try to autocomplete with the files in the directory
-- [x] ls works, ls -l doesn't. Shell enters in a loop and would not exit
-- [x] $? works, but it also prints "minishell: command not found:"
+- [x] ~~ls works, ls -l doesn't. Shell enters in a loop and would not exit~~
+- [x] ~~$? works, but it also prints "minishell: command not found:"~~
 - [ ] $? + $? prints minishell: command not found: X
-- [ ] After typing something and pressing CTRL + C a couple of times, it keeps saving the typed text in the buffer with the message "minishell: command not found:"
-- [ ] After typing the commnad "cat" without arguments the Shell enters in a loop and would not exit
-- [ ] export var=x do not export the var
+- [x] ~~After typing something and pressing CTRL + C a couple of times, it keeps saving the typed text in the buffer with the message "minishell: command not found:"~~
+- [x] ~~After typing the commnad "cat" without arguments the Shell enters in a loop and would not exit~~
+- [x] ~~export var=x doesn't export the var~~
