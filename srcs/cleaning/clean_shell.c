@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:42:07 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/15 18:23:33 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:44:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ int	clean_vars(t_shell *shell)
 	int	i;
 
 	i = 0;
-	while (shell->vars && shell->vars[i] != NULL)
+	while (shell->vars && (shell->vars[i] != NULL || i % 2 != 0))
 	{
-		free(shell->vars[i]);
+		if (shell->vars[i])
+			free(shell->vars[i]);
 		i++;
 	}
 	if (shell->vars)

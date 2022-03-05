@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/04 20:14:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:39:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int args_ammount(t_ast *command)
 	//printf("Entered args_ammount for ast branch %s \n", ast_to_str(command->e_type));
 	while (command && command->branches && command->branches[i] != NULL)
 	{
-		if (command->branches[i]->my_tok->e_type == TOK_WORD)
+		if (command->branches[i]->my_tok->e_type == TOK_WORD || command->branches[i]->my_tok->e_type == TOK_EQUALS)
 			if (command->branches[i]->my_tok->value != NULL)	
 				count++;
 		i++;
@@ -59,6 +59,7 @@ int store_args(t_comm *comm, t_ast *ast, int a)
 	i = 0;
 	ar = find_args_branch(ast);
 	comm->args = malloc(sizeof(char *) * (a + 1));
+	DEBUG(fprintf(stderr, "ARGS will have %i fields\n", a));
 	if (!comm->args)
 		return (1);
 	comm->args[x++] = ast->branches[find_cmd_branch(ast)]->my_tok->value;
@@ -146,6 +147,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (a > 1)
 	{
 		x = store_args(comm, ast, a);
+		DEBUG(fprintf(stderr, "Accessing field %i\n", x));
 		comm->args[x] = NULL;
 	}
 	else
@@ -178,6 +180,7 @@ void init_comm_helper(t_comm *comm)
 	comm->args = NULL;
 	comm->infile = NULL;
 	comm->cmd = NULL;
+	comm->unsorted_env = NULL;
 	comm->outfile = NULL;
 	comm->heredoc_word = NULL;
 	comm->heredoc_filename = NULL;

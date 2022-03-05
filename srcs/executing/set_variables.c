@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:24:28 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/22 17:33:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:44:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,31 @@ int add_variable(t_shell *shell, char *var, char *expands)
 		if (!shell->vars)
 			return (0); // or malloc error
 		shell->vars[0] = ft_strdup(var);
-		shell->vars[1] = ft_strdup(expands);
+		if (!expands)
+			shell->vars[1] = NULL;
+		else
+			shell->vars[1] = ft_strdup(expands);
 		shell->vars[2] = NULL;
 		return (1);
 	}
 
-	while (shell->vars[i] != NULL)
+	while (shell->vars[i] != NULL || i % 2 != 0)
 		i++;
 	temp = malloc(sizeof(char *) * (i + 3));
 	if (!temp)
 		return (0);
 
 	i = 0;
-	while (shell->vars[i] != NULL)
+	while (shell->vars[i] != NULL || i % 2 != 0)
 	{
 		temp[i] = shell->vars[i];
 		i++;
 	}
 	temp[i++] = ft_strdup(var);
-	temp[i++] = ft_strdup(expands);
+	if (!expands)
+		temp[i++] = NULL;
+	else
+		temp[i++] = ft_strdup(expands);
 	temp[i] = NULL;
 	if (shell->vars != NULL)
 		free(shell->vars);
@@ -87,7 +93,8 @@ int update_var(t_shell *shell, char *var, char *expands, float var_set)
 //	printf("updating variable %s where(%i) var_set(%f)\n", var, where, var_set);
 	if (var_set - (float)where == 0)
 	{
-		free(shell->vars[where + 1]);
+		if (shell->vars[where + 1])
+			free(shell->vars[where + 1]);
 		shell->vars[where + 1] = ft_strdup(expands);
 		if (!shell->vars[where + 1])
 			return (1);

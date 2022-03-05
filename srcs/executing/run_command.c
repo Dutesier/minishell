@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/14 16:19:27 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:10:47 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int exec_ft_comm(t_comm *ft_comm)
 	if (ft_comm->is_ft == 3)
 		return (ft_echo(ft_comm));
 	if (ft_comm->is_ft == 4)
-		return (ft_env(ft_comm, 0));
+		return (ft_env(ft_comm));
 	if (ft_comm->is_ft == 5)
 		return (ft_export(ft_comm));
 	if (ft_comm->is_ft == 6)
