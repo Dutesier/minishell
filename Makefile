@@ -23,6 +23,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/commands/ft_echo.c \
 				srcs/commands/ft_env.c \
 				srcs/commands/ft_export.c \
+				srcs/commands/ft_export_utils.c \
 				srcs/commands/ft_unset.c \
 				srcs/commands/ft_envp.c \
 				srcs/commands/ft_exit.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_envp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:16:14 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/15 18:51:43 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:55:07 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	**add_envp(char **envp, char *add)
 		i++;
 	}
 	new[i++] = add;
+	new[i] = NULL;
+	free(envp);
 	return (new);
 }
 
@@ -68,6 +70,7 @@ char	**rm_envp(char **envp, char *rm)
 		free(new);
 		return (envp);
 	}
+	free(envp);
 	return (new);
 }
 
@@ -88,6 +91,8 @@ char	*whole_var_from_vars(char **vars, char *var)
 	}
 	if (!vars[i])
 		return (NULL);
+	if (!vars[i + 1])
+		return (NULL);
 	temp = ft_strcat(vars[i], "=");
 	final = ft_strcat(temp, vars[i + 1]);
 	free(temp);
@@ -106,11 +111,11 @@ void	rm_var_from_vars(t_shell *shell, char *var)
 	var_set = 0;
 	if (!shell->vars || !shell->vars[i])
 		return ;
-	while (shell->vars[size] != NULL)
+	while (shell->vars[size] != NULL || size % 2 != 0)
 		size++;
 	if (size == 0)
 		return ;
-	while (shell->vars[i] != NULL)
+	while (shell->vars[i] != NULL || i % 2 != 0)
 	{
 		if (ft_strcmp_two(shell->vars[i], var))
 			var_set = 1;
@@ -125,12 +130,13 @@ void	rm_var_from_vars(t_shell *shell, char *var)
 		return ;
 	i = 0;
 	size = 0;
-	while (shell->vars[i] != NULL)
+	while (shell->vars[i] != NULL || i % 2 != 0)
 	{
 		if (ft_strcmp_two(shell->vars[i], var))
 		{
 			free(shell->vars[i++]);
-			free(shell->vars[i++]);
+			if (shell->vars[i++]) // Can sometimes be null
+				free(shell->vars[i]);
 		}
 		if (shell->vars[i])
 			temp[size++] = shell->vars[i++];

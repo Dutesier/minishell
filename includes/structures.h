@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 14:08:50 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 18:45:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_comm
 
 	char	*cmd;
 	char	**args;
+	char	**unsorted_env;
 
 	t_shell *shell;
 	// Should the two bellow be deleted

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:38:27 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/15 18:30:27 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/05 19:58:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	print_sorted_export(char **sorted_env);
 
 int	ft_export(t_comm *ft_comm)
 {
@@ -22,7 +24,7 @@ int	ft_export(t_comm *ft_comm)
 
 	i = 1;
 	if (!ft_comm->args[1])
-		return (ft_print_export(ft_comm, 0));
+		return (ft_print_export(ft_comm));
 	while (ft_comm->args[i])
 	{
 		var_set = var_is_set(ft_comm->shell, ft_comm->args[i]);
@@ -32,7 +34,7 @@ int	ft_export(t_comm *ft_comm)
 		{
 			if (!ft_comm->args[i + 1])
 			{
-				add_variable(ft_comm->shell,ft_comm->args[i], "");
+				add_variable(ft_comm->shell,ft_comm->args[i], NULL);
 				i++;
 				//fprintf(stderr, "Export: 1\n");
 			}
@@ -52,7 +54,7 @@ int	ft_export(t_comm *ft_comm)
 			}
 			else
 			{
-				add_variable(ft_comm->shell,ft_comm->args[i], "");
+				add_variable(ft_comm->shell,ft_comm->args[i], NULL);
 				i++;
 				//fprintf(stderr, "Export: 3\n");
 			}
@@ -101,30 +103,29 @@ int	ft_export(t_comm *ft_comm)
 }
 /*	return (ft_env(ft_comm, 1)); */
 
-int	ft_print_export(t_comm *ft_comm, int i)
+int	ft_print_export(t_comm *ft_comm)
 {
 	int		sorted;
 	int		next;
 	char	**sorted_env;
 	int		env_ammount;
 
-	while (ft_comm->shell->envp[i])
-		i++;
-	sorted_env = malloc(sizeof(char *) * (i + 1));
+	env_ammount = build_unsorted_env(ft_comm);
+	sorted_env = malloc(sizeof(char *) * (env_ammount + 1));
 	if (!sorted_env)
-		return (0);
+		return (print_error(MEMORY_FAIL));
 	sorted_env[0] = NULL;
 	sorted = 0;
-	env_ammount = i;
 	while (sorted < env_ammount)
 	{
-		next = get_next_lowest_env(sorted_env, ft_comm);
-		sorted_env[sorted++] = ft_comm->shell->envp[next];
+		next = get_next_lowest_env(sorted_env, ft_comm->unsorted_env);
+		sorted_env[sorted++] = ft_comm->unsorted_env[next];
 		sorted_env[sorted] = NULL;
 	}
-	print_sorted_env(sorted_env);
+	print_sorted_export(sorted_env);
 	free(sorted_env);
-	return (sorted);
+	free(ft_comm->unsorted_env);
+	return (0);
 }
 
 int	env_in_sorted(char **sorted_env, char *env)
@@ -141,7 +142,7 @@ int	env_in_sorted(char **sorted_env, char *env)
 	return (0);
 }
 
-void	print_sorted_env(char **sorted_env)
+static void	print_sorted_export(char **sorted_env)
 {
 	int	i;
 	int	j;
@@ -151,8 +152,14 @@ void	print_sorted_env(char **sorted_env)
 	{
 		printf("declare -x ");
 		j = 0;
-		while (sorted_env[i][j] != '=')
+		while (sorted_env[i][j] != '=' && sorted_env[i][j] != '\0')
 			printf("%c", sorted_env[i][j++]);
+		if (sorted_env[i][j] == '\0')
+		{
+			i++;
+			printf("\n");
+			continue ;
+		}
 		printf("%c", sorted_env[i][j++]);
 		printf("\"");
 		while (sorted_env[i][j] != '\0')
@@ -162,30 +169,30 @@ void	print_sorted_env(char **sorted_env)
 	}
 }
 
-int	get_next_lowest_env(char **sorted_env, t_comm *ft_comm)
+int	get_next_lowest_env(char **sorted_env, char **unsorted)
 {
 	int	i;
 	int j;
 	int	lowest;
 
 	i = 0;
-	while (ft_comm->shell->envp[i])
+	while (unsorted[i])
 	{
-		if (env_in_sorted(sorted_env, ft_comm->shell->envp[i]))
+		if (env_in_sorted(sorted_env, unsorted[i]))
 		{
 			i++;
 			continue ;
 		}
 		j = 0;
 		lowest = 1;
-		while (ft_comm->shell->envp[j])
+		while (unsorted[j])
 		{
-			if (i == j || env_in_sorted(sorted_env, ft_comm->shell->envp[j]))
+			if (i == j || env_in_sorted(sorted_env, unsorted[j]))
 			{
 				j++;
 				continue ;
 			}
-			if (my_strcmp(ft_comm->shell->envp[i], ft_comm->shell->envp[j]) > 0)
+			if (my_strcmp(unsorted[i], unsorted[j]) > 0)
 			{
 				lowest = 0;
 				break ;
