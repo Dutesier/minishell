@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 13:42:45 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:01:38 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ int set_in_and_out(t_comm *comm)
 	DEBUG(fprintf(stderr, "Reads: %s%i%s\n", ft_color(YEL), comm->redir.reads, ft_color(WHT)));
 	DEBUG(fprintf(stderr, "Appends: %s%i%s\n", ft_color(YEL), comm->redir.appends, ft_color(WHT)));
 	DEBUG(fprintf(stderr, "Heredoc: %s%i%s\n", ft_color(YEL), comm->redir.heredoc, ft_color(WHT)));
+	if (comm->redir.reads || comm->redir.heredoc)
+		save_std_io(comm->shell, 1, 0);
+	if (comm->redir.appends || comm->redir.writes)
+		save_std_io(comm->shell, 0, 1);
 	while (comm->redir.ammount > 0)
 	{
 		if (comm->redir.reads) // < 
 		{
-			save_std_io(comm->shell, 1, 0);
 			if (comm->shell->io.current_in != STDIN_FILENO)
 				close(comm->shell->io.current_in);
 			comm->shell->io.current_in = change_in(STDIN_FILENO, comm->infile, comm->redir.reads);
@@ -61,7 +64,6 @@ int set_in_and_out(t_comm *comm)
 		}
 		else if (comm->redir.writes) // >
 		{
-			save_std_io(comm->shell, 0, 1);
 			if (comm->shell->io.current_out != STDOUT_FILENO)
 				close(comm->shell->io.current_out);
 			comm->shell->io.current_out = change_out(STDOUT_FILENO, comm->outfile, comm->redir.writes);
@@ -72,7 +74,6 @@ int set_in_and_out(t_comm *comm)
 		}
 		else if (comm->redir.appends) //  >>
 		{
-			save_std_io(comm->shell, 0, 1);
 			if (comm->shell->io.current_out != STDOUT_FILENO)
 				close(comm->shell->io.current_out);
 			comm->shell->io.current_out = change_out(STDOUT_FILENO, comm->outfile, comm->redir.appends);
@@ -83,7 +84,6 @@ int set_in_and_out(t_comm *comm)
 		}
 		else if (comm->redir.heredoc) // HEREDOC ( << )
 		{
-			save_std_io(comm->shell, 1, 0);
 			if (comm->shell->io.current_in != STDIN_FILENO)
 				close(comm->shell->io.current_in);
 			comm->shell->io.current_in = change_in(STDIN_FILENO, comm->heredoc_filename, comm->redir.heredoc);
