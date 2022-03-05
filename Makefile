@@ -31,6 +31,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/run_command.c \
 				srcs/executing/init_command.c \
 				srcs/executing/init_command_utils.c \
+				srcs/executing/init_command_utils_two.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
 				srcs/executing/set_variables.c \

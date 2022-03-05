@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 17:01:15 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:08:50 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ typedef	struct s_redir
 	int	heredoc;
 
 	int ammount;
+	int read_ammount;
+	int	write_ammount;
+	int	append_ammount;
+	int heredoc_ammount;
 }				t_redir;
 
 typedef struct s_comm

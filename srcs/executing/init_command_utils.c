@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:25:55 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/16 19:18:53 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:12:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,28 @@ int init_comm_redir(t_comm *comm, t_ast *ast, int r)
 		if (b->branches[i]->my_tok->e_type == TOK_GT)
 		{
 			comm->redir.writes = 1;
+			comm->redir.write_ammount++;
 			comm->redir.ammount++;
 			config_redir(comm, b, comm->redir.writes);
 		}
 		else if (b->branches[i]->my_tok->e_type == TOK_LT)
 		{
 			comm->redir.reads = 2;
+			comm->redir.read_ammount++;
 			comm->redir.ammount++;
 			config_redir(comm, b, comm->redir.reads);
 		}
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_RIGHT)
 		{
 			comm->redir.appends = 3;
+			comm->redir.append_ammount++;
 			comm->redir.ammount++;
 			config_redir(comm, b, comm->redir.appends);
 		}
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_LEFT)
 		{
 			comm->redir.heredoc = 4;
+			comm->redir.heredoc_ammount++;
 			comm->redir.ammount++;
 			config_redir(comm, b, comm->redir.heredoc);
 		}
@@ -111,6 +115,7 @@ int find_redir_branch(t_ast *ast)
 	}
 	if (nor == -1)
 		return (-1);
+	count = invert_count(count);
 	return (count);
 }
 
