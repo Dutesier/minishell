@@ -49,5 +49,6 @@
 # include "parser.h"
 # include "canonical.h"
 # include "interactive.h"
+# include "initialization.h"
 
 #endif

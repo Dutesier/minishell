@@ -25,11 +25,10 @@ void	ft_exit(t_comm *ft_comm)
 		clean_envp(ft_comm->shell);
 	/*if (ft_comm->shell->exports)
 		clean_exports(ft_comm->shell);*/
-	clean_shell(ft_comm->shell);
 	if (ft_comm->shell->loop)
 		clear_history();
-	unlink(".mini.thd");
 	if (ft_comm->shell->loop)
 		write(1, "exit\n", 6);
+	clean_shell(ft_comm->shell);
 	exit(ex);
 }

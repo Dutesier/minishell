@@ -26,9 +26,9 @@ t_par *init_parser(t_lex *lex)
 
 t_tok *parser_next(t_par *par, unsigned int type)
 {
-	DEBUG(fprintf(stderr, "Previous Token: [%s] (%s)\nGetting next token...\n", tok_to_str(par->tok->e_type), par->tok->value));
+	//DEBUG(fprintf(stderr, "Previous Token: [%s] (%s)\nGetting next token...\n", tok_to_str(par->tok->e_type), par->tok->value));
 	par->tok = next_token(par->lex);
-	DEBUG(fprintf(stderr, "New Token: [%s] (%s)\n", tok_to_str(par->tok->e_type), par->tok->value));
+	//DEBUG(fprintf(stderr, "New Token: [%s] (%s)\n", tok_to_str(par->tok->e_type), par->tok->value));
 	if (par->tok->e_type != type && type != 42)
 	{
 		return (NULL);

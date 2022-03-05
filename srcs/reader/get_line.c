@@ -38,12 +38,18 @@ static void add_exit_val_prompt(t_shell *shell)
 	char	*new_prompt;
 	char	*exit_val;
 	char	*exit_stat;
+	char 	*color;
 
 	add_cwd_prompt(shell);
+	color = ft_color(GRN);
+	if (shell->last_exit)
+		color = ft_color(RED);
 	exit_stat = ft_itoa(shell->last_exit);
 	exit_val = ft_strjoin(exit_stat, ") \033[0;34m$\033[0;37m ");
 	free(exit_stat);
-	new_prompt = ft_strjoin("\033[0;32m(", exit_val);
+	color = ft_strjoin(color, "(");
+	new_prompt = ft_strjoin(color, exit_val);
+	free(color);
 	free(exit_val);
 	exit_val = ft_strjoin(shell->prompt, new_prompt);
 	free(new_prompt);

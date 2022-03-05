@@ -33,8 +33,10 @@ int	clean_shell(t_shell *shell)
 			free(shell->commands[i]->infile);
 		if (shell->commands[i]->outfile)
 			free(shell->commands[i]->outfile);
-		if (shell->commands[i]->heredoc)
-			free(shell->commands[i]->heredoc);
+		if (shell->commands[i]->heredoc_filename)
+			free(shell->commands[i]->heredoc_filename);
+		if (shell->commands[i]->heredoc_word)
+			free (shell->commands[i]->heredoc_word);
 		free(shell->commands[i]);
 		i++;
 	}

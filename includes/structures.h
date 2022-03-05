@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/12 17:01:15 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:08:50 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,20 @@ typedef struct s_ast
 	
 }			t_ast;
 
+typedef	struct s_redir
+{
+	int	reads;
+	int	writes;
+	int	appends;
+	int	heredoc;
+
+	int ammount;
+	int read_ammount;
+	int	write_ammount;
+	int	append_ammount;
+	int heredoc_ammount;
+}				t_redir;
+
 typedef struct s_comm
 {
 	enum
@@ -97,10 +111,9 @@ typedef struct s_comm
 
 	char	*infile;
 	char	*outfile;
-	char	*heredoc;
-	int		in;
-	int		out;
-	int		redir;
+	char	*heredoc_filename;
+	char	*heredoc_word;
+	t_redir	redir;
 
 	char	*cmd;
 	char	**args;
@@ -112,7 +125,6 @@ typedef struct s_comm
 
 	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
 
-	int		my_pipe[2];
 
 	int		is_ft;
 }			t_comm;
@@ -131,6 +143,19 @@ typedef struct s_termcaps
 	char			*set_cursor_begin;
 }				t_termcaps;
 
+typedef	struct s_io
+{
+	int		save_in;
+	int		save_out;
+	int		saved_in;
+	int		saved_out;
+	int		my_pipe[2];
+	
+
+	int		current_in;
+	int		current_out;
+}				t_io;
+
 typedef struct	s_shell
 {
 	char		**envp;
@@ -145,9 +170,8 @@ typedef struct	s_shell
 	int			loop;
 	char		*prompt;
 	int			last_exit;
-	int		save_in;
-	int		save_out;
-	int		saved;
+
+	t_io		io;	
 
 }			t_shell;
 

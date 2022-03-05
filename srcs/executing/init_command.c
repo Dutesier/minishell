@@ -126,7 +126,7 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (find_var_branch(ast) != -1)
 	{
 		comm->e_type = VAR_DEF;
-		comm->redir = set_variable(shell, ast);
+		set_variable(shell, ast);
 		return (comm);
 	}
 	else
@@ -168,6 +168,8 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (red == 0)
 			red = -1;
 	}
+	if (comm->redir.ammount < 0)
+		return (NULL); // FIXME: Not clean exit
 	return (comm);
 }
 
@@ -177,15 +179,15 @@ void init_comm_helper(t_comm *comm)
 	comm->infile = NULL;
 	comm->cmd = NULL;
 	comm->outfile = NULL;
-	comm->heredoc = NULL;
-	comm->in = STDIN_FILENO;
-	comm->out = STDOUT_FILENO;
-	comm->redir = 0;
+	comm->heredoc_word = NULL;
+	comm->heredoc_filename = NULL;
+	comm->redir.ammount = 0;
+	comm->redir.reads = 0;
+	comm->redir.writes = 0;
+	comm->redir.appends = 0;
+	comm->redir.heredoc = 0;
 
 	comm->piping = 0;
-
-	comm->my_pipe[0] = -1;
-	comm->my_pipe[1] = -1;
 
 	comm->is_ft = 0;
 }
