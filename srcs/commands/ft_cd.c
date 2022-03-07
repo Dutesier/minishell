@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void update_pwd(t_shell *shell);
+static void	update_pwd(t_shell *shell);
 
 int	ft_cd(t_comm *ft_comm)
 {
@@ -25,7 +25,7 @@ int	ft_cd(t_comm *ft_comm)
 	return (i);
 }
 
-static void update_pwd(t_shell *shell)
+static void	update_pwd(t_shell *shell)
 {
 	char	*pwd;
 	char	*temp;

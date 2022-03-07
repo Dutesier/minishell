@@ -13,8 +13,8 @@
 #ifndef INTERACTIVE_H
 # define INTERACTIVE_H
 
-char *join_args(char **argv, int argc);
-int interactive_mode(t_shell *shell, char *argv[]);
-char *format_interactive_line(char *line);
+char	*join_args(char **argv, int argc);
+int		interactive_mode(t_shell *shell, char *argv[]);
+char	*format_interactive_line(char *line);
 
 #endif

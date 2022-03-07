@@ -20,9 +20,7 @@ char	**add_envp(char **envp, char *add)
 	i = 0;
 	while (envp[i])
 		i++;
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		return (NULL);
+	new = malloc_or_exit(sizeof(char *) * (i + 2));
 	i = 0;
 	while (envp[i])
 	{
@@ -35,34 +33,22 @@ char	**add_envp(char **envp, char *add)
 	return (new);
 }
 
-char	**rm_envp(char **envp, char *rm)
+char	**rm_envp(char **envp, char *rm, int i, int l)
 {
-	int		i;
 	int		j;
-	int		l;
 	char	**new;
 
-	i = 0;
-	j = 0;
-	l = 0;
-	if (!envp || !envp[j])
+	if (!envp || !envp[0])
 		return (NULL);
-	while (envp[j])
-		j++;
-	new = malloc(sizeof(char *) * (j));
-	if (!new)
-		return (NULL);
+	j = nta_size(envp);
+	new = malloc_or_exit(sizeof(char *) * (j));
 	while (envp[i])
 	{
 		if (ft_strcmp_two(rm, envp[i]))
-		{
 			free(envp[i++]);
-		}
 		if (envp[i] == NULL)
 			break ;
-		new[l] = envp[i];
-		i++;
-		l++;
+		new[l++] = envp[i++];
 	}
 	new[l] = NULL;
 	if (i == l)
@@ -104,7 +90,6 @@ void	rm_var_from_vars(t_shell *shell, char *var)
 	int		i;
 	int		size;
 	int		var_set;
-	char	**temp;
 
 	i = 0;
 	size = 0;
@@ -122,65 +107,22 @@ void	rm_var_from_vars(t_shell *shell, char *var)
 		i++;
 	}
 	if (!var_set)
-	{
 		return ;
-	}
-	temp = malloc(sizeof(char *) * (size - 1));
-	if (!temp)
-		return ;
-	i = 0;
-	size = 0;
-	while (shell->vars[i] != NULL || i % 2 != 0)
-	{
-		if (ft_strcmp_two(shell->vars[i], var))
-		{
-			free(shell->vars[i++]);
-			if (shell->vars[i++]) // Can sometimes be null
-				free(shell->vars[i]);
-		}
-		if (shell->vars[i])
-			temp[size++] = shell->vars[i++];
-	}
-	temp[size] = NULL;
-	if (shell->vars)
-		free(shell->vars);
-	shell->vars = temp;
-	return ;
+	rm_var(shell, var, size);
 }
 
-/*int	did_i_export(char *var, char **exports)
+int	change_envp(char **envp, int where, char *new_val)
 {
-	int	i;
-
-	i = 0;
-	while (exports && exports[i] != NULL)
-	{
-		if (ft_strcmp_two(var, exports[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}*/
-
-int		change_envp(char **envp, int where, char *new_val)
-{
-	int i;
-	int j;
-	char *new_env;
-
+	int		i;
+	int		j;
+	char	*new_env;
 
 	i = 0;
 	j = 0;
 	if (!envp[where])
 		return (1);
-	while (envp[where][i] != '\0')
-	{
-		if (envp[where][i++] == '=')
-			break ;
-	}
-	new_env = malloc(sizeof(char) * (i + ft_strlen(new_val) + 1));
-	if (!new_env)
-		return (1);
+	i = find_next_eq(envp[where]);
+	new_env = malloc_or_exit(sizeof(char) * (i + ft_strlen(new_val) + 1));
 	while (j < i)
 	{
 		new_env[j] = envp[where][j];

@@ -24,8 +24,10 @@ SRCS 		:=	srcs/main.c \
 				srcs/commands/ft_env.c \
 				srcs/commands/ft_export.c \
 				srcs/commands/ft_export_utils.c \
+				srcs/commands/ft_export_utils_two.c \
 				srcs/commands/ft_unset.c \
 				srcs/commands/ft_envp.c \
+				srcs/commands/ft_envp_utils.c \
 				srcs/commands/ft_exit.c \
 	\
 				srcs/executing/find_path.c \
@@ -67,6 +69,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_dupnoq.c \
 				srcs/utils/dup_envp.c \
 				srcs/utils/find_cwd.c \
+				srcs/utils/malloc_or_exit.c \
+				srcs/utils/null_terminated_arrays.c \
 	\
 				srcs/reader/get_line.c \
 	\
@@ -113,7 +117,7 @@ DEPS	=	includes/commands.h \
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -g
+CFLAGS	=	-Wall -Wextra -Werror -pthread -g -fsanitize=address
 #CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
 #CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
 #CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow

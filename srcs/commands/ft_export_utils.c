@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-static void add_all_unsorted(t_comm *ft_comm);
+static void	add_all_unsorted(t_comm *ft_comm);
 
-int build_unsorted_env(t_comm *ft_comm)
+int	build_unsorted_env(t_comm *ft_comm)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		failed_exp;
 	char	**unsorted_env;
 
@@ -29,17 +29,17 @@ int build_unsorted_env(t_comm *ft_comm)
 	return (i + failed_exp);
 }
 
-static void add_all_unsorted(t_comm *ft_comm)
+static void	add_all_unsorted(t_comm *ft_comm)
 {
-	int i;
+	int	i;
 	int	j;
-	int l;
-	
+	int	l;
+
 	i = 0;
 	j = 0;
 	l = 0;
 	while (ft_comm->shell->envp[i])
-		ft_comm->unsorted_env[l++] = ft_comm->shell->envp[i++]; 
+		ft_comm->unsorted_env[l++] = ft_comm->shell->envp[i++];
 	while (ft_comm->shell->vars && (ft_comm->shell->vars[j] || j % 2 != 0))
 	{
 		if (!ft_comm->shell->vars[j])

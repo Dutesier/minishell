@@ -21,6 +21,7 @@
 #  define MAX_PATH 1024
 # endif
 
+// We need to delete this for norminette
 # ifdef DEBUG_MODE
 #  define DEBUG(x) x
 # else

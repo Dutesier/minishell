@@ -13,8 +13,6 @@
 #ifndef READER_H
 # define READER_H
 
-// char *get_line(const char *prompt, char *line_read);
-void get_line(t_shell *shell);
-
+void	get_line(t_shell *shell);
 
 #endif

@@ -23,8 +23,6 @@ void	ft_exit(t_comm *ft_comm)
 		clean_vars(ft_comm->shell);
 	if (ft_comm->shell->envp)
 		clean_envp(ft_comm->shell);
-	/*if (ft_comm->shell->exports)
-		clean_exports(ft_comm->shell);*/
 	if (ft_comm->shell->loop)
 		clear_history();
 	if (ft_comm->shell->loop)

@@ -38,13 +38,8 @@ int	ft_echo(t_comm *ft_comm)
 		if (ft_comm->args[i])
 			printf(" ");
 	}
-	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	if (n == 0)
-	{
-		DEBUG(fprintf(stderr, "Printing a nl\n"));	
 		printf("%c", '\n');
-		DEBUG(fprintf(stderr,"Printed a nl\n"));	
-	}
 	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	return (0);
 }

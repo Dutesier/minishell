@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CANONICAL_H
-#  define CANONICAL_H
+#ifndef CANONICAL_H
+# define CANONICAL_H
 
 # include "minishell.h"
 
@@ -20,9 +20,7 @@ void	canonical_off(t_shell *shell);
 void	handle_error(t_shell *shell, int exit_code);
 void	init_termcaps(t_shell *shell);
 char	*ft_find_value_from_key(char *str, char *envp[]);
-int 	capabilities(t_termcaps *termcaps);
+int		capabilities(t_termcaps *termcaps);
 void	termcaps_to_null(t_termcaps *termcaps);
 
-
-# endif
-
+#endif

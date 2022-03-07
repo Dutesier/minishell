@@ -51,8 +51,7 @@ char	*ft_substr(char *str, int start, int ammount);
 char	*ft_strcat(char *str, char *append);
 char	*ft_color(unsigned int color);
 void	change_color(unsigned int color);
-//char	*ft_dupnoq(char *s);
-int 	ft_putint(int c);
+int		ft_putint(int c);
 char	*ft_strjoin(char *s1, char *s2);
 
 // Error printing
@@ -84,10 +83,15 @@ int		get_quote(t_lex *lex, char q);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 int		ft_atoi(const char *str);
-char		*ft_itoa(int n);
+char	*ft_itoa(int n);
 
-char **dup_envp(char **envp);
+char	**dup_envp(char **envp);
 
-char *get_cwd(t_shell *shell);
+char	*get_cwd(t_shell *shell);
+
+int		nta_size(char **array);
+int		nta_on_even_size(char **array);
+
+void	*malloc_or_exit(size_t size);
 
 #endif

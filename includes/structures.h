@@ -13,7 +13,7 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 typedef struct s_tok
 {
 	char	*value;
@@ -42,27 +42,25 @@ typedef struct s_tok
 		TOK_DQUOTED,
 		TOK_ERROR,
 		TOK_EOL
-
 	} e_type;
-
 }				t_tok;
 
 typedef struct s_lex
 {
-	int i;
-	char c;
-	char *src;
-	int size;
-	int q;
+	int		i;
+	char	c;
+	char	*src;
+	int		size;
+	int		q;
 }			t_lex;
 
 typedef struct s_par
 {
-	t_lex *lex;
-	t_tok *tok;
+	t_lex	*lex;
+	t_tok	*tok;
 }			t_par;
 
-typedef struct s_ast t_ast;
+typedef struct s_ast	t_ast;
 
 typedef struct s_ast
 {
@@ -79,25 +77,22 @@ typedef struct s_ast
 		AST_DELIMITER,
 		AST_WORD,
 		AST_NULL
-	} e_type;
-
-	t_ast **branches;
-	t_tok *my_tok;
-	
+	}		e_type;
+	t_ast	**branches;
+	t_tok	*my_tok;
 }			t_ast;
 
-typedef	struct s_redir
+typedef struct s_redir
 {
-	int	reads;
-	int	writes;
-	int	appends;
-	int	heredoc;
-
-	int ammount;
-	int read_ammount;
-	int	write_ammount;
-	int	append_ammount;
-	int heredoc_ammount;
+	int		reads;
+	int		writes;
+	int		appends;
+	int		heredoc;
+	int		ammount;
+	int		read_ammount;
+	int		write_ammount;
+	int		append_ammount;
+	int		heredoc_ammount;
 }				t_redir;
 
 typedef struct s_comm
@@ -108,25 +103,16 @@ typedef struct s_comm
 		COMMAND,
 		INVALID
 	} e_type;
-
 	char	*infile;
 	char	*outfile;
 	char	*heredoc_filename;
 	char	*heredoc_word;
 	t_redir	redir;
-
 	char	*cmd;
 	char	**args;
 	char	**unsorted_env;
-
-	t_shell *shell;
-	// Should the two bellow be deleted
-	//char	**envp;
-	//char	**vars;
-
-	int		piping; // If its 0 then we are not piping 1->getting piped 2->piping someone 3->both
-
-
+	t_shell	*shell;
+	int		piping;
 	int		is_ft;
 }			t_comm;
 
@@ -144,37 +130,33 @@ typedef struct s_termcaps
 	char			*set_cursor_begin;
 }				t_termcaps;
 
-typedef	struct s_io
+typedef struct s_io
 {
 	int		save_in;
 	int		save_out;
 	int		saved_in;
 	int		saved_out;
 	int		my_pipe[2];
-	
-
 	int		current_in;
 	int		current_out;
 }				t_io;
 
-typedef struct	s_shell
+typedef struct s_shell
 {
-	char		**envp;
-	char		*line;
-	int			debug;
-	char		**vars;
-	char		**exports; // The idea is to keep track of what we store in envp to know if it's up to us to free
-	int			exit_status; // Terminal can exit with some status, so if we start a bash in our bash (inception) we can know what was the exit from the second bash
-	struct		sigaction sa;
-	t_termcaps	termcaps;
-	t_comm		**commands; // table of all commands
-	int			loop;
-	char		*prompt;
-	int			last_exit;
-
-	t_io		io;	
+	char				**envp;
+	char				*line;
+	int					debug;
+	char				**vars;
+	char				**exports;
+	int					exit_status;
+	struct sigaction	sa;
+	t_termcaps			termcaps;
+	t_comm				**commands;
+	int					loop;
+	char				*prompt;
+	int					last_exit;
+	t_io				io;	
 
 }			t_shell;
-
 
 #endif

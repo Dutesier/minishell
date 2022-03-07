@@ -15,7 +15,7 @@
 
 // parser
 int		parse_line(t_shell *shell);
-void print_ast(t_ast *ast, int l);
+void	print_ast(t_ast *ast, int l);
 
 // lexer
 t_tok	*init_token(char *value, int type);
@@ -29,17 +29,13 @@ t_tok	*token_switch(char c, t_lex *lex);
 t_tok	*token_switch_two(char c, t_lex *lex);
 t_tok	*token_switch_three(t_lex *lex);
 int		nextquote(t_lex *lex, int q);
-char *ft_dupnoq(char *s);
-
-// lexer_utils_two
-//t_tok *unclosed_quote(t_lex *lex);
-
+char	*ft_dupnoq(char *s);
 
 // ast
 t_ast	*init_ast(int type);
 void	ast_add_branch(t_ast *parent, t_ast *child, int i);
 int		ast_branch_ammount(t_ast *ast);
-void ast_add_branch_idx(t_ast *parent, t_ast *child, int i, int idx);
+void	ast_add_branch_idx(t_ast *parent, t_ast *child, int i, int idx);
 
 // parser_logic
 t_ast	*parse_compound(t_par *par);
@@ -58,8 +54,7 @@ t_ast	*parse_command(t_par *par);
 int		command_tok(unsigned int type);
 
 // parse_expansion
-t_ast *parse_expansion(t_par *par);
-int parse_exp_status(t_par *par); //Checks if it really is a var expansion or just a dolla sign
-
+t_ast	*parse_expansion(t_par *par);
+int		parse_exp_status(t_par *par);
 
 #endif
