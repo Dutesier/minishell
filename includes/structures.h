@@ -147,7 +147,6 @@ typedef struct s_shell
 	char				*line;
 	int					debug;
 	char				**vars;
-	char				**exports;
 	int					exit_status;
 	struct sigaction	sa;
 	t_termcaps			termcaps;

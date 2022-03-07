@@ -40,7 +40,6 @@ int		add_variable(t_shell *shell, char *var, char *expands);
 int		set_variable(t_shell *shell, t_ast *ast);
 int		find_var_branch(t_ast *ast);
 int		update_var(t_shell *shell, char *var, char *expands, float var_set);
-void	exports_log(t_shell *shell, char *var);
 int		variable_as_cmd(t_ast *root);
 
 // Variables.c
@@ -48,6 +47,7 @@ float	var_is_set(t_shell *shell, char *var);
 int		var_in_vars(char **vars, char *var);
 int		var_in_envp(char **envp, char *var);
 char	*expansion_from_envp(t_shell *shell, int where);
+int		var_already_set(t_shell *shell, char *expands, int where);
 
 int		run_command(t_comm *comm);
 int		run_ft_command(t_comm *ft_comm);
@@ -60,5 +60,12 @@ int		expand_quote(t_shell *shell, t_ast *father, int i);
 int		unpack_quotes(t_shell *shell, t_ast *ast);
 char	*getvar_from_dq(t_shell *shell, char *str);
 int		dq_expanded_len(char *str);
+
+// configure_redirs.c
+
+void	config_writes_redir(t_comm *comm, t_ast *b);
+void	config_reads_redir(t_comm *comm, t_ast *b);
+void	config_appends_redir(t_comm *comm, t_ast *b);
+void	config_heredoc_redir(t_comm *comm, t_ast *b);
 
 #endif

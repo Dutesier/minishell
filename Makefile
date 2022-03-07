@@ -32,12 +32,16 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/executing/find_path.c \
 				srcs/executing/run_command.c \
+				srcs/executing/run_ft_command.c \
 				srcs/executing/init_command.c \
 				srcs/executing/init_command_utils.c \
 				srcs/executing/init_command_utils_two.c \
+				srcs/executing/init_command_utils_three.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
+				srcs/executing/configure_redirs.c \
 				srcs/executing/set_variables.c \
+				srcs/executing/set_variables_utils.c \
 				srcs/executing/variable_expansion.c \
 				srcs/executing/variables.c \
 				srcs/executing/unpack_quotes.c \
@@ -71,6 +75,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/find_cwd.c \
 				srcs/utils/malloc_or_exit.c \
 				srcs/utils/null_terminated_arrays.c \
+				srcs/utils/safe_free.c \
 	\
 				srcs/reader/get_line.c \
 	\

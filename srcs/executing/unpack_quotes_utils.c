@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int dq_expanded_len(char *str)
+int	dq_expanded_len(char *str)
 {
-	int i;
-	int j;
-	int len;
+	int	i;
+	int	j;
+	int	len;
 
 	i = 0;
 	len = 0;

@@ -15,7 +15,7 @@
 static int	ft_counter(int n);
 static char	*ft_itoa_neg(char *res, int n, int counter);
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		counter;
 	char	*res;
@@ -57,7 +57,7 @@ static char	*ft_itoa_neg(char *res, int n, int counter)
 
 static int	ft_counter(int n)
 {
-	int counter;
+	int	counter;
 
 	counter = 1;
 	if (n == -2147483648)

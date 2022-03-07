@@ -12,59 +12,19 @@
 
 #include "minishell.h"
 
+static int	handle_quoted(char *s, char *sub, int i, int x);
+static int	update_inhib(int *inhib, int mode);
 
-char *ft_dupnoq(char *s)
+char	*ft_dupnoq(char *s)
 {
-	int i;
-	int x;
-	int inhib;
-	char *sub;
-	char *temp;
+	int		i;
+	char	*sub;
+	char	*temp;
 
-	i = 0;
-	x = 0;
 	if (!s)
 		return (NULL);
-	sub = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (!sub)
-		return (NULL);
-	inhib = 0;
-	while (s[x] != '\0')
-	{
-		if (s[x] == '\'')
-		{
-			if (!inhib)
-			{
-				inhib = 1;
-				x++;
-			}
-			else if (inhib == 1)
-			{
-				inhib = 0;
-				x++;
-			}
-			else
-				sub[i++] = s[x++];
-		}
-		else if (s[x] == '\"')
-		{
-			if (!inhib)
-			{
-				inhib = 2;
-				x++;
-			}
-			else if (inhib == 2)
-			{
-				inhib = 0;
-				x++;
-			}
-			else
-				sub[i++] = s[x++];
-		}
-		else
-			sub[i++] = s[x++];
-	}
-	sub[i] = '\0';
+	sub = malloc_or_exit((ft_strlen(s) + 1) * sizeof(char));
+	i = handle_quoted(s, sub, 0, 0);
 	temp = malloc(sizeof(char) * (i + 1));
 	if (!temp)
 	{
@@ -81,3 +41,51 @@ char *ft_dupnoq(char *s)
 	return (temp);
 }
 
+static int	handle_quoted(char *s, char *sub, int i, int x)
+{
+	int	inhib;
+
+	inhib = 0;
+	while (s[x] != '\0')
+	{
+		if (s[x] == '\'')
+		{
+			if (!update_inhib(&inhib, 1))
+				sub[i++] = s[x];
+		}
+		else if (s[x] == '\"')
+		{
+			if (!update_inhib(&inhib, 2))
+				sub[i++] = s[x];
+		}
+		else
+			sub[i++] = s[x];
+		x++;
+	}
+	sub[i] = '\0';
+	return (i);
+}
+
+static int	update_inhib(int *inhib, int mode)
+{
+	int	save;
+
+	save = *inhib;
+	if (mode == 1)
+	{
+		if (!*inhib)
+			*inhib = 1;
+		else if (*inhib == 1)
+			*inhib = 0;
+	}
+	else
+	{
+		if (!*inhib)
+			*inhib = 2;
+		else if (*inhib == 2)
+			*inhib = 0;
+	}
+	if (save != *inhib)
+		return (1);
+	return (0);
+}

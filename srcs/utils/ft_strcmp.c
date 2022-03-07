@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int ft_strcmp(char *str1, char *str2, int cmp)
+int	ft_strcmp(char *str1, char *str2, int cmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str1 || !str2 || cmp < 0)
@@ -28,10 +28,10 @@ int ft_strcmp(char *str1, char *str2, int cmp)
 	return (1);
 }
 
-int ft_strcmp_two(char *str1, char *str2)
+int	ft_strcmp_two(char *str1, char *str2)
 {
-	int i;
-	int cmp;
+	int	i;
+	int	cmp;
 
 	i = 0;
 	if (!str1 || !str2)
@@ -46,9 +46,9 @@ int ft_strcmp_two(char *str1, char *str2)
 	return (1);
 }
 
-int my_strcmp(char *str1, char *str2)
+int	my_strcmp(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str1 || !str2)
@@ -62,10 +62,10 @@ int my_strcmp(char *str1, char *str2)
 	return (str1[i] - str2[i]);
 }
 
-int ft_strcmp_envp(char *whole_var, char *var)
+int	ft_strcmp_envp(char *whole_var, char *var)
 {
-	int i;
-	int cmp;
+	int	i;
+	int	cmp;
 
 	if (!whole_var || !var)
 		return (0);
@@ -101,7 +101,7 @@ char	*ft_strnstr(char *haystack, char *needle)
 		{
 			if (needle[j + 1] == '\0')
 			{
-				return ((char*)haystack + i);
+				return ((char *)haystack + i);
 			}
 			j++;
 		}

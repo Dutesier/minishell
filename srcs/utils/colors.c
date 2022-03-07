@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char *ft_color(unsigned int color)
+char	*ft_color(unsigned int color)
 {
 	if (color == WHT)
 		return ("\033[0;37m");
@@ -33,9 +33,9 @@ char *ft_color(unsigned int color)
 	return ("");
 }
 
-void change_color(unsigned int color)
+void	change_color(unsigned int color)
 {
-	char *s;
+	char	*s;
 
 	s = ft_color(color);
 	printf("%s", s);

@@ -43,7 +43,7 @@ static char	**ft_split2(char const *str, char c)
 
 	i = 0;
 	j = 0;
-	split = malloc(sizeof(char*) * (ft_count_str(str, c) + 1));
+	split = malloc(sizeof(char *) * (ft_count_str(str, c) + 1));
 	if (!split)
 		return (NULL);
 	inword = 0;

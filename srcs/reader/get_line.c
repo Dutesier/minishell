@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-static void add_exit_val_prompt(t_shell *shell);
-static void add_cwd_prompt(t_shell *shell);
+static void	add_exit_val_prompt(t_shell *shell);
+static void	add_cwd_prompt(t_shell *shell);
 
 void	get_line(t_shell *shell)
 {
@@ -22,7 +22,6 @@ void	get_line(t_shell *shell)
 		free(shell->line);
 	}
 	add_exit_val_prompt(shell);
-	// get_cwd(shell);
 	shell->line = readline(shell->prompt);
 	if (shell->line && *shell->line)
 		add_history(shell->line);
@@ -33,12 +32,12 @@ void	get_line(t_shell *shell)
 	}
 }
 
-static void add_exit_val_prompt(t_shell *shell)
+static void	add_exit_val_prompt(t_shell *shell)
 {
 	char	*new_prompt;
 	char	*exit_val;
 	char	*exit_stat;
-	char 	*color;
+	char	*color;
 
 	add_cwd_prompt(shell);
 	color = ft_color(GRN);
@@ -58,9 +57,9 @@ static void add_exit_val_prompt(t_shell *shell)
 	shell->prompt = exit_val;
 }
 
-static void add_cwd_prompt(t_shell *shell)
+static void	add_cwd_prompt(t_shell *shell)
 {
-	char *cwd;
+	char	*cwd;
 
 	if (shell->prompt)
 		free(shell->prompt);

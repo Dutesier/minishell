@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-char *store_buffer(char *holder, char *buff)
+char	*store_buffer(char *holder, char *buff)
 {
-	char *temp;
+	char	*temp;
 
 	if (holder)
 	{
@@ -25,14 +25,14 @@ char *store_buffer(char *holder, char *buff)
 	}
 	else
 	{
-		holder = ft_strdup(buff); // if holder == NULL it means we had a file with no nl ?
+		holder = ft_strdup(buff);
 		if (holder == NULL)
 			return (NULL);
 	}
 	return (holder);
 }
 
-char *store_line(char **line, char *holder, int ret)
+char	*store_line(char **line, char *holder, int ret)
 {
 	char	*temp;
 	int		i;
@@ -48,8 +48,7 @@ char *store_line(char **line, char *holder, int ret)
 			break ;
 		i++;
 	}
-
-	if (i < len) // If we got here cause there's a nl somewhere in holder
+	if (i < len)
 	{
 		*line = ft_substr(holder, 0, i + 1);
 		temp = ft_substr(holder, i + 1, ft_strlen(holder));
@@ -58,9 +57,9 @@ char *store_line(char **line, char *holder, int ret)
 		if (temp)
 			free(temp);
 	}
-	else if (ret == 0) // if we've read till EOF
+	else if (ret == 0)
 	{
-		if (!len) //for the possibility of a file with no nl!!
+		if (!len)
 			return (NULL);
 		*line = holder;
 		holder = NULL;
@@ -68,7 +67,7 @@ char *store_line(char **line, char *holder, int ret)
 	return (holder);
 }
 
-char *get_next_line(int fd, char *s)
+char	*get_next_line(int fd, char *s)
 {
 	static char	*holder[1024];
 	char		buff[421];
@@ -91,29 +90,20 @@ char *get_next_line(int fd, char *s)
 		if (ft_strchr('\n', buff) > -1)
 			break ;
 	}
-	
-
-	if (ret == 0 && !holder[fd]) // Edge case: file with just EOF
+	if (ret == 0 && !holder[fd])
 	{
 		line = ft_strdup("");
 		return (line);
 	}
-	
-
-	if (ret == 0 && ft_strlen(holder[fd]) == ft_strchr('\n', holder[fd])) // Edge case: read till end of file but:
+	if (ret == 0 && ft_strlen(holder[fd]) == ft_strchr('\n', holder[fd]))
 	{
-		if (ft_strlen(holder[fd]) == 0) // Either it was just an empty file
+		if (ft_strlen(holder[fd]) == 0)
 			return (NULL);
-
-		// Or it was a file that ended in a nl
 		line = ft_strdup(holder[fd]);
 		free(holder[fd]);
 		return (line);
 	}
-
 	holder[fd] = store_line(&line, holder[fd], ret);
-	//printf("Holder ->%s<-\nRet %i", holder[fd], ret);
-
 	if (!holder[fd] && ret == 0 && !line)
 	{
 		return (NULL);
@@ -121,10 +111,10 @@ char *get_next_line(int fd, char *s)
 	return (line);
 }
 
-int get_quote(t_lex *lex, char q)
+int	get_quote(t_lex *lex, char q)
 {
-	char *holder;
-	char *s;
+	char	*holder;
+	char	*s;
 
 	if (q == '\'')
 		s = "quote> ";

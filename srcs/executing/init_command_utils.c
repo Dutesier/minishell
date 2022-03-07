@@ -12,94 +12,37 @@
 
 #include "minishell.h"
 
-int init_comm_redir(t_comm *comm, t_ast *ast, int r)
+int	init_comm_redir(t_comm *comm, t_ast *ast, int r)
 {
-	int i;
-	t_ast *b;
+	int		i;
+	t_ast	*b;
 
 	i = 0;
 	b = ast->branches[r];
 	while (b->branches[i] != NULL)
 	{
-		if (b->branches[i]->my_tok->e_type == TOK_SPACE) 
+		if (b->branches[i]->my_tok->e_type == TOK_SPACE)
 			i++;
 		if (b->branches[i] == NULL)
 			break ;
-
 		if (b->branches[i]->my_tok->e_type == TOK_GT)
-		{
-			comm->redir.writes = 1;
-			comm->redir.write_ammount++;
-			comm->redir.ammount++;
-			config_redir(comm, b, comm->redir.writes);
-		}
+			config_writes_redir(comm, b);
 		else if (b->branches[i]->my_tok->e_type == TOK_LT)
-		{
-			comm->redir.reads = 2;
-			comm->redir.read_ammount++;
-			comm->redir.ammount++;
-			config_redir(comm, b, comm->redir.reads);
-		}
+			config_reads_redir(comm, b);
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_RIGHT)
-		{
-			comm->redir.appends = 3;
-			comm->redir.append_ammount++;
-			comm->redir.ammount++;
-			config_redir(comm, b, comm->redir.appends);
-		}
+			config_appends_redir(comm, b);
 		else if (b->branches[i]->my_tok->e_type == TOK_ARROW_LEFT)
-		{
-			comm->redir.heredoc = 4;
-			comm->redir.heredoc_ammount++;
-			comm->redir.ammount++;
-			config_redir(comm, b, comm->redir.heredoc);
-		}
+			config_heredoc_redir(comm, b);
 		i++;
 	}
 	return (comm->redir.ammount);
 }
 
-int config_redir(t_comm *comm, t_ast *ast, int redir)
+int	find_redir_branch(t_ast *ast)
 {
-	int i;
-
-	i = 0;
-	while (ast->branches[i] && ast->branches[i]->my_tok->e_type != TOK_WORD)
-		i++;
-	if (!ast->branches[i])
-	{
-		comm->redir.ammount = -1;
-		return (comm->redir.ammount);
-	}
-	if (redir == 1 || redir == 3)
-	{
-		if (comm->outfile)
-			free (comm->outfile);
-		comm->outfile = ft_strdup(ast->branches[i]->my_tok->value);
-	}
-	else if (redir == 2)
-	{
-		if (comm->infile)
-			free(comm->infile);
-		comm->infile = ft_strdup(ast->branches[i]->my_tok->value);
-	}
-	else if (redir == 4) // lest handle heredoc here
-	{
-		if (comm->heredoc_word)
-			free(comm->heredoc_word);
-		comm->heredoc_word = ft_strdup(ast->branches[i]->my_tok->value);
-		if (comm->heredoc_filename)
-			free(comm->heredoc_filename);
-		comm->heredoc_filename = ft_heredoc(comm);
-	}
-	return (1);
-}
-
-int find_redir_branch(t_ast *ast)
-{
-	int i;
-	int count;
-	int nor;
+	int	i;
+	int	count;
+	int	nor;
 
 	i = 0;
 	count = 0;
@@ -119,9 +62,9 @@ int find_redir_branch(t_ast *ast)
 	return (count);
 }
 
-int find_cmd_branch(t_ast *ast)
+int	find_cmd_branch(t_ast *ast)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ast->branches[i] != NULL && ast->branches[i]->e_type != AST_COMMAND)
@@ -129,11 +72,11 @@ int find_cmd_branch(t_ast *ast)
 	return (i);
 }
 
-int find_args_branch(t_ast *ast)
+int	find_args_branch(t_ast *ast)
 {
-	int i;
-	int count;
-	int noa;
+	int	i;
+	int	count;
+	int	noa;
 
 	i = 0;
 	count = 0;

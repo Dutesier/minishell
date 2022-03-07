@@ -2,7 +2,7 @@
 
 int	nta_size(char **array)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	if (!array)

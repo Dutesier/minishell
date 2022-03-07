@@ -61,19 +61,6 @@ int	clean_vars(t_shell *shell)
 	return (i);
 }
 
-int	clean_exports(t_shell *shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell->exports && shell->exports[i])
-	{
-		free(shell->exports[i++]);
-	}
-	free(shell->exports);
-	return (i);
-}
-
 int	clean_envp(t_shell *shell)
 {
 	int	i;

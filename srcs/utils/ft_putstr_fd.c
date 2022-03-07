@@ -12,16 +12,16 @@
 
 #include "minishell.h"
 
-static int ft_putchar_fd(char c, int fd)
+static int	ft_putchar_fd(char c, int fd)
 {
 	if (fd < 0)
 		return (0);
 	return (write(fd, &c, 1));
 }
 
-int ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s || fd < 0)

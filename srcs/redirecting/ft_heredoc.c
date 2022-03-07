@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-static char *get_until(char *str);
+static char	*get_until(char *str);
 
-char *ft_heredoc(t_comm *comm)
+char	*ft_heredoc(t_comm *comm)
 {
-	int temp;
-	char *str;
-	char *t;
+	int		temp;
+	char	*str;
+	char	*t;
 
 	t = ft_strdup(".mini.thd");
 	if (!t)
@@ -36,15 +36,14 @@ char *ft_heredoc(t_comm *comm)
 	return (t);
 }
 
-static char *get_until(char *str)
+static char	*get_until(char *str)
 {
-	char *holder;
-	char *needle;
+	char	*holder;
+	char	*needle;
 	int		i;
 
 	i = 0;
 	holder = get_next_line(STDIN_FILENO, "heredoc> ");
-	//printf("->str[3] %i<-\n", (int)str[3]);
 	if (ft_isspace(str[ft_strlen(str) - 1]))
 		str[ft_strlen(str) - 1] = '\0';
 	needle = ft_strnstr(holder, str);

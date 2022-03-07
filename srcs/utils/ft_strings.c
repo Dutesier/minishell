@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-char *ft_strdup(char *s)
+char	*ft_strdup(char *s)
 {
-	char *dup;
-	int i;
+	char	*dup;
+	int		i;
 
 	i = 0;
 	if (!s)
@@ -32,11 +32,11 @@ char *ft_strdup(char *s)
 	return (dup);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char *s3;
-	int	i;
-	int j;
+	char	*s3;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -60,10 +60,10 @@ char *ft_strjoin(char *s1, char *s2)
 	return (s3);
 }
 
-char *ft_substr(char *str, int start, int ammount)
+char	*ft_substr(char *str, int start, int ammount)
 {
-	int i;
-	char *sub;
+	int		i;
+	char	*sub;
 
 	i = 0;
 	if (!str)
@@ -82,9 +82,9 @@ char *ft_substr(char *str, int start, int ammount)
 	return (sub);
 }
 
-int ft_strchr(char c, char *s)
+int	ft_strchr(char c, char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s && s[i] != '\0')

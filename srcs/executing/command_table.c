@@ -54,8 +54,6 @@ static void	set_as_piped(t_shell *shell, int i)
 		shell->commands[i]->piping = 3;
 }
 
-
-/* this should be done for every command */
 static int	comm_table_pipes(t_shell *shell, t_ast *root)
 {
 	int	i;
@@ -110,7 +108,6 @@ int	run_comm_table(t_shell *shell)
 	}
 	reset_std_io(shell, 1, 1);
 	unlink(".mini.thd");
-	// close_std_io_dups(shell);
 	DEBUG(fprintf(stderr, "Finished running command table\n"));
 	return (i);
 }

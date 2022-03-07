@@ -1,10 +1,9 @@
-
 #include "minishell.h"
 
-char **dup_envp(char **envp)
+char	**dup_envp(char **envp)
 {
-	int i;
-	char **dup;
+	int		i;
+	char	**dup;
 
 	i = 0;
 	while (envp[i])
@@ -21,4 +20,3 @@ char **dup_envp(char **envp)
 	dup[i] = NULL;
 	return (dup);
 }
-

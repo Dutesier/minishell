@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -24,11 +24,11 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-char *ft_strcat(char *str, char *append)
+char	*ft_strcat(char *str, char *append)
 {
-	int size;
-	int i;
-	char *holder;
+	int		size;
+	int		i;
+	char	*holder;
 
 	size = ft_strlen(str) + ft_strlen(append);
 	i = 0;
@@ -46,11 +46,11 @@ char *ft_strcat(char *str, char *append)
 	return (holder);
 }
 
-char *ft_append(char *str, char *append)
+char	*ft_append(char *str, char *append)
 {
-	int size;
-	int i;
-	char *holder;
+	int		size;
+	int		i;
+	char	*holder;
 
 	size = ft_strlen(str) + ft_strlen(append);
 	i = 0;

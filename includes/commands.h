@@ -29,7 +29,6 @@ int		find_next_eq(char *str);
 int		change_envp(char **envp, int where, char *new_val);
 char	*whole_var_from_vars(char **vars, char *var);
 void	rm_var_from_vars(t_shell *shell, char *var);
-int		did_i_export(char *var, char **exports);
 int		set_new_var(t_comm *ft_comm, int i, int save);
 int		reset_var_vars(t_comm *ft_comm, int i, float var_set);
 int		reset_var_envp(t_comm *ft_comm, int i, int where);

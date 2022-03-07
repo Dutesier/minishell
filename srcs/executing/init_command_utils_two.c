@@ -16,7 +16,7 @@
 
 int	invert_count(int count)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (count >= 0)

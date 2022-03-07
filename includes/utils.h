@@ -93,5 +93,6 @@ int		nta_size(char **array);
 int		nta_on_even_size(char **array);
 
 void	*malloc_or_exit(size_t size);
+int		safe_free(void *ptr);
 
 #endif

@@ -61,8 +61,6 @@ int	main(int argc, char *argv[], char **envp)
 	}
 	if (shell.vars)
 		clean_vars(&shell);
-	/*if (shell.exports)
-		clean_exports(&shell);*/
 	if (shell.envp)
 		clean_envp(&shell);
 	clear_history();

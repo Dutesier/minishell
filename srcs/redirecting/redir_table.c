@@ -1,10 +1,10 @@
 // Lets build all the redirections before we run the commands
 
-int setup_redirs(t_shell *shell, t_ast *root. int comm_ammount)
+int	setup_redirs(t_shell *shell, t_ast *root. int comm_ammount)
 {
-	int *redir_table;
+	int	*redir_table;
 	int	i;
-	int z;
+	int	z;
 
 	i = 0;
 	z = 0;
@@ -21,6 +21,6 @@ int setup_redirs(t_shell *shell, t_ast *root. int comm_ammount)
 		i++;
 	}
 	if (comm_ammount != z)
-		ft_putstr_fd(2, "Command ammount is different from ammount of redirections set\n");
+		ft_putstr_fd(2, "Redirections set != Commands ammount\n");
 	return (0);
 }

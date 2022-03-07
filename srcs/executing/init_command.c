@@ -12,97 +12,17 @@
 
 #include "minishell.h"
 
-void init_comm_helper(t_comm *comm);
+static void	init_comm_helper(t_comm *comm);
+static int	setup_comm_cmd(t_comm *comm, t_ast *ast, int c);
+static int	setup_comm_args(t_comm *comm, t_ast *ast, int c, int a);
+static int	setup_comm_redirection(t_comm *comm, t_ast *ast);
 
-int args_ammount(t_ast *command)
+t_comm	*init_command(t_shell *shell, t_ast *ast)
 {
-	int i;
-	int count;
+	t_comm	*comm;
+	int		c;
 
-	i = 0;
-	count = 0;
-	//printf("Entered args_ammount for ast branch %s \n", ast_to_str(command->e_type));
-	while (command && command->branches && command->branches[i] != NULL)
-	{
-		if (command->branches[i]->my_tok->e_type == TOK_WORD || command->branches[i]->my_tok->e_type == TOK_EQUALS)
-			if (command->branches[i]->my_tok->value != NULL)	
-				count++;
-		i++;
-	}
-	//printf("left args_ammount with %i\n", count + 1);
-	return (count + 1);
-}
-
-int compound_ammount(t_ast *root, int count)
-{
-	int i;
-
-	i = 0;
-	while (root && root->branches && root->branches[i] != NULL)
-	{
-		count = compound_ammount(root->branches[i], count);
-		if (root->branches[i]->e_type == AST_COMPOUND)
-			count++;
-		i++;
-	}
-		//printf("Compound ammount in %s:  %i\n", ast_to_str(root->e_type), count);
-	return (count);
-}
-
-int store_args(t_comm *comm, t_ast *ast, int a)
-{
-	int x;
-	int i;
-	int	ar;
-
-	x = 0;
-	i = 0;
-	ar = find_args_branch(ast);
-	comm->args = malloc(sizeof(char *) * (a + 1));
-	DEBUG(fprintf(stderr, "ARGS will have %i fields\n", a));
-	if (!comm->args)
-		return (1);
-	comm->args[x++] = ast->branches[find_cmd_branch(ast)]->my_tok->value;
-	while (ar >= 0)
-	{
-		while (ast->branches[ar % 10]->branches[i] != NULL)
-		{
-			if (ast->branches[ar % 10]->branches[i]->my_tok->e_type == TOK_SPACE)
-				i++;
-			else if (ast->branches[ar % 10]->branches[i]->e_type == AST_VAR_EXP)
-			{
-				comm->args[x++] = var_expand(ast->branches[ar % 10]->branches[i++]);
-				//i++;
-			}
-			else
-			{
-				if (ast->branches[ar%10]->branches[i]->my_tok->value != NULL)
-					comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
-				else
-					i++;
-			}
-		}
-		ar = ar / 10;
-		if (ar == 0)
-			ar = -1;
-	}
-	return (x);
-}
-
-t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very basic commands
-{
-	t_comm *comm;
-	int a;
-	int x;
-	int c;
-
-	x = 0;
-	a = 0;
-	//printf("Entered init_command of ast branch %s \n", ast_to_str(ast->e_type));
-
-	comm = malloc(sizeof(t_comm));
-	if (!comm)
-		return (NULL);
+	comm = malloc_or_exit(sizeof(t_comm));
 	init_comm_helper(comm);
 	comm->shell = shell;
 	replace_variables(shell, ast, NULL);
@@ -115,28 +35,44 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	if (shell->debug)
 	{
 		int v = 0;
-		while (shell->vars && shell->vars[v] != NULL)
+		while (shell->vars && (shell->vars[v] != NULL || v % 2 != 0))
 		{
 			printf("%sVARS[%i]%s%s\n", ft_color(CYA), v, shell->vars[v], ft_color(WHT));
 			v++;
 		}
 	}
-
-	// Setup Command
 	c = find_cmd_branch(ast);
+	if (!setup_comm_cmd(comm, ast, c))
+		return (comm);
+	setup_comm_args(comm, ast, c, 0);
+	setup_comm_redirection(comm, ast);
+	if (comm->redir.ammount < 0)
+		return (NULL); // FIXME: Not clean exit
+	return (comm);
+}
+
+static int	setup_comm_cmd(t_comm *comm, t_ast *ast, int c)
+{
 	if (find_var_branch(ast) != -1)
 	{
 		comm->e_type = VAR_DEF;
-		set_variable(shell, ast);
-		return (comm);
+		set_variable(comm->shell, ast);
+		return (0);
 	}
 	else
 		comm->e_type = COMMAND;
 	comm->is_ft = ft_iscomm(ast->branches[c]->my_tok->value);
-	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, shell->envp);
+	comm->cmd = ft_newpath(ast->branches[c]->my_tok->value, comm->shell->envp);
+	return (1);
+}
 
-	// Setup arguments
-	int ar = find_args_branch(ast);
+static int	setup_comm_args(t_comm *comm, t_ast *ast, int c, int a)
+{
+	int	ar;
+	int	x;
+
+	ar = find_args_branch(ast);
+	x = 0;
 	while (ar >= 0)
 	{
 		a += args_ammount(ast->branches[ar % 10]);
@@ -152,15 +88,16 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 	}
 	else
 	{
-		comm->args = malloc(sizeof(char *) * 2);
-		if (!comm->args)
-			return (NULL); // NOT A CLEAN EXIT FIXME
+		comm->args = malloc_or_exit(sizeof(char *) * 2);
 		comm->args[0] = ast->branches[c]->my_tok->value;
 		comm->args[1] = NULL;
 	}
+	return (1);
+}
 
-	// Setup Redirection
-	int red;
+static int	setup_comm_redirection(t_comm *comm, t_ast *ast)
+{
+	int	red;
 
 	red = find_redir_branch(ast);
 	while (red >= 0)
@@ -170,12 +107,10 @@ t_comm *init_command(t_shell *shell, t_ast *ast) //FIXME only runs with very bas
 		if (red == 0)
 			red = -1;
 	}
-	if (comm->redir.ammount < 0)
-		return (NULL); // FIXME: Not clean exit
-	return (comm);
+	return (1);
 }
 
-void init_comm_helper(t_comm *comm)
+static void	init_comm_helper(t_comm *comm)
 {
 	comm->args = NULL;
 	comm->infile = NULL;
@@ -189,9 +124,6 @@ void init_comm_helper(t_comm *comm)
 	comm->redir.writes = 0;
 	comm->redir.appends = 0;
 	comm->redir.heredoc = 0;
-
 	comm->piping = 0;
-
 	comm->is_ft = 0;
 }
-

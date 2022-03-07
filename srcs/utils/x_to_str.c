@@ -12,7 +12,9 @@
 
 #include "minishell.h"
 
-char *tok_to_str(unsigned int type)
+static char	*tok_to_str_two(unsigned int type);
+
+char	*tok_to_str(unsigned int type)
 {
 	if (type == TOK_WORD)
 		return ("TOK_WORD");
@@ -26,8 +28,6 @@ char *tok_to_str(unsigned int type)
 		return ("TOK_ARROW_RIGHT");
 	if (type == TOK_ARROW_LEFT)
 		return ("TOK_ARROW_LEFT");
-	if (type == TOK_OPTION)
-		return ("TOK_OPTION");
 	if (type == TOK_SQUOTED)
 		return ("TOK_SQUOTED");
 	if (type == TOK_DQUOTED)
@@ -36,18 +36,17 @@ char *tok_to_str(unsigned int type)
 		return ("TOK_S_QUOTE");
 	if (type == TOK_D_QUOTE)
 		return ("TOK_D_QUOTE");
+	return (tok_to_str_two(type));
+}
+
+static char	*tok_to_str_two(unsigned int type)
+{
 	if (type == TOK_SEMI)
 		return ("TOK_SEMI");
-	if (type == TOK_DOT)
-		return ("TOK_DOT");
 	if (type == TOK_EQUALS)
 		return ("TOK_EQUALS");
 	if (type == TOK_BSLASH)
 		return ("TOK_BSLASH");
-	if (type == TOK_OPAREN)
-		return ("TOK_OPAREN");
-	if (type == TOK_CPAREN)
-		return ("TOK_CAPREN");
 	if (type == TOK_SPACE)
 		return ("TOK_SPACE");
 	if (type == TOK_PIPE)
@@ -61,7 +60,7 @@ char *tok_to_str(unsigned int type)
 	return ("TOKEN UNDEFINED");
 }
 
-char *ast_to_str(unsigned int type)
+char	*ast_to_str(unsigned int type)
 {
 	if (type == AST_ROOT)
 		return ("AST_ROOT");

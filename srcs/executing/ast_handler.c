@@ -17,21 +17,8 @@ int	ast_handler(t_shell *shell, t_ast *root)
 	int	i;
 
 	i = 0;
-	//printf("printing from ast_handler\n");
-	//print_ast(root, 0);
 	command_table(shell, root);
 	i = run_comm_table(shell);
-	/*
-	b = root->branches[1];
-	if (b->e_type == AST_COMMAND)
-	{
-		// Check for predefined commands
-		if (is_command(root->branches[0]->my_tok->value))
-			// reroute this to commands
-			i = 1;
-		else
-			i = init_command(shell, root);
-	}*/
 	return (i);
 }
 

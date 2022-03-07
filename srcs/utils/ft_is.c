@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int is_spec(char c)
+int	is_spec(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (1);
@@ -36,5 +36,6 @@ int	ft_isalnum(int c)
 
 int	ft_isspace(int c)
 {
-	return (c == 9 || c == 11 || c == ' ' || c == 12 || c == 13 );
+	return (c == 9 || c == 11 || c == ' '
+		|| c == 12 || c == 13);
 }

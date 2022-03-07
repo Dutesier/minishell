@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int ft_isquote(int c)
+int	ft_isquote(int c)
 {
 	if (c == '\'')
 		return (1);
@@ -21,16 +21,17 @@ int ft_isquote(int c)
 	return (0);
 }
 
-int ft_isword(int c)
+int	ft_isword(int c)
 {
 	if (ft_isquote(c) || ft_isalnum(c))
 		return (1);
-	if (c == '.' || c == '/' || c == '-' || c ==  '_' || c == '~') // This needs to be changed, too messy rn
+	if (c == '.' || c == '/' || c == '-'
+		|| c == '_' || c == '~')
 		return (1);
 	return (0);
 }
 
-int ft_isforb(int c)
+int	ft_isforb(int c)
 {
 	if (ft_isspace(c))
 		return (1);
@@ -41,7 +42,7 @@ int ft_isforb(int c)
 	return (0);
 }
 
-int ft_iscomm(char *str)
+int	ft_iscomm(char *str)
 {
 	if (ft_strcmp_two(str, "cd"))
 		return (1);
@@ -60,7 +61,7 @@ int ft_iscomm(char *str)
 	return (0);
 }
 
-int wordquotetok(unsigned int type)
+int	wordquotetok(unsigned int type)
 {
 	if (type == TOK_WORD || type == TOK_DQUOTED)
 		return (1);

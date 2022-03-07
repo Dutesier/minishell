@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int set_in_and_out(t_comm *comm)
+int	set_in_and_out(t_comm *comm)
 {
 	int		reset_in;
 	int		reset_out;
@@ -23,8 +23,7 @@ int set_in_and_out(t_comm *comm)
 	DEBUG(fprintf(stderr, "Current In: %s%i%s\n", ft_color(YEL), comm->shell->io.current_in, ft_color(WHT)));
 	DEBUG(fprintf(stderr, "Current Out: %s%i%s\n", ft_color(YEL), comm->shell->io.current_out, ft_color(WHT)));
 	DEBUG(fprintf(stderr, "Setting pipes: Piping (%i)\n", comm->piping));
-	//save_std_io(comm->shell);
-	//reset_std_io(comm->shell, 1, 1);
+
 	reset_in = 1;
 	reset_out = 1;
 	if (comm->piping == 1 || comm->piping == 3)
@@ -105,7 +104,7 @@ int set_in_and_out(t_comm *comm)
 	return (0);
 }
 
-int reset_std_io(t_shell *shell, int reset_in, int reset_out)
+int	reset_std_io(t_shell *shell, int reset_in, int reset_out)
 {
 	DEBUG(fprintf(stderr, "Resetting STD-IO: IN %s OUT %s\n", reset_in ? "true":"false", reset_out ? "true" : "false"));
 	if (reset_in)
@@ -141,7 +140,7 @@ int reset_std_io(t_shell *shell, int reset_in, int reset_out)
 	return (0);
 }
 
-void save_std_io(t_shell *shell, int in, int out)
+void	save_std_io(t_shell *shell, int in, int out)
 {
 	if (!shell->io.saved_in && in)
 	{
@@ -157,7 +156,7 @@ void save_std_io(t_shell *shell, int in, int out)
 	}
 }
 
-void close_std_io_dups(t_shell *shell)
+void	close_std_io_dups(t_shell *shell)
 {
 	if (shell->io.saved_in)
 	{

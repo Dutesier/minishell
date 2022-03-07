@@ -15,8 +15,5 @@
 void	handle_error(t_shell *shell, int exit_code)
 {
 	(void)shell;
-	// t_termcaps *termcaps;
-
-	// termcaps = &shell->termcaps;
 	exit(exit_code);
 }

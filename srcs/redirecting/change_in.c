@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int change_in(int old_in_fd, char *new_in, int redir)
+int	change_in(int old_in_fd, char *new_in, int redir)
 {
-	int in;
+	int	in;
 
 	in = ft_getfd(new_in, redir);
 	if (in == -1)
@@ -22,6 +22,6 @@ int change_in(int old_in_fd, char *new_in, int redir)
 	else
 		DEBUG(fprintf(stderr, "Got FD %s(%i)%s for %s%s%s\n", ft_color(YEL), in, ft_color(WHT),ft_color(YEL), new_in, ft_color(WHT)));
 	dup2(in, old_in_fd);
-	close(in); // Old IN fd now points to IN so no need to have IN open as well;
+	close(in);
 	return (in);
 }
