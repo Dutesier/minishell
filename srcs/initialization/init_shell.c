@@ -18,7 +18,7 @@ void	handle_sig(int sig)
 	{
 	    printf("\n");
     	rl_on_new_line();
-    	//rl_replace_line("", 0); // Clear the previous text (commented out for home dev)
+    	rl_replace_line("", 0); // Clear the previous text (commented out for home dev)
     	rl_redisplay();
     }
 	else

@@ -21,10 +21,12 @@
 
 int parse_line(t_shell *shell)
 {
-	t_lex *lex;
-	t_par *par;
-	t_ast *root;
+	t_lex	*lex;
+	t_par	*par;
+	t_ast	*root;
 
+	handle_expansion(shell);
+	//shell->line = ft_dupnoq(shell->line);
 	lex = init_lexer(shell->line);
 	if (!lex)
 		return (1);

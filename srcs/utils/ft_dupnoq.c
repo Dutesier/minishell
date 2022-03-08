@@ -13,7 +13,6 @@
 #include "minishell.h"
 
 static int	handle_quoted(char *s, char *sub, int i, int x);
-static int	update_inhib(int *inhib, int mode);
 
 char	*ft_dupnoq(char *s)
 {
@@ -66,26 +65,25 @@ static int	handle_quoted(char *s, char *sub, int i, int x)
 	return (i);
 }
 
-static int	update_inhib(int *inhib, int mode)
+int	update_inhib(int *inhib, int mode)
 {
-	int	save;
-
-	save = *inhib;
 	if (mode == 1)
 	{
-		if (!*inhib)
+		if (*inhib == 0)
 			*inhib = 1;
 		else if (*inhib == 1)
 			*inhib = 0;
+		else
+			return (0);
 	}
 	else
 	{
-		if (!*inhib)
+		if (*inhib == 0)
 			*inhib = 2;
 		else if (*inhib == 2)
 			*inhib = 0;
+		else
+			return (0);
 	}
-	if (save != *inhib)
-		return (1);
-	return (0);
+	return (1);
 }

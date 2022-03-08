@@ -94,6 +94,8 @@ SRCS 		:=	srcs/main.c \
 				srcs/parser/lexer_utils_two.c \
 				srcs/parser/lexer_utils.c \
 				srcs/parser/ast.c \
+				srcs/parser/process_expansion.c \
+				srcs/parser/process_quotes.c \
 	\
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \

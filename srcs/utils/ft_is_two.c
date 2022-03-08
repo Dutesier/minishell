@@ -35,7 +35,7 @@ int	ft_isforb(int c)
 {
 	if (ft_isspace(c))
 		return (1);
-	if (ft_strchr(c, "<>$=;|") > -1)
+	if (ft_strchr(c, "<>=;|") > -1)
 		return (1);
 	if (c == '\0')
 		return (1);

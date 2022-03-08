@@ -72,6 +72,7 @@ int		ft_isword(int c);
 int		ft_isforb(int c);
 int		ft_iscomm(char *str);
 int		wordquotetok(unsigned int type);
+int		update_inhib(int *inhib, int mode);
 
 // Get quote - adapted from gnl
 char	*store_buffer(char *holder, char *buff);

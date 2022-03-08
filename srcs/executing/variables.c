@@ -14,13 +14,10 @@
 
 float var_is_set(t_shell *shell, char *var)
 {
-	// int i;
 	int in_envp;
 	int	in_vars;
 
-	// i = 0;
 	in_envp = var_in_envp(shell->envp, var);
-	//printf("in_envp %i\n", in_envp);
 	if (in_envp > -1)
 		return ((float)in_envp + 0.1);
 	if (!shell->vars)

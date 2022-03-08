@@ -59,4 +59,13 @@ int		command_tok(unsigned int type);
 t_ast	*parse_expansion(t_par *par);
 int		parse_exp_status(t_par *par);
 
+// new adittions - preparsing
+
+void	expand(t_shell *shell, char **exp);
+char	*remove_old(char *s, int where);
+char	*insert_str_in_str(char *str, char *insert, int where);
+void	handle_expansion(t_shell *shell);
+void	try_add_expansion(t_shell *shell, int where);
+int		exp_valid_format(char *s, int where);
+
 #endif

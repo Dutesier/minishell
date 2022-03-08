@@ -16,8 +16,8 @@ t_tok	*token_switch(char c, t_lex *lex)
 {
 	if (lex->c == ';')
 		return (init_token(";", TOK_SEMI));
-	if (lex->c == '$')
-		return (init_token("$", TOK_DOLLAR));
+	//if (lex->c == '$')
+	//	return (init_token("$", TOK_DOLLAR));
 	if (lex->c == '~')
 		return (init_token("~", TOK_TILDE));
 	if (lex->c == '|')
