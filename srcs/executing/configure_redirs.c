@@ -27,6 +27,7 @@ void	config_writes_redir(t_comm *comm, t_ast *b)
 		return ;
 	safe_free(comm->outfile);
 	comm->outfile = ft_strdup(b->branches[i]->my_tok->value);
+	create_if_needed(comm->outfile, comm->redir.writes);
 }
 
 void	config_reads_redir(t_comm *comm, t_ast *b)
@@ -57,6 +58,7 @@ void	config_appends_redir(t_comm *comm, t_ast *b)
 		return ;
 	safe_free(comm->outfile);
 	comm->outfile = ft_strdup(b->branches[i]->my_tok->value);
+	create_if_needed(comm->outfile, comm->redir.appends);
 }
 
 void	config_heredoc_redir(t_comm *comm, t_ast *b)

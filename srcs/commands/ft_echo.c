@@ -18,17 +18,16 @@ int	ft_echo(t_comm *ft_comm)
 {
 	int	n;
 	int	i;
-	int printed;
+	int	printed;
 
 	n = 0;
 	i = 1;
 	printed = 0;
-	if (ft_comm->args[1])
-		if (echo_n_flag(ft_comm->args[1]))
-		{
-			n = 1;
-			i = 2;
-		}
+	if (ft_comm->args[1] && echo_n_flag(ft_comm->args[1]))
+	{
+		n = 1;
+		i = 2;
+	}
 	while (ft_comm->args[i])
 	{
 		printf("%s", ft_comm->args[i++]);

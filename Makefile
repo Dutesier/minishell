@@ -40,6 +40,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/ast_handler.c \
 				srcs/executing/command_table.c \
 				srcs/executing/configure_redirs.c \
+				srcs/executing/configure_redirs_utils.c \
 				srcs/executing/set_variables.c \
 				srcs/executing/set_variables_utils.c \
 				srcs/executing/variable_expansion.c \

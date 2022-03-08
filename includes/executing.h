@@ -67,5 +67,6 @@ void	config_writes_redir(t_comm *comm, t_ast *b);
 void	config_reads_redir(t_comm *comm, t_ast *b);
 void	config_appends_redir(t_comm *comm, t_ast *b);
 void	config_heredoc_redir(t_comm *comm, t_ast *b);
+void	create_if_needed(char *filename, int mode);
 
 #endif

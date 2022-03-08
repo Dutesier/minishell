@@ -18,18 +18,15 @@ t_ast	*parse_expansion(t_par *par)
 {
 	t_ast			*ast;
 	int				i;
-	unsigned int	next;
 
 	i = 0;
 	ast = init_ast(AST_VAR_EXP);
 	ast_add_branch(ast, parse_var_exp(par), i++);
 	parser_next(par, 42);
-	next = par->tok->e_type;
-	if (command_tok(next) == 1)
+	if (command_tok(par->next) == 1)
 		return (ast);
 	ast_add_branch(ast, parse_var_exp(par), i++);
 	parser_next(par, 42);
-	next = par->tok->e_type;
 	return (ast);
 }
 
