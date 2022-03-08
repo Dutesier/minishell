@@ -3,62 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   parser_logic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:58:17 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/15 17:11:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:42:40 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast *parse_compound(t_par *par)
+static int		var_parse(t_ast *ast, t_par *par, int *i);
+static t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x);
+
+t_ast	*parse_compound(t_par *par)
 {
-	t_ast *ast;
-	int i;
-	int x;
-	unsigned int next;
+	t_ast			*ast;
+	int				i;
+	int				x;
 
 	i = 0;
 	x = 0;
 	ast = init_ast(AST_COMPOUND);
-	next = par->tok->e_type;
-	if (next == TOK_DOLLAR && !parse_exp_status(par))
+	if (par->next == TOK_DOLLAR && !parse_exp_status(par))
 	{
 		ast_add_branch(ast, parse_expansion(par), i++);
-		x++; // NOT SURE...
-		next = par->tok->e_type;
+		x++;
 	}
-	next = par->tok->e_type;
-	if (command_tok(next) == 2)
+	if (command_tok(par->next) == 2)
 	{
 		x++;
 		ast_add_branch(ast, parse_redirect(par), i++);
 	}
-	else if (next != TOK_EOL && next != TOK_SEMI)
+	else if (par->next != TOK_EOL && par->next != TOK_SEMI)
 	{
 		ast_add_branch(ast, parse_word(par), i++);
 		parser_next(par, 42);
 	}
-	next = par->tok->e_type;
-	if (next == TOK_EQUALS)
-	{
-		ast->branches[0]->e_type = AST_VARIABLE;
-		ast_add_branch(ast, parse_variable(par), i++);
-		next = par->tok->e_type;
-		if (next == TOK_SPACE)
-		{
-			free(par->tok);
-			parser_next(par, 42);
-			next = par->tok->e_type;
-		}
-		if (next == TOK_SEMI || next == TOK_EOL) //FIXME:handle for pipe
+	return (parse_compound_two(par, ast, i, x));
+}
+
+static t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x)
+{
+	if (par->next == TOK_EQUALS)
+		if (!var_parse(ast, par, &i))
 			return (ast);
-	}
-	if (next == TOK_SEMI || next == TOK_EOL)
+	if (par->next == TOK_SEMI || par->next == TOK_EOL)
 	{
 		if (i == 1 && ast->branches[0]->e_type != AST_VAR_EXP)
-			ast->branches[0]->e_type = AST_COMMAND; //FIXME: What happens when a var expansion happens first??? It is getting set to COMMAND
+			ast->branches[0]->e_type = AST_COMMAND;
 		return (ast);
 	}
 	else
@@ -66,11 +58,24 @@ t_ast *parse_compound(t_par *par)
 		i += command_parser(ast, par, i, x);
 		return (ast);
 	}
-	return (ast); // FIXME Should null terminate? 
+	return (ast);
 }
 
+static int	var_parse(t_ast *ast, t_par *par, int *i)
+{
+	ast->branches[0]->e_type = AST_VARIABLE;
+	ast_add_branch(ast, parse_variable(par), *i++);
+	if (par->next == TOK_SPACE)
+	{
+		free(par->tok);
+		parser_next(par, 42);
+	}
+	if (par->next == TOK_SEMI || par->next == TOK_EOL)
+		return (0);
+	return (1);
+}
 
-t_ast *parse_redirect(t_par *par)
+t_ast	*parse_redirect(t_par *par)
 {
 	t_ast			*ast;
 	int				i;
@@ -79,7 +84,7 @@ t_ast *parse_redirect(t_par *par)
 	ast = init_ast(AST_REDIRECT);
 	i = 0;
 	next = par->tok->e_type;
-	ast_add_branch(ast, parse_word(par), i++); // The redirect Token
+	ast_add_branch(ast, parse_word(par), i++);
 	parser_next(par, 42);
 	next = par->tok->e_type;
 	if (next == TOK_SPACE)
@@ -88,7 +93,7 @@ t_ast *parse_redirect(t_par *par)
 		parser_next(par, 42);
 		next = par->tok->e_type;
 	}
-	ast_add_branch(ast, parse_word(par), i++); // The file to redirect to or from
+	ast_add_branch(ast, parse_word(par), i++);
 	parser_next(par, 42);
 	next = par->tok->e_type;
 	if (next == TOK_SPACE)
@@ -98,4 +103,3 @@ t_ast *parse_redirect(t_par *par)
 	}
 	return (ast);
 }
-

@@ -5,30 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2022/01/21 16:13:47 by dareias-         ###   ########.fr       */
+/*   Created: 2022/03/07 22:35:51 by dareias-          #+#    #+#             */
+/*   Updated: 2022/03/07 23:04:11 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tok *init_token(char *value, int type)
+t_tok	*init_token(char *value, int type)
 {
-	t_tok *tok;
-	tok = malloc(sizeof(t_tok));
-	if (!tok)
-		return (NULL);
+	t_tok	*tok;
+
+	tok = malloc_or_exit(sizeof(t_tok));
 	tok->value = value;
 	tok->e_type = type;
 	return (tok);
 }
 
-t_lex *init_lexer(char *src)
+t_lex	*init_lexer(char *src)
 {
-	t_lex *lex;
+	t_lex	*lex;
 
-	lex = malloc(sizeof(t_lex));
-	if (!lex)
-		return (NULL);
+	lex = malloc_or_exit(sizeof(t_lex));
 	lex->i = 0;
 	lex->c = src[lex->i];
 	lex->src = src;
@@ -37,7 +35,7 @@ t_lex *init_lexer(char *src)
 	return (lex);
 }
 
-void lex_next(t_lex *lex)
+void	lex_next(t_lex *lex)
 {
 	if (lex->i < lex->size && lex->c != '\0')
 	{
@@ -48,32 +46,16 @@ void lex_next(t_lex *lex)
 		printf("*** ERROR: lex->i %i not < then lex->size %i or lex->c %c = NTR\n", lex->i, lex->size, lex->c);
 }
 
-t_tok *lex_get_word(t_lex *lex)
+t_tok	*lex_get_word(t_lex *lex)
 {
 	char	*value;
 	int		i;
 	int		x;
-	int		q;
-	int     store;
+	int		store;
 
-	i = 0;
 	x = lex->i;
 	store = 0;
-	while (!ft_isforb(lex->c))
-	{
-		q = ft_isquote(lex->c);
-		if (q > 0)
-		{
-			i++;
-			lex_next(lex);
-			store = q;
-			q = nextquote(lex, q); // REUSING Q for a whole diff thing
-			if (q > 0)
-				i += q - 1;
-		}
-		i++;
-		lex_next(lex);
-	}
+	i = lex_get_word_core(lex, &store);
 	value = ft_dupnoq(ft_substr(lex->src, x, i));
 	if (!value)
 	{	
@@ -85,7 +67,7 @@ t_tok *lex_get_word(t_lex *lex)
 	return (init_token(value, TOK_WORD));
 }
 
-t_tok *next_token(t_lex *lex)
+t_tok	*next_token(t_lex *lex)
 {
 	t_tok	*tok;
 
@@ -104,4 +86,3 @@ t_tok *next_token(t_lex *lex)
 	}
 	return (init_token(NULL, TOK_EOL));
 }
-

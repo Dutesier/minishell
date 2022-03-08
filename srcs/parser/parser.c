@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:38:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/28 19:00:15 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:30:25 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,9 @@ void print_ast(t_ast *ast, int l)
 	{
 		print_ast(ast->branches[i++], l);
 	}
+}
+
+void	update_next(t_par *par, unsigned int *next)
+{
+	*next = par->tok->e_type;
 }

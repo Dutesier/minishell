@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:36:13 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/14 20:00:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/07 22:46:45 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /*
  *
- * We read from comm->shell->io.my_pipe[0] and write to comm->shell->io.my_pipe[1]
+ * We read from comm->shell->io.my_pipe[0] and 
+ * write to comm->shell->io.my_pipe[1]
  * if comm->is_ft then the fds we have are not duplicated
  * 
 */
@@ -75,12 +76,12 @@ static int	getting_piped_and_piping(t_comm *comm)
 		DEBUG(fprintf(stderr, "Closed (%i)\n", comm->shell->io.current_out));
 	}
 	if (dup2(comm->shell->io.my_pipe[0], STDIN_FILENO) < 0)
-		return (print_error(IN_N_OUT_FAIL) + fprintf(stderr, "comm->shell->io.my_pipe[0] = (%i)\n", comm->shell->io.my_pipe[0]));
+		return (print_error(IN_N_OUT_FAIL));
 	comm->shell->io.current_in = comm->shell->io.my_pipe[0];
 	if (pipe(comm->shell->io.my_pipe) < 0)
 		return (print_error(IN_N_OUT_FAIL));
 	if (dup2(comm->shell->io.my_pipe[1], STDOUT_FILENO) < 0)
-		return (print_error(IN_N_OUT_FAIL) + fprintf(stderr, "comm->shell->io.my_pipe[1] = (%i)\n", comm->shell->io.my_pipe[1]));
+		return (print_error(IN_N_OUT_FAIL));
 	comm->shell->io.current_out = comm->shell->io.my_pipe[1];
 	return (0);
 }

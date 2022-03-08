@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:50:03 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/04 19:27:46 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:30:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // parser
 int		parse_line(t_shell *shell);
 void	print_ast(t_ast *ast, int l);
+void	update_next(t_par *par, unsigned int *next);
 
 // lexer
 t_tok	*init_token(char *value, int type);
@@ -30,6 +31,7 @@ t_tok	*token_switch_two(char c, t_lex *lex);
 t_tok	*token_switch_three(t_lex *lex);
 int		nextquote(t_lex *lex, int q);
 char	*ft_dupnoq(char *s);
+int		lex_get_word_core(t_lex *lex, int *store);
 
 // ast
 t_ast	*init_ast(int type);

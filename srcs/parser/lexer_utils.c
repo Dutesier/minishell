@@ -6,44 +6,30 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:12:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/01/21 15:44:46 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:09:09 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tok *token_switch(char c, t_lex *lex)
+t_tok	*token_switch(char c, t_lex *lex)
 {
 	if (lex->c == ';')
 		return (init_token(";", TOK_SEMI));
 	if (lex->c == '$')
 		return (init_token("$", TOK_DOLLAR));
-	/*if (lex->c == '(')
-		return (init_token("(", TOK_OPAREN));
-	if (lex->c == ')')
-		return (init_token(")", TOK_CPAREN));*/
 	if (lex->c == '~')
 		return (init_token("~", TOK_TILDE));
-	//if (lex->c == '/')
-	//	return (init_token("/", TOK_BSLASH));
 	if (lex->c == '|')
-	{
 		return (init_token("|", TOK_PIPE));
-	}
-	//if (lex->c == '.')
-	//	return (init_token(".", TOK_DOT));
 	if (lex->c == '=')
 		return (init_token("=", TOK_EQUALS));
-	/*if (lex->c == '\'')
-		return (init_token("\'", TOK_S_QUOTE));
-	if (lex->c == '\"')
-		return (init_token("\"", TOK_D_QUOTE));*/
 	if (lex->c == '\n')
 		return (init_token("EOL", TOK_EOL));
 	return (token_switch_two(c, lex));
 }
 
-t_tok *token_switch_two(char c, t_lex *lex)
+t_tok	*token_switch_two(char c, t_lex *lex)
 {
 	if (c == '<')
 	{
@@ -66,9 +52,9 @@ t_tok *token_switch_two(char c, t_lex *lex)
 	return (token_switch_three(lex));
 }
 
-t_tok *token_switch_three(t_lex *lex)
+t_tok	*token_switch_three(t_lex *lex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_isspace(lex->c))
@@ -85,7 +71,7 @@ t_tok *token_switch_three(t_lex *lex)
 
 int	nextquote(t_lex *lex, int q)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	lex->c = lex->src[lex->i];
@@ -99,11 +85,10 @@ int	nextquote(t_lex *lex, int q)
 	if (lex->c == '\0')
 	{
 		if (q == 1)
-			get_quote(lex, '\''); //FIXME here we need a program that gets rest of str - probably good instance to use gnl
+			get_quote(lex, '\'');
 		else
-			get_quote(lex, '\"'); //FIXME here we need a program that gets rest of str - probably good instance to use gnl
+			get_quote(lex, '\"');
 		return (i + nextquote(lex, q));
 	}
 	return (i);
 }
-

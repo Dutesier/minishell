@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:38:21 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/15 17:19:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:33:06 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ t_par *init_parser(t_lex *lex)
 {
 	t_par *par;
 
-	par = malloc(sizeof(t_par));
-	if (!par)
-		return (NULL);
+	par = malloc_or_exit(sizeof(t_par));
 	par->lex = lex;
 	par->tok = next_token(lex);
+	par->next = par->tok->e_type;
 	return (par);
 }
 
@@ -28,6 +27,7 @@ t_tok *parser_next(t_par *par, unsigned int type)
 {
 	//DEBUG(fprintf(stderr, "Previous Token: [%s] (%s)\nGetting next token...\n", tok_to_str(par->tok->e_type), par->tok->value));
 	par->tok = next_token(par->lex);
+	par->next = par->tok->e_type;
 	//DEBUG(fprintf(stderr, "New Token: [%s] (%s)\n", tok_to_str(par->tok->e_type), par->tok->value));
 	if (par->tok->e_type != type && type != 42)
 	{
