@@ -19,9 +19,7 @@ int	change_out(int old_out_fd, char *new_out, int redir)
 	out = ft_getfd(new_out, redir);
 	if (out == -1)
 		return (print_error(FILE_OPEN_FAIL) - 2);
-	else
-		DEBUG(fprintf(stderr, "Got FD %s(%i)%s for %s%s%s\n", ft_color(YEL), out, ft_color(WHT),ft_color(YEL), new_out, ft_color(WHT)));
+	DEBUG(fprintf(stderr, "Got FD %s(%i)%s for %s%s%s\n", ft_color(YEL), out, ft_color(WHT),ft_color(YEL), new_out, ft_color(WHT)));
 	dup2(out, old_out_fd);
-	close(out);
 	return (out);
 }

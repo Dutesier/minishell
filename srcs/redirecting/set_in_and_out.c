@@ -63,8 +63,7 @@ int	set_in_and_out(t_comm *comm)
 		}
 		else if (comm->redir.writes) // >
 		{
-			if (comm->shell->io.current_out != STDOUT_FILENO)
-				close(comm->shell->io.current_out);
+			close(comm->shell->io.current_out);
 			comm->shell->io.current_out = change_out(STDOUT_FILENO, comm->outfile, comm->redir.writes);
 			reset_out = 0;
 			if (comm->shell->io.current_out < 0)
@@ -73,8 +72,7 @@ int	set_in_and_out(t_comm *comm)
 		}
 		else if (comm->redir.appends) //  >>
 		{
-			if (comm->shell->io.current_out != STDOUT_FILENO)
-				close(comm->shell->io.current_out);
+			close(comm->shell->io.current_out);
 			comm->shell->io.current_out = change_out(STDOUT_FILENO, comm->outfile, comm->redir.appends);
 			reset_out = 0;
 			if (comm->shell->io.current_out < 0)
