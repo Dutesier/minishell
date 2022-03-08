@@ -12,35 +12,50 @@
 
 #include "minishell.h"
 
-//static int ft_loop_echo(t_comm *ft_comm, int n);
+static int	echo_n_flag(char *flag);
 
 int	ft_echo(t_comm *ft_comm)
 {
-	char	*str;
-	int		n;
-	int		i;
+	int	n;
+	int	i;
+	int printed;
 
 	n = 0;
 	i = 1;
-	str = NULL;
+	printed = 0;
 	if (ft_comm->args[1])
-	{
-		if (ft_strcmp(ft_comm->args[1], "-n", ft_min(ft_strlen(ft_comm->args[1]), 2))) // This needs to be changed to include "-nnnnnn"
+		if (echo_n_flag(ft_comm->args[1]))
 		{
 			n = 1;
 			i = 2;
 		}
-		str = ft_comm->args[i];
-	}
 	while (ft_comm->args[i])
 	{
 		printf("%s", ft_comm->args[i++]);
+		printed = 1;
 		if (ft_comm->args[i])
 			printf(" ");
 	}
-	if (n == 0)
+	if (n == 0 && printed)
 		printf("%c", '\n');
 	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	return (0);
 }
 
+static int	echo_n_flag(char *flag)
+{
+	int	i;
+
+	i = 0;
+	if (flag[i++] != '-')
+		return (0);
+	if (flag[i] == '\0')
+		return (0);
+	while (flag[i] != '\0')
+	{
+		if (flag[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
