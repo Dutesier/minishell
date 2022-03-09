@@ -31,8 +31,11 @@ t_ast	*parse_compound(t_par *par)
 	}
 	if (command_tok(par->next) == 2)
 	{
-		x++;
-		ast_add_branch(ast, parse_redirect(par), i++);
+		while (command_tok(par->next) == 2)
+		{
+			x++;
+			ast_add_branch(ast, parse_redirect(par), i++);
+		}
 	}
 	else if (par->next != TOK_EOL && par->next != TOK_SEMI)
 	{
