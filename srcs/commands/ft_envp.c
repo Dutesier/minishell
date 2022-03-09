@@ -49,21 +49,13 @@ char	**rm_envp(char **envp, char *rm, int i, int l)
 		if (!found && ft_strcmp_two(rm, envp[i]))
 		{
 			safe_free(envp[i]);
-			found = 1;
-			i++;
+			found = ++i;
 		}
 		if (!envp[i])
 			break ;
 		new[l++] = envp[i++];
 	}
-	new[l] = NULL;
-	if (i == l)
-	{
-		free(new);
-		return (envp);
-	}
-	free(envp);
-	return (new);
+	return (rm_envp_two(new, envp, i, l));
 }
 
 char	*whole_var_from_vars(char **vars, char *var)

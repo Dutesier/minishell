@@ -38,6 +38,18 @@ void	rm_var(t_shell *shell, char *var, int size)
 	return ;
 }
 
+char	**rm_envp_two(char **new, char **envp, int i, int l)
+{
+	new[l] = NULL;
+	if (i == l)
+	{
+		free(new);
+		return (envp);
+	}
+	free(envp);
+	return (new);
+}
+
 int	find_next_eq(char *str)
 {
 	int	i;

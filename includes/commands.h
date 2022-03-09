@@ -24,6 +24,7 @@ void	ft_exit(t_comm *ft_comm);
 // Envp
 char	**add_envp(char **envp, char *add);
 char	**rm_envp(char **envp, char *rm, int i, int l);
+char	**rm_envp_two(char **new, char **envp, int i, int l);
 void	rm_var(t_shell *shell, char *var, int size);
 int		find_next_eq(char *str);
 int		change_envp(char **envp, int where, char *new_val);
