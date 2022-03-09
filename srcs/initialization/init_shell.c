@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:35:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/07 22:35:06 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:05:04 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	handle_sig(int sig)
 {
 	if (sig == SIGINT)
 	{
-	    printf("\n");
-    	rl_on_new_line();
-    	rl_replace_line("", 0); // Clear the previous text (commented out for home dev)
-    	rl_redisplay();
-    }
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 	else
 		fprintf(stderr, "ERROR: SIGNAL %i\n", sig);
 }
@@ -36,12 +36,12 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->prompt = NULL;
 	shell->sa.sa_handler = &handle_sig;
 	shell->sa.sa_flags = SA_RESTART;
-    shell->io.save_in = -1;
+	shell->io.save_in = -1;
 	shell->io.save_out = -1;
 	shell->io.saved_in = 0;
 	shell->io.saved_out = 0;
-    shell->io.current_in = STDIN_FILENO;
-    shell->io.current_out = STDOUT_FILENO;
+	shell->io.current_in = STDIN_FILENO;
+	shell->io.current_out = STDOUT_FILENO;
 	shell->io.my_pipe[0] = -2;
 	shell->io.my_pipe[1] = -2;
 	init_termcaps(shell);

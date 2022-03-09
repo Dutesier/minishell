@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unpack_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:03:09 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/04 20:11:58 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:39:24 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,11 @@ int	exp_needed(t_shell *shell, t_ast *father, char *og_str, int dqindex)
 	new_str = malloc(sizeof(char) * (j + 1));
 	if (!new_str)
 		return (0);
-	while (og_str[i] != '\0')
+	while (og_str[i++] != '\0')
 	{
 		if (og_str[i] == '$')
 			break ;
 		new_str[i] = og_str[i];
-		i++;
 	}
 	j = i;
 	while (og_str[i] != '\0' && og_str[i] != ' ')
@@ -114,19 +113,17 @@ char	*getvar_from_dq(t_shell *shell, char *str)
 
 	i = 0;
 	len = 0;
-	while (str[i] != '\0')
+	while (str[i++] != '\0')
 	{
 		if (str[i] == '$')
 			break ;
-		i++;
 	}
 	if (str[i] == '\0')
 		return (NULL);
-	while (str[i + len] != '\0')
+	while (str[i + len++] != '\0')
 	{
-		if (str[i + len] == ' ') //some othe chars too?
+		if (str[i + len] == ' ')
 			break ;
-		len++;
 	}
 	if (str[i + len] != '\0')
 		len = len - 1;

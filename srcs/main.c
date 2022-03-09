@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:51:49 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/01 14:39:49 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:31:46 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	main(int argc, char *argv[], char **envp)
 	
 	// FOR TESTING ONLY
 	// argv[2] will contains the content of the line for example "echo something ; ls -la"
-	if (argc >= 3 && !ft_strcmp(argv[1], "-c", 3))
-	{
-		int exit_status = interactive_mode(&shell, argv);
-		exit(exit_status);
-	}
+	// if (argc >= 3 && !ft_strcmp(argv[1], "-c", 3))
+	// {
+	// 	// int exit_status = interactive_mode(&shell, argv);
+	// 	exit(exit_status);
+	// }
     // Above this is the function that normally launch your minishell, instead
     // of reading line with a get_next_line or a read() on fd 0, you just have to get
     // the argv[2] (which contains the content) and execute it.
@@ -43,8 +43,8 @@ int	main(int argc, char *argv[], char **envp)
 
 	if (argc > 1 && ft_strcmp(argv[1], "-debug", ft_min(ft_strlen(argv[1]), 6)))
 		shell.debug = 1;
-	else if (argc > 1)
-		return (interactive_mode(&shell, argv));
+	// else if (argc > 1)
+	// 	return (interactive_mode(&shell, argv));
 	shell.loop = 1;
 	while (shell.loop)
 	{

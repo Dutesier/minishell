@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils_two.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:30:43 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/07 22:30:45 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:27:56 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ int	set_new_var(t_comm *ft_comm, int i, int save)
 {
 	char	*var;
 	
-	DEBUG(fprintf(stderr, "SET NEW VAR\n");)
-
 	if (!ft_comm->args[i + 1])
 		add_variable(ft_comm->shell, ft_comm->args[i++], NULL);
-	else if (ft_comm->args[i + 1][0] == '='
-		&& ft_comm->args[i + 1][1] == '\0')
+	else if (ft_comm->args[i + 1][0] == '=' && ft_comm->args[i + 1][1] == '\0')
 	{
 		if (!ft_comm->args[i + 2])
 		{
@@ -78,9 +75,7 @@ int	reset_var_envp(t_comm *ft_comm, int i, float var_set) // Var is set in envp
 	char *var;
 	char *third_arg;
 
-	DEBUG(fprintf(stderr, "RESET VAR ENVP\n");)
-	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '='
-		&& ft_comm->args[i + 1][1] == '\0')
+	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '=' && ft_comm->args[i + 1][1] == '\0')
 	{
 		var = ft_comm->args[i + 2];
 		third_arg = var;

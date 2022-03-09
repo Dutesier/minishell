@@ -6,15 +6,15 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:11:08 by dareias-          #+#    #+#             */
-/*   Updated: 2021/12/29 19:47:26 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:03:16 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-float var_is_set(t_shell *shell, char *var)
+float	var_is_set(t_shell *shell, char *var)
 {
-	int in_envp;
+	int	in_envp;
 	int	in_vars;
 
 	in_envp = var_in_envp(shell->envp, var);
@@ -28,19 +28,17 @@ float var_is_set(t_shell *shell, char *var)
 	return (-1);
 }
 
-int var_in_vars(char **vars, char *var)
+int	var_in_vars(char **vars, char *var)
 {
-	int i;
-	int var_found;
+	int	i;
+	int	var_found;
 
 	i = 0;
 	var_found = 0;
 	if (!vars || !vars[0])
 		return (-1);
-	//printf("vars[0] %s\n", vars[0]);
 	while (vars[i] != NULL)
 	{
-		DEBUG(fprintf(stderr, "Comparing vars[%i] %s with %s\n", i, vars[i], var));
 		if (ft_strcmp_two(vars[i], var))
 		{
 			var_found = 1;
@@ -53,7 +51,7 @@ int var_in_vars(char **vars, char *var)
 	return (-1);
 }
 
-int var_in_envp(char **envp, char *var)
+int	var_in_envp(char **envp, char *var)
 {
 	int		i;
 	int		var_found;
@@ -62,12 +60,10 @@ int var_in_envp(char **envp, char *var)
 	var_found = 0;
 	if (!envp || !envp[0])
 		return (-1);
-	//printf("var in envp %s\n", var);
 	while (envp[i] != NULL)
 	{
 		if (ft_strcmp_envp(envp[i], var))
 		{
-			//printf("Found match: %s with %s\n", envp[i], var);
 			var_found = 1;
 			break ;
 		}
@@ -78,13 +74,13 @@ int var_in_envp(char **envp, char *var)
 	return (-1);
 }
 
-char *expansion_from_envp(t_shell *shell, int where)
+char	*expansion_from_envp(t_shell *shell, int where)
 {
-	int i;
-	int j;
-	int m;
-	char *expands;
-	char *var;
+	int		i;
+	int		j;
+	int		m;
+	char	*expands;
+	char	*var;
 
 	i = 0;
 	j = 0;
@@ -95,19 +91,14 @@ char *expansion_from_envp(t_shell *shell, int where)
 	if (var[i++] == '\0')
 		return (NULL);
 	j = i;
-	while (var[j] != '\0')
-	{
+	while (var[j++] != '\0')
 		m++;
-		j++;
-	}
 	expands = malloc(sizeof(char) * (m + 1));
 	if (!expands)
 		return (NULL);
 	j = 0;
 	while (var[i] != '\0')
-	{
 		expands[j++] = var[i++];
-	}
 	expands[j] = '\0';
 	return (expands);
 }

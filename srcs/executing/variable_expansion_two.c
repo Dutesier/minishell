@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_ft_command.c                                   :+:      :+:    :+:   */
+/*   variable_expansion_two.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 22:39:48 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 16:36:11 by jibanez-         ###   ########.fr       */
+/*   Created: 2022/03/09 16:58:52 by jibanez-          #+#    #+#             */
+/*   Updated: 2022/03/09 17:01:14 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_ft_comm(t_comm *ft_comm)
+//move to a file
+void	while_replace_vars(int x, t_ast *ast, t_shell *shell)
 {
-	if (ft_comm->is_ft == 1)
-		return (ft_cd(ft_comm));
-	if (ft_comm->is_ft == 2)
-		return (ft_pwd(ft_comm));
-	if (ft_comm->is_ft == 3)
-		return (ft_echo(ft_comm));
-	if (ft_comm->is_ft == 4)
-		return (ft_env(ft_comm));
-	if (ft_comm->is_ft == 5)
-		return (ft_export(ft_comm));
-	if (ft_comm->is_ft == 6)
-		return (ft_unset(ft_comm));
-	if (ft_comm->is_ft == 7)
-		ft_exit(ft_comm);
-	return (-1);
+	int	i;
+
+	i = 0;
+	while (x && ast->branches && ast->branches[i] != NULL)
+		replace_variables(shell, ast->branches[i++], ast);
+}
+
+//move to a file
+void	init_token_branch(t_ast *ast, t_ast *temp, t_shell *shell, int c)
+{
+	if (ast->branches[c] != NULL)
+		temp->my_tok = init_token(ft_variable(shell,
+					ast->branches[c]->my_tok->value), TOK_WORD);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 19:10:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:35:53 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ int	run_command(t_comm *comm)
 
 	if (set_in_and_out(comm))
 		return (1);
-	if (comm->shell->debug)
-	{
-		comm_printer(comm);
-		fprintf(stderr, "********* FINISHED DEBUGGING *********\n");
-		fprintf(stderr, "%sCommand output:%s \n", ft_color(GRN), ft_color(WHT));
-	}
 	signal(SIGINT, comm_sig);
 	if (comm->is_ft)
 		return (run_ft_command(comm));
@@ -49,7 +43,6 @@ int	run_command(t_comm *comm)
 	else
 	{
 		waitpid(pid, &sta, 0);
-		DEBUG(fprintf(stderr, "**************Execve finished**************\n"));
 		sta = WEXITSTATUS(sta);
 		if (sta)
 			return (sta);

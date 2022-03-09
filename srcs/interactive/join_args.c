@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   join_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 20:06:34 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/08 19:34:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:09:09 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *join_args(char **argv, int argc)
+char	*join_args(char **argv, int argc)
 {
-	int i;
-	char *line;
-	char *temp;
-	
+	int		i;
+	char	*line;
+	char	*temp;
+
 	i = 1;
 	line = "";
 	temp = NULL;
@@ -34,4 +34,3 @@ char *join_args(char **argv, int argc)
 	}
 	return (line);
 }
-

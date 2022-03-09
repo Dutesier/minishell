@@ -44,6 +44,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/executing/set_variables.c \
 				srcs/executing/set_variables_utils.c \
 				srcs/executing/variable_expansion.c \
+				srcs/executing/variable_expansion_two.c \
 				srcs/executing/variables.c \
 				srcs/executing/unpack_quotes.c \
 				srcs/executing/unpack_quotes_utils.c \

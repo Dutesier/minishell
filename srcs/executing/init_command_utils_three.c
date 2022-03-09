@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_command_utils_three.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:40:15 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/07 22:40:17 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:34:35 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ int	store_args(t_comm *comm, t_ast *ast, int a)
 	return (x);
 }
 
+static int	ft_ar_calculation(int ar)
+{
+	ar = ar / 10;
+	if (ar == 0)
+		ar = -1;
+	return (ar);
+}
+
 static int	store_args_core(t_comm *comm, t_ast *ast, int x, int ar)
 {
 	int	i;
@@ -71,21 +79,20 @@ static int	store_args_core(t_comm *comm, t_ast *ast, int x, int ar)
 	{
 		while (ast->branches[ar % 10]->branches[i] != NULL)
 		{
-			if (ast->branches[ar % 10]->branches[i]->my_tok->e_type == TOK_SPACE)
+			if (ast->branches[ar % 10]->branches[i]
+				->my_tok->e_type == TOK_SPACE)
 				i++;
-			else if (ast->branches[ar % 10]->branches[i]->e_type == AST_VAR_EXP)
-				comm->args[x++] = var_expand(ast->branches[ar % 10]->branches[i++]);
+			else if (ast->branches[ar % 10]
+				->branches[i]->e_type == AST_VAR_EXP)
+				comm->args[x++] = var_expand(ast->branches[ar % 10]
+						->branches[i++]);
+			else if (ast->branches[ar % 10]->branches[i]->my_tok->value != NULL)
+					comm->args[x++] = ast->branches[ar % 10]
+					->branches[i++]->my_tok->value;
 			else
-			{
-				if (ast->branches[ar % 10]->branches[i]->my_tok->value != NULL)
-					comm->args[x++] = ast->branches[ar % 10]->branches[i++]->my_tok->value;
-				else
-					i++;
-			}
+				i++;
 		}
-		ar = ar / 10;
-		if (ar == 0)
-			ar = -1;
+		ar = ft_ar_calculation(ar);
 	}
 	return (x);
 }
