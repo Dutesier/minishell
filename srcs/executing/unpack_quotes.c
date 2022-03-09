@@ -82,7 +82,7 @@ int	exp_needed(t_shell *shell, t_ast *father, char *og_str, int dqindex)
 	if (!variable_expanded)
 		variable_expanded = ft_strdup("");
 	j = dq_expanded_len(og_str) + ft_strlen(variable_expanded);
-	new_str = malloc(sizeof(char) * (j + 1));
+	new_str = malloc_or_exit(sizeof(char) * (j + 1));
 	if (!new_str)
 		return (0);
 	while (og_str[i++] != '\0')

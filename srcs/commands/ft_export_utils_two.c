@@ -15,7 +15,7 @@
 int	set_new_var(t_comm *ft_comm, int i, int save)
 {
 	char	*var;
-	
+
 	if (!ft_comm->args[i + 1])
 		add_variable(ft_comm->shell, ft_comm->args[i++], NULL);
 	else if (ft_comm->args[i + 1][0] == '=' && ft_comm->args[i + 1][1] == '\0')
@@ -40,19 +40,17 @@ int	set_new_var(t_comm *ft_comm, int i, int save)
 	return (i);
 }
 
-int	reset_var_vars(t_comm *ft_comm, int i, float var_set)
+int	reset_var_vars(t_comm *c, int i, float var_set)
 {
 	char	*var;
 	char	*third_arg;
 	int		save_idx;
 
-	DEBUG(fprintf(stderr, "RESET VAR VARS\n");)
 	save_idx = i;
 	var = NULL;
-	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '='
-		&& ft_comm->args[i + 1][1] == '\0') // Setting the var to a new value and exporting
+	if (c->args[i + 1] && c->args[i + 1][0] == '=' && c->args[i + 1][1] == '\0')
 	{
-		var = ft_comm->args[i + 2];
+		var = c->args[i + 2];
 		third_arg = var;
 		if (!var)
 			var = "";
@@ -63,19 +61,20 @@ int	reset_var_vars(t_comm *ft_comm, int i, float var_set)
 	else
 		i++;
 	if (!var)
-		ft_comm->shell->envp = add_envp(ft_comm->shell->envp, whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[save_idx]));
+		c->shell->envp = add_envp(c->shell->envp,
+				whole_var_from_vars(c->shell->vars, c->args[save_idx]));
 	else
-		update_var(ft_comm->shell, ft_comm->args[save_idx],
-			var, var_set);
+		update_var(c->shell, c->args[save_idx], var, var_set);
 	return (i);
 }
 
-int	reset_var_envp(t_comm *ft_comm, int i, float var_set) // Var is set in envp
+int	reset_var_envp(t_comm *ft_comm, int i, float var_set)
 {
-	char *var;
-	char *third_arg;
+	char	*var;
+	char	*third_arg;
 
-	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '=' && ft_comm->args[i + 1][1] == '\0')
+	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '='
+		&& ft_comm->args[i + 1][1] == '\0')
 	{
 		var = ft_comm->args[i + 2];
 		third_arg = var;
@@ -83,8 +82,6 @@ int	reset_var_envp(t_comm *ft_comm, int i, float var_set) // Var is set in envp
 			var = "";
 		update_var(ft_comm->shell, ft_comm->args[i],
 			var, var_set);
-		//var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
-		//change_envp(ft_comm->shell->envp, where, ft_comm->args[i + 2]);
 		i += 2;
 		if (third_arg)
 			i++;
@@ -117,4 +114,3 @@ int	is_it_lowest(char **sorted_env, char **unsorted, int i)
 	}
 	return (lowest);
 }
-

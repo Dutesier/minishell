@@ -18,11 +18,9 @@ int	ft_echo(t_comm *ft_comm)
 {
 	int	n;
 	int	i;
-	int	printed;
 
 	n = 0;
 	i = 1;
-	printed = 0;
 	if (ft_comm->args[1] && echo_n_flag(ft_comm->args[1]))
 	{
 		n = 1;
@@ -31,13 +29,11 @@ int	ft_echo(t_comm *ft_comm)
 	while (ft_comm->args[i])
 	{
 		printf("%s", ft_comm->args[i++]);
-		printed = 1;
 		if (ft_comm->args[i])
 			printf(" ");
 	}
-	if (n == 0 && printed)
+	if (n == 0)
 		printf("%c", '\n');
-	DEBUG(fprintf(stderr, "Left ft_echo\n"));
 	return (0);
 }
 

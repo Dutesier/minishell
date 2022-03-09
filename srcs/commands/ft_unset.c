@@ -28,10 +28,7 @@ int	ft_unset(t_comm *ft_comm)
 		var_set = var_is_set(sh, ft_comm->args[i]);
 		where = (int)var_set;
 		if (var_set > -1 && var_set - (float)where == 0)
-		{
-			DEBUG(fprintf(stderr, "Removing var from vars %s", ft_comm->args[i]));
 			rm_var_from_vars(sh, ft_comm->args[i]);
-		}
 		else if (var_set > -1)
 		{
 			sh->envp = rm_envp(sh->envp, sh->envp[where], 0, 0);
