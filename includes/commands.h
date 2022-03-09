@@ -31,7 +31,7 @@ int		change_envp(char **envp, int where, char *new_val);
 char	*whole_var_from_vars(char **vars, char *var);
 void	rm_var_from_vars(t_shell *shell, char *var);
 int		set_new_var(t_comm *ft_comm, int i, int save);
-int		reset_var_vars(t_comm *ft_comm, int i, float var_set);
+int		reset_var_vars(t_comm *c, int i, float var_set);
 int		reset_var_envp(t_comm *ft_comm, int i, float var_set);
 
 // EXPORT

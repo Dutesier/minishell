@@ -37,13 +37,13 @@ char	*ft_newpath(char *cmd, char **envp)
 	char	*full_cmd;
 
 	i = 0;
-	if (access(cmd, F_OK) == 0)
+	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	path = ft_split(ft_findpath(envp), ':');
 	while (path[i] != NULL)
 	{
 		full_cmd = ft_append(path[i], cmd);
-		if (access(full_cmd, F_OK) == 0)
+		if (access(full_cmd, X_OK) == 0)
 			return (full_cmd);
 		free(full_cmd);
 		i++;

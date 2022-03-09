@@ -26,7 +26,7 @@ t_comm	*init_command(t_shell *shell, t_ast *ast)
 	init_comm_helper(comm);
 	comm->shell = shell;
 	replace_variables(shell, ast, NULL);
-	unpack_quotes(shell, ast);
+	unpack_quotes(ast);
 	if (variable_as_cmd(ast))
 	{
 		comm->e_type = INVALID;

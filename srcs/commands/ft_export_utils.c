@@ -32,7 +32,6 @@ int	build_unsorted_env(t_comm *ft_comm)
 			failed_exp++;
 		j++;
 	}
-	DEBUG(fprintf(stderr, "mallocing %i (%i + %i + 1)\n", i + failed_exp + 1, i, failed_exp));
 	unsorted_env = malloc(sizeof(char *) * (i + failed_exp + 1));
 	if (!unsorted_env)
 		return (print_error(MEMORY_FAIL));
@@ -53,7 +52,6 @@ static void	add_all_unsorted(t_comm *ft_comm)
 	l = 0;
 	while (ft_comm->shell->envp[i])
 	{
-		DEBUG(fprintf(stderr, "Adding %s to unsorted\n", ft_comm->shell->envp[i]));
 		ft_comm->unsorted_env[l++] = ft_comm->shell->envp[i++];
 	}
 	while (ft_comm->shell->vars && (ft_comm->shell->vars[j] || j % 2 != 0))
