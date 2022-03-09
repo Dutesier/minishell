@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_quotes.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 17:15:05 by dareias-          #+#    #+#             */
+/*   Updated: 2022/03/09 17:15:07 by dareias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -19,7 +31,8 @@ char	*insert_str_in_str(char *str, char *insert, int where)
 
 	if (where > ft_strlen(str) || !insert)
 		return (str);
-	new_str = malloc_or_exit(sizeof(char) * (ft_strlen(str) + ft_strlen(insert) + 1));
+	new_str = malloc_or_exit(sizeof(char) * (ft_strlen(str)
+				+ ft_strlen(insert) + 1));
 	i = 0;
 	n = 0;
 	s = 0;
@@ -61,6 +74,7 @@ void	try_add_expansion(t_shell *shell, int where)
 	char	*exp;
 	char	*new_line;
 	int		i;
+
 	if (!exp_valid_format(shell->line, where + 1))
 		return ;
 	new_line = ft_strdup(shell->line);
@@ -68,19 +82,15 @@ void	try_add_expansion(t_shell *shell, int where)
 	while (exp_valid_format(new_line, (where + 1) + i))
 		i++;
 	exp = ft_substr(new_line, (where + 1), i);
-	DEBUG(fprintf(stderr, "New_line: %s\n", new_line));
-	DEBUG(fprintf(stderr, "EXP: %s\n", exp));
 	expand(shell, &exp);
-	DEBUG(fprintf(stderr, "EXP: %s\n", exp));
 	new_line = remove_old(new_line, where);
 	new_line = insert_str_in_str(new_line, exp, where);
-	DEBUG(fprintf(stderr, "End str: %s", new_line));
 	safe_free(exp);
 	safe_free(shell->line);
 	shell->line = new_line;
 }
 
-int exp_valid_format(char *s, int where)
+int	exp_valid_format(char *s, int where)
 {
 	char	c;
 
@@ -89,4 +99,3 @@ int exp_valid_format(char *s, int where)
 		return (0);
 	return (ft_isalnum(c));
 }
-

@@ -41,12 +41,15 @@ void	ast_add_branch_idx(t_ast *parent, t_ast *child, int i, int idx);
 
 // parser_logic
 t_ast	*parse_compound(t_par *par);
+t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x);
+t_ast	*parse_compound_core(t_ast *ast, t_par *par, int i, int x);
 t_ast	*parse_redirect(t_par *par);
 
 // parser_utils
 t_par	*init_parser(t_lex *lex);
 t_tok	*parser_next(t_par *par, unsigned int type);
 t_ast	*parse_to_ast(t_par *par);
+int		parse_to_ast_core(t_ast *root, t_par *par, int i);
 t_ast	*parse_word(t_par *par);
 t_ast	*parse_variable(t_par *par);
 

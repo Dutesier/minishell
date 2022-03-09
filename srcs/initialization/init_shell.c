@@ -21,8 +21,6 @@ void	handle_sig(int sig)
     	rl_replace_line("", 0); // Clear the previous text (commented out for home dev)
     	rl_redisplay();
     }
-	else
-		fprintf(stderr, "ERROR: SIGNAL %i\n", sig);
 }
 
 void	init_shell(t_shell *shell, char **envp)

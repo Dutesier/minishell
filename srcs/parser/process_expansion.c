@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_expansion.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 17:14:56 by dareias-          #+#    #+#             */
+/*   Updated: 2022/03/09 17:14:57 by dareias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	expand(t_shell *shell, char **exp)
@@ -13,7 +25,7 @@ void	expand(t_shell *shell, char **exp)
 
 char	*remove_old(char *s, int where)
 {
-	char 	*temp;
+	char	*temp;
 	int		i;
 	int		j;
 
@@ -21,12 +33,8 @@ char	*remove_old(char *s, int where)
 	j = 0;
 	while (exp_valid_format(s, (where + 1) + i))
 		i++;
-	if(!s)
-	{
-		DEBUG(fprintf(stderr, "Panic, why am I null????\n");)
+	if (!s)
 		return (NULL);
-	}
-	DEBUG(fprintf(stderr,"Deleting %i elements\n Mallocing %i bytes\nWhere: %i\nOur str: %s\n", i, ft_strlen(s) - i, where, s));
 	temp = malloc_or_exit(sizeof(char) * (ft_strlen(s) - i));
 	while (s[j] != '\0' && j < where)
 	{
@@ -39,7 +47,6 @@ char	*remove_old(char *s, int where)
 		j++;
 	}
 	temp[j] = '\0';
-	DEBUG(fprintf(stderr, "STR without $VAR: %s\n", temp));
 	safe_free(s);
 	return (temp);
 }
