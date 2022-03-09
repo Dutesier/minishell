@@ -42,5 +42,4 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->io.current_out = STDOUT_FILENO;
 	shell->io.my_pipe[0] = -2;
 	shell->io.my_pipe[1] = -2;
-	init_termcaps(shell);
 }

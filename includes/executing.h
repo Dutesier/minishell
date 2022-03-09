@@ -57,11 +57,9 @@ void	while_replace_vars(int x, t_ast *ast, t_shell *shell);
 void	init_token_branch(t_ast *ast, t_ast *temp, t_shell *shell, int c);
 
 // unpack_quotes (&& utils)
-//int		exp_needed(t_shell *shell, t_ast *father, char *og_str, int i);
 int		no_exp_needed(t_ast *son, char *value);
 int		expand_quote(t_ast *father, int i);
 int		unpack_quotes(t_ast *ast);
-char	*getvar_from_dq(t_shell *shell, char *str);
 int		dq_expanded_len(char *str);
 
 // configure_redirs.c

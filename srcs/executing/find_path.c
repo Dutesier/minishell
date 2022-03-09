@@ -43,7 +43,7 @@ char	*ft_newpath(char *cmd, char **envp)
 	while (path[i] != NULL)
 	{
 		full_cmd = ft_append(path[i], cmd);
-		if (access(full_cmd, F_OK) == 0)
+		if (access(full_cmd, X_OK) == 0)
 			return (full_cmd);
 		free(full_cmd);
 		i++;
