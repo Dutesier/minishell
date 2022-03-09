@@ -22,11 +22,12 @@ void	rm_var(t_shell *shell, char *var, int size)
 	size = 0;
 	while (shell->vars[i] != NULL || i % 2 != 0)
 	{
+		printf("%i\n", i);
 		if (ft_strcmp_two(shell->vars[i], var))
 		{
 			free(shell->vars[i++]);
 			if (shell->vars[i++])
-				free(shell->vars[i]);
+				free(shell->vars[i - 1]);
 		}
 		if (shell->vars[i])
 			temp[size++] = shell->vars[i++];

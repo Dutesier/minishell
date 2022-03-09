@@ -36,17 +36,23 @@ char	**add_envp(char **envp, char *add)
 char	**rm_envp(char **envp, char *rm, int i, int l)
 {
 	int		j;
+	int		found;
 	char	**new;
 
 	if (!envp || !envp[0])
 		return (NULL);
 	j = nta_size(envp);
 	new = malloc_or_exit(sizeof(char *) * (j));
-	while (envp[i])
+	found = 0;
+	while (i < j && envp[i])
 	{
-		if (ft_strcmp_two(rm, envp[i]))
-			free(envp[i++]);
-		if (envp[i] == NULL)
+		if (!found && ft_strcmp_two(rm, envp[i]))
+		{
+			safe_free(envp[i]);
+			found = 1;
+			i++;
+		}
+		if (!envp[i])
 			break ;
 		new[l++] = envp[i++];
 	}

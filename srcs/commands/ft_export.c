@@ -55,9 +55,13 @@ int	ft_print_export(t_comm *ft_comm)
 	while (sorted < env_ammount)
 	{
 		next = get_next_lowest_env(sorted_env, ft_comm->unsorted_env);
+		if (next == -1)
+			break ;
+		DEBUG(fprintf(stderr, "Next lowest: (%i) %s\n", next, next != -1 ? ft_comm->unsorted_env[next] : NULL));
 		sorted_env[sorted++] = ft_comm->unsorted_env[next];
 		sorted_env[sorted] = NULL;
 	}
+	sorted_env[sorted] = NULL;
 	print_sorted_export(sorted_env);
 	free(sorted_env);
 	free(ft_comm->unsorted_env);
