@@ -54,6 +54,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/redirecting/fd_closer.c \
 				srcs/redirecting/get_fd.c \
 				srcs/redirecting/set_in_and_out.c \
+				srcs/redirecting/set_in_and_out_two.c \
 				srcs/redirecting/set_pipes.c \
 				srcs/redirecting/ft_heredoc.c \
 	\
