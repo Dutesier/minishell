@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2022/02/28 20:09:05 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:01:06 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@
 # include "reader.h"
 # include "cleaning.h"
 # include "parser.h"
-# include "canonical.h"
 # include "interactive.h"
 # include "initialization.h"
 

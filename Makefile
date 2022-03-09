@@ -104,8 +104,6 @@ SRCS 		:=	srcs/main.c \
 				srcs/cleaning/clean_shell.c \
 				srcs/cleaning/clean_ast.c \
 	\
-				srcs/termcaps/canonical_mode.c\
-	\
 				srcs/handle_error/handle_error.c\
 	\
 

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:35:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 17:39:23 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:02:09 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->io.current_out = STDOUT_FILENO;
 	shell->io.my_pipe[0] = -2;
 	shell->io.my_pipe[1] = -2;
-	init_termcaps(shell);
 }
