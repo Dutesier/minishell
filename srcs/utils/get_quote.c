@@ -34,7 +34,6 @@ char	*store_buffer(char *holder, char *buff)
 
 char	*store_line(char **line, char *holder, int ret)
 {
-	char	*temp;
 	int		i;
 	int		len;
 
@@ -49,14 +48,7 @@ char	*store_line(char **line, char *holder, int ret)
 		i++;
 	}
 	if (i < len)
-	{
-		*line = ft_substr(holder, 0, i + 1);
-		temp = ft_substr(holder, i + 1, ft_strlen(holder));
-		free(holder);
-		holder = ft_strdup(temp);
-		if (temp)
-			free(temp);
-	}
+		store_line_helper(line, holder, NULL, i);
 	else if (ret == 0)
 	{
 		if (!len)
@@ -90,25 +82,7 @@ char	*get_next_line(int fd, char *s)
 		if (ft_strchr('\n', buff) > -1)
 			break ;
 	}
-	if (ret == 0 && !holder[fd])
-	{
-		line = ft_strdup("");
-		return (line);
-	}
-	if (ret == 0 && ft_strlen(holder[fd]) == ft_strchr('\n', holder[fd]))
-	{
-		if (ft_strlen(holder[fd]) == 0)
-			return (NULL);
-		line = ft_strdup(holder[fd]);
-		free(holder[fd]);
-		return (line);
-	}
-	holder[fd] = store_line(&line, holder[fd], ret);
-	if (!holder[fd] && ret == 0 && !line)
-	{
-		return (NULL);
-	}
-	return (line);
+	return (gnl_helper(holder[fd], line, ret));
 }
 
 int	get_quote(t_lex *lex, char q)

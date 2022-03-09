@@ -13,7 +13,6 @@
 #include "minishell.h"
 
 static int		var_parse(t_ast *ast, t_par *par, int *i);
-static t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x);
 
 t_ast	*parse_compound(t_par *par)
 {
@@ -29,23 +28,10 @@ t_ast	*parse_compound(t_par *par)
 		ast_add_branch(ast, parse_expansion(par), i++);
 		x++;
 	}
-	if (command_tok(par->next) == 2)
-	{
-		while (command_tok(par->next) == 2)
-		{
-			x++;
-			ast_add_branch(ast, parse_redirect(par), i++);
-		}
-	}
-	else if (par->next != TOK_EOL && par->next != TOK_SEMI)
-	{
-		ast_add_branch(ast, parse_word(par), i++);
-		parser_next(par, 42);
-	}
-	return (parse_compound_two(par, ast, i, x));
+	return (parse_compound_core(ast, par, i, x));
 }
 
-static t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x)
+t_ast	*parse_compound_two(t_par *par, t_ast *ast, int i, int x)
 {
 	if (par->next == TOK_EQUALS)
 		if (!var_parse(ast, par, &i))

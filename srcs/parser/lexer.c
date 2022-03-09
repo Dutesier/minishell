@@ -42,8 +42,6 @@ void	lex_next(t_lex *lex)
 		lex->i++;
 		lex->c = lex->src[lex->i];
 	}
-	else
-		printf("*** ERROR: lex->i %i not < then lex->size %i or lex->c %c = NTR\n", lex->i, lex->size, lex->c);
 }
 
 t_tok	*lex_get_word(t_lex *lex)

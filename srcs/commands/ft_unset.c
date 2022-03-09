@@ -39,5 +39,5 @@ int	ft_unset(t_comm *ft_comm)
 		}
 		i++;
 	}
-	return (i);
+	return (0);
 }

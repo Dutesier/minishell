@@ -64,6 +64,7 @@ SRCS 		:=	srcs/main.c \
 				srcs/utils/ft_putstr_fd.c \
 				srcs/utils/ft_strings.c \
 				srcs/utils/get_quote.c \
+				srcs/utils/get_quote_utils.c \
 				srcs/utils/ft_is.c \
 				srcs/utils/ft_is_two.c \
 				srcs/utils/x_to_str.c \
@@ -88,7 +89,9 @@ SRCS 		:=	srcs/main.c \
 	\
 				srcs/parser/parser.c \
 				srcs/parser/parser_utils.c \
+				srcs/parser/parser_utils_two.c \
 				srcs/parser/parser_logic.c \
+				srcs/parser/parser_logic_utils.c \
 				srcs/parser/parse_command.c \
 				srcs/parser/parse_expansion.c \
 				srcs/parser/lexer.c \

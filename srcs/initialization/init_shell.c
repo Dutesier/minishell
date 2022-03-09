@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:35:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 17:05:04 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:39:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	handle_sig(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else
-		fprintf(stderr, "ERROR: SIGNAL %i\n", sig);
 }
 
 void	init_shell(t_shell *shell, char **envp)

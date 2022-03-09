@@ -12,19 +12,20 @@
 
 #include "minishell.h"
 
-int	is_compound(t_par *par)
+t_ast	*parse_compound_core(t_ast *ast, t_par *par, int i, int x)
 {
-	if (par->tok->e_type == TOK_WORD)
-		return (1);
-	if (par->tok->e_type == TOK_SPACE)
-		return (1);
-	if (par->tok->e_type == TOK_OPTION)
-		return (1);
-	if (par->tok->e_type == TOK_DQUOTED)
-		return (1);
-	if (par->tok->e_type == TOK_DOT)
-		return (1);
-	if (par->tok->e_type == TOK_BSLASH)
-		return (1);
-	return (0);
+	if (command_tok(par->next) == 2)
+	{
+		while (command_tok(par->next) == 2)
+		{
+			x++;
+			ast_add_branch(ast, parse_redirect(par), i++);
+		}
+	}
+	else if (par->next != TOK_EOL && par->next != TOK_SEMI)
+	{
+		ast_add_branch(ast, parse_word(par), i++);
+		parser_next(par, 42);
+	}
+	return (parse_compound_two(par, ast, i, x));
 }
