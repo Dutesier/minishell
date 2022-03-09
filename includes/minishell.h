@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:52:23 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:01:06 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:52:53 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # else
 #  define IS_LINUX 0
 #  define MAX_PATH 1024
-# endif
-
-// We need to delete this for norminette
-# ifdef DEBUG_MODE
-#  define DEBUG(x) x
-# else
-#  define DEBUG(x)
 # endif
 
 # include <stdio.h>

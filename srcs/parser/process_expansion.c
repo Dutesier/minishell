@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_expansion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:56 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 17:14:57 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:54:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	expand(t_shell *shell, char **exp)
 	char	*temp;
 
 	temp = ft_variable(shell, *exp);
-	DEBUG(fprintf(stderr, "Variable from ft_variable: %s", temp));
 	safe_free(*exp);
 	*exp = temp;
-	DEBUG(fprintf(stderr, "Variable from ft_variable: %s", *exp));
 }
 
 char	*remove_old(char *s, int where)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:38:27 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 19:58:43 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:53:40 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_export(t_comm *ft_comm)
 	while (ft_comm->args[i])
 	{
 		var_set = var_is_set(ft_comm->shell, ft_comm->args[i]);
-		DEBUG(fprintf(stderr, "Var_Set %f\n", var_set);)
 		where = (int)var_set;
 		save = i;
 		if (var_set == -1.0)

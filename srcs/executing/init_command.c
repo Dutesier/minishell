@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 16:28:55 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:54:59 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static int	setup_comm_args(t_comm *comm, t_ast *ast, int c, int a)
 	if (a > 1)
 	{
 		x = store_args(comm, ast, a);
-		DEBUG(fprintf(stderr, "Accessing field %i\n", x));
 		comm->args[x] = NULL;
 	}
 	else

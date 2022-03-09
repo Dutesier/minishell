@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:15:05 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 17:15:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:05:52 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int	exp_valid_format(char *s, int where)
 	c = s[where];
 	if (c == '\0')
 		return (0);
-	return (ft_isalnum(c));
+	return (ft_isalnum(c) || c == '?');
 }

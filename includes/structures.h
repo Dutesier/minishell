@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 19:56:38 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/07 23:31:29 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:53:10 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_lex
 
 typedef struct s_par
 {
-	t_lex		*lex;
-	t_tok		*tok;
-	unsigned	next;
+	t_lex			*lex;
+	t_tok			*tok;
+	unsigned int	next;
 }			t_par;
 
 typedef struct s_ast	t_ast;

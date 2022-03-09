@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:14:15 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 13:30:37 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:54:53 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char	*ft_heredoc(t_comm *comm)
 		return (0);
 	write(temp, str, ft_strlen(str) * sizeof(char));
 	free(str);
-	if (close(temp) < 0)
-		DEBUG(fprintf(stderr, "Could not close HEREDOC (%i)\n", temp));
+	close(temp);
 	return (t);
 }
 

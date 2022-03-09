@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 16:35:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:53:53 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ static int	child_process(t_comm *comm)
 	int	error;
 
 	error = 0;
-	DEBUG(fprintf(stderr, "Inside forked process\n"));
 	if (!comm->is_ft)
 	{
-		DEBUG(fprintf(stderr, "Calling execve\n"));
 		error = execve(comm->cmd, comm->args, comm->shell->envp);
 		if (error < 0)
 			return (print_error(-1));
@@ -84,8 +82,6 @@ int	run_ft_command(t_comm *ft_comm)
 	sta = 0;
 	save_in = STDIN_FILENO;
 	save_out = STDOUT_FILENO;
-	DEBUG(fprintf(stderr, "Entered run ft\n"));
 	sta = exec_ft_comm(ft_comm);
-	DEBUG(fprintf(stderr, "Ran ft_command\n"));
 	return (sta);
 }
