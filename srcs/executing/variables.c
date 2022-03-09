@@ -40,6 +40,7 @@ int var_in_vars(char **vars, char *var)
 	//printf("vars[0] %s\n", vars[0]);
 	while (vars[i] != NULL)
 	{
+		DEBUG(fprintf(stderr, "Comparing vars[%i] %s with %s\n", i, vars[i], var));
 		if (ft_strcmp_two(vars[i], var))
 		{
 			var_found = 1;

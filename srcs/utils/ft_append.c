@@ -30,6 +30,8 @@ char	*ft_strcat(char *str, char *append)
 	int		i;
 	char	*holder;
 
+	if (!append)
+		return (ft_strdup(str));
 	size = ft_strlen(str) + ft_strlen(append);
 	i = 0;
 	holder = (char *)malloc(sizeof(char) * (size + 1));

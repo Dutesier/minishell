@@ -15,6 +15,8 @@
 int	set_new_var(t_comm *ft_comm, int i, int save)
 {
 	char	*var;
+	
+	DEBUG(fprintf(stderr, "SET NEW VAR\n");)
 
 	if (!ft_comm->args[i + 1])
 		add_variable(ft_comm->shell, ft_comm->args[i++], NULL);
@@ -44,29 +46,53 @@ int	set_new_var(t_comm *ft_comm, int i, int save)
 int	reset_var_vars(t_comm *ft_comm, int i, float var_set)
 {
 	char	*var;
+	char	*third_arg;
+	int		save_idx;
 
+	DEBUG(fprintf(stderr, "RESET VAR VARS\n");)
+	save_idx = i;
+	var = NULL;
 	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '='
-		&& ft_comm->args[i + 1][1] == '\0')
+		&& ft_comm->args[i + 1][1] == '\0') // Setting the var to a new value and exporting
 	{
-		update_var(ft_comm->shell, ft_comm->args[i],
-			ft_comm->args[i + 2], var_set);
-		var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
-		i += 3;
+		var = ft_comm->args[i + 2];
+		third_arg = var;
+		if (!var)
+			var = "";
+		i += 2;
+		if (third_arg)
+			i++;
 	}
 	else
-		var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i++]);
-	if (var)
-		ft_comm->shell->envp = add_envp(ft_comm->shell->envp, var);
+		i++;
+	if (!var)
+		ft_comm->shell->envp = add_envp(ft_comm->shell->envp, whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[save_idx]));
+	else
+		update_var(ft_comm->shell, ft_comm->args[save_idx],
+			var, var_set);
 	return (i);
 }
 
-int	reset_var_envp(t_comm *ft_comm, int i, int where)
+int	reset_var_envp(t_comm *ft_comm, int i, float var_set) // Var is set in envp
 {
+	char *var;
+	char *third_arg;
+
+	DEBUG(fprintf(stderr, "RESET VAR ENVP\n");)
 	if (ft_comm->args[i + 1] && ft_comm->args[i + 1][0] == '='
 		&& ft_comm->args[i + 1][1] == '\0')
 	{
-		change_envp(ft_comm->shell->envp, where, ft_comm->args[i + 2]);
-		i += 3;
+		var = ft_comm->args[i + 2];
+		third_arg = var;
+		if (!var)
+			var = "";
+		update_var(ft_comm->shell, ft_comm->args[i],
+			var, var_set);
+		//var = whole_var_from_vars(ft_comm->shell->vars, ft_comm->args[i]);
+		//change_envp(ft_comm->shell->envp, where, ft_comm->args[i + 2]);
+		i += 2;
+		if (third_arg)
+			i++;
 	}
 	else
 		i++;
@@ -96,3 +122,4 @@ int	is_it_lowest(char **sorted_env, char **unsorted, int i)
 	}
 	return (lowest);
 }
+

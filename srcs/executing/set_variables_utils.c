@@ -14,6 +14,7 @@
 
 int	var_already_set(t_shell *shell, char *expands, int where)
 {
+	DEBUG(fprintf(stderr, "var_already_set %i expands %s\n", where, expands);)
 	safe_free(shell->vars[where + 1]);
 	shell->vars[where + 1] = ft_strdup(expands);
 	if (!shell->vars[where + 1])

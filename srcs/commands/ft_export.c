@@ -27,6 +27,7 @@ int	ft_export(t_comm *ft_comm)
 	while (ft_comm->args[i])
 	{
 		var_set = var_is_set(ft_comm->shell, ft_comm->args[i]);
+		DEBUG(fprintf(stderr, "Var_Set %f\n", var_set);)
 		where = (int)var_set;
 		save = i;
 		if (var_set == -1.0)
@@ -34,7 +35,7 @@ int	ft_export(t_comm *ft_comm)
 		else if (var_set - (float)where != 0.1)
 			i = reset_var_vars(ft_comm, i, var_set);
 		else
-			i = reset_var_envp(ft_comm, i, where);
+			i = reset_var_envp(ft_comm, i, var_set);
 	}
 	return (0);
 }
