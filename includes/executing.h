@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 14:17:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:00:58 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int		var_already_set(t_shell *shell, char *expands, int where);
 int		run_command(t_comm *comm);
 int		run_ft_command(t_comm *ft_comm);
 int		exec_ft_comm(t_comm *ft_comm);
+
+void	while_replace_vars(int x, t_ast *ast, t_shell *shell);
+void	init_token_branch(t_ast *ast, t_ast *temp, t_shell *shell, int c);
 
 // unpack_quotes (&& utils)
 int		exp_needed(t_shell *shell, t_ast *father, char *og_str, int i);

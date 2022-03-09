@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 19:39:47 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:28:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,13 @@ t_comm	*init_command(t_shell *shell, t_ast *ast)
 		comm->e_type = INVALID;
 		return (comm);
 	}
-	if (shell->debug)
-	{
-		int v = 0;
-		while (shell->vars && (shell->vars[v] != NULL || v % 2 != 0))
-		{
-			printf("%sVARS[%i]%s%s\n", ft_color(CYA), v, shell->vars[v], ft_color(WHT));
-			v++;
-		}
-	}
 	c = find_cmd_branch(ast);
 	if (!setup_comm_cmd(comm, ast, c))
 		return (comm);
 	setup_comm_args(comm, ast, c, 0);
 	setup_comm_redirection(comm, ast);
 	if (comm->redir.ammount < 0)
-		return (NULL); // FIXME: Not clean exit
+		return (NULL);
 	return (comm);
 }
 

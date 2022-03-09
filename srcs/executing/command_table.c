@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:58:18 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 13:43:28 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:22:59 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,16 @@ int	run_comm_table(t_shell *shell)
 				if (shell->commands[i]->redir.reads)
 					printf("%sVariable set%s \n", ft_color(BLU), ft_color(WHT));
 				else
-					printf("%sWarning: Either rewrote variable or variable couldn't be set%s \n", ft_color(RED), ft_color(WHT));
+					printf("%sW!: variable%s \n", ft_color(RED), ft_color(WHT));
 			}
 			i++;
 		}
 		else if (shell->commands[i]->e_type == INVALID)
 			i++;
 		else
-		{
 			shell->last_exit = run_command(shell->commands[i++]);
-		}
 	}
 	reset_std_io(shell, 1, 1);
 	unlink(".mini.thd");
-	DEBUG(fprintf(stderr, "Finished running command table\n"));
 	return (i);
 }
