@@ -20,7 +20,8 @@ int	parse_line(t_shell *shell)
 
 	if (handle_expansion(shell))
 		return (ft_putstr_fd("minishell: Error: Unclosed quotes\n", 2));
-	if (shell->line[ft_strlen(shell->line) - 1] == '|')
+	if (shell->line && shell->line[0] != '\0'
+		&& shell->line[ft_strlen(shell->line) - 1] == '|')
 		return (ft_putstr_fd("minishell: Error: Unclosed pipe\n", 2));
 	lex = init_lexer(shell->line);
 	if (!lex)
