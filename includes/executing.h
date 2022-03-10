@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:04 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 17:00:58 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:04:35 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ast_handler(t_shell *shell, t_ast *root);
 int		branch_ammount(t_ast *ast);
 int		command_table(t_shell *shell, t_ast *root);
 int		run_comm_table(t_shell *shell);
+int		invalid_command(t_comm *comm, t_ast *ast, int c);
 
 char	*var_expand(t_ast *ast);
 char	*ft_variable(t_shell *shell, char *str);

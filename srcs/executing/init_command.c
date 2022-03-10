@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:40:52 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:54:59 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:13:39 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	setup_comm_cmd(t_comm *comm, t_ast *ast, int c)
 		set_variable(comm->shell, ast);
 		return (0);
 	}
+	else if (invalid_command(comm, ast, c))
+		return (0);
 	else
 		comm->e_type = COMMAND;
 	comm->is_ft = ft_iscomm(ast->branches[c]->my_tok->value);

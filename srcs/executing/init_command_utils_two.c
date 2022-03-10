@@ -6,13 +6,22 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:18:30 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/05 14:17:14 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:11:04 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // For better organization of init command
+int	invalid_command(t_comm *comm, t_ast *ast, int c)
+{
+	if (!ast->branches[c] || !ast->branches[c]->my_tok)
+	{
+		comm->e_type = INVALID;
+		return (1);
+	}
+	return (0);
+}
 
 int	invert_count(int count)
 {
