@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:17:56 by Jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/05 19:10:11 by dareias-         ###   ########.fr       */
+/*   Updated: 2022/03/10 10:48:22 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static void	print_env(char **env);
 
 int	ft_env(t_comm *ft_comm)
 {
-	int	i;
-
-	i = 0;
 	if (!ft_comm->shell->envp)
 		return (1);
 	print_env(ft_comm->shell->envp);

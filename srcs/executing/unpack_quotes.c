@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:03:09 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 16:39:24 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 10:53:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,16 @@ int	unpack_quotes(t_ast *ast)
 int	expand_quote(t_ast *father, int i)
 {
 	int		j;
-	int		found_dollar;
 	t_ast	*son;
 	char	*value;
 
 	j = 0;
-	found_dollar = 0;
 	son = father->branches[i];
 	value = son->my_tok->value;
 	while (value[j] != '\0')
 	{
 		if (value[j] == '$')
-		{
-			found_dollar = 1;
 			break ;
-		}
 		j++;
 	}
 	return (no_exp_needed(son, value));

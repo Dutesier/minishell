@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:44:42 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:45:30 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:24:31 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	comm_read(t_comm *comm, int *reset_in)
 		close(comm->shell->io.current_in);
 	comm->shell->io.current_in = change_in(STDIN_FILENO,
 			comm->infile, comm->redir.reads);
-	reset_in = 0;
+	*reset_in = 0;
 	if (comm->shell->io.current_in < 0)
 		return (1);
 	comm->redir.reads = 0;
@@ -30,7 +30,7 @@ int	comm_write(t_comm *comm, int *reset_out)
 	close(comm->shell->io.current_out);
 	comm->shell->io.current_out = change_out(STDOUT_FILENO,
 			comm->outfile, comm->redir.writes);
-	reset_out = 0;
+	*reset_out = 0;
 	if (comm->shell->io.current_out < 0)
 		return (1);
 	comm->redir.writes = 0;
@@ -42,7 +42,7 @@ int	comm_appends(t_comm *comm, int *reset_out)
 	close(comm->shell->io.current_out);
 	comm->shell->io.current_out = change_out(STDOUT_FILENO,
 			comm->outfile, comm->redir.appends);
-	reset_out = 0;
+	*reset_out = 0;
 	if (comm->shell->io.current_out < 0)
 		return (1);
 	comm->redir.appends = 0;
@@ -55,7 +55,7 @@ int	comm_heredoc(t_comm *comm, int *reset_in)
 		close(comm->shell->io.current_in);
 	comm->shell->io.current_in = change_in(STDIN_FILENO,
 			comm->heredoc_filename, comm->redir.heredoc);
-	reset_in = 0;
+	*reset_in = 0;
 	if (comm->shell->io.current_in < 0)
 		return (1);
 	return (0);

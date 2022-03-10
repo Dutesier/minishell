@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:57:45 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:45:07 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:23:38 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	comm_piping(t_comm *comm, int *reset_in, int *reset_out)
 	if (comm->piping == 1 || comm->piping == 3)
 	{
 		save_std_io(comm->shell, 1, 0);
-		reset_in = 0;
+		*reset_in = 0;
 	}
 	if (comm->piping == 2 || comm->piping == 3)
 	{
 		save_std_io(comm->shell, 0, 1);
-		reset_out = 0;
+		*reset_out = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:44:39 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:53:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 10:48:49 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ static int	null_command(t_comm *comm)
 int	run_ft_command(t_comm *ft_comm)
 {
 	int	sta;
-	int	save_in;
-	int	save_out;
 
 	sta = 0;
-	save_in = STDIN_FILENO;
-	save_out = STDOUT_FILENO;
 	sta = exec_ft_comm(ft_comm);
 	return (sta);
 }

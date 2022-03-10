@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:40:15 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 16:34:35 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/10 10:49:05 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ int	compound_ammount(t_ast *root, int count)
 int	store_args(t_comm *comm, t_ast *ast, int a)
 {
 	int	x;
-	int	i;
 	int	ar;
 
 	x = 0;
-	i = 0;
 	ar = find_args_branch(ast);
 	comm->args = malloc_or_exit(sizeof(char *) * (a + 1));
 	comm->args[x++] = ast->branches[find_cmd_branch(ast)]->my_tok->value;
