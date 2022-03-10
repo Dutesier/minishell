@@ -39,10 +39,11 @@ static char	*get_until(char *str)
 {
 	char	*holder;
 	char	*needle;
+	char	*temp;
 	int		i;
 
 	i = 0;
-	holder = get_next_line(STDIN_FILENO, "heredoc> ");
+	holder = readline("heredoc> ");
 	if (ft_isspace(str[ft_strlen(str) - 1]))
 		str[ft_strlen(str) - 1] = '\0';
 	needle = ft_strnstr(holder, str);
@@ -51,9 +52,11 @@ static char	*get_until(char *str)
 	while (!needle)
 	{
 		i = 1;
-		holder = ft_strcat(holder, get_next_line(STDIN_FILENO, "heredoc> "));
-		if (!holder)
+		temp = ft_strcat(holder, readline("heredoc> "));
+		if (!temp)
 			return (NULL);
+		free(holder);
+		holder = temp;
 		needle = ft_strnstr(holder, str);
 	}
 	if (i)

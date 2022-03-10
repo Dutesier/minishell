@@ -75,11 +75,11 @@ int		wordquotetok(unsigned int type);
 int		update_inhib(int *inhib, int mode);
 
 // Get quote - adapted from gnl
-char	*store_buffer(char *holder, char *buff);
-char	*store_line(char **line, char *holder, int ret);
-char	*get_next_line(int fd, char *s);
-char	*gnl_helper(char *holder, char *line, int ret);
-void	store_line_helper(char **line, char **holder, char *temp, int i);
+// char	*store_buffer(char *holder, char *buff);
+// char	*store_line(char **line, char *holder, int ret);
+// char	*get_next_line(int fd, char *s);
+// char	*gnl_helper(char **holder, char *line, int ret);
+// void	store_line_helper(char **line, char **holder, char *temp, int i);
 
 // Math
 int		ft_max(int a, int b);
