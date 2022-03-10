@@ -38,8 +38,8 @@ int	main(int argc, char *argv[], char **envp)
 		get_line(&shell);
 		if (shell.line != NULL)
 		{
-			parse_line(&shell);
-			clean_shell(&shell);
+			if (!parse_line(&shell))
+				clean_shell(&shell);
 		}
 	}
 	if (shell.vars)

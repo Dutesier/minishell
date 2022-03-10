@@ -47,7 +47,7 @@ char	*insert_str_in_str(char *str, char *insert, int where)
 	return (new_str);
 }
 
-void	handle_expansion(t_shell *shell)
+int	handle_expansion(t_shell *shell)
 {
 	char	*s;
 	int		inhib;
@@ -67,6 +67,7 @@ void	handle_expansion(t_shell *shell)
 		s = shell->line;
 		x++;
 	}
+	return (inhib);
 }
 
 void	try_add_expansion(t_shell *shell, int where)

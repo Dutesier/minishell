@@ -35,12 +35,12 @@ char	*gnl_helper(char *holder, char *line, int ret)
 	return (line);
 }
 
-void	store_line_helper(char **line, char *holder, char *temp, int i)
+void	store_line_helper(char **line, char **holder, char *temp, int i)
 {
-	*line = ft_substr(holder, 0, i + 1);
-	temp = ft_substr(holder, i + 1, ft_strlen(holder));
-	free(holder);
-	holder = ft_strdup(temp);
+	*line = ft_substr(*holder, 0, i + 1);
+	temp = ft_substr(*holder, i + 1, ft_strlen(*holder));
+	free(*holder);
+	*holder = ft_strdup(temp);
 	if (temp)
 		free(temp);
 }

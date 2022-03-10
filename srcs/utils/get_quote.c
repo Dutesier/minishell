@@ -18,17 +18,17 @@ char	*store_buffer(char *holder, char *buff)
 
 	if (holder)
 	{
+		if (!buff)
+			fprintf(stderr, "No buf\n");
+		else
+			fprintf(stderr, "Buff: %s\n", buff);
+		fprintf(stderr, "Holder: %s\n", holder);
 		temp = ft_strjoin(holder, buff);
 		free(holder);
-		holder = ft_strdup(temp);
-		free(temp);
+		holder = temp;
 	}
 	else
-	{
 		holder = ft_strdup(buff);
-		if (holder == NULL)
-			return (NULL);
-	}
 	return (holder);
 }
 
@@ -48,7 +48,7 @@ char	*store_line(char **line, char *holder, int ret)
 		i++;
 	}
 	if (i < len)
-		store_line_helper(line, holder, NULL, i);
+		store_line_helper(line, &holder, NULL, i);
 	else if (ret == 0)
 	{
 		if (!len)
@@ -79,35 +79,9 @@ char	*get_next_line(int fd, char *s)
 			return (NULL);
 		buff[ret] = '\0';
 		holder[fd] = store_buffer(holder[fd], buff);
+		fprintf(stderr, "Holder[%i] : %s\n", fd, holder[fd]);
 		if (ft_strchr('\n', buff) > -1)
 			break ;
 	}
 	return (gnl_helper(holder[fd], line, ret));
-}
-
-int	get_quote(t_lex *lex, char q)
-{
-	char	*holder;
-	char	*s;
-
-	if (q == '\'')
-		s = "quote> ";
-	else if (q == '\"')
-		s = "dquote> ";
-	else
-		s = "pipe> ";
-	holder = get_next_line(STDIN_FILENO, s);
-	if (!holder)
-		return (1);
-	while (ft_strchr(q, holder) < 0)
-	{
-		holder = ft_strcat(holder, get_next_line(STDIN_FILENO, s));
-		if (!holder)
-			return (1);
-	}
-	holder = ft_strcat(lex->src, holder);
-	free(lex->src);
-	lex->src = holder;
-	lex->size = ft_strlen(holder);
-	return (0);
 }

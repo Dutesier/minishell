@@ -78,9 +78,8 @@ int		update_inhib(int *inhib, int mode);
 char	*store_buffer(char *holder, char *buff);
 char	*store_line(char **line, char *holder, int ret);
 char	*get_next_line(int fd, char *s);
-int		get_quote(t_lex *lex, char q);
 char	*gnl_helper(char *holder, char *line, int ret);
-void	store_line_helper(char **line, char *holder, char *temp, int i);
+void	store_line_helper(char **line, char **holder, char *temp, int i);
 
 // Math
 int		ft_max(int a, int b);

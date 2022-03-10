@@ -37,6 +37,8 @@ char	*ft_newpath(char *cmd, char **envp)
 	char	*full_cmd;
 
 	i = 0;
+	if (!cmd || cmd[0] == '\0')
+		return (NULL);
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	path = ft_split(ft_findpath(envp), ':');

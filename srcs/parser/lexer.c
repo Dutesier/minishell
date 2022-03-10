@@ -54,6 +54,11 @@ t_tok	*lex_get_word(t_lex *lex)
 	x = lex->i;
 	store = 0;
 	i = lex_get_word_core(lex, &store);
+	if (i == -1)
+	{
+		lex_next(lex);
+		return (init_token(NULL, TOK_ERROR));
+	}
 	value = ft_dupnoq(ft_substr(lex->src, x, i));
 	if (!value)
 	{	

@@ -82,11 +82,8 @@ int	nextquote(t_lex *lex, int q)
 	}
 	if (lex->c == '\0')
 	{
-		if (q == 1)
-			get_quote(lex, '\'');
-		else
-			get_quote(lex, '\"');
-		return (i + nextquote(lex, q));
+		ft_putstr_fd("minishell: Error: Unclosed quotes\n", 2);
+		return (-1);
 	}
 	return (i);
 }

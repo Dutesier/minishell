@@ -43,6 +43,8 @@ int	lex_get_word_core(t_lex *lex, int *store)
 			q = nextquote(lex, q);
 			if (q > 0)
 				i += q - 1;
+			else if (q < 0)
+				return (-1);
 		}
 		i++;
 		lex_next(lex);
