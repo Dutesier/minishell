@@ -46,8 +46,6 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->prompt = NULL;
 	shell->par = NULL;
 	shell->ast = NULL;
-	// shell->sa.sa_handler = &handle_sig;
-	// shell->sa.sa_flags = SA_RESTART;
 	shell->io.save_in = -1;
 	shell->io.save_out = -1;
 	shell->io.saved_in = 0;
@@ -56,5 +54,5 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->io.current_out = STDOUT_FILENO;
 	shell->io.my_pipe[0] = -2;
 	shell->io.my_pipe[1] = -2;
-	termios_init();	
+	termios_init();
 }
