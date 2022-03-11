@@ -18,9 +18,8 @@ t_ast	*init_ast(int type)
 
 	ast = malloc_or_exit(sizeof(t_ast));
 	ast->e_type = type;
-	ast->branches = malloc_or_exit(sizeof(t_ast *));
-	ast_add_branch(ast, NULL, 0);
 	ast->my_tok = NULL;
+	ast->branches = NULL;
 	return (ast);
 }
 

@@ -32,10 +32,10 @@ int	parse_line(t_shell *shell)
 	root = parse_to_ast(par);
 	if (!root)
 		return (1);
-	ast_handler(shell, root);
-	shell->line = par->lex->src;
 	shell->ast = root;
 	shell->par = par;
+	shell->line = par->lex->src;
+	ast_handler(shell, root);
 	return (0);
 }
 

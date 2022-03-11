@@ -22,6 +22,8 @@
 
 // static int	clean_args(t_comm *comm);
 
+static void	free_cmd(t_comm *comm);
+
 int	clean_shell(t_shell *shell)
 {
 	int	i;
@@ -33,23 +35,12 @@ int	clean_shell(t_shell *shell)
 		clean_parser(shell->par);
 	while (shell->commands && shell->commands[i] != NULL)
 	{
-		if (shell->commands[i]->cmd)
-			free(shell->commands[i]->cmd);
-		if (shell->commands[i]->infile)
-			free(shell->commands[i]->infile);
-		if (shell->commands[i]->outfile)
-			free(shell->commands[i]->outfile);
-		if (shell->commands[i]->heredoc_filename)
-			free(shell->commands[i]->heredoc_filename);
-		if (shell->commands[i]->heredoc_word)
-			free (shell->commands[i]->heredoc_word);
-		// clean_args(shell->commands[i]);
+		free_cmd(shell->commands[i]);
 		free(shell->commands[i]);
 		i++;
 	}
 	if (shell->commands)
 		free(shell->commands);
-	//safe_free(shell->prompt);
 	return (i);
 }
 
@@ -81,15 +72,18 @@ int	clean_envp(t_shell *shell)
 	return (i);
 }
 
-// static int	clean_args(t_comm *comm)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (comm && comm->args && comm->args[i])
-// 	{
-// 		if (comm->args[i])
-// 			free(comm->args[i++]);
-// 	}
-// 	return (i);
-// }
+static void	free_cmd(t_comm *comm)
+{
+	if (comm->cmd)
+		free(comm->cmd);
+	if (comm->infile)
+		free(comm->infile);
+	if (comm->outfile)
+		free(comm->outfile);
+	if (comm->heredoc_filename)
+		free(comm->heredoc_filename);
+	if (comm->heredoc_word)
+		free (comm->heredoc_word);
+	if (comm->args)
+		free (comm->args);
+}

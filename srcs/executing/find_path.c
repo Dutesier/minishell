@@ -61,7 +61,7 @@ char	*ft_newpath(char *cmd, char **envp)
 
 static void	path_freer(char **path)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!path)

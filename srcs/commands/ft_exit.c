@@ -15,7 +15,7 @@
 void	ft_exit(t_comm *ft_comm)
 {
 	int		ex;
-	t_shell *sh;
+	t_shell	*sh;
 
 	sh = ft_comm->shell;
 	ex = EXIT_SUCCESS;
