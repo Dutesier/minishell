@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:14:15 by dareias-          #+#    #+#             */
-/*   Updated: 2022/03/09 18:54:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/11 09:32:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*get_until(char *str);
+static char	*keep_getting_hd(char *holder);
 
 char	*ft_heredoc(t_comm *comm)
 {
@@ -39,27 +40,42 @@ static char	*get_until(char *str)
 {
 	char	*holder;
 	char	*needle;
-	char	*temp;
 	int		i;
 
 	i = 0;
-	holder = readline("heredoc> ");
+	holder = readline("> ");
+	if (!holder)
+		return (NULL);
 	if (ft_isspace(str[ft_strlen(str) - 1]))
 		str[ft_strlen(str) - 1] = '\0';
 	needle = ft_strnstr(holder, str);
-	if (!holder)
-		return (NULL);
 	while (!needle)
 	{
 		i = 1;
-		temp = ft_strcat(holder, readline("heredoc> "));
-		if (!temp)
+		holder = keep_getting_hd(holder);
+		if (!holder)
 			return (NULL);
-		free(holder);
-		holder = temp;
 		needle = ft_strnstr(holder, str);
 	}
-	if (i)
+	if (i && needle[0] != '\0')
 		needle[0] = '\0';
+	return (holder);
+}
+
+static char	*keep_getting_hd(char *holder)
+{
+	char	*temp;
+	char	*o_temp;
+
+	o_temp = readline("> ");
+	temp = ft_strcat(holder, "\n");
+	free(holder);
+	if (!temp)
+		return (NULL);
+	holder = ft_strcat(temp, o_temp);
+	free(o_temp);
+	free(temp);
+	if (!holder)
+		return (NULL);
 	return (holder);
 }
