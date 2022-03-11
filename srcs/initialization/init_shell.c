@@ -30,8 +30,11 @@ void	init_shell(t_shell *shell, char **envp)
 	shell->envp = dup_envp(envp);
 	shell->line = 0;
 	shell->debug = 0;
+	shell->commands = NULL;
 	shell->vars = NULL;
 	shell->prompt = NULL;
+	shell->par = NULL;
+	shell->ast = NULL;
 	shell->sa.sa_handler = &handle_sig;
 	shell->sa.sa_flags = SA_RESTART;
 	shell->io.save_in = -1;

@@ -34,8 +34,8 @@ int	parse_line(t_shell *shell)
 		return (1);
 	ast_handler(shell, root);
 	shell->line = par->lex->src;
-	clean_ast(root);
-	clean_parser(par);
+	shell->ast = root;
+	shell->par = par;
 	return (0);
 }
 

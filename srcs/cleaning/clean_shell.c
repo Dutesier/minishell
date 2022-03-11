@@ -20,11 +20,17 @@
 *	1 for shell line
 */
 
+// static int	clean_args(t_comm *comm);
+
 int	clean_shell(t_shell *shell)
 {
 	int	i;
 
 	i = 0;
+	if (shell->ast)
+		clean_ast(shell->ast);
+	if (shell->par)
+		clean_parser(shell->par);
 	while (shell->commands && shell->commands[i] != NULL)
 	{
 		if (shell->commands[i]->cmd)
@@ -37,11 +43,13 @@ int	clean_shell(t_shell *shell)
 			free(shell->commands[i]->heredoc_filename);
 		if (shell->commands[i]->heredoc_word)
 			free (shell->commands[i]->heredoc_word);
+		// clean_args(shell->commands[i]);
 		free(shell->commands[i]);
 		i++;
 	}
 	if (shell->commands)
 		free(shell->commands);
+	//safe_free(shell->prompt);
 	return (i);
 }
 
@@ -72,3 +80,16 @@ int	clean_envp(t_shell *shell)
 		free(shell->envp);
 	return (i);
 }
+
+// static int	clean_args(t_comm *comm)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (comm && comm->args && comm->args[i])
+// 	{
+// 		if (comm->args[i])
+// 			free(comm->args[i++]);
+// 	}
+// 	return (i);
+// }

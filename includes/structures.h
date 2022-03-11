@@ -156,6 +156,8 @@ typedef struct s_shell
 	char				*prompt;
 	int					last_exit;
 	t_io				io;	
+	t_par				*par;
+	t_ast				*ast;
 
 }			t_shell;
 

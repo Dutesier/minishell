@@ -41,11 +41,9 @@ int	main(int argc, char *argv[], char **envp)
 			if (!parse_line(&shell))
 				clean_shell(&shell);
 		}
+		else
+			clean_shell(&shell);
 	}
-	if (shell.vars)
-		clean_vars(&shell);
-	if (shell.envp)
-		clean_envp(&shell);
 	clear_history();
 	return (EXIT_SUCCESS);
 }

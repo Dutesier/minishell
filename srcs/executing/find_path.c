@@ -18,6 +18,8 @@
 
 #include "minishell.h"
 
+static void	path_freer(char **path);
+
 char	*ft_findpath(char **envp)
 {
 	int	i;
@@ -46,9 +48,30 @@ char	*ft_newpath(char *cmd, char **envp)
 	{
 		full_cmd = ft_append(path[i], cmd);
 		if (access(full_cmd, X_OK) == 0)
+		{
+			path_freer(path);
 			return (full_cmd);
+		}
 		free(full_cmd);
 		i++;
 	}
+	path_freer(path);
 	return (NULL);
+}
+
+static void	path_freer(char **path)
+{
+	int i;
+
+	i = 0;
+	if (!path)
+		return ;
+	while (path[i] != NULL)
+	{
+		if (path[i])
+			free(path[i]);
+		i++;
+	}
+	free(path);
+	return ;
 }

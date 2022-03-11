@@ -14,19 +14,22 @@
 
 void	ft_exit(t_comm *ft_comm)
 {
-	int	ex;
+	int		ex;
+	t_shell *sh;
 
+	sh = ft_comm->shell;
 	ex = EXIT_SUCCESS;
 	if (ft_comm->args[1])
 		ex = ft_atoi(ft_comm->args[1]);
-	if (ft_comm->shell->vars)
-		clean_vars(ft_comm->shell);
-	if (ft_comm->shell->envp)
-		clean_envp(ft_comm->shell);
-	if (ft_comm->shell->loop)
+	clean_shell(sh);
+	if (sh->vars)
+		clean_vars(sh);
+	if (sh->envp)
+		clean_envp(sh);
+	if (sh->loop)
+	{
 		clear_history();
-	if (ft_comm->shell->loop)
 		write(1, "exit\n", 6);
-	clean_shell(ft_comm->shell);
+	}
 	exit(ex);
 }

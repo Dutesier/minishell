@@ -126,7 +126,7 @@ DEPS	=	includes/commands.h \
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -pthread -g 
 #CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
 #CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
 #CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
