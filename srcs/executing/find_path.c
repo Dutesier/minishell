@@ -29,7 +29,9 @@ char	*ft_findpath(char **envp)
 		return (NULL);
 	while (ft_strcmp(envp[i], "PATH", 4) == 0 && envp[i])
 		i++;
-	return (envp[i]);
+	if (!envp[i])
+		return (NULL);
+	return (envp[i] + 5);
 }
 
 char	*ft_newpath(char *cmd, char **envp)
