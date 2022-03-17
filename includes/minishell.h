@@ -44,4 +44,7 @@
 # include "interactive.h"
 # include "initialization.h"
 
+# define malloc(a) NULL
+# define calloc(a, b) NULL
+
 #endif

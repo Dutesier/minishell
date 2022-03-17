@@ -1,4 +1,4 @@
-MAKEFLAGS	+=	--quiet
+
 
 WHT	= \033[0;37m
 BLK	= \033[0;30m
@@ -126,7 +126,7 @@ DEPS	=	includes/commands.h \
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -g 
+CFLAGS	= -w -pthread -g	#-Wall -Wextra -Werror -pthread -g 
 #CFLAGS += -Wpedantic -Werror=pedantic -pedantic-errors -Wcast-align
 #CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
 #CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
